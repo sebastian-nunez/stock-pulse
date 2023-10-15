@@ -23,9 +23,9 @@
   - Monitor product quantities and make adjustments as needed.
   - Receive low-stock alerts for timely restocking.
 
-- **Category Management:**
-  - Create, update, and remove categories for products.
-  - Assign products to multiple categories.
+- **Category & Tag Management:**
+  - Create, update, and remove categories and tags for products.
+  - Assign products to multiple tags.
 
 - **User-friendly Interface:**
   - Browse products, view details, and manage the shopping cart effortlessly.
