@@ -17,7 +17,7 @@
 
 - **Product Management:**
   - Add, update, and remove products with ease.
-  - Categorize products for efficient organization.
+  - Categorize and tag products for efficient organization.
 
 - **Inventory Control:**
   - Monitor product quantities and make adjustments as needed.
