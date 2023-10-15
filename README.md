@@ -1,6 +1,6 @@
 # StockPulse
 
-> StockPulse is an efficient and intuitive inventory management application designed for e-commerce businesses.
+> An efficient and intuitive inventory management application designed for e-commerce businesses.
 >
 > Streamline your stock control, categorize products, track sales, and manage your inventory seamlessly.
 
