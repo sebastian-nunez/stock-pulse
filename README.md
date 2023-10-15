@@ -80,10 +80,10 @@ Stores information about individual products.
 | Field       | Type          | Description                      |
 |-------------|---------------|----------------------------------|
 | id          | SERIAL        | Unique identifier for the product|
-| name        | VARCHAR(255)  | Name of the product              |
-| description | TEXT          | Description of the product       |
+| name        | VARCHAR(50)   | Name of the product              |
+| description | VARCHAR(255)  | Description of the product       |
 | image       | TEXT          | Image of the product             |
-| quantity    | INT           | Quantity of the product in stock  |
+| quantity    | INT           | Quantity of the product in stock |
 | price       | MONEY         | Price of the product             |
 | category_id | INT           | Foreign key referencing a category|
 
@@ -102,8 +102,8 @@ Stores information about product tags. Ex. Discounted, Hotsale, Rebate etc.
 
 | Field       | Type          | Description                      |
 |-------------|---------------|----------------------------------|
-| id      | SERIAL        | Unique identifier for the tag     |
-| name        | VARCHAR(50)   | Name of the tag                   |
+| id          | SERIAL            | Unique identifier for the tag|
+| name        | VARCHAR(25)   | Name of the tag                  |
 
 ### `product_tag`
 
