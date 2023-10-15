@@ -103,6 +103,7 @@ Stores information about product categories.
 |-------------|---------------|----------------------------------|
 | id          | SERIAL        | Unique identifier for the category|
 | name        | VARCHAR(100)  | Name of the category              |
+| description | VARCHAR(255)  | Description of the category      |
 
 ### `tag`
 
@@ -110,8 +111,9 @@ Stores information about product tags. Ex. Discounted, Hotsale, Rebate etc.
 
 | Field       | Type          | Description                      |
 |-------------|---------------|----------------------------------|
-| id          | SERIAL        | Unique identifier for the tag     |
+| id          | SERIAL        | Unique identifier for the tag    |
 | name        | VARCHAR(25)   | Name of the tag                  |
+| description | VARCHAR(255)  | Description of the tag           |
 
 ### `product_tag`
 
