@@ -61,11 +61,11 @@
    - Update product details like name, description, and price.
    - Remove products from the inventory.
 
-2. **Categorize Products:**
-   - Add new categories for products.
-   - Assign products to one or more categories.
-   - Update category details.
-   - Remove categories.
+2. **Categorize & Tag Products:**
+   - Add new categories or tags for products.
+   - Assign products to one category or multiple tags.
+   - Update category or tag details.
+   - Remove categories or tags.
 
 3. **Manage Inventory:**
    - View a list of products and their current inventory levels.
