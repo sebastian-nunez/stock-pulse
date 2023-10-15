@@ -4,6 +4,15 @@
 >
 > Streamline your stock control, categorize products, track sales, and manage your inventory seamlessly.
 
+## Table of Contents
+
+1. [Features](#features)
+2. [Getting Started](#getting-started)
+3. [Technologies](#technologies)
+4. [User Stories](#user-stories)
+5. [Tables](#tables)
+6. [License](#license)
+
 ## Features
 
 - **Product Management:**
@@ -27,7 +36,7 @@
 2. **Set up the backend:**
    - Navigate to the backend directory: `cd server`
    - Install dependencies: `npm install`
-   - Update the enviroment variables: rename `.env.template` to `.env` and fill in variables
+   - Update the environment variables: rename `.env.template` to `.env` and fill in variables
    - Run the backend server: `npm run start`
 3. **Set up the frontend:**
    - Navigate to the frontend directory: `cd client`
@@ -40,7 +49,7 @@
 - **Languages:** JavaScript, Node.js
 - **Frameworks:** React.js (Vite), Express.js
 - **UI Components:** NextUI, TailwindCSS
-- **Database:** PostgresSQL
+- **Database:** PostgreSQL
 - **Hosting:** Railway
 
 ## User Stories
@@ -61,7 +70,6 @@
 3. **Manage Inventory:**
    - View a list of products and their current inventory levels.
    - Adjust the quantity of products in the inventory (e.g., add stock, remove stock).
-
 
 ## Tables
 
@@ -102,7 +110,7 @@ Stores information about product tags. Ex. Discounted, Hotsale, Rebate etc.
 
 | Field       | Type          | Description                      |
 |-------------|---------------|----------------------------------|
-| id          | SERIAL            | Unique identifier for the tag|
+| id          | SERIAL        | Unique identifier for the tag     |
 | name        | VARCHAR(25)   | Name of the tag                  |
 
 ### `product_tag`
