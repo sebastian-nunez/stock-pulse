@@ -1,10 +1,8 @@
 # StockPulse
 
-StockPulse is an efficient and intuitive inventory management application designed for e-commerce businesses. Streamline your stock control, categorize products, track sales, and manage your inventory seamlessly.
-
-Built using React (Vite), NextUI, TailwindCSS for the frontend, Node.js/Express for the backend, and PostgreSQL for the database. 
-
-Hosted through [Railway](https://railway.app/).
+> StockPulse is an efficient and intuitive inventory management application designed for e-commerce businesses.
+>
+> Streamline your stock control, categorize products, track sales, and manage your inventory seamlessly.
 
 ## Features
 
@@ -64,8 +62,59 @@ Hosted through [Railway](https://railway.app/).
    - View a list of products and their current inventory levels.
    - Adjust the quantity of products in the inventory (e.g., add stock, remove stock).
 
+
+## Tables
+
+In this schema, we have the following relationships:
+
+1. **One-to-Many Relationship (Category to Products):**
+   - Each product belongs to one category.
+
+2. **Many-to-Many Relationship (Products to Tags):**
+   - Products can have multiple tags, and each tag can be associated with multiple products.
+
+### `product`
+
+Stores information about individual products.
+
+| Field       | Type          | Description                      |
+|-------------|---------------|----------------------------------|
+| id          | SERIAL        | Unique identifier for the product|
+| name        | VARCHAR(255)  | Name of the product              |
+| description | TEXT          | Description of the product       |
+| image       | TEXT          | Image of the product             |
+| quantity    | INT           | Quantity of the product in stock  |
+| price       | MONEY         | Price of the product             |
+| category_id | INT           | Foreign key referencing a category|
+
+### `category`
+
+Stores information about product categories.
+
+| Field       | Type          | Description                      |
+|-------------|---------------|----------------------------------|
+| id          | SERIAL        | Unique identifier for the category|
+| name        | VARCHAR(100)  | Name of the category              |
+
+### `tag`
+
+Stores information about product tags. Ex. Discounted, Hotsale, Rebate etc.
+
+| Field       | Type          | Description                      |
+|-------------|---------------|----------------------------------|
+| id      | SERIAL        | Unique identifier for the tag     |
+| name        | VARCHAR(50)   | Name of the tag                   |
+
+### `product_tag`
+
+Establishes a many-to-many relationship between products and tags.
+
+| Field       | Type          | Description                      |
+|-------------|---------------|----------------------------------|
+| product_id  | INT           | Foreign key referencing products  |
+| tag_id      | INT           | Foreign key referencing tags      |
+| PRIMARY KEY | (product_id, tag_id) | Composite primary key         |
+
 ## License
 
 This project is licensed under the [MIT License](https://github.com/sebastian-nunez/stock-pulse/blob/main/LICENSE)
-
-
