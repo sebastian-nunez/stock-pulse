@@ -18,6 +18,7 @@ const Home = () => {
     } catch (error) {
       alert(error);
       console.log(error);
+      setIsLoading(false);
     }
   };
 
