@@ -1,20 +1,20 @@
 import { Button } from "@nextui-org/react";
 import { Card, User, CardBody } from "@nextui-org/react";
-import { Spinner } from "@nextui-org/react";
 import { Users } from "lucide-react";
 import { useState } from "react";
 import UsersAPI from "../services/UsersAPI";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
-  const [showUsers, setShowUsers] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getUsers = async () => {
-    setShowUsers(true);
+    setIsLoading(true);
 
     try {
       const users = await UsersAPI.getAllUsers();
       setUsers(users);
+      setIsLoading(false);
     } catch (error) {
       alert(error);
       console.log(error);
@@ -24,15 +24,17 @@ const Home = () => {
   return (
     <>
       <section className="text-center">
-        <h1 className="m-6 text-5xl font-bold">StockPulse</h1>
+        <h1 className="mb-6 mt-12 text-6xl font-extrabold tracking-tighter">
+          StockPulse
+        </h1>
 
         <Button
           color="primary"
           radius="md"
           variant="shadow"
-          startContent={!showUsers && <Users />}
+          startContent={!isLoading && <Users />}
           onClick={getUsers}
-          isLoading={showUsers && users.length <= 0}
+          isLoading={isLoading && users.length <= 0}
         >
           Get Users
         </Button>
@@ -49,6 +51,8 @@ const Home = () => {
                     avatarProps={{
                       src: user.image,
                       size: "lg",
+                      isBordered: true,
+                      isFocusable: true,
                     }}
                   />
                 </CardBody>
