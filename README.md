@@ -85,17 +85,24 @@ In this schema, we have the following relationships:
 
 Stores information about individual products.
 
-| Field       | Type          | Description                      |
-|-------------|---------------|----------------------------------|
-| id          | SERIAL        | Unique identifier for the product|
-| name        | VARCHAR(50)   | Name of the product              |
-| description | VARCHAR(255)  | Description of the product       |
-| image       | VARCHAR(255)  | Image of the product             |
-| quantity    | INT           | Quantity of the product in stock |
-| price       | MONEY         | Price of the product             |
-| updated     | DATE          | Last updated date                |
-| notes       | TEXT          | Any notes about the product      |
-| category_id | INT           | Foreign key referencing a category|
+| Field          | Type          | Description                                   |
+|----------------|---------------|-----------------------------------------------|
+| id             | SERIAL        | Unique identifier for the product             |
+| name           | VARCHAR(100)  | Name of the product                           |
+| brand          | VARCHAR(100)  | Brand or manufacturer of the product          |
+| description    | VARCHAR(255)  | Description of the product                    |
+| image          | VARCHAR(255)  | Image of the product                          |
+| quantity       | INT           | Quantity of the product in stock              |
+| price          | MONEY         | Price of the product in USD                   |
+| is_available   | BOOLEAN       | Information about the product's availability (true/false) |
+| weight         | DECIMAL(10,2) | Weight of the product (in lbs)                |
+| dimensions     | VARCHAR(50)   | Dimensions of the product (Length x Width x Height) |
+| warranty_info  | VARCHAR(255)  | Details about the product's warranty          |
+| notes          | TEXT          | Any notes about the product                   |
+| date_added     | DATE          | Date when the product was added to the inventory|
+| last_updated   | TIMESTAMP     | Date and time when the product information was last updated |
+| category_id    | INT           | Foreign key referencing a category            |
+
 
 ### `category`
 
