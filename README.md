@@ -58,6 +58,8 @@
    - Run the frontend app: `npm run dev`
 4. Open your browser and visit [http://localhost:5173](http://localhost:5173) to access StockPulse.
 
+**Note:** Service currently relies on `Railway` for database hosting and management. You can sign up and host your own instance. [Learn more about Railway](https://railway.app/)
+
 ## Technologies
 
 - **Languages:** JavaScript, Node.js
