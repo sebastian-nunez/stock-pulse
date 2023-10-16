@@ -62,7 +62,7 @@
 
 - **Languages:** JavaScript, Node.js
 - **Frameworks:** React.js (Vite), Express.js
-- **UI Components:** NextUI, TailwindCSS
+- **UI Components:** NextUI, TailwindCSS, Lucide Icons
 - **Database:** PostgreSQL
 - **Hosting:** Railway
 
