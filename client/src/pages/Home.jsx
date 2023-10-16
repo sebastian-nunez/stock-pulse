@@ -41,7 +41,7 @@ const Home = () => {
       </section>
 
       <section className="m-12 grid grid-cols-2 gap-6">
-        {users
+        {users.length > 0
           ? users.map((user) => (
               <Card key={user.id}>
                 <CardBody>
