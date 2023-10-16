@@ -68,6 +68,8 @@
 
 ### High-Level Flow
 
+> Traces a simple "Get All Users" functionality within the application.
+
 ![High level trace](demos/stock-pulse-design-1.png)
 _Diagram ignores any authentication/authorization measures_.
 
