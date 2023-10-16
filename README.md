@@ -90,9 +90,11 @@ Stores information about individual products.
 | id          | SERIAL        | Unique identifier for the product|
 | name        | VARCHAR(50)   | Name of the product              |
 | description | VARCHAR(255)  | Description of the product       |
-| image       | TEXT          | Image of the product             |
+| image       | VARCHAR(255)  | Image of the product             |
 | quantity    | INT           | Quantity of the product in stock |
 | price       | MONEY         | Price of the product             |
+| updated     | DATE          | Last updated date                |
+| notes       | TEXT          | Any notes about the product      |
 | category_id | INT           | Foreign key referencing a category|
 
 ### `category`
@@ -102,7 +104,7 @@ Stores information about product categories.
 | Field       | Type          | Description                      |
 |-------------|---------------|----------------------------------|
 | id          | SERIAL        | Unique identifier for the category|
-| name        | VARCHAR(100)  | Name of the category              |
+| name        | VARCHAR(25)   | Name of the category             |
 | description | VARCHAR(255)  | Description of the category      |
 
 ### `tag`
@@ -121,9 +123,9 @@ Establishes a many-to-many relationship between products and tags.
 
 | Field       | Type          | Description                      |
 |-------------|---------------|----------------------------------|
-| product_id  | INT           | Foreign key referencing products  |
-| tag_id      | INT           | Foreign key referencing tags      |
-| PRIMARY KEY | (product_id, tag_id) | Composite primary key         |
+| product_id  | INT           | Foreign key referencing products |
+| tag_id      | INT           | Foreign key referencing tags     |
+| PRIMARY KEY | (product_id, tag_id) | Composite primary key     |
 
 ## License
 
