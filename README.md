@@ -66,6 +66,11 @@
 - **Database:** PostgreSQL
 - **Hosting:** Railway
 
+### High-Level Flow
+
+![High level trace](demos/stock-pulse-design-1.png)
+_Diagram ignores any authentication/authorization measures_.
+
 ## User Stories
 
 ### As an Admin, I want to:
