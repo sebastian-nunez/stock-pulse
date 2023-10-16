@@ -1,29 +1,43 @@
 # StockPulse
 
-> An efficient and intuitive inventory management application designed for e-commerce businesses.
->
-> Streamline your stock control, categorize products, track sales, and manage your inventory seamlessly.
+**CodePath WEB103 Final Project**
+
+**Designed and developed by:** Priscilla Colon, Sebastian Nunez
+
+🔗 **Link to deployed app:**
 
 ## Table of Contents
 
-1. [Features](#features)
-2. [Getting Started](#getting-started)
-3. [Technologies](#technologies)
-4. [User Stories](#user-stories)
-5. [Tables](#tables)
-6. [License](#license)
+1. [About](#about)
+2. [Features](#features)
+3. [Getting Started](#getting-started)
+4. [Technologies](#technologies)
+5. [User Stories](#user-stories)
+6. [Tables](#tables)
+7. [License](#license)
+
+## About
+
+**Description:** An efficient and intuitive inventory management application designed for e-commerce businesses.
+
+**Purpose:** To streamline your stock control, categorize products, track sales, and manage your inventory seamlessly.
+
+**Inspiration:** StockPulse was created with the vision to promote growth and customer satisfaction while effortlessly overseeing and organizing their products and sales.
 
 ## Features
 
 - **Product Management:**
+
   - Add, update, and remove products with ease.
   - Categorize and tag products for efficient organization.
 
 - **Inventory Control:**
+
   - Monitor product quantities and make adjustments as needed.
   - Receive low-stock alerts for timely restocking.
 
 - **Category & Tag Management:**
+
   - Create, update, and remove categories and tags for products.
   - Assign products to multiple tags.
 
@@ -57,11 +71,13 @@
 ### As an Admin, I want to:
 
 1. **Manage Products:**
+
    - Add new products to the inventory, including their name, description, and price.
    - Update product details like name, description, and price.
    - Remove products from the inventory.
 
 2. **Categorize & Tag Products:**
+
    - Add new categories or tags for products.
    - Assign products to one category or multiple tags.
    - Update category or tag details.
@@ -76,6 +92,7 @@
 In this schema, we have the following relationships:
 
 1. **One-to-Many Relationship (Category to Products):**
+
    - Each product belongs to one category.
 
 2. **Many-to-Many Relationship (Products to Tags):**
@@ -85,54 +102,53 @@ In this schema, we have the following relationships:
 
 Stores information about individual products.
 
-| Field          | Type          | Description                                   |
-|----------------|---------------|-----------------------------------------------|
-| id             | SERIAL        | Unique identifier for the product             |
-| name           | VARCHAR(100)  | Name of the product                           |
-| brand          | VARCHAR(100)  | Brand or manufacturer of the product          |
-| description    | VARCHAR(255)  | Description of the product                    |
-| image          | VARCHAR(255)  | Image of the product                          |
-| quantity       | INT           | Quantity of the product in stock              |
-| price          | MONEY         | Price of the product in USD                   |
-| is_available   | BOOLEAN       | Information about the product's availability (true/false) |
-| weight         | DECIMAL(10,2) | Weight of the product (in lbs)                |
-| dimensions     | VARCHAR(50)   | Dimensions of the product (Length x Width x Height) |
-| warranty_info  | VARCHAR(255)  | Details about the product's warranty          |
-| notes          | TEXT          | Any notes about the product                   |
-| date_added     | DATE          | Date when the product was added to the inventory|
-| last_updated   | TIMESTAMP     | Date and time when the product information was last updated |
-| category_id    | INT           | Foreign key referencing a category            |
-
+| Field         | Type          | Description                                                 |
+| ------------- | ------------- | ----------------------------------------------------------- |
+| id            | SERIAL        | Unique identifier for the product                           |
+| name          | VARCHAR(100)  | Name of the product                                         |
+| brand         | VARCHAR(100)  | Brand or manufacturer of the product                        |
+| description   | VARCHAR(255)  | Description of the product                                  |
+| image         | VARCHAR(255)  | Image of the product                                        |
+| quantity      | INT           | Quantity of the product in stock                            |
+| price         | MONEY         | Price of the product in USD                                 |
+| is_available  | BOOLEAN       | Information about the product's availability (true/false)   |
+| weight        | DECIMAL(10,2) | Weight of the product (in lbs)                              |
+| dimensions    | VARCHAR(50)   | Dimensions of the product (Length x Width x Height)         |
+| warranty_info | VARCHAR(255)  | Details about the product's warranty                        |
+| notes         | TEXT          | Any notes about the product                                 |
+| date_added    | DATE          | Date when the product was added to the inventory            |
+| last_updated  | TIMESTAMP     | Date and time when the product information was last updated |
+| category_id   | INT           | Foreign key referencing a category                          |
 
 ### `category`
 
 Stores information about product categories.
 
-| Field       | Type          | Description                      |
-|-------------|---------------|----------------------------------|
-| id          | SERIAL        | Unique identifier for the category|
-| name        | VARCHAR(25)   | Name of the category             |
-| description | VARCHAR(255)  | Description of the category      |
+| Field       | Type         | Description                        |
+| ----------- | ------------ | ---------------------------------- |
+| id          | SERIAL       | Unique identifier for the category |
+| name        | VARCHAR(25)  | Name of the category               |
+| description | VARCHAR(255) | Description of the category        |
 
 ### `tag`
 
 Stores information about product tags. Ex. Discounted, Hotsale, Rebate etc.
 
-| Field       | Type          | Description                      |
-|-------------|---------------|----------------------------------|
-| id          | SERIAL        | Unique identifier for the tag    |
-| name        | VARCHAR(25)   | Name of the tag                  |
-| description | VARCHAR(255)  | Description of the tag           |
+| Field       | Type         | Description                   |
+| ----------- | ------------ | ----------------------------- |
+| id          | SERIAL       | Unique identifier for the tag |
+| name        | VARCHAR(25)  | Name of the tag               |
+| description | VARCHAR(255) | Description of the tag        |
 
 ### `product_tag`
 
 Establishes a many-to-many relationship between products and tags.
 
-| Field       | Type          | Description                      |
-|-------------|---------------|----------------------------------|
-| product_id  | INT           | Foreign key referencing products |
-| tag_id      | INT           | Foreign key referencing tags     |
-| PRIMARY KEY | (product_id, tag_id) | Composite primary key     |
+| Field       | Type                 | Description                      |
+| ----------- | -------------------- | -------------------------------- |
+| product_id  | INT                  | Foreign key referencing products |
+| tag_id      | INT                  | Foreign key referencing tags     |
+| PRIMARY KEY | (product_id, tag_id) | Composite primary key            |
 
 ## License
 
