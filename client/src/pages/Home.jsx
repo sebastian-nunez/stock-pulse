@@ -1,9 +1,9 @@
 import { Button } from "@nextui-org/react";
-import { Card } from "@nextui-org/react";
+import { Card, User, CardBody } from "@nextui-org/react";
 import { Spinner } from "@nextui-org/react";
 import { Users } from "lucide-react";
 import { useState } from "react";
-import { requestJSON } from "../utils/api";
+import UsersAPI from "../services/UsersAPI";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
@@ -12,9 +12,15 @@ const Home = () => {
   const getUsers = async () => {
     setShowUsers(true);
 
-    const users = await requestJSON("GET", "/api");
-    setUsers([...JSON.stringify(users)]);
+    try {
+      const users = await UsersAPI.getAllUsers();
+      setUsers(users);
+    } catch (error) {
+      alert(error);
+      console.log(error);
+    }
   };
+
   return (
     <>
       <section className="text-center">
@@ -24,15 +30,31 @@ const Home = () => {
           color="primary"
           radius="md"
           variant="shadow"
-          startContent={<Users />}
+          startContent={!showUsers && <Users />}
           onClick={getUsers}
+          isLoading={showUsers && users.length <= 0}
         >
           Get Users
         </Button>
       </section>
 
-      <section className="mt-12 flex justify-center">
-        {showUsers ? users.length > 0 ? <div>{users}</div> : <Spinner /> : null}
+      <section className="m-12 grid grid-cols-2 gap-6">
+        {users
+          ? users.map((user) => (
+              <Card key={user.id}>
+                <CardBody>
+                  <User
+                    name={`${user.firstname} ${user.lastname}`}
+                    description={user.role}
+                    avatarProps={{
+                      src: user.image,
+                      size: "lg",
+                    }}
+                  />
+                </CardBody>
+              </Card>
+            ))
+          : null}
       </section>
     </>
   );
