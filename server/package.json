@@ -1,0 +1,27 @@
+{
+  "name": "stock-pulse-server",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Backend server for StockPulse inventory management application",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm run reset && nodemon --require dotenv/config server.js",
+    "reset": "cd config && node --require dotenv/config reset.js"
+  },
+  "keywords": [
+    "inventory",
+    "management",
+    "backend",
+    "server",
+    "StockPulse"
+  ],
+  "author": "Priscilla Colon, Sebastian Nunez",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1",
+    "pg": "^8.11.3"
+  }
+}
