@@ -6,17 +6,19 @@ class APIError extends Error {
   }
 }
 
-const headers = {
-  "Content-Type": "application/json",
-};
-
 // helped method to create API requests (sends/accepts JSON only!)
-const requestJSON = async (method, url, body = null) => {
+const requestJSON = async (method, url, body = null, headers = null) => {
+  const headerOptions = {
+    "Content-Type": "application/json",
+    ...headers,
+  };
+
   const options = body
-    ? { method, headers, body: JSON.stringify(body) }
-    : { method, headers };
+    ? { method, headerOptions, body: JSON.stringify(body) }
+    : { method, headerOptions };
 
   let response;
+  let data;
 
   try {
     response = await fetch(url, options);
@@ -24,7 +26,11 @@ const requestJSON = async (method, url, body = null) => {
     throw new APIError("API cannot be reached", e.message);
   }
 
-  const data = await response.json();
+  try {
+    data = await response.json();
+  } catch (e) {
+    throw new APIError("Unable to convert data to JSON!", e.message);
+  }
 
   if (response.ok) {
     return data;
