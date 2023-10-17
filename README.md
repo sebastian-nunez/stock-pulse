@@ -8,13 +8,22 @@
 
 ## Table of Contents
 
-1. [About](#about)
-2. [Features](#features)
-3. [Getting Started](#getting-started)
-4. [Technologies](#technologies)
-5. [User Stories](#user-stories)
-6. [Tables](#tables)
-7. [License](#license)
+- [About](#about)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Technologies](#technologies)
+- [System Design](#system-design)
+  - [High Level](#high-level)
+  - ["Get All Users" Trace](#get-all-users-trace)
+- [User Stories](#user-stories)
+- [ER Diagram](#er-diagram)
+- [Tables](#tables)
+  - [`product`](#product)
+  - [`category`](#category)
+  - [`tag`](#tag)
+  - [`product_tag`](#product_tag)
+- [Wireframes](#wireframes)
+- [License](#license)
 
 ## About
 
@@ -67,10 +76,15 @@
 - **UI Components:** NextUI, TailwindCSS, Lucide Icons
 - **Database:** PostgreSQL
 - **Hosting:** Railway
+- **Design:** Whimsical
 
-### High-Level Flow
+## System Design
 
-> Traces a simple "Get All Users" functionality within the application.
+### High Level
+
+![System Design](demos/stock-pulse-system-design.png)
+
+### "Get All Users" Trace
 
 ![High level trace](demos/stock-pulse-design-1.png)
 _Diagram ignores any authentication/authorization measures_.
@@ -95,6 +109,10 @@ _Diagram ignores any authentication/authorization measures_.
 3. **Manage Inventory:**
    - View a list of products and their current inventory levels.
    - Adjust the quantity of products in the inventory (e.g., add stock, remove stock).
+
+## ER Diagram
+
+_ER Diagram to be added soon..._
 
 ## Tables
 
@@ -158,6 +176,10 @@ Establishes a many-to-many relationship between products and tags.
 | product_id  | INT                  | Foreign key referencing products |
 | tag_id      | INT                  | Foreign key referencing tags     |
 | PRIMARY KEY | (product_id, tag_id) | Composite primary key            |
+
+## Wireframes
+
+_Wireframes to be added soon..._
 
 ## License
 
