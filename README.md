@@ -144,7 +144,6 @@ Stores information about individual products.
 | warranty_info | VARCHAR(255)  | Details about the product's warranty                        |
 | notes         | TEXT          | Any notes about the product                                 |
 | date_added    | DATE          | Date when the product was added to the inventory            |
-| last_updated  | TIMESTAMP     | Date and time when the product information was last updated |
 | category_id   | INT           | Foreign key referencing a category                          |
 
 ### `category`
