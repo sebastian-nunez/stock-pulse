@@ -131,7 +131,7 @@ Stores information about individual products.
 
 | Field         | Type          | Description                                                 |
 | ------------- | ------------- | ----------------------------------------------------------- |
-| id            | SERIAL        | Unique identifier for the product                           |
+| product_id    | SERIAL        | Unique identifier for the product                           |
 | name          | VARCHAR(100)  | Name of the product                                         |
 | brand         | VARCHAR(100)  | Brand or manufacturer of the product                        |
 | description   | VARCHAR(255)  | Description of the product                                  |
@@ -153,7 +153,7 @@ Stores information about product categories.
 
 | Field       | Type         | Description                        |
 | ----------- | ------------ | ---------------------------------- |
-| id          | SERIAL       | Unique identifier for the category |
+| category_id | SERIAL       | Unique identifier for the category |
 | name        | VARCHAR(25)  | Name of the category               |
 | description | VARCHAR(255) | Description of the category        |
 
@@ -163,7 +163,7 @@ Stores information about product tags. Ex. Discounted, Hotsale, Rebate etc.
 
 | Field       | Type         | Description                   |
 | ----------- | ------------ | ----------------------------- |
-| id          | SERIAL       | Unique identifier for the tag |
+| tag_id      | SERIAL       | Unique identifier for the tag |
 | name        | VARCHAR(25)  | Name of the tag               |
 | description | VARCHAR(255) | Description of the tag        |
 
