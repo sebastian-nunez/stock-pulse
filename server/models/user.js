@@ -1,7 +1,7 @@
 import { pool } from "../config/database.js";
 
 class UserModel {
-  static findAll = async () => {
+  static getAll = async () => {
     const selectQuery = `
       SELECT *
       FROM user_table
