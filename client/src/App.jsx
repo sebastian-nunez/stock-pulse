@@ -7,15 +7,15 @@ const App = () => {
   const element = useRoutes([
     {
       path: "/",
-      element: <Home />
+      element: <Home />,
     },
     {
       path: "/*",
-      element: <PageNotFound />
-    }
+      element: <PageNotFound />,
+    },
   ]);
 
-  return <main>{element}</main>;
+  return <div>{element}</div>;
 };
 
 export default App;

@@ -3,24 +3,13 @@ import { Card, User, CardBody } from "@nextui-org/react";
 import { Users } from "lucide-react";
 import { useState } from "react";
 import UsersAPI from "../services/UsersAPI";
+import { useQuery } from "react-query";
 
 const Home = () => {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const getUsers = async () => {
-    setIsLoading(true);
-
-    try {
-      const users = await UsersAPI.getAllUsers();
-      setUsers(users);
-      setIsLoading(false);
-    } catch (error) {
-      alert(error);
-      console.log(error);
-      setIsLoading(false);
-    }
-  };
+  const usersQuery = useQuery(["users"], UsersAPI.getAllUsers, {
+    enabled: false,
+  });
+  const users = usersQuery.data;
 
   return (
     <>
@@ -33,16 +22,16 @@ const Home = () => {
           color="primary"
           radius="md"
           variant="shadow"
-          startContent={!isLoading && <Users />}
-          onClick={getUsers}
-          isLoading={isLoading && users.length <= 0}
+          startContent={!usersQuery.isLoading && <Users />}
+          onClick={() => usersQuery.refetch()}
+          isLoading={usersQuery.isLoading}
         >
           Get Users
         </Button>
       </section>
 
       <section className="m-12 grid grid-cols-2 gap-6">
-        {users.length > 0
+        {users?.length > 0
           ? users.map((user) => (
               <Card key={user.id}>
                 <CardBody>
@@ -59,7 +48,7 @@ const Home = () => {
                 </CardBody>
               </Card>
             ))
-          : null}
+          : usersQuery.isError && <div>ERROR: {usersQuery.error?.message}</div>}
       </section>
     </>
   );
