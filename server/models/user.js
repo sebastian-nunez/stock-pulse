@@ -15,6 +15,27 @@ class UserModel {
       console.log(error);
     }
   };
+
+  static createOne = async ({ firstname, lastname, role, image }) => {
+    const insertQuery = `
+      INSERT INTO user_table (firstname, lastname, role, image)
+      VALUES ($1, $2, $3, $4)
+      RETURNING *;
+    `;
+
+    try {
+      const results = await pool.query(insertQuery, [
+        firstname,
+        lastname,
+        role,
+        image
+      ]);
+
+      return results.rows[0];
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 
 export default UserModel;
