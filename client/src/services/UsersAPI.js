@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const BASE_USERS_URL = "/api/users";
+const USERS_BASE_URL = "/api/users";
 
 class UsersAPI {
   static getAllUsers = async () => {
-    const res = await axios.get(BASE_USERS_URL);
+    const res = await axios.get(USERS_BASE_URL);
     const users = res.data;
 
     return users;
@@ -16,7 +16,7 @@ class UsersAPI {
       "Content-Type": "application/json",
     };
 
-    const res = await axios.post(BASE_USERS_URL, body, { headers });
+    const res = await axios.post(USERS_BASE_URL, body, { headers });
     const userCreated = res.data;
 
     return userCreated;
