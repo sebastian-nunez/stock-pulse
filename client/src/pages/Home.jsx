@@ -31,8 +31,17 @@ const Home = () => {
   // use query
   const queryClient = useQueryClient();
 
-  const createUser = useMutation(UsersAPI.createUser, () => {
-    queryClient.invalidateQueries(["users"]);
+  const createUser = useMutation(UsersAPI.createUser, {
+    onSuccess: (userData) => {
+      queryClient.invalidateQueries(["users"]);
+
+      toast.success(
+        `${userData.firstname} ${userData.lastname} successfully added!`,
+      );
+    },
+    onError: (error) => {
+      toast.error("Error: " + error.message);
+    },
   });
 
   const usersQuery = useQuery(["users"], UsersAPI.getAllUsers, {
@@ -87,8 +96,9 @@ const Home = () => {
         <div className="my-6 flex justify-end gap-6">
           <Tooltip content="Add a User" delay={300}>
             <Button
+              color="primary"
               radius="sm"
-              variant="flat"
+              variant="ghost"
               onPress={onOpen}
               isDisabled={createUser.isLoading}
             >
@@ -110,20 +120,24 @@ const Home = () => {
       )}
 
       {/* ------------ User Grid -------------- */}
-      <section className="mx-6 grid grid-cols-2 gap-6">
+      <section className="m-6 grid grid-cols-3 gap-6">
         {users?.length > 0
           ? users
               .filter((user) => {
                 const normalizedInput = searchInput.trim().toLowerCase();
-                const fullName = `${user.firstname} ${user.lastname}`
-                  .trim()
-                  .toLowerCase();
+                const firstName = user.firstname.trim().toLowerCase();
+                const lastName = user.lastname.trim().toLowerCase();
+                const fullName = `${firstName} ${lastName}`;
 
-                return fullName.includes(normalizedInput);
+                return (
+                  firstName.startsWith(normalizedInput) ||
+                  lastName.startsWith(normalizedInput) ||
+                  fullName.startsWith(normalizedInput)
+                );
               })
               .map((user) => (
                 <Card key={user.id}>
-                  <CardBody>
+                  <CardBody className="flex flex-row">
                     <User
                       name={`${user.firstname} ${user.lastname}`}
                       description={user.role}
@@ -132,6 +146,7 @@ const Home = () => {
                         size: "lg",
                         isBordered: true,
                         isFocusable: true,
+                        showFallback: true,
                       }}
                     />
                   </CardBody>
@@ -210,14 +225,6 @@ const Home = () => {
       </Modal>
 
       {/* ------------ Toaster Notification -------------- */}
-      {createUser.isSuccess &&
-        toast.success(`User successfully added!`) &&
-        createUser.reset()}
-
-      {createUser.isError &&
-        toast.error("Error: " + createUser.error?.message) &&
-        createUser.reset()}
-
       <Toaster position="top-right" />
     </>
   );
