@@ -15,6 +15,7 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@nextui-org/react";
+import toast, { Toaster } from "react-hot-toast";
 
 const DEFAULT_USER = {
   firstname: null,
@@ -207,6 +208,17 @@ const Home = () => {
           </ModalContent>
         </form>
       </Modal>
+
+      {/* ------------ Toaster Notification -------------- */}
+      {createUser.isSuccess &&
+        toast.success(`User successfully added!`) &&
+        createUser.reset()}
+
+      {createUser.isError &&
+        toast.error("Error: " + createUser.error?.message) &&
+        createUser.reset()}
+
+      <Toaster position="top-right" />
     </>
   );
 };
