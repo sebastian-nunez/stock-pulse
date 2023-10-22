@@ -10,13 +10,13 @@
 
 - [About](#about)
 - [Features](#features)
+- [Demo](#demo)
 - [Getting Started](#getting-started)
 - [Technologies](#technologies)
+- [ER Diagram](#er-diagram)
 - [System Design](#system-design)
   - [High Level](#high-level)
   - ["Get All Users" Trace](#get-all-users-trace)
-- [User Stories](#user-stories)
-- [ER Diagram](#er-diagram)
 - [Tables](#tables)
   - [`product`](#product)
   - [`category`](#category)
@@ -53,6 +53,10 @@
 - **User-friendly Interface:**
   - Browse products, view details, and manage the shopping cart effortlessly.
 
+## Demo
+
+![demo](demos/stock-pulse-demo-2.gif)
+
 ## Getting Started
 
 1. **Clone the repository:** `git clone https://github.com/sebastian-nunez/stock-pulse`
@@ -71,12 +75,24 @@
 
 ## Technologies
 
-- **Languages:** JavaScript, Node.js
-- **Frameworks:** React.js (Vite), Express.js
-- **UI Components:** NextUI, TailwindCSS, Lucide Icons
+- **Frontend**
+  - **Languages:** JavaScript, JSX
+  - **Frameworks:** React.js (Vite)
+  - **UI Components:** NextUI, TailwindCSS
+  - **Icons:** Lucide Icons
+  - **Data Fetching:** useQuery, Axios
+  - **Form Validation:** react-hook-form, zod
+  - **Notifications/Toasts:** react-hot-toast
+- **Backend:**
+  - **Languages:** Node.js
+  - **Frameworks:** Express
 - **Database:** PostgreSQL
 - **Hosting:** Railway
 - **Design:** Whimsical
+
+## ER Diagram
+
+![ER Diagram](demos/stock-pulse-ER-diagram.png)
 
 ## System Design
 
@@ -89,36 +105,12 @@
 ![High level trace](demos/stock-pulse-design-1.png)
 _Diagram ignores any authentication/authorization measures_.
 
-## User Stories
-
-### As an Admin, I want to:
-
-1. **Manage Products:**
-
-   - Add new products to the inventory, including their name, description, and price.
-   - Update product details like name, description, and price.
-   - Remove products from the inventory.
-
-2. **Categorize & Tag Products:**
-
-   - Add new categories or tags for products.
-   - Assign products to one category or multiple tags.
-   - Update category or tag details.
-   - Remove categories or tags.
-
-3. **Manage Inventory:**
-   - View a list of products and their current inventory levels.
-   - Adjust the quantity of products in the inventory (e.g., add stock, remove stock).
-
-## ER Diagram
-
-_ER Diagram to be added soon..._
-
 ## Tables
 
 In this schema, we have the following relationships:
 
 1. **One-to-Many Relationship (Category to Products):**
+
    - Each product belongs to one category.
 
 2. **Many-to-Many Relationship (Products to Tags):**
@@ -128,52 +120,52 @@ In this schema, we have the following relationships:
 
 Stores information about individual products.
 
-| Field            | Type                | Description                                                | Constraints                     |
-|------------------|---------------------|------------------------------------------------------------|---------------------------------|
-| product_id       | SERIAL              | Unique identifier for the product                          | Primary Key                     |
-| name             | VARCHAR(100)        | Name of the product                                        | Not Null, Unique                |
-| brand            | VARCHAR(100)        | Brand or manufacturer of the product                       | Not Null                        |
-| description      | VARCHAR(255)        | Description of the product                                 | Not Null                        |
-| image            | VARCHAR(255)        | Image of the product                                       | Not Null                        |
-| quantity         | INT                 | Quantity of the product in stock                           | Not Null                        |
-| price            | MONEY               | Price of the product in USD                                | Not Null                        |
-| is_available     | BOOLEAN             | Information about the product's availability (true/false)  | Not Null, true or false         |
-| weight           | DECIMAL(10,2)       | Weight of the product (in lbs)                             | Not Null                        |
-| dimensions       | VARCHAR(50)         | Dimensions of the product (Length x Width x Height)        | Default: "Unknown."             |
-| warranty_info    | VARCHAR(255)        | Details about the product's warranty                       | Default: "No warranty information available."|
-| notes            | TEXT                | Any notes about the product                                |                                 |
-| date_added       | DATE                | Date when the product was added to the inventory           | Not Null, Default: CURRENT_DATE |
-| category_id      | INT                 | Foreign key referencing a category                         | Foreign Key, ON DELETE SET NULL |
+| Field         | Type          | Description                                               | Constraints                                   |
+| ------------- | ------------- | --------------------------------------------------------- | --------------------------------------------- |
+| product_id    | SERIAL        | Unique identifier for the product                         | Primary Key                                   |
+| name          | VARCHAR(100)  | Name of the product                                       | Not Null, Unique                              |
+| brand         | VARCHAR(100)  | Brand or manufacturer of the product                      | Not Null                                      |
+| description   | VARCHAR(255)  | Description of the product                                | Not Null                                      |
+| image         | VARCHAR(255)  | Image of the product                                      | Not Null                                      |
+| quantity      | INT           | Quantity of the product in stock                          | Not Null                                      |
+| price         | MONEY         | Price of the product in USD                               | Not Null                                      |
+| is_available  | BOOLEAN       | Information about the product's availability (true/false) | Not Null, true or false                       |
+| weight        | DECIMAL(10,2) | Weight of the product (in lbs)                            | Not Null                                      |
+| dimensions    | VARCHAR(50)   | Dimensions of the product (Length x Width x Height)       | Default: "Unknown."                           |
+| warranty_info | VARCHAR(255)  | Details about the product's warranty                      | Default: "No warranty information available." |
+| notes         | TEXT          | Any notes about the product                               |                                               |
+| date_added    | DATE          | Date when the product was added to the inventory          | Not Null, Default: CURRENT_DATE               |
+| category_id   | INT           | Foreign key referencing a category                        | Foreign Key, ON DELETE SET NULL               |
 
 ### `category`
 
 Stores information about product categories.
 
-| Field            | Type                | Description                                                | Constraints                     |
-|------------------|---------------------|------------------------------------------------------------|---------------------------------|
-| category_id      | SERIAL              | Unique identifier for the category                         | Primary Key                     |
-| name             | VARCHAR(25)         | Name of the category                                       | Not Null, Unique                |
-| description      | VARCHAR(255)        | Description of the category                                | Default: "No description provided." |
+| Field       | Type         | Description                        | Constraints                         |
+| ----------- | ------------ | ---------------------------------- | ----------------------------------- |
+| category_id | SERIAL       | Unique identifier for the category | Primary Key                         |
+| name        | VARCHAR(25)  | Name of the category               | Not Null, Unique                    |
+| description | VARCHAR(255) | Description of the category        | Default: "No description provided." |
 
 ### `tag`
 
 Stores information about product tags. Ex. Discounted, Hotsale, Rebate etc.
 
-| Field            | Type                | Description                                                | Constraints                     |
-|------------------|---------------------|------------------------------------------------------------|---------------------------------|
-| tag_id           | SERIAL              | Unique identifier for the tag                              | Primary Key                     |
-| name             | VARCHAR(25)         | Name of the tag                                            | Not Null, Unique                |
-| description      | VARCHAR(255)        | Description of the tag                                     | Default: "No description provided."|
+| Field       | Type         | Description                   | Constraints                         |
+| ----------- | ------------ | ----------------------------- | ----------------------------------- |
+| tag_id      | SERIAL       | Unique identifier for the tag | Primary Key                         |
+| name        | VARCHAR(25)  | Name of the tag               | Not Null, Unique                    |
+| description | VARCHAR(255) | Description of the tag        | Default: "No description provided." |
 
 ### `product_tag`
 
 Establishes a many-to-many relationship between products and tags.
 
-| Field            | Type                | Description                                                | Constraints                     |
-|------------------|---------------------|------------------------------------------------------------|---------------------------------|
-| product_id       | INT                 | Foreign key referencing products                           | Foreign Key, ON DELETE CASCADE  |
-| tag_id           | INT                 | Foreign key referencing tags                               | Foreign Key, ON DELETE CASCADE  |
-| PRIMARY KEY      | (product_id, tag_id)| Composite primary key                                      | Primary Key                     |
+| Field       | Type                 | Description                      | Constraints                    |
+| ----------- | -------------------- | -------------------------------- | ------------------------------ |
+| product_id  | INT                  | Foreign key referencing products | Foreign Key, ON DELETE CASCADE |
+| tag_id      | INT                  | Foreign key referencing tags     | Foreign Key, ON DELETE CASCADE |
+| PRIMARY KEY | (product_id, tag_id) | Composite primary key            | Primary Key                    |
 
 ## Wireframes
 
