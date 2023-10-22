@@ -13,11 +13,12 @@
 - [Demo](#demo)
 - [Getting Started](#getting-started)
 - [Technologies](#technologies)
+- [ER Diagram](#er-diagram)
 - [System Design](#system-design)
+
   - [High Level](#high-level)
   - ["Get All Users" Trace](#get-all-users-trace)
-- [User Stories](#user-stories)
-- [ER Diagram](#er-diagram)
+
 - [Tables](#tables)
   - [`product`](#product)
   - [`category`](#category)
@@ -91,6 +92,10 @@
 - **Hosting:** Railway
 - **Design:** Whimsical
 
+## ER Diagram
+
+![ER Diagram](demos/stock-pulse-ER-diagram.png)
+
 ## System Design
 
 ### High Level
@@ -101,31 +106,6 @@
 
 ![High level trace](demos/stock-pulse-design-1.png)
 _Diagram ignores any authentication/authorization measures_.
-
-## User Stories
-
-### As an Admin, I want to:
-
-1. **Manage Products:**
-
-   - Add new products to the inventory, including their name, description, and price.
-   - Update product details like name, description, and price.
-   - Remove products from the inventory.
-
-2. **Categorize & Tag Products:**
-
-   - Add new categories or tags for products.
-   - Assign products to one category or multiple tags.
-   - Update category or tag details.
-   - Remove categories or tags.
-
-3. **Manage Inventory:**
-   - View a list of products and their current inventory levels.
-   - Adjust the quantity of products in the inventory (e.g., add stock, remove stock).
-
-## ER Diagram
-
-_ER Diagram to be added soon..._
 
 ## Tables
 
