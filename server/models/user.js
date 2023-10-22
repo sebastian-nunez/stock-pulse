@@ -8,12 +8,25 @@ class UserModel {
       ORDER BY firstname, lastname;
     `;
 
-    try {
-      const results = await pool.query(selectQuery);
-      return results.rows;
-    } catch (error) {
-      console.log(error);
-    }
+    const results = await pool.query(selectQuery);
+    return results.rows;
+  };
+
+  static createOne = async ({ firstname, lastname, role, image }) => {
+    const insertQuery = `
+      INSERT INTO user_table (firstname, lastname, role, image)
+      VALUES ($1, $2, $3, $4)
+      RETURNING *;
+    `;
+
+    const results = await pool.query(insertQuery, [
+      firstname,
+      lastname,
+      role,
+      image
+    ]);
+
+    return results.rows[0];
   };
 }
 
