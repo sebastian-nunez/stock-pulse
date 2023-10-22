@@ -76,9 +76,17 @@
 
 ## Technologies
 
-- **Languages:** JavaScript, Node.js
-- **Frameworks:** React.js (Vite), Express.js
-- **UI Components:** NextUI, TailwindCSS, Lucide Icons
+- **Frontend**
+  - **Languages:** JavaScript, JSX
+  - **Frameworks:** React.js (Vite)
+  - **UI Components:** NextUI, TailwindCSS
+  - **Icons:** Lucide Icons
+  - **Data Fetching:** useQuery, Axios
+  - **Form Validation:** react-hook-form, zod
+  - **Notifications/Toasts:** react-hot-toast
+- **Backend:**
+  - **Languages:** Node.js
+  - **Frameworks:** Express
 - **Database:** PostgreSQL
 - **Hosting:** Railway
 - **Design:** Whimsical
