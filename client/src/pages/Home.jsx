@@ -39,9 +39,6 @@ const Home = () => {
         `${userData.firstname} ${userData.lastname} successfully added!`,
       );
     },
-    onError: (error) => {
-      toast.error("Error: " + error.message);
-    },
   });
 
   const usersQuery = useQuery(["users"], UsersAPI.getAllUsers, {

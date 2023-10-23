@@ -5,7 +5,12 @@ import "./index.css";
 import { NextUIProvider } from "@nextui-org/react";
 import { BrowserRouter } from "react-router-dom";
 import toast from "react-hot-toast";
-import { QueryClient, QueryClientProvider, QueryCache } from "react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  QueryCache,
+  MutationCache,
+} from "react-query";
 
 // react-query
 const queryClient = new QueryClient({
@@ -15,8 +20,22 @@ const queryClient = new QueryClient({
     },
   },
   queryCache: new QueryCache({
-    // global error handling
-    onError: (error) => toast.error(`Error: ${error.message}`),
+    // global error handling for useQuery
+    onError: (error) => {
+      const message = error?.response?.data?.message;
+
+      console.error(message);
+      toast.error(`Error: ${error.message}. \n\nDetails: ${message}`);
+    },
+  }),
+  mutationCache: new MutationCache({
+    // global error handling for useMutation
+    onError: (error) => {
+      const message = error?.response?.data?.message;
+
+      console.error(message);
+      toast.error(`Error: ${error.message}. \n\nDetails: ${message}`);
+    },
   }),
 });
 
