@@ -6,6 +6,8 @@
 
 🔗 **Link to deployed app:**
 
+![All wireframes](demos/stock-pulse-wireframes-overview.png)
+
 ## Table of Contents
 
 - [About](#about)
@@ -13,6 +15,7 @@
 - [Demo](#demo)
 - [Getting Started](#getting-started)
 - [Technologies](#technologies)
+- [Wireframes](#wireframes)
 - [ER Diagram](#er-diagram)
 - [System Design](#system-design)
   - [High Level](#high-level)
@@ -22,7 +25,6 @@
   - [`category`](#category)
   - [`tag`](#tag)
   - [`product_tag`](#product_tag)
-- [Wireframes](#wireframes)
 - [License](#license)
 
 ## About
@@ -63,7 +65,7 @@
 2. **Set up the backend:**
    - Navigate to the backend directory: `cd server`
    - Install dependencies: `npm install`
-   - Update the environment variables: rename `.env.template` to `.env` and fill in variables
+   - Update the environment variables: make a copy of `.env.template` and rename it to `.env` and fill in variables
    - Run the backend server: `npm run start`
 3. **Set up the frontend:**
    - Navigate to the frontend directory: `cd client`
@@ -89,6 +91,31 @@
 - **Database:** PostgreSQL
 - **Hosting:** Railway
 - **Design:** Whimsical
+
+## Wireframes
+
+### Home
+
+![Home](demos/stock-pulse-wireframes-home.png)
+
+### Login/Sign up
+
+![Sign up](demos/stock-pulse-wireframes-signup.png)
+![Log in](demos/stock-pulse-wireframes-login.png)
+
+### Dashboard
+
+![Dashboard](demos/stock-pulse-wireframes-dashboard.png)
+
+### Inventory
+
+![Inventory](demos/stock-pulse-wireframes-inventory.png)
+
+### Product Management
+
+![Product Details](demos/stock-pulse-wireframes-product-details.png)
+![Edit Product](demos/stock-pulse-wireframes-edit-product.png)
+![Add Product](demos/stock-pulse-wireframes-add-product.png)
 
 ## ER Diagram
 
@@ -166,10 +193,6 @@ Establishes a many-to-many relationship between products and tags.
 | product_id  | INT                  | Foreign key referencing products | Foreign Key, ON DELETE CASCADE |
 | tag_id      | INT                  | Foreign key referencing tags     | Foreign Key, ON DELETE CASCADE |
 | PRIMARY KEY | (product_id, tag_id) | Composite primary key            | Primary Key                    |
-
-## Wireframes
-
-_Wireframes to be added soon..._
 
 ## License
 

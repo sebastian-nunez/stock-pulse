@@ -4,18 +4,35 @@ Reference the Creating an Entity Relationship Diagram final project guide in the
 
 ## List of Pages
 
-[👉🏾👉🏾👉🏾 List the pages you expect to have in your app, with a ⭐ next to pages you have wireframed]
+- Home
+- Dashboard
+- Inventory
+- Login
+- Sign up
 
-## Wireframe 1: [page title]
+### Overview
 
-[👉🏾👉🏾👉🏾 include wireframe 1]
+![All wireframes](/demos/stock-pulse-wireframes-all.png)
 
-## Wireframe 2: [page title]
+### Home
 
-[👉🏾👉🏾👉🏾 include wireframe 2]
+![Home](/demos/stock-pulse-wireframes-home.png)
 
-## Wireframe 3: [page title]
+### Login/Sign up
 
-[👉🏾👉🏾👉🏾 include wireframe 3]
+![Sign up](/demos/stock-pulse-wireframes-signup.png)
+![Log in](/demos/stock-pulse-wireframes-login.png)
 
-[👉🏾👉🏾👉🏾 include more wireframes as desired]
+### Dashboard
+
+![Dashboard](/demos/stock-pulse-wireframes-dashboard.png)
+
+### Inventory
+
+![Inventory](/demos/stock-pulse-wireframes-inventory.png)
+
+### Product Management
+
+![Product Details](/demos/stock-pulse-wireframes-product-details.png)
+![Edit Product](/demos/stock-pulse-wireframes-edit-product.png)
+![Add Product](/demos/stock-pulse-wireframes-add-product.png)
