@@ -16,6 +16,7 @@ class CategoryModel {
     const insertQuery = `
         INSERT INTO category (name, description)
         VALUES ($1, $2)
+        ON CONFLICT (name) DO NOTHING
         RETURNING *;
     `;
 
@@ -28,9 +29,19 @@ class CategoryModel {
     const selectQuery = `
         SELECT *
         FROM category
-        WHERE id = $1;
+        WHERE category_id = $1;
     `;
 
+    const results = await pool.query(selectQuery, [categoryId]);
+    return results.rows[0];
+  };
+
+  static getOneById = async (categoryId) => {
+    const selectQuery = `
+      SELECT *
+      FROM category
+      WHERE category_id = $1;
+    `;
     const results = await pool.query(selectQuery, [categoryId]);
     return results.rows[0];
   };
@@ -39,7 +50,7 @@ class CategoryModel {
     const selectQuery = `
         SELECT *
         FROM category
-        WHERE name = $1;
+        WHERE name ILIKE $1;
     `;
 
     const results = await pool.query(selectQuery, [categoryName]);
@@ -50,7 +61,7 @@ class CategoryModel {
     const updateQuery = `
         UPDATE category
         SET name = $1, description = $2
-        WHERE id = $3
+        WHERE category_id = $3
         RETURNING *;
     `;
 
@@ -66,7 +77,7 @@ class CategoryModel {
   static deleteOne = async (categoryId) => {
     const deleteQuery = `
         DELETE FROM category
-        WHERE id = $1
+        WHERE category_id = $1
         RETURNING *;
     `;
 
