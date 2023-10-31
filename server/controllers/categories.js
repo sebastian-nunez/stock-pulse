@@ -36,7 +36,7 @@ class CategoryController {
     try {
       const category = await Category.getOneByName(categoryName);
 
-      if (!tag) {
+      if (!category) {
         res.status(404).json({ message: "Category not found!" });
         return;
       }
