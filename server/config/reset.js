@@ -60,7 +60,7 @@ const createCategoryTable = async () => {
 
       CREATE TABLE IF NOT EXISTS category (
         category_id         SERIAL PRIMARY KEY,
-        name                VARCHAR(25) NOT NULL,
+        name                VARCHAR(25) UNIQUE NOT NULL,
         description         VARCHAR(255) DEFAULT 'No description provided.'
       );
     `;
