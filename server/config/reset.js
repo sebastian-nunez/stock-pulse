@@ -60,7 +60,7 @@ const createCategoryTable = async () => {
 
       CREATE TABLE IF NOT EXISTS category (
         category_id         SERIAL PRIMARY KEY,
-        name                VARCHAR(25) NOT NULL,
+        name                VARCHAR(25) UNIQUE NOT NULL,
         description         VARCHAR(255) DEFAULT 'No description provided.'
       );
     `;
@@ -143,7 +143,7 @@ const createProductTable = async () => {
         description         VARCHAR(255) NOT NULL,
         image               VARCHAR(255) NOT NULL,
         quantity            INT NOT NULL,
-        price               MONEY NOT NULL CHECK (price > 0),
+        price               MONEY NOT NULL,
         is_available        BOOLEAN NOT NULL,
         weight              DECIMAL(10, 2) NOT NULL,
         dimensions          VARCHAR(50) DEFAULT 'Unknown',
@@ -241,6 +241,8 @@ await seedProductTags();
 // ------------------------- product_details -------------------------
 const createProductDetailsView = async () => {
   const createQuery = `
+    DROP VIEW IF EXISTS product_details;
+
     CREATE VIEW product_details AS (
       SELECT
         p.product_id,
