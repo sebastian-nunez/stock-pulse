@@ -12,7 +12,7 @@ class CategoryModel {
     return results.rows;
   };
 
-  static createOne = async ({ name, description }) => {
+  static createOne = async (name, description) => {
     const insertQuery = `
         INSERT INTO category (name, description)
         VALUES ($1, $2)
