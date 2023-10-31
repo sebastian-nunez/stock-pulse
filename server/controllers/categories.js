@@ -94,16 +94,16 @@ class CategoryController {
     try {
       categoryId = parseInt(categoryId);
 
-      const updateCategory = await Category.updateOne(categoryId, name, description);
+      const updatedCategory = await Category.updateOne(categoryId, name, description);
 
-      if (!updateCategory) {
+      if (!updatedCategory) {
         res.status(404).json({ message: "Category not found!" });
         return;
       }
 
       res
         .status(200)
-        .json({ message: "Category updated successfully!", updateCategory });
+        .json({ message: "Category updated successfully!", updatedCategory });
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
