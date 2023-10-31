@@ -1,8 +1,9 @@
-import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-dotenv.config();
+import express from "express";
+import TagRoutes from "./routes/tags.js";
 import UserRoutes from "./routes/users.js";
+dotenv.config();
 
 // constants
 const PORT = process.env.PORT || 3001;
@@ -14,6 +15,7 @@ app.use(express.json());
 
 // routes
 app.use("/api/users", UserRoutes);
+app.use("/api/tags", TagRoutes);
 
 // health check endpoints
 app.get("/api", (req, res) => {
