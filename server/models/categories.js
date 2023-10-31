@@ -25,17 +25,6 @@ class CategoryModel {
     return results.rows[0];
   };
 
-  static getOne = async (categoryId) => {
-    const selectQuery = `
-        SELECT *
-        FROM category
-        WHERE category_id = $1;
-    `;
-
-    const results = await pool.query(selectQuery, [categoryId]);
-    return results.rows[0];
-  };
-
   static getOneById = async (categoryId) => {
     const selectQuery = `
       SELECT *
