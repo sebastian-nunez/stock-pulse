@@ -24,7 +24,7 @@ class TagsController {
 
       const tag = await Tag.getOneById(tagId);
 
-      if (tag === undefined) {
+      if (!tag) {
         res.status(404).json({ message: "Tag not found!" });
         return;
       }
@@ -41,7 +41,7 @@ class TagsController {
     try {
       const tag = await Tag.getOneByName(tagName);
 
-      if (tag === undefined) {
+      if (!tag) {
         res.status(404).json({ message: "Tag not found!" });
         return;
       }
@@ -56,16 +56,16 @@ class TagsController {
     let { name, description } = req.body;
 
     try {
-      const newTag = await Tag.createOne(name, description);
+      const createdTag = await Tag.createOne(name, description);
 
-      if (newTag === undefined) {
+      if (!createdTag) {
         res.status(409).json({ message: "Tag already exists!" });
         return;
       }
 
       res
         .status(201)
-        .json({ message: "Tag created successfully!", tag: newTag });
+        .json({ message: "Tag created successfully!", createdTag });
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
@@ -79,14 +79,14 @@ class TagsController {
 
       const deletedTag = await Tag.deleteOne(tagId);
 
-      if (deletedTag === undefined) {
+      if (!deletedTag) {
         res.status(404).json({ message: "Tag not found!" });
         return;
       }
 
       res
         .status(200)
-        .json({ message: "Tag deleted successfully!", tag: deletedTag });
+        .json({ message: "Tag deleted successfully!", deletedTag });
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
@@ -101,14 +101,14 @@ class TagsController {
 
       const updatedTag = await Tag.updateOne(tagId, name, description);
 
-      if (updatedTag === undefined) {
+      if (!updatedTag) {
         res.status(404).json({ message: "Tag not found!" });
         return;
       }
 
       res
         .status(200)
-        .json({ message: "Tag updated successfully!", tag: updatedTag });
+        .json({ message: "Tag updated successfully!", updatedTag });
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
