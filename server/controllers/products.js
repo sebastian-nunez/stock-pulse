@@ -35,13 +35,31 @@ class ProductsController {
     }
   };
 
-  static createProduct = async (req, res) => {
-    const productDetails = req.body;
+  static getProductByName = async (req, res) => {
+    const { productName } = req.params;
 
     try {
-      const createdProduct = await Product.createOne(productDetails);
+      const product = await Product.getOneByName(productName);
 
-      if (!createdProduct) {
+      if (!product) {
+        res.status(404).json({ message: "Product not found!" });
+        return;
+      }
+
+      res.status(200).json(product);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  };
+
+  static createProduct = async (req, res) => {
+    const productDetails = req.body;
+    const { category, tags } = productDetails;
+
+    try {
+      const product = await Product.get(productDetails);
+
+      if (product) {
         res.status(409).json({ message: "Product already exists!" });
         return;
       }

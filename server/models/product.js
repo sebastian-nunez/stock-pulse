@@ -23,6 +23,17 @@ class ProductModel {
     return results.rows[0];
   };
 
+  static getOneByName = async productName => {
+    const selectQuery = `
+        SELECT *
+        FROM product_details
+        WHERE name ILIKE $1;
+    `;
+
+    const results = await pool.query(selectQuery, [productName]);
+    return results.rows[0];
+  };
+
   static deleteOne = async productId => {
     const deleteQuery = `
         DELETE FROM product
