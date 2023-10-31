@@ -143,7 +143,7 @@ const createProductTable = async () => {
         description         VARCHAR(255) NOT NULL,
         image               VARCHAR(255) NOT NULL,
         quantity            INT NOT NULL,
-        price               MONEY NOT NULL,
+        price               MONEY NOT NULL CHECK (price > 0),
         is_available        BOOLEAN NOT NULL,
         weight              DECIMAL(10, 2) NOT NULL,
         dimensions          VARCHAR(50) DEFAULT 'Unknown',
@@ -237,3 +237,41 @@ const seedProductTags = async () => {
 
 await createProductTagTable();
 await seedProductTags();
+
+// ------------------------- product_details -------------------------
+const createProductDetailsView = async () => {
+  const createQuery = `
+    CREATE VIEW product_details AS (
+      SELECT
+        p.product_id,
+        p.name,
+        p.brand,
+        p.description,
+        p.image,
+        p.quantity,
+        p.price,
+        p.is_available,
+        p.weight,
+        p.dimensions,
+        p.warranty_info,
+        p.notes,
+        p.date_added,
+        c.name AS category,
+        array_agg(t.name) AS tags
+      FROM product p
+      LEFT JOIN category c ON p.category_id = c.category_id
+      LEFT JOIN product_tag pt ON pt.product_id = p.product_id
+      LEFT JOIN tag t ON t.tag_id = pt.tag_id
+      GROUP BY p.product_id, c.name
+    );
+  `;
+
+  try {
+    await pool.query(createQuery);
+    console.log("Created the product_details view!");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+await createProductDetailsView();
