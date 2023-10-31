@@ -1,4 +1,6 @@
+import Category from "../models/category.js";
 import Product from "../models/product.js";
+import Tag from "../models/tag.js";
 
 class ProductsController {
   static getProducts = async (req, res) => {
@@ -52,17 +54,101 @@ class ProductsController {
     }
   };
 
+  static isValidProductDetails = productDetails => {
+    const {
+      name,
+      brand,
+      description,
+      image,
+      quantity,
+      price,
+      isAvailable,
+      weight,
+      dimensions,
+      warrantyInfo,
+      notes,
+      category,
+      tags
+    } = productDetails;
+
+    return (
+      name &&
+      brand &&
+      description &&
+      image &&
+      quantity &&
+      price &&
+      isAvailable &&
+      weight &&
+      dimensions &&
+      warrantyInfo &&
+      notes &&
+      category &&
+      tags
+    );
+  };
+
   static createProduct = async (req, res) => {
     const productDetails = req.body;
-    const { category, tags } = productDetails;
+    const { name, category, tags } = productDetails;
+
+    // check if the required fields are provided
+    if (!ProductsController.isValidProductDetails(productDetails)) {
+      res.status(400).json({
+        message:
+          "Please provide all the required fields within the body of the request!"
+      });
+
+      return;
+    }
 
     try {
-      const product = await Product.get(productDetails);
+      // check if the product already exists
+      const product = await Product.getOneByName(name);
 
       if (product) {
         res.status(409).json({ message: "Product already exists!" });
         return;
       }
+
+      // check if the category already exists (if not, create it!)
+      let categoryFound = await Category.getOneByName(category);
+
+      if (!categoryFound) {
+        categoryFound = await Category.createOne(
+          category,
+          "No description available."
+        );
+      }
+
+      // create the product
+      const newProductDetails = {
+        ...productDetails,
+        categoryId: categoryFound.category_id
+      };
+      const createdProduct = await Product.createOne(newProductDetails);
+
+      // get all the tag ids
+      const tagIds = [];
+
+      for (let tagName of tags) {
+        let tagFound = await Tag.getOneByName(tagName);
+
+        if (!tagFound) {
+          tagFound = await Tag.createOne(tagName, "No description available.");
+        }
+
+        tagIds.push(tagFound.tag_id);
+      }
+
+      // TODO: add the tags to the product (using product_tag model)
+      // tagIds.forEach(async tagId => {
+      //   await ProductTag.createOne(createdProduct.product_id, tagId);
+      // });
+
+      console.log(
+        `Adding tags with Ids ${tagIds} to product with name ${name}!`
+      );
 
       res
         .status(201)
@@ -94,16 +180,69 @@ class ProductsController {
   static updateProduct = async (req, res) => {
     let { productId } = req.params;
     const productDetails = req.body;
+    const { category, tags } = productDetails;
+
+    // check if the required fields are provided
+    if (!ProductsController.isValidProductDetails(productDetails)) {
+      res.status(400).json({
+        message:
+          "Please provide all the required fields within the body of the request!"
+      });
+
+      return;
+    }
 
     try {
       productId = parseInt(productId);
 
-      const updatedProduct = await Product.updateOne(productId, productDetails);
+      // check if the product exists
+      const product = await Product.getOneById(productId);
 
-      if (!updatedProduct) {
+      if (!product) {
         res.status(404).json({ message: "Product not found!" });
         return;
       }
+
+      // TODO: delete all the tags associated with the product
+      // await ProductTag.deleteAllTags(productId);
+
+      // get all the NEW tag ids
+      const tagIds = [];
+
+      for (let tagName of tags) {
+        let tagFound = await Tag.getOneByName(tagName);
+
+        if (!tagFound) {
+          tagFound = await Tag.createOne(tagName, "No description available.");
+        }
+
+        tagIds.push(tagFound.tag_id);
+      }
+
+      // TODO: add the tags to the product (using product_tag model)
+      // tagIds.forEach(async tagId => {
+      //   await ProductTag.createOne(productId, tagId);
+      // });
+
+      // check if the category already exists (if not, create it and save the category_id)
+      let categoryFound = await Category.getOneByName(category);
+
+      if (!categoryFound) {
+        categoryFound = await Category.createOne(
+          category,
+          "No description available."
+        );
+      }
+
+      // update the product
+      const updatedProductDetails = {
+        ...productDetails,
+        categoryId: categoryFound.category_id
+      };
+      const updatedProduct = await Product.updateOne(
+        productId,
+        updatedProductDetails
+      );
 
       res
         .status(200)
