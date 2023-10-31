@@ -1,6 +1,7 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import CategoryRoutes from "./routes/categories.js";
 import TagRoutes from "./routes/tags.js";
 import UserRoutes from "./routes/users.js";
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.json());
 // routes
 app.use("/api/users", UserRoutes);
 app.use("/api/tags", TagRoutes);
+app.use("/api/categories", CategoryRoutes);
 
 // health check endpoints
 app.get("/api", (req, res) => {
