@@ -27,7 +27,7 @@ class TagModel {
     const selectQuery = `
       SELECT *
       FROM tag
-      WHERE name = $1;
+      WHERE name ILIKE $1;
     `;
 
     const results = await pool.query(selectQuery, [tagName]);
