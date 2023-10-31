@@ -7,6 +7,7 @@
 🔗 **Link to deployed app:**
 
 ![All wireframes](demos/stock-pulse-wireframes-overview.png)
+> *StockPulse - Design Process Overview*
 
 ## Table of Contents
 
@@ -15,6 +16,7 @@
 - [Demo](#demo)
 - [Getting Started](#getting-started)
 - [Technologies](#technologies)
+- [Kanban Board](#kanban-board)
 - [Wireframes](#wireframes)
 - [ER Diagram](#er-diagram)
 - [System Design](#system-design)
@@ -91,6 +93,11 @@
 - **Database:** PostgreSQL
 - **Hosting:** Railway
 - **Design:** Whimsical
+
+## Kanban Board
+> You can find the full board on [Whimsical.]( https://whimsical.com/kanban-board-7xwirWDMp5HDHfk6cUiFwX)
+
+![Kanban Board](demos/stock-pulse-kanban-board.png)
 
 ## Wireframes
 
