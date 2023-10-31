@@ -1,5 +1,5 @@
 import "../config/dotenv.js";
-import Category from "../models/categories.js";
+import Category from "../models/category.js";
 
 class CategoryController {
   static getCategories = async (req, res) => {
@@ -94,7 +94,11 @@ class CategoryController {
     try {
       categoryId = parseInt(categoryId);
 
-      const updatedCategory = await Category.updateOne(categoryId, name, description);
+      const updatedCategory = await Category.updateOne(
+        categoryId,
+        name,
+        description
+      );
 
       if (!updatedCategory) {
         res.status(404).json({ message: "Category not found!" });

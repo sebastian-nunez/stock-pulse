@@ -1,10 +1,10 @@
-import { pool } from "../database/db.js";
+import { pool } from "../config/database.js";
 
 class ProductModel {
   static getAll = async () => {
     const selectQuery = `
         SELECT *
-        FROM product
+        FROM product_details
         ORDER BY name, description;
     `;
 
@@ -15,7 +15,7 @@ class ProductModel {
   static getOneById = async productId => {
     const selectQuery = `
         SELECT *
-        FROM product
+        FROM product_details
         WHERE product_id = $1;
     `;
 
