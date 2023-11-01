@@ -17,9 +17,11 @@ class ProductTagController {
   };
 
   static getProductsWithTag = async (req, res) => {
-    const { tagId } = req.params;
+    let { tagId } = req.params;
 
     try {
+      tagId = parseInt(tagId);
+      
       const products = await ProductTag.getAllProducts(tagId);
 
       if (!products) {
@@ -34,9 +36,11 @@ class ProductTagController {
   };
 
   static getTagsOfProduct = async (req, res) => {
-    const { productId } = req.params;
+    let { productId } = req.params;
 
     try {
+      productId = parseInt(productId);
+      
       const tags = await ProductTag.getAllTags(productId);
 
       if (!tags) {
@@ -96,9 +100,12 @@ class ProductTagController {
   };
 
   static createProductTag = async (req, res) => {
-    const { productId, tagId } = req.body;
+    let { productId, tagId } = req.body;
 
     try {
+      productId = parseInt(productId);
+      tagId = parseInt(tagId);
+      
       const createdProductTag = await ProductTag.createOne(productId, tagId);
 
       if (!createdProductTag) {
