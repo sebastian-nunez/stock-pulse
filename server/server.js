@@ -2,6 +2,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import CategoryRoutes from "./routes/categories.js";
+import ProductTagRoutes from "./routes/productTag.js";
 import ProductRoutes from "./routes/products.js";
 import TagRoutes from "./routes/tags.js";
 import UserRoutes from "./routes/users.js";
@@ -20,6 +21,7 @@ app.use("/api/users", UserRoutes);
 app.use("/api/tags", TagRoutes);
 app.use("/api/categories", CategoryRoutes);
 app.use("/api/products", ProductRoutes);
+app.use("/api/product-tag", ProductTagRoutes);
 
 // health check endpoints
 app.get("/api", (req, res) => {
