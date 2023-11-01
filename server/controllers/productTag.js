@@ -94,6 +94,26 @@ class ProductTagController {
       res.status(400).json({ message: error.message });
     }
   };
+
+  static createProductTag = async (req, res) => {
+    const { productId, tagId } = req.body;
+
+    try {
+      const createdProductTag = await ProductTag.createOne(productId, tagId);
+
+      if (!createdProductTag) {
+        res.status(409).json({ message: "Product tag already exists!" });
+        return;
+      }
+
+      res.status(200).json({
+        message: "Product tag created successfully!",
+        createdProductTag
+      });
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  };
 }
 
 export default ProductTagController;
