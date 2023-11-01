@@ -1,5 +1,6 @@
 import Category from "../models/category.js";
 import Product from "../models/product.js";
+import ProductTag from "../models/productTag.js";
 import Tag from "../models/tag.js";
 
 class ProductsController {
@@ -141,14 +142,10 @@ class ProductsController {
         tagIds.push(tagFound.tag_id);
       }
 
-      // TODO: add the tags to the product (using product_tag model)
-      // tagIds.forEach(async tagId => {
-      //   await ProductTag.createOne(createdProduct.product_id, tagId);
-      // });
-
-      console.log(
-        `Adding tags with Ids ${tagIds} to product with name ${name}!`
-      );
+      // add the tags to the product
+      tagIds.forEach(async tagId => {
+        await ProductTag.createOne(createdProduct.product_id, tagId);
+      });
 
       res
         .status(201)
@@ -188,7 +185,6 @@ class ProductsController {
         message:
           "Please provide all the required fields within the body of the request!"
       });
-
       return;
     }
 
@@ -203,8 +199,8 @@ class ProductsController {
         return;
       }
 
-      // TODO: delete all the tags associated with the product
-      // await ProductTag.deleteAllTags(productId);
+      // delete all the tags associated with the product
+      await ProductTag.deleteAllTags(productId);
 
       // get all the NEW tag ids
       const tagIds = [];
@@ -219,10 +215,10 @@ class ProductsController {
         tagIds.push(tagFound.tag_id);
       }
 
-      // TODO: add the tags to the product (using product_tag model)
-      // tagIds.forEach(async tagId => {
-      //   await ProductTag.createOne(productId, tagId);
-      // });
+      // add the tags to the product
+      tagIds.forEach(async tagId => {
+        await ProductTag.createOne(productId, tagId);
+      });
 
       // check if the category already exists (if not, create it and save the category_id)
       let categoryFound = await Category.getOneByName(category);
@@ -239,6 +235,7 @@ class ProductsController {
         ...productDetails,
         categoryId: categoryFound.category_id
       };
+
       const updatedProduct = await Product.updateOne(
         productId,
         updatedProductDetails
