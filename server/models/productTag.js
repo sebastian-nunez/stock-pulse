@@ -3,8 +3,8 @@ import { pool } from "../config/database.js";
 class ProductTagModel {
   static getAll = async () => {
     const selectQuery = `
-        SELECT product_id, tag_id
-        FROM product_tag
+        SELECT *
+        FROM product_tag_details;
     `;
 
     const results = await pool.query(selectQuery);
@@ -14,7 +14,7 @@ class ProductTagModel {
   static getAllProducts = async tagId => {
     const selectQuery = `
         SELECT *
-        FROM product_tag
+        FROM product_tag_details
         WHERE tag_id = $1;
     `;
 
@@ -25,7 +25,7 @@ class ProductTagModel {
   static getAllTags = async productId => {
     const selectQuery = `
         SELECT *
-        FROM product_tag
+        FROM product_tag_details
         WHERE product_id = $1;
     `;
 

@@ -277,3 +277,31 @@ const createProductDetailsView = async () => {
 };
 
 await createProductDetailsView();
+
+// ------------------------- product_tag_details -------------------------
+const createProductTagDetailsView = async () => {
+  const createQuery = `
+    DROP VIEW IF EXISTS product_tag_details;
+
+    CREATE VIEW product_tag_details AS (
+      SELECT
+        pt.product_id,
+        pt.tag_id,
+        p.name AS product_name,
+        t.name AS tag_name
+      FROM product_tag pt
+      LEFT JOIN product p ON p.product_id = pt.product_id
+      LEFT JOIN tag t ON t.tag_id = pt.tag_id
+      ORDER BY p.name, t.name
+    );
+  `;
+
+  try {
+    await pool.query(createQuery);
+    console.log("Created the product_tag_details view!");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+await createProductTagDetailsView();
