@@ -7,13 +7,18 @@ import {
   NavbarMenu,
   NavbarMenuToggle,
 } from "@nextui-org/react";
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+
+export const menuItems = [
+  { name: "Home", path: "/" },
+  { name: "Dashboard", path: "/dashboard" },
+  { name: "Inventory", path: "/inventory" },
+];
 
 export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const menuItems = ["Dashboard", "Inventory"];
+  const { pathname } = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <Navbar
@@ -39,11 +44,16 @@ export default function App() {
         <Divider orientation="vertical" className="h-1/2" />
 
         {/* Menu Items */}
-        {menuItems.map((item, index) => (
-          <NavbarItem key={`${item}-${index}`}>
-            <Link to={`/${item.toLowerCase()}`}>{item}</Link>
-          </NavbarItem>
-        ))}
+        {menuItems
+          .filter((item) => item.name !== "Home")
+          .map((item) => (
+            <NavbarItem
+              key={item.name}
+              isActive={item.path === pathname} // highlight active item from URL
+            >
+              <Link to={item.path}>{item.name}</Link>
+            </NavbarItem>
+          ))}
       </NavbarContent>
 
       <div className="w-full" />
@@ -55,15 +65,16 @@ export default function App() {
       ></NavbarContent>
 
       {/* Mobile Menu */}
+
       <NavbarMenu>
-        {menuItems.map((item, index) => (
+        {menuItems.map((item) => (
           <Link
             className="w-full rounded border bg-white p-4 text-center text-xl font-semibold drop-shadow-sm"
-            to={`/${item.toLowerCase()}`}
+            to={item.path}
             size="lg"
-            key={`${item}-${index}`}
+            key={item.name}
           >
-            {item}
+            {item.name}
           </Link>
         ))}
       </NavbarMenu>
