@@ -17,9 +17,9 @@ class UsersAPI {
     };
 
     const res = await axios.post(USERS_BASE_URL, body, { headers });
-    const userCreated = res.data;
+    const createdUser = res.data;
 
-    return userCreated;
+    return createdUser;
   };
 }
 
