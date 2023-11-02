@@ -1,5 +1,6 @@
 import { useRoutes } from "react-router-dom";
 import "./App.css";
+import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
@@ -30,6 +31,7 @@ const App = () => {
     <>
       <NavBar />
       <div className="container mx-auto min-h-screen">{element}</div>
+      <Footer />
     </>
   );
 };
