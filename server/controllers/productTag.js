@@ -21,7 +21,7 @@ class ProductTagController {
 
     try {
       tagId = parseInt(tagId);
-      
+
       const products = await ProductTag.getAllProducts(tagId);
 
       if (!products) {
@@ -40,7 +40,7 @@ class ProductTagController {
 
     try {
       productId = parseInt(productId);
-      
+
       const tags = await ProductTag.getAllTags(productId);
 
       if (!tags) {
@@ -55,7 +55,14 @@ class ProductTagController {
   };
 
   static deleteProductTag = async (req, res) => {
-    let { productId, tagId } = req.body;
+    let { productId, tagId } = req.query;
+
+    if (!productId || !tagId) {
+      res
+        .status(400)
+        .json({ message: "productId and tagId are required query params!" });
+      return;
+    }
 
     try {
       productId = parseInt(productId);
@@ -102,10 +109,17 @@ class ProductTagController {
   static createProductTag = async (req, res) => {
     let { productId, tagId } = req.body;
 
+    if (!productId || !tagId) {
+      res
+        .status(400)
+        .json({ message: "productId and tagId are required within the body!" });
+      return;
+    }
+
     try {
       productId = parseInt(productId);
       tagId = parseInt(tagId);
-      
+
       const createdProductTag = await ProductTag.createOne(productId, tagId);
 
       if (!createdProductTag) {
