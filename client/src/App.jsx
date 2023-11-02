@@ -6,6 +6,8 @@ import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Inventory from "./pages/Inventory";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import Playground from "./pages/Playground";
+
 const App = () => {
   const element = useRoutes([
     {
@@ -22,6 +24,10 @@ const App = () => {
       element: <Inventory />,
     },
     {
+      path: "/playground",
+      element: <Playground />,
+    },
+    {
       path: "/*",
       element: <PageNotFound />,
     },
@@ -30,7 +36,7 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <div className="container mx-auto min-h-screen">{element}</div>
+      <div className="container mx-auto min-h-screen py-4">{element}</div>
       <Footer />
     </>
   );
