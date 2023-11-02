@@ -1,21 +1,22 @@
-import { Button } from "@nextui-org/react";
-import { Card, User, CardBody } from "@nextui-org/react";
-import { Users } from "lucide-react";
-import UsersAPI from "../services/UsersAPI";
-import { useQuery, useMutation, useQueryClient } from "react-query";
-import { Search, UserPlus2 } from "lucide-react";
-import { Input } from "@nextui-org/react";
-import { useState } from "react";
-import { Tooltip } from "@nextui-org/react";
 import {
+  Button,
+  Card,
+  CardBody,
+  Input,
   Modal,
-  ModalContent,
-  ModalHeader,
   ModalBody,
+  ModalContent,
   ModalFooter,
+  ModalHeader,
+  Tooltip,
+  User,
   useDisclosure,
 } from "@nextui-org/react";
+import { Search, UserPlus2, Users } from "lucide-react";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import UsersAPI from "../services/UsersAPI";
 
 const DEFAULT_USER = {
   firstname: null,
@@ -69,12 +70,11 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div className="py-6">
       {/* ------------ Heading -------------- */}
       <section className="text-center">
-        <h1 className="mb-6 mt-12 text-6xl font-extrabold tracking-tighter">
-          StockPulse
-        </h1>
+        <h1 className="text-5xl font-extrabold tracking-tighter">Home</h1>
+        <p className="pb-6 text-gray-500">We're working on it...</p>
 
         <Button
           color="primary"
@@ -223,7 +223,7 @@ const Home = () => {
 
       {/* ------------ Toaster Notification -------------- */}
       <Toaster position="top-right" />
-    </>
+    </div>
   );
 };
 
