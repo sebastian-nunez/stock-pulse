@@ -3,7 +3,7 @@ import axios from "axios";
 const CATEGORIES_BASE_URL = "/api/categories";
 
 class CategoriesAPI {
-  static getAllCategories = async () => {
+  static getCategories = async () => {
     const res = await axios.get(CATEGORIES_BASE_URL);
     const categories = res.data;
 
@@ -18,7 +18,9 @@ class CategoriesAPI {
   };
 
   static getCategoryByName = async (categoryName) => {
-    const res = await axios.get(`${CATEGORIES_BASE_URL}/byName/${categoryName}`);
+    const res = await axios.get(
+      `${CATEGORIES_BASE_URL}/byName/${categoryName}`,
+    );
     const category = res.data;
 
     return category;
@@ -31,10 +33,7 @@ class CategoriesAPI {
     return deletedCategory;
   };
 
-  static createCategory = async (
-    name,
-    description,
-  ) => {
+  static createCategory = async (name, description) => {
     const body = JSON.stringify({
       name,
       description,
@@ -50,11 +49,7 @@ class CategoriesAPI {
     return createdCategory;
   };
 
-  static updateCategory = async (
-    categoryId,
-    name,
-    description,
-  ) => {
+  static updateCategory = async (categoryId, name, description) => {
     const body = JSON.stringify({
       categoryId,
       name,
@@ -65,9 +60,13 @@ class CategoriesAPI {
       "Content-Type": "application/json",
     };
 
-    const res = await axios.patch(`${CATEGORIES_BASE_URL}/${categoryId}`, body, {
-      headers,
-    });
+    const res = await axios.patch(
+      `${CATEGORIES_BASE_URL}/${categoryId}`,
+      body,
+      {
+        headers,
+      },
+    );
     const updatedCategory = res.data;
 
     return updatedCategory;
