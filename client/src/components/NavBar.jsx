@@ -7,6 +7,7 @@ import {
   NavbarMenu,
   NavbarMenuToggle,
 } from "@nextui-org/react";
+import { Layers3 } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -36,7 +37,12 @@ export default function App() {
       <NavbarContent className="hidden gap-4 sm:flex" justify="start">
         {/* Branding */}
         <NavbarBrand>
-          <Link to="/" className="text-2xl font-extrabold">
+          <Link
+            to="/"
+            className="inline-flex gap-2 text-2xl font-extrabold tracking-tight"
+          >
+            {/* Logo */}
+            <Layers3 size={25} className="my-auto" />
             StockPulse
           </Link>
         </NavbarBrand>
@@ -65,7 +71,6 @@ export default function App() {
       ></NavbarContent>
 
       {/* Mobile Menu */}
-
       <NavbarMenu>
         {menuItems.map((item) => (
           <Link
