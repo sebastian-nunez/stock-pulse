@@ -123,7 +123,7 @@ class ProductsController {
   };
 
   static deleteProduct = async (req, res) => {
-    const { productId } = req.params;
+    let { productId } = req.params;
 
     try {
       productId = parseInt(productId);

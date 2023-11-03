@@ -10,6 +10,7 @@ import { Save, Trash } from "lucide-react";
 import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { useMutation, useQueryClient } from "react-query";
+import { isValidProductDetails } from "../../../server/utils/validator";
 import ProductsAPI from "../services/ProductsAPI";
 import { EMPTY_PRODUCT } from "../utils/types";
 import ProductDetailsForm from "./ProductDetailsForm";
@@ -35,6 +36,15 @@ const ProductEditableModal = ({
     },
   });
 
+  const updateProduct = useMutation(ProductsAPI.updateProduct, {
+    onSuccess: (response) => {
+      queryClient.invalidateQueries(["products"]);
+
+      const productName = response.updatedProduct.name;
+      toast.success(`${productName} successfully updated!`);
+    },
+  });
+
   const onFormChange = (e) => {
     const { name, value } = e.target;
 
@@ -52,16 +62,19 @@ const ProductEditableModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: input validation
+
+    // validate product details
+    if (!isValidProductDetails(productInfo)) {
+      toast.error("Invalid product details!");
+      return;
+    }
 
     // if the product has an id, it means it's an existing product
     if (productInfo.product_id) {
-      toast.success("Product updated!");
+      updateProduct.mutate(productInfo);
     } else {
       toast.success("Product created!");
     }
-
-    console.log(productInfo);
   };
 
   return (
