@@ -9,6 +9,8 @@ import {
 import { Save, Trash } from "lucide-react";
 import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
+import { useMutation, useQueryClient } from "react-query";
+import ProductsAPI from "../services/ProductsAPI";
 import { EMPTY_PRODUCT } from "../utils/types";
 import ProductDetailsForm from "./ProductDetailsForm";
 
@@ -20,6 +22,18 @@ const ProductEditableModal = ({
   onOpenChange,
 }) => {
   const [productInfo, setProductInfo] = useState(product);
+  const queryClient = useQueryClient();
+
+  const deleteProduct = useMutation(ProductsAPI.deleteProduct, {
+    onSuccess: (response) => {
+      queryClient.invalidateQueries(["products"]);
+
+      const productName = response.deletedProduct.name;
+      toast.success(`${productName} successfully deleted!`);
+
+      setProductInfo(EMPTY_PRODUCT); // TODO: this is a hacky way to clear the form
+    },
+  });
 
   const onFormChange = (e) => {
     const { name, value } = e.target;
@@ -27,14 +41,19 @@ const ProductEditableModal = ({
     setProductInfo((prev) => ({ ...prev, [name]: value }));
   };
 
-  // TODO: input validation
   const handleDelete = () => {
-    toast.success("Product deleted!");
+    if (!productInfo.product_id) {
+      toast.error("Product does not have a valid ID, unable to delete!");
+      return;
+    }
+
+    deleteProduct.mutate(productInfo.product_id);
   };
 
-  // TODO: input validation
   const handleSubmit = (e) => {
     e.preventDefault();
+    // TODO: input validation
+
     // if the product has an id, it means it's an existing product
     if (productInfo.product_id) {
       toast.success("Product updated!");
