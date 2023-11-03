@@ -7,12 +7,12 @@ import {
   ModalHeader,
 } from "@nextui-org/react";
 import { Plus } from "lucide-react";
-
+import { Toaster, toast } from "react-hot-toast";
 const ProductCreateModal = ({ isOpen, onOpenChange }) => {
   // TODO: input validation
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Product Create Form Submitted!");
+    toast.success("Product Create Form Submitted!");
   };
 
   return (
@@ -54,6 +54,8 @@ const ProductCreateModal = ({ isOpen, onOpenChange }) => {
           )}
         </ModalContent>
       </Modal>
+
+      <Toaster position="top-right" />
     </>
   );
 };
