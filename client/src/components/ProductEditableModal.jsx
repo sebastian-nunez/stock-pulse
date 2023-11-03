@@ -33,7 +33,8 @@ const ProductEditableModal = ({
   };
 
   // TODO: input validation
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     // if the product has an id, it means it's an existing product
     if (productInfo.product_id) {
       toast.success("Product updated!");
@@ -64,6 +65,7 @@ const ProductEditableModal = ({
               <ModalBody>
                 <ProductDetailsForm
                   product={productInfo}
+                  onSubmit={handleSubmit}
                   onFormChange={onFormChange}
                 />
               </ModalBody>
@@ -91,12 +93,13 @@ const ProductEditableModal = ({
                   </Button>
 
                   <Button
+                    form="product-details-form"
+                    type="submit"
                     color="primary"
                     onPress={onClose}
                     className="w-36"
                     radius="sm"
                     startContent={<Save />}
-                    onClick={handleSubmit}
                   >
                     Save
                   </Button>

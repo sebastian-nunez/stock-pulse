@@ -1,8 +1,8 @@
 import { Input } from "@nextui-org/react";
 
-const ProductDetailsForm = ({ product, onFormChange }) => {
+const ProductDetailsForm = ({ product, onFormChange, onSubmit }) => {
   return (
-    <form onChange={onFormChange}>
+    <form id="product-details-form" onChange={onFormChange} onSubmit={onSubmit}>
       <Input name="name" placeholder="Name" value={product.name} />
     </form>
   );
