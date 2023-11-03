@@ -12,7 +12,7 @@ const ProductCreateModal = ({ isOpen, onOpenChange }) => {
   // TODO: input validation
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success("Product Create Form Submitted!");
+    toast.success("Product added!");
   };
 
   return (

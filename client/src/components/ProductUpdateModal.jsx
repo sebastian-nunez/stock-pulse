@@ -7,17 +7,18 @@ import {
   ModalHeader,
 } from "@nextui-org/react";
 import { Save, Trash } from "lucide-react";
+import { Toaster, toast } from "react-hot-toast";
 
 const ProductUpdateModal = ({ product, isOpen, onOpenChange }) => {
   // TODO: input validation
   const handleDelete = () => {
-    console.log("Product Deleted!");
+    toast.success("Product deleted!");
   };
 
   // TODO: input validation
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Product Update Form Submitted!");
+    toast.success("Product updated!");
   };
 
   return (
@@ -70,6 +71,8 @@ const ProductUpdateModal = ({ product, isOpen, onOpenChange }) => {
           )}
         </ModalContent>
       </Modal>
+
+      <Toaster position="top-right" />
     </>
   );
 };
