@@ -5,6 +5,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Spinner,
 } from "@nextui-org/react";
 import { Save, Trash } from "lucide-react";
 import { useState } from "react";
@@ -23,7 +24,9 @@ const ProductEditableModal = ({
   onOpenChange,
 }) => {
   const [productInfo, setProductInfo] = useState(product);
+
   const queryClient = useQueryClient();
+  const isLoading = queryClient.isMutating() || queryClient.isFetching(); // handle the loading states
 
   const deleteProduct = useMutation(ProductsAPI.deleteProduct, {
     onSuccess: (response) => {
@@ -32,6 +35,8 @@ const ProductEditableModal = ({
       const productName = response.deletedProduct.name;
       toast.success(`${productName} successfully deleted!`);
 
+      // close the modal and reset the form
+      onOpenChange();
       setProductInfo(EMPTY_PRODUCT); // TODO: this is a hacky way to clear the form
     },
   });
@@ -42,6 +47,11 @@ const ProductEditableModal = ({
 
       const productName = response.updatedProduct.name;
       toast.success(`${productName} successfully updated!`);
+
+      // TODO: clear out the form?
+
+      // close the modal
+      onOpenChange();
     },
   });
 
@@ -51,6 +61,11 @@ const ProductEditableModal = ({
 
       const productName = response.createdProduct.name;
       toast.success(`${productName} successfully created!`);
+
+      // TODO: clear out the form
+
+      // close the modal
+      onOpenChange();
     },
   });
 
@@ -104,11 +119,15 @@ const ProductEditableModal = ({
 
               {/* -------------------- Body -------------------- */}
               <ModalBody>
-                <ProductDetailsForm
-                  product={productInfo}
-                  onSubmit={handleSubmit}
-                  onFormChange={onFormChange}
-                />
+                {isLoading ? (
+                  <Spinner size="md" color="primary" label="Loading..." />
+                ) : (
+                  <ProductDetailsForm
+                    product={productInfo}
+                    onSubmit={handleSubmit}
+                    onFormChange={onFormChange}
+                  />
+                )}
               </ModalBody>
 
               {/* -------------------- Footer -------------------- */}
@@ -118,7 +137,6 @@ const ProductEditableModal = ({
                   {canDelete && (
                     <Button
                       color="danger"
-                      onPress={onClose}
                       startContent={<Trash />}
                       onClick={handleDelete}
                     >
@@ -137,7 +155,6 @@ const ProductEditableModal = ({
                     form="product-details-form"
                     type="submit"
                     color="primary"
-                    onPress={onClose}
                     className="w-36"
                     radius="sm"
                     startContent={<Save />}
