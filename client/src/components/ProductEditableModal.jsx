@@ -10,15 +10,22 @@ import { Save, Trash } from "lucide-react";
 import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { EMPTY_PRODUCT } from "../utils/types";
+import ProductDetailsForm from "./ProductDetailsForm";
 
 const ProductEditableModal = ({
   title,
-  canDelete,
+  canDelete = true,
   product = EMPTY_PRODUCT,
   isOpen,
   onOpenChange,
 }) => {
   const [productInfo, setProductInfo] = useState(product);
+
+  const onFormChange = (e) => {
+    const { name, value } = e.target;
+
+    setProductInfo((prev) => ({ ...prev, [name]: value }));
+  };
 
   // TODO: input validation
   const handleDelete = () => {
@@ -26,9 +33,15 @@ const ProductEditableModal = ({
   };
 
   // TODO: input validation
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    toast.success("Product updated!");
+  const handleSubmit = () => {
+    // if the product has an id, it means it's an existing product
+    if (productInfo.product_id) {
+      toast.success("Product updated!");
+    } else {
+      toast.success("Product created!");
+    }
+
+    console.log(productInfo);
   };
 
   return (
@@ -41,14 +54,23 @@ const ProductEditableModal = ({
       >
         <ModalContent>
           {(onClose) => (
-            <form onSubmit={handleSubmit}>
+            <>
+              {/* -------------------- Header -------------------- */}
               <ModalHeader className="flex flex-col gap-1 text-3xl font-bold">
                 {title}
               </ModalHeader>
 
-              <ModalBody>ProductDetailsForm</ModalBody>
+              {/* -------------------- Body -------------------- */}
+              <ModalBody>
+                <ProductDetailsForm
+                  product={productInfo}
+                  onFormChange={onFormChange}
+                />
+              </ModalBody>
 
+              {/* -------------------- Footer -------------------- */}
               <ModalFooter className="flex justify-between">
+                {/* --------- Left Footer ---------*/}
                 <div className="flex gap-3">
                   {canDelete && (
                     <Button
@@ -62,6 +84,7 @@ const ProductEditableModal = ({
                   )}
                 </div>
 
+                {/* --------- Right Footer ---------*/}
                 <div className="flex gap-3">
                   <Button color="danger" variant="light" onPress={onClose}>
                     Cancel
@@ -70,16 +93,16 @@ const ProductEditableModal = ({
                   <Button
                     color="primary"
                     onPress={onClose}
-                    type="submit"
                     className="w-36"
                     radius="sm"
                     startContent={<Save />}
+                    onClick={handleSubmit}
                   >
                     Save
                   </Button>
                 </div>
               </ModalFooter>
-            </form>
+            </>
           )}
         </ModalContent>
       </Modal>
