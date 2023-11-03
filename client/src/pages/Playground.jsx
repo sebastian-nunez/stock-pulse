@@ -20,6 +20,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import ProductCreateModal from "../components/ProductCreateModal";
+import ProductUpdateModal from "../components/ProductUpdateModal";
 import UsersAPI from "../services/UsersAPI";
 
 export const Action = {
@@ -151,6 +152,12 @@ const Playground = () => {
         {selectedFilter === Filter.PRODUCT &&
           selectedAction === Action.CREATE && (
             <ProductCreateModal isOpen={isOpen} onOpenChange={onOpenChange} />
+          )}
+
+        {/* Edit a product */}
+        {selectedFilter === Filter.PRODUCT &&
+          selectedAction === Action.UPDATE && (
+            <ProductUpdateModal isOpen={isOpen} onOpenChange={onOpenChange} />
           )}
       </section>
 
