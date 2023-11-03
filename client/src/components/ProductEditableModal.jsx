@@ -45,6 +45,15 @@ const ProductEditableModal = ({
     },
   });
 
+  const createProduct = useMutation(ProductsAPI.createProduct, {
+    onSuccess: (response) => {
+      queryClient.invalidateQueries(["products"]);
+
+      const productName = response.createdProduct.name;
+      toast.success(`${productName} successfully created!`);
+    },
+  });
+
   const onFormChange = (e) => {
     const { name, value } = e.target;
 
@@ -73,7 +82,7 @@ const ProductEditableModal = ({
     if (productInfo.product_id) {
       updateProduct.mutate(productInfo);
     } else {
-      toast.success("Product created!");
+      createProduct.mutate(productInfo);
     }
   };
 
