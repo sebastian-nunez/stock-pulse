@@ -4,11 +4,6 @@ import {
   CardBody,
   Divider,
   Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
   Select,
   SelectItem,
   Tooltip,
@@ -20,6 +15,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import ProductCreateModal from "../components/ProductCreateModal";
+import ProductDetailsModal from "../components/ProductDetailsModal";
 import ProductUpdateModal from "../components/ProductUpdateModal";
 import UsersAPI from "../services/UsersAPI";
 
@@ -34,7 +30,6 @@ export const Filter = {
   PRODUCT: "Product",
   CATEGORY: "Category",
   TAG: "Tag",
-  USER: "User",
 };
 
 const DEFAULT_USER = {
@@ -159,6 +154,12 @@ const Playground = () => {
           selectedAction === Action.UPDATE && (
             <ProductUpdateModal isOpen={isOpen} onOpenChange={onOpenChange} />
           )}
+
+        {/* View a product */}
+        {selectedFilter === Filter.PRODUCT &&
+          selectedAction === Action.VIEW && (
+            <ProductDetailsModal isOpen={isOpen} onOpenChange={onOpenChange} />
+          )}
       </section>
 
       <Divider className="my-12" />
@@ -232,77 +233,6 @@ const Playground = () => {
                 <div>ERROR: {usersQuery.error?.message}</div>
               )}
         </div>
-
-        {/* ------------ Modal -------------- */}
-        {selectedAction === Action.CREATE && selectedFilter === Filter.USER && (
-          <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-            <form onSubmit={handleAddUser}>
-              <ModalContent>
-                {(onClose) => (
-                  <>
-                    <ModalHeader className="flex flex-col gap-1">
-                      Add User
-                    </ModalHeader>
-
-                    <ModalBody>
-                      <div className="flex gap-3">
-                        <Input
-                          type="text"
-                          name="firstname"
-                          label="Firstname"
-                          variant="bordered"
-                          onChange={handleChange}
-                          isRequired
-                        />
-                        <Input
-                          type="text"
-                          name="lastname"
-                          label="Lastname"
-                          variant="bordered"
-                          onChange={handleChange}
-                          isRequired
-                        />
-                      </div>
-
-                      <Input
-                        type="text"
-                        name="role"
-                        label="Role"
-                        variant="bordered"
-                        onChange={handleChange}
-                        isRequired
-                      />
-                      <Input
-                        type="text"
-                        name="image"
-                        label="Image Link"
-                        onChange={handleChange}
-                        variant="bordered"
-                        isClearable
-                        description="Please provide a valid URL"
-                      />
-                    </ModalBody>
-
-                    <ModalFooter>
-                      <Button color="danger" variant="light" onPress={onClose}>
-                        Cancel
-                      </Button>
-
-                      <Button
-                        color="primary"
-                        variant="shadow"
-                        onPress={onClose}
-                        type="submit"
-                      >
-                        Add
-                      </Button>
-                    </ModalFooter>
-                  </>
-                )}
-              </ModalContent>
-            </form>
-          </Modal>
-        )}
 
         {/* ------------ Toaster Notification -------------- */}
         <Toaster position="top-right" />
