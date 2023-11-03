@@ -22,19 +22,21 @@ const queryClient = new QueryClient({
   queryCache: new QueryCache({
     // global error handling for useQuery
     onError: (error) => {
-      const message = error?.response?.data?.message;
+      const responseMessage = error?.response?.data?.message;
 
-      console.error(message);
-      toast.error(`Error: ${error.message}. \n\nDetails: ${message}`);
+      toast.error(
+        `Error: ${error.message} \n\nMessage: ${responseMessage || "None"}`,
+      );
     },
   }),
   mutationCache: new MutationCache({
     // global error handling for useMutation
     onError: (error) => {
-      const message = error?.response?.data?.message;
+      const responseMessage = error?.response?.data?.message;
 
-      console.error(message);
-      toast.error(`Error: ${error.message}. \n\nDetails: ${message}`);
+      toast.error(
+        `Error: ${error.message} \n\nMessage: ${responseMessage || "None"}`,
+      );
     },
   }),
 });
