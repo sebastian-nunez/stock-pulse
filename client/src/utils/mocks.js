@@ -1,4 +1,5 @@
 export const MOCK_PRODUCT = {
+  product_id: 1,
   name: "Product Name",
   brand: "Brand Name",
   description: "Product Description",
