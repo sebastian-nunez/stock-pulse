@@ -1,4 +1,5 @@
 import axios from "axios";
+import { isValidCategoryDetails } from "../../../server/utils/validator";
 
 const CATEGORIES_BASE_URL = "/api/categories";
 
@@ -33,11 +34,12 @@ class CategoriesAPI {
     return deletedCategory;
   };
 
-  static createCategory = async (name, description) => {
-    const body = JSON.stringify({
-      name,
-      description,
-    });
+  static createCategory = async (categoryDetails) => {
+    if (!isValidCategoryDetails(categoryDetails)) {
+      throw new Error("Invalid category details!");
+    }
+
+    const body = JSON.stringify(categoryDetails);
 
     const headers = {
       "Content-Type": "application/json",
@@ -49,19 +51,22 @@ class CategoriesAPI {
     return createdCategory;
   };
 
-  static updateCategory = async (categoryId, name, description) => {
-    const body = JSON.stringify({
-      categoryId,
-      name,
-      description,
-    });
+  static updateCategory = async (categoryDetails) => {
+    if (
+      !isValidCategoryDetails(categoryDetails) ||
+      !categoryDetails.category_id
+    ) {
+      throw new Error("Invalid category details!");
+    }
+
+    const body = JSON.stringify(categoryDetails);
 
     const headers = {
       "Content-Type": "application/json",
     };
 
     const res = await axios.patch(
-      `${CATEGORIES_BASE_URL}/${categoryId}`,
+      `${CATEGORIES_BASE_URL}/${categoryDetails.category_id}`,
       body,
       {
         headers,

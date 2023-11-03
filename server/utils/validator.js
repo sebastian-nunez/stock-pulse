@@ -32,3 +32,21 @@ export const isValidProductDetails = productDetails => {
     Array.isArray(tags)
   );
 };
+
+export const isValidCategoryDetails = categoryDetails => {
+  const { name, description } = categoryDetails;
+
+  return name && description;
+};
+
+export const isValidTagDetails = tagDetails => {
+  const { name, description } = tagDetails;
+
+  return name && description;
+};
+
+export const isValidProductTagDetails = productTagDetails => {
+  const { product_id, tag_id } = productTagDetails;
+
+  return product_id && tag_id;
+};

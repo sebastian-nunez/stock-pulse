@@ -1,4 +1,5 @@
 import axios from "axios";
+import { isValidProductTagDetails } from "../../../server/utils/validator";
 
 const PRODUCT_TAGS_BASE_URL = "/api/product-tag";
 
@@ -24,9 +25,13 @@ class ProductTagsAPI {
     return tags;
   };
 
-  static deleteProductTag = async (productId, tagId) => {
+  static deleteProductTag = async (productTagDetails) => {
+    if (!isValidProductTagDetails(productTagDetails)) {
+      throw new Error("Invalid product tag details!");
+    }
+
     const res = await axios.delete(
-      `${PRODUCT_TAGS_BASE_URL}/?productId=${productId}&tagId=${tagId}`,
+      `${PRODUCT_TAGS_BASE_URL}/?productId=${product_id}&tagId=${tag_id}`,
     );
     const deletedProductTag = res.data;
 
@@ -42,11 +47,11 @@ class ProductTagsAPI {
     return deletedProductTags;
   };
 
-  static createProductTag = async (productId, tagId) => {
-    const body = JSON.stringify({
-      productId,
-      tagId,
-    });
+  static createProductTag = async (productTagDetails) => {
+    if (!isValidProductTagDetails(productTagDetails)) {
+      throw new Error("Invalid product tag details!");
+    }
+    const body = JSON.stringify(productTagDetails);
 
     const headers = {
       "Content-Type": "application/json",
