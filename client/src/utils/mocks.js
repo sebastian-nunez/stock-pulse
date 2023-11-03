@@ -1,0 +1,15 @@
+export const MOCK_PRODUCT = {
+  name: "Product Name",
+  brand: "Brand Name",
+  description: "Product Description",
+  image: "product_image.jpg",
+  quantity: 100,
+  price: 49.99,
+  is_available: true,
+  weight: 2.5,
+  dimensions: "10x5x3",
+  warranty_info: "1-year limited warranty",
+  notes: "This product comes in multiple colors.",
+  category: "Category 1",
+  tags: ["Tag 1", "Tag 2"],
+};
