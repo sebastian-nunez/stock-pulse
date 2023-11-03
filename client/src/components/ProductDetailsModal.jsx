@@ -7,7 +7,7 @@ import {
   ModalHeader,
 } from "@nextui-org/react";
 
-const ProductDetailsModal = ({ isOpen, onOpenChange }) => {
+const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
   return (
     <>
       <Modal
