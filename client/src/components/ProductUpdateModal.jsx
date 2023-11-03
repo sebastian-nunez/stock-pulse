@@ -62,7 +62,7 @@ const ProductUpdateModal = ({ product, isOpen, onOpenChange }) => {
                     radius="sm"
                     startContent={<Save />}
                   >
-                    Update
+                    Save
                   </Button>
                 </div>
               </ModalFooter>
