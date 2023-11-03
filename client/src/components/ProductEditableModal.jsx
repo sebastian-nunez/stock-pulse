@@ -6,13 +6,29 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@nextui-org/react";
-import { Plus } from "lucide-react";
+import { Save, Trash } from "lucide-react";
+import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
-const ProductCreateModal = ({ isOpen, onOpenChange }) => {
+import { EMPTY_PRODUCT } from "../utils/types";
+
+const ProductEditableModal = ({
+  title,
+  canDelete,
+  product = EMPTY_PRODUCT,
+  isOpen,
+  onOpenChange,
+}) => {
+  const [productInfo, setProductInfo] = useState(product);
+
+  // TODO: input validation
+  const handleDelete = () => {
+    toast.success("Product deleted!");
+  };
+
   // TODO: input validation
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success("Product added!");
+    toast.success("Product updated!");
   };
 
   return (
@@ -27,12 +43,25 @@ const ProductCreateModal = ({ isOpen, onOpenChange }) => {
           {(onClose) => (
             <form onSubmit={handleSubmit}>
               <ModalHeader className="flex flex-col gap-1 text-3xl font-bold">
-                Add Product
+                {title}
               </ModalHeader>
 
               <ModalBody>ProductDetailsForm</ModalBody>
 
-              <ModalFooter>
+              <ModalFooter className="flex justify-between">
+                <div className="flex gap-3">
+                  {canDelete && (
+                    <Button
+                      color="danger"
+                      onPress={onClose}
+                      startContent={<Trash />}
+                      onClick={handleDelete}
+                    >
+                      Delete
+                    </Button>
+                  )}
+                </div>
+
                 <div className="flex gap-3">
                   <Button color="danger" variant="light" onPress={onClose}>
                     Cancel
@@ -44,9 +73,9 @@ const ProductCreateModal = ({ isOpen, onOpenChange }) => {
                     type="submit"
                     className="w-36"
                     radius="sm"
-                    startContent={<Plus />}
+                    startContent={<Save />}
                   >
-                    Add
+                    Save
                   </Button>
                 </div>
               </ModalFooter>
@@ -60,4 +89,4 @@ const ProductCreateModal = ({ isOpen, onOpenChange }) => {
   );
 };
 
-export default ProductCreateModal;
+export default ProductEditableModal;

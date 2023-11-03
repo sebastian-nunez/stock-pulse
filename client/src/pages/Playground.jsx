@@ -14,10 +14,10 @@ import { Search, Users } from "lucide-react";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import ProductCreateModal from "../components/ProductCreateModal";
 import ProductDetailsModal from "../components/ProductDetailsModal";
-import ProductUpdateModal from "../components/ProductUpdateModal";
+import { default as ProductEditableModal } from "../components/ProductEditableModal";
 import UsersAPI from "../services/UsersAPI";
+import { MOCK_PRODUCT } from "../utils/mocks";
 
 export const Action = {
   CREATE: "Create",
@@ -146,13 +146,24 @@ const Playground = () => {
         {/* Create a product */}
         {selectedFilter === Filter.PRODUCT &&
           selectedAction === Action.CREATE && (
-            <ProductCreateModal isOpen={isOpen} onOpenChange={onOpenChange} />
+            <ProductEditableModal
+              title="Add Product"
+              canDelete={false}
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+            />
           )}
 
         {/* Edit a product */}
         {selectedFilter === Filter.PRODUCT &&
           selectedAction === Action.UPDATE && (
-            <ProductUpdateModal isOpen={isOpen} onOpenChange={onOpenChange} />
+            <ProductEditableModal
+              title="Edit Product"
+              canDelete={true}
+              product={MOCK_PRODUCT}
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+            />
           )}
 
         {/* View a product */}
