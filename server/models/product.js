@@ -53,12 +53,12 @@ class ProductModel {
       image,
       quantity,
       price,
-      isAvailable,
+      is_available,
       weight,
       dimensions,
-      warrantyInfo,
+      warranty_info,
       notes,
-      categoryId
+      category_id
     } = productDetails;
 
     const insertQuery = `
@@ -87,12 +87,12 @@ class ProductModel {
       image,
       quantity,
       price,
-      isAvailable,
+      is_available,
       weight,
       dimensions,
-      warrantyInfo,
+      warranty_info,
       notes,
-      categoryId
+      category_id
     ]);
 
     return results.rows[0];
@@ -106,12 +106,12 @@ class ProductModel {
       image,
       quantity,
       price,
-      isAvailable,
+      is_available,
       weight,
       dimensions,
-      warrantyInfo,
+      warranty_info,
       notes,
-      categoryId
+      category_id
     } = productDetails;
 
     const updateQuery = `
@@ -139,12 +139,12 @@ class ProductModel {
       image,
       quantity,
       price,
-      isAvailable,
+      is_available,
       weight,
       dimensions,
-      warrantyInfo,
+      warranty_info,
       notes,
-      categoryId,
+      category_id,
       productId
     ]);
 

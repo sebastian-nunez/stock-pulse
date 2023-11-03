@@ -126,10 +126,14 @@ class ProductsController {
     const { productId } = req.params;
 
     try {
+      productId = parseInt(productId);
+
       const deletedProduct = await Product.deleteOne(productId);
 
       if (!deletedProduct) {
-        res.status(404).json({ message: "Product not found!" });
+        res
+          .status(404)
+          .json({ message: `Product with id ${productId} not found!` });
         return;
       }
 
@@ -162,7 +166,9 @@ class ProductsController {
       const product = await Product.getOneById(productId);
 
       if (!product) {
-        res.status(404).json({ message: "Product not found!" });
+        res
+          .status(404)
+          .json({ message: `Product with id ${productId} not found!` });
         return;
       }
 

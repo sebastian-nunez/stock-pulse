@@ -6,10 +6,10 @@ export const isValidProductDetails = productDetails => {
     image,
     quantity,
     price,
-    isAvailable,
+    is_available,
     weight,
     dimensions,
-    warrantyInfo,
+    warranty_info,
     notes,
     category,
     tags
@@ -22,10 +22,10 @@ export const isValidProductDetails = productDetails => {
     image &&
     quantity &&
     price &&
-    isAvailable &&
+    is_available &&
     weight &&
     dimensions &&
-    warrantyInfo &&
+    warranty_info &&
     notes &&
     category &&
     tags &&
