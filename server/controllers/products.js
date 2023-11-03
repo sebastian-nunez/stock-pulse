@@ -92,7 +92,7 @@ class ProductsController {
       // create the product
       const newProductDetails = {
         ...productDetails,
-        categoryId: categoryFound.category_id
+        category_id: categoryFound.category_id
       };
       const createdProduct = await Product.createOne(newProductDetails);
 
@@ -206,7 +206,7 @@ class ProductsController {
       // update the product
       const updatedProductDetails = {
         ...productDetails,
-        categoryId: categoryFound.category_id
+        category_id: categoryFound.category_id
       };
 
       const updatedProduct = await Product.updateOne(
