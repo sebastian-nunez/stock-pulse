@@ -2,6 +2,7 @@ import Category from "../models/category.js";
 import Product from "../models/product.js";
 import ProductTag from "../models/productTag.js";
 import Tag from "../models/tag.js";
+import { isValidProductDetails } from "../utils/validator.js";
 
 class ProductsController {
   static getProducts = async (req, res) => {
@@ -55,46 +56,12 @@ class ProductsController {
     }
   };
 
-  static isValidProductDetails = productDetails => {
-    const {
-      name,
-      brand,
-      description,
-      image,
-      quantity,
-      price,
-      isAvailable,
-      weight,
-      dimensions,
-      warrantyInfo,
-      notes,
-      category,
-      tags
-    } = productDetails;
-
-    return (
-      name &&
-      brand &&
-      description &&
-      image &&
-      quantity &&
-      price &&
-      isAvailable &&
-      weight &&
-      dimensions &&
-      warrantyInfo &&
-      notes &&
-      category &&
-      tags
-    );
-  };
-
   static createProduct = async (req, res) => {
     const productDetails = req.body;
     const { name, category, tags } = productDetails;
 
     // check if the required fields are provided
-    if (!ProductsController.isValidProductDetails(productDetails)) {
+    if (!isValidProductDetails(productDetails)) {
       res.status(400).json({
         message:
           "Please provide all the required fields within the body of the request!"
@@ -180,7 +147,7 @@ class ProductsController {
     const { category, tags } = productDetails;
 
     // check if the required fields are provided
-    if (!ProductsController.isValidProductDetails(productDetails)) {
+    if (!isValidProductDetails(productDetails)) {
       res.status(400).json({
         message:
           "Please provide all the required fields within the body of the request!"
