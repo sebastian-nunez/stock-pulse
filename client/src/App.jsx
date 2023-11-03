@@ -36,7 +36,7 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <div className="container mx-auto min-h-screen py-4">{element}</div>
+      <div className="container mx-auto min-h-screen pb-12 pt-4">{element}</div>
       <Footer />
     </>
   );
