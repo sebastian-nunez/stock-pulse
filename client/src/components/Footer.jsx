@@ -1,6 +1,6 @@
-import React from "react";
 import { Layers3 } from "lucide-react";
-import "./Footer.css";
+import React from "react";
+import "../styles/Footer.css";
 
 const Footer = () => {
   return (

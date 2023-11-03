@@ -1,16 +1,16 @@
+import { NextUIProvider } from "@nextui-org/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
-import { NextUIProvider } from "@nextui-org/react";
-import { BrowserRouter } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
+  MutationCache,
+  QueryCache,
   QueryClient,
   QueryClientProvider,
-  QueryCache,
-  MutationCache,
 } from "react-query";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.jsx";
+import "./styles/index.css";
 
 // react-query
 const queryClient = new QueryClient({

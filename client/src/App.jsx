@@ -1,12 +1,12 @@
 import { useRoutes } from "react-router-dom";
-import "./App.css";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Inventory from "./pages/Inventory";
-import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import PageNotFound from "./pages/PageNotFound";
 import Playground from "./pages/Playground";
+import "./styles/App.css";
 
 const App = () => {
   const element = useRoutes([
