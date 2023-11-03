@@ -159,7 +159,6 @@ const Playground = () => {
           selectedAction === Action.UPDATE && (
             <ProductEditableModal
               title="Edit Product"
-              canDelete={true}
               product={MOCK_PRODUCT}
               isOpen={isOpen}
               onOpenChange={onOpenChange}
