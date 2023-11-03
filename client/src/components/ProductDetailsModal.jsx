@@ -23,7 +23,7 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                 Product Details
               </ModalHeader>
 
-              <ModalBody>ProductDetails Content</ModalBody>
+              <ModalBody>{JSON.stringify(product)}</ModalBody>
 
               <ModalFooter>
                 <Button color="danger" onPress={onClose} radius="sm">

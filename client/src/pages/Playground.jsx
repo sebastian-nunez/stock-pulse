@@ -168,7 +168,11 @@ const Playground = () => {
         {/* View a product */}
         {selectedFilter === Filter.PRODUCT &&
           selectedAction === Action.VIEW && (
-            <ProductDetailsModal isOpen={isOpen} onOpenChange={onOpenChange} />
+            <ProductDetailsModal
+              product={MOCK_PRODUCT}
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+            />
           )}
       </section>
 
