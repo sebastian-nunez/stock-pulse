@@ -27,7 +27,7 @@ export const productSchema = z.object({
     }),
   dimensions: z
     .string("Product dimensions are required!")
-    .min(6, "Product dimensions must be at least 6 characters")
+    .min(5, "Product dimensions must be at least 5 characters")
     .max(50, "Product dimensions must be less than 50 characters"),
   description: z
     .string("Product description is required!")
