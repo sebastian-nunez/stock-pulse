@@ -1,4 +1,5 @@
 import axios from "axios";
+import { isValidTagDetails } from "../../../server/utils/validator";
 
 const TAGS_BASE_URL = "/api/tags";
 
@@ -31,8 +32,12 @@ class TagsAPI {
     return deletedTag;
   };
 
-  static createTag = async (name, description) => {
-    const body = JSON.stringify({ name, description });
+  static createTag = async (tagDetails) => {
+    if (!isValidTagDetails(tagDetails)) {
+      throw new Error("Invalid tag details!");
+    }
+
+    const body = JSON.stringify(tagDetails);
     const headers = {
       "Content-Type": "application/json",
     };
@@ -43,15 +48,23 @@ class TagsAPI {
     return createdTag;
   };
 
-  static updateTag = async (tagId, name, description) => {
-    const body = JSON.stringify({ name, description });
+  static updateTag = async (tagDetails) => {
+    if (!isValidTagDetails(tagDetails) || !tagDetails.tag_id) {
+      throw new Error("Invalid tag details!");
+    }
+
+    const body = JSON.stringify(tagDetails);
     const headers = {
       "Content-Type": "application/json",
     };
 
-    const res = await axios.patch(`${TAGS_BASE_URL}/${tagId}`, body, {
-      headers,
-    });
+    const res = await axios.patch(
+      `${TAGS_BASE_URL}/${tagDetails.tag_id}`,
+      body,
+      {
+        headers,
+      },
+    );
     const updatedTag = res.data;
 
     return updatedTag;

@@ -62,6 +62,7 @@ class TagModel {
     const deleteQuery = `
       DELETE FROM tag
       WHERE tag_id = $1
+      ORDER BY name
       RETURNING *;
     `;
 

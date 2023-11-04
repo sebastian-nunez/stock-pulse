@@ -1,16 +1,16 @@
+import { NextUIProvider } from "@nextui-org/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
-import { NextUIProvider } from "@nextui-org/react";
-import { BrowserRouter } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
+  MutationCache,
+  QueryCache,
   QueryClient,
   QueryClientProvider,
-  QueryCache,
-  MutationCache,
 } from "react-query";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.jsx";
+import "./styles/index.css";
 
 // react-query
 const queryClient = new QueryClient({
@@ -22,19 +22,21 @@ const queryClient = new QueryClient({
   queryCache: new QueryCache({
     // global error handling for useQuery
     onError: (error) => {
-      const message = error?.response?.data?.message;
+      const responseMessage = error?.response?.data?.message;
 
-      console.error(message);
-      toast.error(`Error: ${error.message}. \n\nDetails: ${message}`);
+      toast.error(
+        `Error: ${error.message} \n\nMessage: ${responseMessage || "None"}`,
+      );
     },
   }),
   mutationCache: new MutationCache({
     // global error handling for useMutation
     onError: (error) => {
-      const message = error?.response?.data?.message;
+      const responseMessage = error?.response?.data?.message;
 
-      console.error(message);
-      toast.error(`Error: ${error.message}. \n\nDetails: ${message}`);
+      toast.error(
+        `Error: ${error.message} \n\nMessage: ${responseMessage || "None"}`,
+      );
     },
   }),
 });

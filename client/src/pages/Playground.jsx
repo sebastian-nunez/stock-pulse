@@ -4,11 +4,6 @@ import {
   CardBody,
   Divider,
   Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
   Select,
   SelectItem,
   Tooltip,
@@ -19,8 +14,9 @@ import { Search, Users } from "lucide-react";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import ProductCreateModal from "../components/ProductCreateModal";
-import ProductUpdateModal from "../components/ProductUpdateModal";
+import ProductDetailsModal from "../components/ProductDetailsModal";
+import { default as ProductEditableModal } from "../components/ProductEditableModal";
+import ProductsAPI from "../services/ProductsAPI";
 import UsersAPI from "../services/UsersAPI";
 
 export const Action = {
@@ -34,7 +30,6 @@ export const Filter = {
   PRODUCT: "Product",
   CATEGORY: "Category",
   TAG: "Tag",
-  USER: "User",
 };
 
 const DEFAULT_USER = {
@@ -52,6 +47,21 @@ const Playground = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [selectedAction, setSelectedAction] = useState(null);
+  const [productId, setProductId] = useState(1);
+
+  const productByIdQuery = useQuery(
+    ["products", productId],
+    () => ProductsAPI.getProductById(productId),
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["products"]);
+      },
+    },
+  );
+  const product = productByIdQuery.data;
+
+  const productsQuery = useQuery(["products"], ProductsAPI.getAllProducts);
+  const products = productsQuery.data;
 
   {
     /* --------------------------- Users ---------------------------*/
@@ -107,6 +117,20 @@ const Playground = () => {
 
         {/* Form */}
         <div className="flex gap-4">
+          {/* Filter Selection */}
+          <Select
+            label="Filter"
+            variant="bordered"
+            placeholder="Select an filter"
+            className="w-1/3"
+            size="sm"
+            onChange={(e) => setSelectedFilter(e.target.value)}
+          >
+            {Object.values(Filter).map((filter) => (
+              <SelectItem key={filter}>{filter}</SelectItem>
+            ))}
+          </Select>
+
           {/* Action Selection */}
           <Select
             label="Action"
@@ -121,19 +145,23 @@ const Playground = () => {
             ))}
           </Select>
 
-          {/* Filter Selection */}
-          <Select
-            label="Filter"
-            variant="bordered"
-            placeholder="Select an filter"
-            className="w-1/3"
-            size="sm"
-            onChange={(e) => setSelectedFilter(e.target.value)}
-          >
-            {Object.values(Filter).map((filter) => (
-              <SelectItem key={filter}>{filter}</SelectItem>
-            ))}
-          </Select>
+          {/* Product ID Selector */}
+          {selectedFilter === Filter.PRODUCT &&
+            selectedAction &&
+            selectedAction !== Action.CREATE && (
+              <Input
+                value={productId}
+                label="Product ID"
+                placeholder="1"
+                type="number"
+                variant="bordered"
+                size="sm"
+                onChange={(e) => {
+                  setProductId(e.target.value);
+                }}
+                className="w-fit"
+              />
+            )}
         </div>
 
         {/* Open Modal Button */}
@@ -143,6 +171,7 @@ const Playground = () => {
             variant="shadow"
             className="mt-6 w-1/3"
             onPress={onOpen}
+            isLoading={productByIdQuery.isLoading}
           >
             Open Modal
           </Button>
@@ -151,13 +180,34 @@ const Playground = () => {
         {/* Create a product */}
         {selectedFilter === Filter.PRODUCT &&
           selectedAction === Action.CREATE && (
-            <ProductCreateModal isOpen={isOpen} onOpenChange={onOpenChange} />
+            <ProductEditableModal
+              title="Add Product"
+              canDelete={false}
+              isOpen={isOpen}
+              product={null}
+              onOpenChange={onOpenChange}
+            />
           )}
 
         {/* Edit a product */}
         {selectedFilter === Filter.PRODUCT &&
           selectedAction === Action.UPDATE && (
-            <ProductUpdateModal isOpen={isOpen} onOpenChange={onOpenChange} />
+            <ProductEditableModal
+              title="Edit Product"
+              product={product}
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+            />
+          )}
+
+        {/* View a product */}
+        {selectedFilter === Filter.PRODUCT &&
+          selectedAction === Action.VIEW && (
+            <ProductDetailsModal
+              product={product}
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+            />
           )}
       </section>
 
@@ -232,77 +282,6 @@ const Playground = () => {
                 <div>ERROR: {usersQuery.error?.message}</div>
               )}
         </div>
-
-        {/* ------------ Modal -------------- */}
-        {selectedAction === Action.CREATE && selectedFilter === Filter.USER && (
-          <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-            <form onSubmit={handleAddUser}>
-              <ModalContent>
-                {(onClose) => (
-                  <>
-                    <ModalHeader className="flex flex-col gap-1">
-                      Add User
-                    </ModalHeader>
-
-                    <ModalBody>
-                      <div className="flex gap-3">
-                        <Input
-                          type="text"
-                          name="firstname"
-                          label="Firstname"
-                          variant="bordered"
-                          onChange={handleChange}
-                          isRequired
-                        />
-                        <Input
-                          type="text"
-                          name="lastname"
-                          label="Lastname"
-                          variant="bordered"
-                          onChange={handleChange}
-                          isRequired
-                        />
-                      </div>
-
-                      <Input
-                        type="text"
-                        name="role"
-                        label="Role"
-                        variant="bordered"
-                        onChange={handleChange}
-                        isRequired
-                      />
-                      <Input
-                        type="text"
-                        name="image"
-                        label="Image Link"
-                        onChange={handleChange}
-                        variant="bordered"
-                        isClearable
-                        description="Please provide a valid URL"
-                      />
-                    </ModalBody>
-
-                    <ModalFooter>
-                      <Button color="danger" variant="light" onPress={onClose}>
-                        Cancel
-                      </Button>
-
-                      <Button
-                        color="primary"
-                        variant="shadow"
-                        onPress={onClose}
-                        type="submit"
-                      >
-                        Add
-                      </Button>
-                    </ModalFooter>
-                  </>
-                )}
-              </ModalContent>
-            </form>
-          </Modal>
-        )}
 
         {/* ------------ Toaster Notification -------------- */}
         <Toaster position="top-right" />

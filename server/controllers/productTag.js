@@ -107,20 +107,22 @@ class ProductTagController {
   };
 
   static createProductTag = async (req, res) => {
-    let { productId, tagId } = req.body;
+    let { product_id, tag_id } = req.body;
 
-    if (!productId || !tagId) {
+    if (!product_id || !tag_id) {
       res
         .status(400)
-        .json({ message: "productId and tagId are required within the body!" });
+        .json({
+          message: "product_id and tag_id are required within the body!"
+        });
       return;
     }
 
     try {
-      productId = parseInt(productId);
-      tagId = parseInt(tagId);
+      product_id = parseInt(product_id);
+      tag_id = parseInt(tag_id);
 
-      const createdProductTag = await ProductTag.createOne(productId, tagId);
+      const createdProductTag = await ProductTag.createOne(product_id, tag_id);
 
       if (!createdProductTag) {
         res.status(409).json({ message: "Product tag already exists!" });

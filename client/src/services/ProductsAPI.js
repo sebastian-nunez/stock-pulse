@@ -1,4 +1,5 @@
 import axios from "axios";
+import { isValidProductDetails } from "../../../server/utils/validator";
 
 const PRODUCTS_BASE_URL = "/api/products";
 
@@ -31,37 +32,12 @@ class ProductsAPI {
     return deletedProduct;
   };
 
-  static createProduct = async (
-    name,
-    brand,
-    description,
-    image,
-    quantity,
-    price,
-    isAvailable,
-    weight,
-    dimensions,
-    warrantyInfo,
-    notes,
-    category,
-    tags,
-  ) => {
-    const body = JSON.stringify({
-      name,
-      brand,
-      description,
-      image,
-      quantity,
-      price,
-      isAvailable,
-      weight,
-      dimensions,
-      warrantyInfo,
-      notes,
-      category,
-      tags,
-    });
+  static createProduct = async (productDetails) => {
+    if (!isValidProductDetails(productDetails)) {
+      throw new Error("Invalid product details!");
+    }
 
+    const body = JSON.stringify(productDetails);
     const headers = {
       "Content-Type": "application/json",
     };
@@ -72,45 +48,23 @@ class ProductsAPI {
     return createdProduct;
   };
 
-  static updateProduct = async (
-    productId,
-    name,
-    brand,
-    description,
-    image,
-    quantity,
-    price,
-    isAvailable,
-    weight,
-    dimensions,
-    warrantyInfo,
-    notes,
-    category,
-    tags,
-  ) => {
-    const body = JSON.stringify({
-      name,
-      brand,
-      description,
-      image,
-      quantity,
-      price,
-      isAvailable,
-      weight,
-      dimensions,
-      warrantyInfo,
-      notes,
-      category,
-      tags,
-    });
+  static updateProduct = async (productDetails) => {
+    if (!isValidProductDetails(productDetails)) {
+      throw new Error("Invalid product details!");
+    }
 
+    const body = JSON.stringify(productDetails);
     const headers = {
       "Content-Type": "application/json",
     };
 
-    const res = await axios.patch(`${PRODUCTS_BASE_URL}/${productId}`, body, {
-      headers,
-    });
+    const res = await axios.patch(
+      `${PRODUCTS_BASE_URL}/${productDetails.product_id}`,
+      body,
+      {
+        headers,
+      },
+    );
     const updatedProduct = res.data;
 
     return updatedProduct;

@@ -13,9 +13,13 @@ You will need to reference the GitHub Project Management guide in the course por
 - [x] In this repo, create issues for each feature on your feature list
   - [x] Make sure to add the issues to your project board and to the appropriate milestones
 - [x] Update the status of issues in your project board as you complete them
-- [ ] In `readme.md`, check off the features you have completed in this unit by adding a ✅ emoji in front of their title
-  - [ ] Under each feature you have completed, **include a GIF** showing feature functionality
+- [x] In `readme.md`, check off the features you have completed in this unit by adding a ✅ emoji in front of their title
+  - [x] Under each feature you have completed, **include a GIF** showing feature functionality
 - [x] In this document, complete the **Reflection** section below
+
+## DEMO - Product Management
+
+![demo](../demos/playground-product-modals-1.gif)
 
 ## Reflection
 

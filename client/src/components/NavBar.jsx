@@ -56,6 +56,7 @@ export default function App() {
             <NavbarItem
               key={item.name}
               isActive={item.path === pathname} // highlight active item from URL
+              className="text-slate-700"
             >
               <Link to={item.path}>{item.name}</Link>
             </NavbarItem>

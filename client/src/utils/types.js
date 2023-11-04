@@ -1,0 +1,15 @@
+export const EMPTY_PRODUCT = {
+  name: "",
+  brand: "",
+  description: "",
+  image: "",
+  quantity: null,
+  price: null,
+  is_available: true,
+  weight: null,
+  dimensions: "",
+  warranty_info: "",
+  notes: "",
+  category: "",
+  tags: [],
+};

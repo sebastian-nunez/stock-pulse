@@ -259,7 +259,7 @@ const createProductDetailsView = async () => {
         p.notes,
         p.date_added,
         c.name AS category,
-        array_agg(t.name) AS tags
+        array_remove(array_agg(t.name), NULL) AS tags
       FROM product p
       LEFT JOIN category c ON p.category_id = c.category_id
       LEFT JOIN product_tag pt ON pt.product_id = p.product_id
