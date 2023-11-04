@@ -17,7 +17,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import ProductDetailsModal from "../components/ProductDetailsModal";
 import { default as ProductEditableModal } from "../components/ProductEditableModal";
 import UsersAPI from "../services/UsersAPI";
-import { MOCK_EXISTING_PRODUCT, MOCK_NEW_PRODUCT } from "../utils/mocks";
+import { MOCK_EXISTING_PRODUCT } from "../utils/mocks";
 
 export const Action = {
   CREATE: "Create",
@@ -149,7 +149,6 @@ const Playground = () => {
             <ProductEditableModal
               title="Add Product"
               canDelete={false}
-              product={MOCK_NEW_PRODUCT}
               isOpen={isOpen}
               onOpenChange={onOpenChange}
             />
