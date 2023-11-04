@@ -13,7 +13,7 @@
 
 - [About](#about)
 - [Features](#features)
-- [Demo](#demo)
+- [Demos](#demos)
 - [Getting Started](#getting-started)
 - [Technologies](#technologies)
 - [Kanban Board](#kanban-board)
@@ -41,13 +41,8 @@
 
 - **Product Management:**
 
-  - Add, update, and remove products with ease.
-  - Categorize and tag products for efficient organization.
-
-- **Inventory Control:**
-
-  - Monitor product quantities and make adjustments as needed.
-  - Receive low-stock alerts for timely restocking.
+  - ✅ Add, update, and remove products with ease.
+  - ✅ Categorize and tag products for efficient organization.
 
 - **Category & Tag Management:**
 
@@ -55,11 +50,18 @@
   - Assign products to multiple tags.
 
 - **User-friendly Interface:**
-  - Browse products, view details, and manage the shopping cart effortlessly.
+  - Browse products, view details, and manage inventory easily
 
-## Demo
+- **Inventory Control:**
 
-![demo](demos/stock-pulse-demo-2.gif)
+  - Monitor product quantities and make adjustments as needed.
+  - Receive low-stock alerts for timely restocking.
+
+
+## Demos
+
+### Product Management Modals
+![demo](demos/playground-product-modals-1.gif)
 
 ## Getting Started
 
