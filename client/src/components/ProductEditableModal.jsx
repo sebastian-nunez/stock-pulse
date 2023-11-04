@@ -8,21 +8,26 @@ import {
   Spinner,
 } from "@nextui-org/react";
 import { Save, Trash } from "lucide-react";
+import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { useMutation, useQueryClient } from "react-query";
 import ProductsAPI from "../services/ProductsAPI";
-import { EMPTY_PRODUCT } from "../utils/types";
 import ProductDetailsForm from "./ProductDetailsForm";
 
 const ProductEditableModal = ({
   title,
   canDelete = true,
-  product = EMPTY_PRODUCT,
+  product,
   isOpen,
   onOpenChange,
 }) => {
+  const [productDetails, setProductDetails] = useState(product || null);
+
+  // react-query
   const queryClient = useQueryClient();
-  const isLoading = queryClient.isMutating() || queryClient.isFetching(); // handle the loading states
+  const isLoading =
+    queryClient.isMutating(["products"]) ||
+    queryClient.isFetching(["tags", "categories", "products"]); // handle the loading states
 
   const deleteProduct = useMutation(ProductsAPI.deleteProduct, {
     onSuccess: (response) => {
@@ -33,7 +38,7 @@ const ProductEditableModal = ({
 
       // close the modal
       onOpenChange();
-      // setProductInfo(EMPTY_PRODUCT); // TODO: this is a hacky way to clear the form
+      setProductDetails(null); // reset the product details
     },
   });
 
@@ -44,9 +49,8 @@ const ProductEditableModal = ({
       const productName = response.updatedProduct.name;
       toast.success(`${productName} successfully updated!`);
 
-      // close the modal
+      // close the modal (keep the state of the form)
       onOpenChange();
-      // setProductInfo(EMPTY_PRODUCT); // TODO: clear out the form
     },
   });
 
@@ -59,7 +63,7 @@ const ProductEditableModal = ({
 
       // close the modal
       onOpenChange();
-      // setProductInfo(EMPTY_PRODUCT); // TODO: clear out the form
+      setProductDetails(null); // reset the product details
     },
   });
 
@@ -72,15 +76,35 @@ const ProductEditableModal = ({
     deleteProduct.mutate(product.product_id);
   };
 
-  const handleSave = (productDetails) => {
-    console.log(productDetails);
+  const handleSave = (formValues, reset) => {
+    // convert tags string to array (ensure it's a string first)
+    const tagsArray =
+      formValues?.tags?.length > 0 ? `${formValues?.tags}`.split(",") : [];
+
+    // combine the existing product details with the form values
+    const newProductDetails = {
+      ...productDetails,
+      ...formValues,
+      tags: tagsArray,
+    };
+    setProductDetails(newProductDetails); // async state update
 
     // if the product has an id, it means it's an existing product
-    if (productDetails.product_id) {
-      updateProduct.mutate(productDetails);
+    if (newProductDetails.product_id) {
+      // detect if there are any changes
+      if (
+        JSON.stringify(newProductDetails) === JSON.stringify(productDetails)
+      ) {
+        toast.error("No changes detected, nothing to update!");
+        return;
+      }
+
+      updateProduct.mutate(newProductDetails);
     } else {
-      createProduct.mutate(productDetails);
+      createProduct.mutate(newProductDetails);
     }
+
+    reset(); // reset the form
   };
 
   return (
@@ -104,7 +128,10 @@ const ProductEditableModal = ({
                 {isLoading ? (
                   <Spinner size="md" color="primary" label="Loading..." />
                 ) : (
-                  <ProductDetailsForm product={product} onSubmit={handleSave} />
+                  <ProductDetailsForm
+                    product={productDetails}
+                    onSubmit={handleSave}
+                  />
                 )}
               </ModalBody>
 

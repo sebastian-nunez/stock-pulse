@@ -36,20 +36,20 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
   const tags = tagsQuery.data;
 
   // loading states
-  if (queryClient.isFetching()) {
+  if (queryClient.isFetching(["categories", "tags"])) {
     return <Spinner size="md" color="primary" label="Loading..." />;
   }
 
   return (
     <form
       id="product-details-form"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit((formValues) => onSubmit(formValues, reset))}
       className="flex flex-col gap-3"
     >
       <div className="flex gap-3">
         <Input
           {...register("name")}
-          defaultValue={product.name}
+          defaultValue={product?.name}
           type="text"
           placeholder="Air Jordan 1 Retro"
           label="Name"
@@ -66,7 +66,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           <Switch
             {...register("is_available")}
             size="sm"
-            defaultSelected={product.is_available}
+            defaultSelected={product?.is_available || true} // product is available by default
             onValueChange={(value) => setValue("is_available", value)}
           />
         </div>
@@ -75,7 +75,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
       <div className="flex gap-3">
         <Input
           {...register("brand")}
-          defaultValue={product.brand}
+          defaultValue={product?.brand}
           type="text"
           placeholder="Nike"
           label="Brand"
@@ -112,7 +112,9 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
               <span className="text-small text-default-400">$</span>
             </div>
           }
-          defaultValue={`${product?.price?.replace(/\$/g, "")}`} // remove $ sign from price
+          defaultValue={
+            product?.price && `${product?.price}`.replace(/\$/g, "")
+          } // remove $ sign from price
           type="number"
           placeholder="0.00"
           label="Price"
@@ -125,7 +127,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
 
         <Input
           {...register("quantity")}
-          defaultValue={product.quantity}
+          defaultValue={product?.quantity}
           type="number"
           placeholder="0"
           label="Quantity"
@@ -140,7 +142,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
       <div className="flex gap-3">
         <Input
           {...register("weight")}
-          defaultValue={product.weight}
+          defaultValue={product?.weight}
           type="number"
           placeholder="0.00"
           label="Weight (lbs)"
@@ -153,7 +155,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
 
         <Input
           {...register("dimensions")}
-          defaultValue={product.dimensions}
+          defaultValue={product?.dimensions}
           type="text"
           placeholder="Length x Width x Height"
           label="Dimensions (in)"
@@ -168,7 +170,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
       <div className="flex gap-3">
         <Input
           {...register("image")}
-          defaultValue={product.image}
+          defaultValue={product?.image}
           type="text"
           placeholder="https://"
           label="Image"
@@ -183,7 +185,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
       <div className="flex gap-3">
         <Textarea
           {...register("description")}
-          defaultValue={product.description}
+          defaultValue={product?.description}
           label="Description"
           placeholder="Enter product description here..."
           minRows={2}
@@ -191,6 +193,35 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           variant="bordered"
           isInvalid={errors.description !== undefined}
           errorMessage={errors.description?.message}
+          isRequired
+        />
+      </div>
+
+      <div className="flex gap-3">
+        <Textarea
+          {...register("warranty_info")}
+          defaultValue={product?.warranty_info}
+          label="Warranty Info"
+          placeholder="Enter warranty information here..."
+          minRows={1}
+          maxRows={2}
+          variant="bordered"
+          isInvalid={errors.warranty_info !== undefined}
+          errorMessage={errors.warranty_info?.message}
+          isRequired
+        />
+      </div>
+
+      <div className="flex gap-3">
+        <Textarea
+          {...register("notes")}
+          defaultValue={product?.notes}
+          label="Notes"
+          placeholder="Enter product notes here..."
+          maxRows={3}
+          variant="bordered"
+          isInvalid={errors.notes !== undefined}
+          errorMessage={errors.notes?.message}
           isRequired
         />
       </div>
@@ -229,33 +260,6 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
               </SelectItem>
             ))}
         </Select>
-      </div>
-
-      <div className="flex gap-3">
-        <Textarea
-          {...register("warranty_info")}
-          defaultValue={product.warranty_info}
-          label="Warranty Info"
-          placeholder="Enter warranty information here..."
-          minRows={1}
-          maxRows={2}
-          variant="bordered"
-          isInvalid={errors.warranty_info !== undefined}
-          errorMessage={errors.warranty_info?.message}
-        />
-      </div>
-
-      <div className="flex gap-3">
-        <Textarea
-          {...register("notes")}
-          defaultValue={product.notes}
-          label="Notes"
-          placeholder="Enter product notes here..."
-          maxRows={3}
-          variant="bordered"
-          isInvalid={errors.notes !== undefined}
-          errorMessage={errors.notes?.message}
-        />
       </div>
     </form>
   );
