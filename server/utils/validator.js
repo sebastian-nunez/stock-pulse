@@ -16,19 +16,19 @@ export const isValidProductDetails = productDetails => {
   } = productDetails;
 
   return (
-    name &&
-    brand &&
-    description &&
-    image &&
-    quantity &&
-    price &&
-    is_available &&
-    weight &&
-    dimensions &&
-    warranty_info &&
-    notes &&
-    category &&
-    tags &&
+    name !== undefined &&
+    brand !== undefined &&
+    description !== undefined &&
+    image !== undefined &&
+    quantity !== undefined &&
+    price !== undefined &&
+    is_available !== undefined &&
+    weight !== undefined &&
+    dimensions !== undefined &&
+    warranty_info !== undefined &&
+    notes !== undefined &&
+    category !== undefined &&
+    tags !== undefined &&
     Array.isArray(tags)
   );
 };
