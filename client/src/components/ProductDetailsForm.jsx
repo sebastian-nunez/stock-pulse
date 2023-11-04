@@ -119,6 +119,8 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
             product?.price && `${product?.price}`.replace(/\$/g, "")
           } // remove $ sign from price
           type="number"
+          min={0}
+          step={0.01}
           placeholder="0.00"
           label="Price"
           variant="bordered"
@@ -133,6 +135,8 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           defaultValue={product?.quantity}
           type="number"
           placeholder="0"
+          min={0}
+          step={1}
           label="Quantity"
           variant="bordered"
           isInvalid={errors.quantity !== undefined}
@@ -148,6 +152,8 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           defaultValue={product?.weight}
           type="number"
           placeholder="0.00"
+          min={0.0}
+          step={0.5}
           label="Weight (lbs)"
           variant="bordered"
           isInvalid={errors.weight !== undefined}
