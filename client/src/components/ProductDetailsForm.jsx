@@ -60,8 +60,10 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           isRequired
         />
 
-        <div className="flex w-1/5 justify-center gap-1 rounded-xl border-2 align-middle drop-shadow-sm">
-          <p className="my-auto text-xs text-slate-600">Available</p>
+        <div className="flex w-1/5 justify-between gap-2 rounded-xl border-2 align-middle drop-shadow-sm hover:border-zinc-400">
+          <p className="my-auto ml-3 text-xs font-semibold text-zinc-500">
+            Available
+          </p>
 
           <Switch
             {...register("is_available")}
