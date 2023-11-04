@@ -36,7 +36,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
   const tags = tagsQuery.data;
 
   // loading states
-  if (queryClient.isFetching(["categories", "tags"])) {
+  if (queryClient.isFetching(["categories", "tags", "products"])) {
     return <Spinner size="md" color="primary" label="Loading..." />;
   }
 
@@ -66,9 +66,12 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           <Switch
             {...register("is_available")}
             size="sm"
-            defaultSelected={product?.is_available || true} // product is available by default
+            defaultSelected={
+              product?.is_available !== undefined ? product.is_available : true
+            } // product is available by default
             onValueChange={(value) => setValue("is_available", value)}
           />
+          <em>{errors?.is_available?.message}</em>
         </div>
       </div>
 
