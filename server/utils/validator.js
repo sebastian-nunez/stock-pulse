@@ -1,48 +1,24 @@
-export const isValidProductDetails = productDetails => {
-  const {
-    name,
-    brand,
-    description,
-    image,
-    quantity,
-    price,
-    is_available,
-    weight,
-    dimensions,
-    warranty_info,
-    notes,
-    category,
-    tags
-  } = productDetails;
+import { fromZodError } from "zod-validation-error";
+import { productSchema } from "../../client/src/utils/schemas.js";
 
-  return (
-    name !== undefined &&
-    brand !== undefined &&
-    description !== undefined &&
-    image !== undefined &&
-    quantity !== undefined &&
-    price !== undefined &&
-    is_available !== undefined &&
-    weight !== undefined &&
-    dimensions !== undefined &&
-    warranty_info !== undefined &&
-    notes !== undefined &&
-    category !== undefined &&
-    tags !== undefined &&
-    Array.isArray(tags)
-  );
+export const validateProductDetails = productDetails => {
+  try {
+    productSchema.parse(productDetails);
+  } catch (error) {
+    throw fromZodError(error);
+  }
 };
 
 export const isValidCategoryDetails = categoryDetails => {
   const { name, description } = categoryDetails;
 
-  return name && description;
+  return name !== undefined && description !== undefined;
 };
 
 export const isValidTagDetails = tagDetails => {
   const { name, description } = tagDetails;
 
-  return name && description;
+  return name !== undefined && description;
 };
 
 export const isValidProductTagDetails = productTagDetails => {

@@ -2,7 +2,7 @@ import Category from "../models/category.js";
 import Product from "../models/product.js";
 import ProductTag from "../models/productTag.js";
 import Tag from "../models/tag.js";
-import { isValidProductDetails } from "../utils/validator.js";
+import { validateProductDetails } from "../utils/validator.js";
 
 class ProductsController {
   static getProducts = async (req, res) => {
@@ -60,17 +60,10 @@ class ProductsController {
     const productDetails = req.body;
     const { name, category, tags } = productDetails;
 
-    // check if the required fields are provided
-    if (!isValidProductDetails(productDetails)) {
-      res.status(400).json({
-        message:
-          "Please provide all the required fields within the body of the request!"
-      });
-
-      return;
-    }
-
     try {
+      // check if the required fields are provided
+      validateProductDetails(productDetails);
+
       // check if the product already exists
       const product = await Product.getOneByName(name);
 
@@ -150,16 +143,9 @@ class ProductsController {
     const productDetails = req.body;
     const { category, tags } = productDetails;
 
-    // check if the required fields are provided
-    if (!isValidProductDetails(productDetails)) {
-      res.status(400).json({
-        message:
-          "Please provide all the required fields within the body of the request!"
-      });
-      return;
-    }
-
     try {
+      // check if the required fields are provided
+      validateProductDetails(productDetails);
       productId = parseInt(productId);
 
       // check if the product exists

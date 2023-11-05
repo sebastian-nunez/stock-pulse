@@ -1,5 +1,5 @@
 import axios from "axios";
-import { isValidProductDetails } from "../../../server/utils/validator";
+import { validateProductDetails } from "../../../server/utils/validator";
 
 const PRODUCTS_BASE_URL = "/api/products";
 
@@ -33,9 +33,7 @@ class ProductsAPI {
   };
 
   static createProduct = async (productDetails) => {
-    if (!isValidProductDetails(productDetails)) {
-      throw new Error("Invalid product details!");
-    }
+    validateProductDetails(productDetails);
 
     const body = JSON.stringify(productDetails);
     const headers = {
@@ -49,9 +47,7 @@ class ProductsAPI {
   };
 
   static updateProduct = async (productDetails) => {
-    if (!isValidProductDetails(productDetails)) {
-      throw new Error("Invalid product details!");
-    }
+    validateProductDetails(productDetails);
 
     const body = JSON.stringify(productDetails);
     const headers = {

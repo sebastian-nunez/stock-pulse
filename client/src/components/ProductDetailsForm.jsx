@@ -109,7 +109,12 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
         >
           {categories &&
             categories.map((category) => (
-              <SelectItem key={category.name}>{category.name}</SelectItem>
+              <SelectItem
+                key={category.name}
+                textValue={category?.name || "EMPTY"}
+              >
+                {category.name}
+              </SelectItem>
             ))}
         </Select>
       </div>
