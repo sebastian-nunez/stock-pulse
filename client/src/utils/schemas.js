@@ -40,3 +40,25 @@ export const productSchema = z.object({
     .max(25, "Product category must be less than 25 characters"),
   tags: z.array(z.string()).default([]),
 });
+
+export const categorySchema = z.object({
+  name: z
+    .string()
+    .min(2, "Category name must be at least 2 characters")
+    .max(25, "Category name must be less than 25 characters"),
+  description: z
+    .string()
+    .min(10, "Category description must be at least 10 characters")
+    .max(255, "Category description must be less than 255 characters"),
+});
+
+export const tagSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Category name must be at least 2 characters")
+    .max(25, "Category name must be less than 25 characters"),
+  description: z
+    .string()
+    .min(10, "Category description must be at least 10 characters")
+    .max(255, "Category description must be less than 255 characters"),
+});
