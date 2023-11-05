@@ -1,4 +1,5 @@
 import Tag from "../models/tag.js";
+import { validateTagDetails } from "../utils/validator.js";
 
 class TagsController {
   static getTags = async (req, res) => {
@@ -56,6 +57,8 @@ class TagsController {
     let { name, description } = req.body;
 
     try {
+      validateTagDetails({ name, description });
+
       const createdTag = await Tag.createOne(name, description);
 
       if (!createdTag) {
@@ -97,6 +100,7 @@ class TagsController {
     const { name, description } = req.body;
 
     try {
+      validateTagDetails({ name, description });
       tagId = parseInt(tagId);
 
       const updatedTag = await Tag.updateOne(tagId, name, description);
