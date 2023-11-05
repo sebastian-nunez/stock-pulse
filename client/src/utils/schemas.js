@@ -10,21 +10,9 @@ export const productSchema = z.object({
     .string("Product brand is required!")
     .min(2, "Product brand must be at least 2 characters")
     .max(100, "Product brand must be less than 100 characters"),
-  price: z
-    .string("Product price is required!")
-    .refine((val) => !Number.isNaN(parseInt(val, 10)), {
-      message: "Expected number, received a string",
-    }),
-  quantity: z
-    .string("Product quantity is required!")
-    .refine((val) => !Number.isNaN(parseInt(val, 10)), {
-      message: "Expected number, received a string",
-    }),
-  weight: z
-    .string("Product weight is required!")
-    .refine((val) => !Number.isNaN(parseInt(val, 10)), {
-      message: "Expected number, received a string",
-    }),
+  price: z.number("Product price is required!"),
+  quantity: z.number("Product quantity is required!"),
+  weight: z.number("Product weight is required!"),
   dimensions: z
     .string("Product dimensions are required!")
     .min(5, "Product dimensions must be at least 5 characters")
@@ -42,12 +30,13 @@ export const productSchema = z.object({
     .min(5, "Product notes must be at least 5 characters")
     .max(255, "Product notes must be less than 255 characters")
     .default("No notes available."),
-  tags: z.any(),
   warranty_info: z
     .string("Product warranty info is required!")
     .min(10, "Warranty information must be at least 10 characters")
     .max(255, "Warranty information must be less than 255 characters")
     .default("No warranty information available."),
-
-  category: z.string("Product category is required!"),
+  category: z
+    .string("Product category is required!")
+    .max(25, "Product category must be less than 25 characters"),
+  tags: z.array(z.string()).default([]),
 });
