@@ -17,8 +17,10 @@ export const productSchema = z.object({
   weight: z.number("Product weight is required!"),
   dimensions: z
     .string("Product dimensions are required!")
-    .min(5, "Product dimensions must be at least 5 characters")
-    .max(50, "Product dimensions must be less than 50 characters"),
+    .max(50, "Product dimensions must be less than 50 characters")
+    .refine((value) => /^\d+\s*x\s*\d+\s*x\s*\d+$/.test(value), {
+      message: "Dimensions format (in): Length x Width x Height",
+    }),
   description: z
     .string("Product description is required!")
     .min(15, "Product description must be at least 15 characters")
