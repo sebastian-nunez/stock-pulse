@@ -60,8 +60,8 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           isRequired
         />
 
-        <div className="flex w-1/5 justify-between gap-2 rounded-xl border-2 align-middle drop-shadow-sm hover:border-zinc-400">
-          <p className="my-auto ml-3 text-xs font-semibold text-zinc-500">
+        <div className="flex w-1/5 min-w-fit flex-col justify-between gap-2 rounded-xl border-2 align-middle drop-shadow-sm hover:border-zinc-400 sm:flex-row">
+          <p className="my-auto ml-3 text-center text-xs font-semibold text-zinc-500">
             Available
           </p>
 
@@ -72,6 +72,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
               product?.is_available !== undefined ? product.is_available : true
             } // product is available by default
             onValueChange={(value) => setValue("is_available", value)}
+            className="mx-auto"
           />
           <em>{errors?.is_available?.message}</em>
         </div>
