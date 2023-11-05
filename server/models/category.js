@@ -16,7 +16,6 @@ class CategoryModel {
     const insertQuery = `
         INSERT INTO category (name, description)
         VALUES ($1, $2)
-        ON CONFLICT (name) DO NOTHING
         RETURNING *;
     `;
 
@@ -25,7 +24,7 @@ class CategoryModel {
     return results.rows[0];
   };
 
-  static getOneById = async (categoryId) => {
+  static getOneById = async categoryId => {
     const selectQuery = `
       SELECT *
       FROM category
@@ -35,7 +34,7 @@ class CategoryModel {
     return results.rows[0];
   };
 
-  static getOneByName = async (categoryName) => {
+  static getOneByName = async categoryName => {
     const selectQuery = `
         SELECT *
         FROM category
@@ -57,13 +56,13 @@ class CategoryModel {
     const results = await pool.query(updateQuery, [
       name,
       description,
-      categoryId,
+      categoryId
     ]);
 
     return results.rows[0];
   };
 
-  static deleteOne = async (categoryId) => {
+  static deleteOne = async categoryId => {
     const deleteQuery = `
         DELETE FROM category
         WHERE category_id = $1
