@@ -1,5 +1,9 @@
 import { fromZodError } from "zod-validation-error";
-import { productSchema } from "../../client/src/utils/schemas.js";
+import {
+  categorySchema,
+  productSchema,
+  tagSchema
+} from "../../client/src/utils/schemas.js";
 
 export const validateProductDetails = productDetails => {
   try {
@@ -9,20 +13,18 @@ export const validateProductDetails = productDetails => {
   }
 };
 
-export const isValidCategoryDetails = categoryDetails => {
-  const { name, description } = categoryDetails;
-
-  return name !== undefined && description !== undefined;
+export const validateCategoryDetails = categoryDetails => {
+  try {
+    categorySchema.parse(categoryDetails);
+  } catch (error) {
+    throw fromZodError(error);
+  }
 };
 
-export const isValidTagDetails = tagDetails => {
-  const { name, description } = tagDetails;
-
-  return name !== undefined && description;
-};
-
-export const isValidProductTagDetails = productTagDetails => {
-  const { product_id, tag_id } = productTagDetails;
-
-  return product_id && tag_id;
+export const validateTagDetails = tagDetails => {
+  try {
+    tagSchema.parse(tagDetails);
+  } catch (error) {
+    throw fromZodError(error);
+  }
 };
