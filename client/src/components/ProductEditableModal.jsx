@@ -78,14 +78,14 @@ const ProductEditableModal = ({
 
   const handleSave = (formValues, reset) => {
     // convert tags string to array (ensure it's a string first)
-    const tagsArray =
-      formValues?.tags?.length > 0 ? `${formValues?.tags}`.split(",") : [];
+    // const tagsArray =
+    //   formValues?.tags?.length > 0 ? `${formValues?.tags}`.split(",") : [];
 
     // combine the existing product details with the form values
     const newProductDetails = {
       ...productDetails,
       ...formValues,
-      tags: tagsArray,
+      // tags: tagsArray,
     };
     setProductDetails(newProductDetails); // async state update
 
