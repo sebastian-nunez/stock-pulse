@@ -54,12 +54,15 @@ class CategoryController {
     try {
       categoryId = parseInt(categoryId);
 
-      const deletedCategory = await Category.deleteOne(categoryId);
+      // check if the category exists
+      const category = await Category.getOneById(categoryId);
 
-      if (!deletedCategory) {
+      if (!category) {
         res.status(404).json({ message: "Category not found!" });
         return;
       }
+
+      const deletedCategory = await Category.deleteOne(categoryId);
 
       res
         .status(200)

@@ -59,12 +59,16 @@ class TagsController {
     try {
       validateTagDetails({ name, description });
 
-      const createdTag = await Tag.createOne(name, description);
+      // check if tag already exists
+      const tag = await Tag.getOneByName(name);
 
-      if (!createdTag) {
+      if (tag) {
         res.status(409).json({ message: "Tag already exists!" });
         return;
       }
+
+      // create the NEW tag
+      const createdTag = await Tag.createOne(name, description);
 
       res
         .status(201)
@@ -80,12 +84,16 @@ class TagsController {
     try {
       tagId = parseInt(tagId);
 
-      const deletedTag = await Tag.deleteOne(tagId);
+      // check if tag exists
+      const tag = await Tag.getOneById(tagId);
 
-      if (!deletedTag) {
+      if (!tag) {
         res.status(404).json({ message: "Tag not found!" });
         return;
       }
+
+      // delete the tag
+      const deletedTag = await Tag.deleteOne(tagId);
 
       res
         .status(200)
@@ -103,12 +111,16 @@ class TagsController {
       validateTagDetails({ name, description });
       tagId = parseInt(tagId);
 
-      const updatedTag = await Tag.updateOne(tagId, name, description);
+      // check if the tag exists
+      const tag = await Tag.getOneById(tagId);
 
-      if (!updatedTag) {
+      if (!tag) {
         res.status(404).json({ message: "Tag not found!" });
         return;
       }
+
+      // update the tag
+      const updatedTag = await Tag.updateOne(tagId, name, description);
 
       res
         .status(200)

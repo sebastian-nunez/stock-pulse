@@ -38,7 +38,6 @@ class TagModel {
     const insertQuery = `
       INSERT INTO tag (name, description)
       VALUES ($1, $2)
-      ON CONFLICT (name) DO NOTHING
       RETURNING *;
     `;
 
@@ -62,7 +61,6 @@ class TagModel {
     const deleteQuery = `
       DELETE FROM tag
       WHERE tag_id = $1
-      ORDER BY name
       RETURNING *;
     `;
 
