@@ -63,7 +63,15 @@
 
 ### Product Management Modals
 
-![demo](demos/playground-product-modals-1.gif)
+> Input forms are fully validated before submission including user-friendly error messages and hints. Error and success notifications are displayed.
+
+![demo 1](demos/playground-product-modals-1.gif)
+
+## End-to-End API Validation
+
+> All API endpoints validate their data and send helpful error messages back to the client.
+
+![demo 2](demos/stock-pulse-e2e-api-validation.gif)
 
 ## Getting Started
 
