@@ -1,5 +1,5 @@
 import axios from "axios";
-import { validateProductDetails } from "../../../server/utils/validator";
+import { validateProductDetails } from "../../../server/utils/validator.js";
 
 const PRODUCTS_BASE_URL = "/api/products";
 
@@ -48,6 +48,10 @@ class ProductsAPI {
 
   static updateProduct = async (productDetails) => {
     validateProductDetails(productDetails);
+
+    if (!productDetails.product_id) {
+      throw new Error("Product id is required!");
+    }
 
     const body = JSON.stringify(productDetails);
     const headers = {

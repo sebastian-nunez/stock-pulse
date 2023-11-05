@@ -1,5 +1,5 @@
 import axios from "axios";
-import { isValidCategoryDetails } from "../../../server/utils/validator";
+import { validateCategoryDetails } from "../../../server/utils/validator";
 
 const CATEGORIES_BASE_URL = "/api/categories";
 
@@ -35,9 +35,7 @@ class CategoriesAPI {
   };
 
   static createCategory = async (categoryDetails) => {
-    if (!isValidCategoryDetails(categoryDetails)) {
-      throw new Error("Invalid category details!");
-    }
+    validateCategoryDetails(categoryDetails);
 
     const body = JSON.stringify(categoryDetails);
 
@@ -52,11 +50,10 @@ class CategoriesAPI {
   };
 
   static updateCategory = async (categoryDetails) => {
-    if (
-      !isValidCategoryDetails(categoryDetails) ||
-      !categoryDetails.category_id
-    ) {
-      throw new Error("Invalid category details!");
+    validateCategoryDetails(categoryDetails);
+
+    if (!categoryDetails.category_id) {
+      throw new Error("Category id is required!");
     }
 
     const body = JSON.stringify(categoryDetails);

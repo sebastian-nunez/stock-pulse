@@ -1,5 +1,5 @@
 import axios from "axios";
-import { isValidTagDetails } from "../../../server/utils/validator";
+import { validateTagDetails } from "../../../server/utils/validator.js";
 
 const TAGS_BASE_URL = "/api/tags";
 
@@ -33,9 +33,7 @@ class TagsAPI {
   };
 
   static createTag = async (tagDetails) => {
-    if (!isValidTagDetails(tagDetails)) {
-      throw new Error("Invalid tag details!");
-    }
+    validateTagDetails(tagDetails);
 
     const body = JSON.stringify(tagDetails);
     const headers = {
@@ -49,8 +47,10 @@ class TagsAPI {
   };
 
   static updateTag = async (tagDetails) => {
-    if (!isValidTagDetails(tagDetails) || !tagDetails.tag_id) {
-      throw new Error("Invalid tag details!");
+    validateTagDetails(tagDetails);
+
+    if (tagDetails.tag_id === undefined) {
+      throw new Error("Tag id is required!");
     }
 
     const body = JSON.stringify(tagDetails);
