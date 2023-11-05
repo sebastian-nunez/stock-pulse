@@ -8,7 +8,6 @@ import {
   Spinner,
 } from "@nextui-org/react";
 import { Save, Trash } from "lucide-react";
-import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { useMutation, useQueryClient } from "react-query";
 import ProductsAPI from "../services/ProductsAPI";
@@ -21,7 +20,7 @@ const ProductEditableModal = ({
   isOpen,
   onOpenChange,
 }) => {
-  const [productDetails, setProductDetails] = useState(product || null);
+  const productId = product?.product_id || null;
 
   // react-query
   const queryClient = useQueryClient();
@@ -38,7 +37,6 @@ const ProductEditableModal = ({
 
       // close the modal
       onOpenChange();
-      setProductDetails(null); // reset the product details
     },
   });
 
@@ -63,7 +61,6 @@ const ProductEditableModal = ({
 
       // close the modal
       onOpenChange();
-      setProductDetails(null); // reset the product details
     },
   });
 
@@ -76,35 +73,19 @@ const ProductEditableModal = ({
     deleteProduct.mutate(product.product_id);
   };
 
-  const handleSave = (formValues, reset) => {
-    // convert tags string to array (ensure it's a string first)
-    // const tagsArray =
-    //   formValues?.tags?.length > 0 ? `${formValues?.tags}`.split(",") : [];
-
-    // combine the existing product details with the form values
-    const newProductDetails = {
-      ...productDetails,
-      ...formValues,
-      // tags: tagsArray,
-    };
-    setProductDetails(newProductDetails); // async state update
-
+  const handleSave = (productDetails) => {
     // if the product has an id, it means it's an existing product
-    if (newProductDetails.product_id) {
-      // detect if there are any changes
-      if (
-        JSON.stringify(newProductDetails) === JSON.stringify(productDetails)
-      ) {
-        toast.error("No changes detected, nothing to update!");
-        return;
-      }
+    if (productId) {
+      // add the product id to the product details
+      const updatedProductDetails = {
+        product_id: productId,
+        ...productDetails,
+      };
 
-      updateProduct.mutate(newProductDetails);
+      updateProduct.mutate(updatedProductDetails);
     } else {
-      createProduct.mutate(newProductDetails);
+      createProduct.mutate(productDetails);
     }
-
-    reset(); // reset the form
   };
 
   return (
@@ -128,10 +109,7 @@ const ProductEditableModal = ({
                 {isLoading ? (
                   <Spinner size="md" color="primary" label="Loading..." />
                 ) : (
-                  <ProductDetailsForm
-                    product={productDetails}
-                    onSubmit={handleSave}
-                  />
+                  <ProductDetailsForm product={product} onSubmit={handleSave} />
                 )}
               </ModalBody>
 

@@ -20,7 +20,6 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
     setValue,
   } = useForm({
     resolver: zodResolver(productSchema),
@@ -43,7 +42,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
   return (
     <form
       id="product-details-form"
-      onSubmit={handleSubmit((formValues) => onSubmit(formValues, reset))}
+      onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-3"
     >
       <div className="flex gap-3">
@@ -128,9 +127,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
               <span className="text-small text-default-400">$</span>
             </div>
           }
-          defaultValue={
-            product?.price && `${product?.price}`.replace(/\$/g, "")
-          } // remove $ sign from price
+          defaultValue={product?.price} // remove $ sign from price
           type="number"
           min={0}
           step={0.01}
