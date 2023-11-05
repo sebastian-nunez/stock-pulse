@@ -10,7 +10,9 @@ export const productSchema = z.object({
     .string("Product brand is required!")
     .min(2, "Product brand must be at least 2 characters")
     .max(100, "Product brand must be less than 100 characters"),
-  price: z.number("Product price is required!"),
+  price: z
+    .number("Product price is required!")
+    .min(0.01, "Product price must be at least $0.01"),
   quantity: z.number("Product quantity is required!"),
   weight: z.number("Product weight is required!"),
   dimensions: z
@@ -37,6 +39,7 @@ export const productSchema = z.object({
     .default("No warranty information available."),
   category: z
     .string("Product category is required!")
+    .min(2, "Product category must be at least 2 characters")
     .max(25, "Product category must be less than 25 characters"),
   tags: z.array(z.string()).default([]),
 });
