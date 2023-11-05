@@ -1,5 +1,4 @@
 import axios from "axios";
-import { isValidProductTagDetails } from "../../../server/utils/validator";
 
 const PRODUCT_TAGS_BASE_URL = "/api/product-tag";
 
@@ -26,7 +25,9 @@ class ProductTagsAPI {
   };
 
   static deleteProductTag = async (productTagDetails) => {
-    if (!isValidProductTagDetails(productTagDetails)) {
+    const { product_id, tag_id } = productTagDetails;
+
+    if (!product_id || !tag_id) {
       throw new Error("Invalid product tag details!");
     }
 
@@ -48,9 +49,12 @@ class ProductTagsAPI {
   };
 
   static createProductTag = async (productTagDetails) => {
-    if (!isValidProductTagDetails(productTagDetails)) {
+    const { product_id, tag_id } = productTagDetails;
+
+    if (!product_id || !tag_id) {
       throw new Error("Invalid product tag details!");
     }
+
     const body = JSON.stringify(productTagDetails);
 
     const headers = {

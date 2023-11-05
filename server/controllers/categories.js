@@ -1,5 +1,6 @@
 import "../config/dotenv.js";
 import Category from "../models/category.js";
+import { validateCategoryDetails } from "../utils/validator.js";
 
 class CategoryController {
   static getCategories = async (req, res) => {
@@ -53,12 +54,15 @@ class CategoryController {
     try {
       categoryId = parseInt(categoryId);
 
-      const deletedCategory = await Category.deleteOne(categoryId);
+      // check if the category exists
+      const category = await Category.getOneById(categoryId);
 
-      if (!deletedCategory) {
+      if (!category) {
         res.status(404).json({ message: "Category not found!" });
         return;
       }
+
+      const deletedCategory = await Category.deleteOne(categoryId);
 
       res
         .status(200)
@@ -72,12 +76,19 @@ class CategoryController {
     let { name, description } = req.body;
 
     try {
-      const createdCategory = await Category.createOne(name, description);
+      // check if the required fields are provided
+      validateCategoryDetails({ name, description });
 
-      if (!createdCategory) {
+      // check if the category already exists
+      const category = await Category.getOneByName(name);
+
+      if (category) {
         res.status(409).json({ message: "Category already exists!" });
         return;
       }
+
+      // create the NEW category
+      const createdCategory = await Category.createOne(name, description);
 
       res
         .status(201)
@@ -92,18 +103,24 @@ class CategoryController {
     const { name, description } = req.body;
 
     try {
+      // check if the required fields are provided
+      validateCategoryDetails({ name, description });
       categoryId = parseInt(categoryId);
 
+      // check if the category exists
+      const category = await Category.getOneById(categoryId);
+
+      if (!category) {
+        res.status(404).json({ message: "Category not found!" });
+        return;
+      }
+
+      // update the category
       const updatedCategory = await Category.updateOne(
         categoryId,
         name,
         description
       );
-
-      if (!updatedCategory) {
-        res.status(404).json({ message: "Category not found!" });
-        return;
-      }
 
       res
         .status(200)

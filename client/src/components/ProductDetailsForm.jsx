@@ -19,8 +19,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
-    reset,
+    formState: { errors },
     setValue,
   } = useForm({
     resolver: zodResolver(productSchema),
@@ -35,7 +34,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
   const tagsQuery = useQuery(["tags"], TagsAPI.getAllTags);
   const tags = tagsQuery.data;
 
-  // loading states
+  // loading state
   if (queryClient.isFetching(["categories", "tags", "products"])) {
     return <Spinner size="md" color="primary" label="Loading..." />;
   }
@@ -43,10 +42,11 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
   return (
     <form
       id="product-details-form"
-      onSubmit={handleSubmit((formValues) => onSubmit(formValues, reset))}
+      onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-3"
     >
       <div className="flex gap-3">
+        {/* ---------- Name ---------- */}
         <Input
           {...register("name")}
           defaultValue={product?.name}
@@ -60,8 +60,11 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           isRequired
         />
 
-        <div className="flex w-1/5 justify-center gap-1 rounded-xl border-2 align-middle drop-shadow-sm">
-          <p className="my-auto text-xs text-slate-600">Available</p>
+        {/* ---------- Availability ---------- */}
+        <div className="flex w-1/5 min-w-fit flex-col justify-between gap-2 rounded-xl border-2 align-middle drop-shadow-sm hover:border-zinc-400 sm:flex-row">
+          <label className="my-auto ml-3 text-center text-xs font-semibold text-zinc-500">
+            Available
+          </label>
 
           <Switch
             {...register("is_available")}
@@ -70,12 +73,14 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
               product?.is_available !== undefined ? product.is_available : true
             } // product is available by default
             onValueChange={(value) => setValue("is_available", value)}
+            className="mx-auto"
           />
           <em>{errors?.is_available?.message}</em>
         </div>
       </div>
 
       <div className="flex gap-3">
+        {/* ---------- Brand ---------- */}
         <Input
           {...register("brand")}
           defaultValue={product?.brand}
@@ -89,6 +94,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           isRequired
         />
 
+        {/* ---------- Category ---------- */}
         <Select
           {...register("category")}
           defaultSelectedKeys={product?.category && new Set([product.category])}
@@ -102,22 +108,26 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
         >
           {categories &&
             categories.map((category) => (
-              <SelectItem key={category.name}>{category.name}</SelectItem>
+              <SelectItem
+                key={category.name}
+                textValue={category?.name || "EMPTY"}
+              >
+                {category.name}
+              </SelectItem>
             ))}
         </Select>
       </div>
 
       <div className="flex gap-3">
+        {/* ---------- Price ---------- */}
         <Input
-          {...register("price")}
+          {...register("price", { valueAsNumber: true })}
           startContent={
             <div className="pointer-events-none flex items-center">
               <span className="text-small text-default-400">$</span>
             </div>
           }
-          defaultValue={
-            product?.price && `${product?.price}`.replace(/\$/g, "")
-          } // remove $ sign from price
+          defaultValue={product?.price} // remove $ sign from price
           type="number"
           min={0}
           step={0.01}
@@ -130,8 +140,9 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           isRequired
         />
 
+        {/* ---------- Quantity ---------- */}
         <Input
-          {...register("quantity")}
+          {...register("quantity", { valueAsNumber: true })}
           defaultValue={product?.quantity}
           type="number"
           placeholder="0"
@@ -147,8 +158,9 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
       </div>
 
       <div className="flex gap-3">
+        {/* ---------- Weight ---------- */}
         <Input
-          {...register("weight")}
+          {...register("weight", { valueAsNumber: true })}
           defaultValue={product?.weight}
           type="number"
           placeholder="0.00"
@@ -162,6 +174,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           isRequired
         />
 
+        {/* ---------- Dimensions ---------- */}
         <Input
           {...register("dimensions")}
           defaultValue={product?.dimensions}
@@ -176,100 +189,103 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
         />
       </div>
 
-      <div className="flex gap-3">
-        <Input
-          {...register("image")}
-          defaultValue={product?.image}
-          type="text"
-          placeholder="https://"
-          label="Image"
-          variant="bordered"
-          isInvalid={errors.image !== undefined}
-          errorMessage={errors.image?.message}
-          isRequired
-          isClearable
-        />
-      </div>
+      {/* ---------- Image ---------- */}
+      <Input
+        {...register("image")}
+        defaultValue={product?.image}
+        type="text"
+        placeholder="https://"
+        label="Image"
+        variant="bordered"
+        isInvalid={errors.image !== undefined}
+        errorMessage={errors.image?.message}
+        isRequired
+        isClearable
+      />
 
-      <div className="flex gap-3">
-        <Textarea
-          {...register("description")}
-          defaultValue={product?.description}
-          label="Description"
-          placeholder="Enter product description here..."
-          minRows={2}
-          maxRows={3}
-          variant="bordered"
-          isInvalid={errors.description !== undefined}
-          errorMessage={errors.description?.message}
-          isRequired
-        />
-      </div>
+      {/* ---------- Description ---------- */}
+      <Textarea
+        {...register("description")}
+        defaultValue={product?.description}
+        label="Description"
+        placeholder="Enter product description here..."
+        minRows={2}
+        maxRows={3}
+        variant="bordered"
+        isInvalid={errors.description !== undefined}
+        errorMessage={errors.description?.message}
+        isRequired
+      />
 
-      <div className="flex gap-3">
-        <Textarea
-          {...register("warranty_info")}
-          defaultValue={product?.warranty_info}
-          label="Warranty Info"
-          placeholder="Enter warranty information here..."
-          minRows={1}
-          maxRows={2}
-          variant="bordered"
-          isInvalid={errors.warranty_info !== undefined}
-          errorMessage={errors.warranty_info?.message}
-          isRequired
-        />
-      </div>
+      {/* ---------- Warranty Information ---------- */}
+      <Textarea
+        {...register("warranty_info")}
+        defaultValue={product?.warranty_info}
+        label="Warranty Info"
+        placeholder="Enter warranty information here..."
+        minRows={1}
+        maxRows={2}
+        variant="bordered"
+        isInvalid={errors.warranty_info !== undefined}
+        errorMessage={errors.warranty_info?.message}
+        isRequired
+      />
 
-      <div className="flex gap-3">
-        <Textarea
-          {...register("notes")}
-          defaultValue={product?.notes}
-          label="Notes"
-          placeholder="Enter product notes here..."
-          maxRows={3}
-          variant="bordered"
-          isInvalid={errors.notes !== undefined}
-          errorMessage={errors.notes?.message}
-          isRequired
-        />
-      </div>
+      {/* ---------- Notes ---------- */}
+      <Textarea
+        {...register("notes")}
+        defaultValue={product?.notes}
+        label="Notes"
+        placeholder="Enter product notes here..."
+        maxRows={4}
+        variant="bordered"
+        isInvalid={errors.notes !== undefined}
+        errorMessage={errors.notes?.message}
+        isRequired
+      />
 
-      <div className="flex gap-3">
-        <Select
-          {...register("tags")}
-          defaultSelectedKeys={tags && product?.tags && new Set(product.tags)}
-          label="Tags"
-          items={tags}
-          variant="bordered"
-          isMultiline={true}
-          selectionMode="multiple"
-          placeholder="Select a tag"
-          renderValue={(selectedItems) => {
-            return (
-              <div className="flex flex-wrap gap-2">
-                {selectedItems.map((item) => (
-                  <Chip
-                    key={item.key}
-                    size="sm"
-                    color="primary"
-                    className="mt-1"
-                  >
-                    {item.key}
-                  </Chip>
-                ))}
-              </div>
-            );
-          }}
-        >
-          {tags &&
-            tags.map((tag) => (
-              <SelectItem key={tag.name} textValue={tag.name}>
-                {tag.name}
-              </SelectItem>
-            ))}
-        </Select>
-      </div>
+      <Select
+        {...register("tags")}
+        defaultSelectedKeys={tags && product?.tags && new Set(product.tags)}
+        label="Tags"
+        items={tags}
+        variant="bordered"
+        onChange={
+          // convert comma-separated string to array of strings
+          (e) => {
+            const selectedTags = e.target.value;
+
+            if (selectedTags?.length > 0) {
+              setValue("tags", selectedTags.split(","));
+            } else {
+              setValue("tags", []);
+            }
+          }
+        }
+        isMultiline={true}
+        selectionMode="multiple"
+        placeholder="Select a tag"
+        renderValue={(selectedItems) => {
+          // selected tags
+          return (
+            <div className="flex flex-wrap gap-2">
+              {selectedItems.map((item) => (
+                <Chip key={item.key} size="sm" color="primary" className="mt-1">
+                  {item.key}
+                </Chip>
+              ))}
+            </div>
+          );
+        }}
+      >
+        {/* Tag options */}
+        {tags &&
+          tags.map((tag) => (
+            <SelectItem key={tag.name} textValue={tag.name}>
+              {tag.name}
+            </SelectItem>
+          ))}
+      </Select>
     </form>
   );
 };
