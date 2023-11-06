@@ -49,7 +49,7 @@ const Playground = () => {
   const [selectedAction, setSelectedAction] = useState(null);
   const [productId, setProductId] = useState(1);
 
-  const productByIdQuery = useQuery(["product", { productId }], () => {
+  const productByIdQuery = useQuery(["products", { productId }], () => {
     // avoid fetching when productId is null
     if (productId) {
       return ProductsAPI.getProductById(productId);
