@@ -1,6 +1,6 @@
 # StockPulse
 
-**CodePath WEB103 Final Project**
+## CodePath WEB103 Final Project
 
 **Designed and developed by:** Priscilla Colon, Sebastian Nunez
 
@@ -36,28 +36,30 @@
 
 **Purpose:** To streamline your stock control, categorize products, track sales, and manage your inventory seamlessly.
 
-**Inspiration:** StockPulse was created with the vision to promote growth and customer satisfaction while effortlessly overseeing and organizing their products and sales.
+**Inspiration:** StockPulse was created with the vision to promote growth and customer satisfaction while effortlessly overseeing and organizing its products and sales.
 
 ## Features
 
 - **Product Management:**
 
-  - ✅ Add, update, and remove products with ease.
-  - ✅ Categorize and tag products for efficient organization.
+  - [x] Add, update, and remove products with ease.
+  - [x] Categorize and tag products for efficient organization.
 
 - **Category & Tag Management:**
 
-  - Create, update, and remove categories and tags for products.
-  - Assign products to multiple tags.
+  - [ ] Create, update, and remove categories and tags for products.
+  - [x] Assign products to multiple tags.
 
 - **User-friendly Interface:**
 
-  - Browse products, view details, and manage inventory easily
+  - [x] Browse products, view details, and manage inventory via an **Inventory** or "card view"
+  - [ ] Browse products, view details, and manage inventory via a **Dashboard** or "tabular view"
+  - [x] End-to-end form and input validation
+  - [ ] Login via OAuth using GitHub
 
 - **Inventory Control:**
-
-  - Monitor product quantities and make adjustments as needed.
-  - Receive low-stock alerts for timely restocking.
+  - [ ] Monitor product quantities and make adjustments as needed.
+  - [ ] Receive low-stock alerts for timely restocking.
 
 ## Demos
 
@@ -79,7 +81,7 @@
 2. **Set up the backend:**
    - Navigate to the backend directory: `cd server`
    - Install dependencies: `npm install`
-   - Update the environment variables: make a copy of `.env.template` and rename it to `.env` and fill in the variables
+   - Update the environment variables: make a copy of the `.env.template` rename it to `.env` and fill in the variables
    - Run the backend server: `npm run start`
 3. **Set up the frontend:**
    - Navigate to the frontend directory: `cd client`
@@ -91,7 +93,7 @@
 ## Technologies
 
 - **Frontend**
-  - **Languages:** JavaScript, JSX
+  - **Languages:** JavaScript
   - **Frameworks:** React.js (Vite)
   - **UI Components:** NextUI, TailwindCSS
   - **Icons:** Lucide Icons
@@ -101,6 +103,7 @@
 - **Backend:**
   - **Languages:** Node.js
   - **Frameworks:** Express
+  - **Authentication:** Passport, OAuth2
 - **Database:** PostgreSQL
 - **Hosting:** Railway
 - **Design:** Whimsical
