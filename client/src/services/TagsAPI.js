@@ -6,23 +6,23 @@ const TAGS_BASE_URL = "/api/tags";
 class TagsAPI {
   static getAllTags = async () => {
     const res = await axios.get(TAGS_BASE_URL);
-    const tags = res.data;
+    validateTagDetails(res.data[0]); // validate the first tag
 
-    return tags;
+    return res.data;
   };
 
   static getTagById = async (tagId) => {
     const res = await axios.get(`${TAGS_BASE_URL}/${tagId}`);
-    const tag = res.data;
+    const validatedTag = validateTagDetails(res.data);
 
-    return tag;
+    return validatedTag;
   };
 
   static getTagByName = async (tagName) => {
     const res = await axios.get(`${TAGS_BASE_URL}/byName/${tagName}`);
-    const tag = res.data;
+    const validatedTag = validateTagDetails(res.data);
 
-    return tag;
+    return validatedTag;
   };
 
   static deleteTag = async (tagId) => {
@@ -33,9 +33,9 @@ class TagsAPI {
   };
 
   static createTag = async (tagDetails) => {
-    validateTagDetails(tagDetails);
+    const validatedTag = validateTagDetails(tagDetails);
 
-    const body = JSON.stringify(tagDetails);
+    const body = JSON.stringify(validatedTag);
     const headers = {
       "Content-Type": "application/json",
     };
@@ -47,19 +47,19 @@ class TagsAPI {
   };
 
   static updateTag = async (tagDetails) => {
-    validateTagDetails(tagDetails);
+    const validatedTag = validateTagDetails(tagDetails);
 
-    if (tagDetails.tag_id === undefined) {
+    if (validatedTag.tag_id === undefined) {
       throw new Error("Tag id is required!");
     }
 
-    const body = JSON.stringify(tagDetails);
+    const body = JSON.stringify(validatedTag);
     const headers = {
       "Content-Type": "application/json",
     };
 
     const res = await axios.patch(
-      `${TAGS_BASE_URL}/${tagDetails.tag_id}`,
+      `${TAGS_BASE_URL}/${validatedTag.tag_id}`,
       body,
       {
         headers,

@@ -6,23 +6,23 @@ const PRODUCTS_BASE_URL = "/api/products";
 class ProductsAPI {
   static getAllProducts = async () => {
     const res = await axios.get(PRODUCTS_BASE_URL);
-    const products = res.data;
+    validateProductDetails(res.data[0]); // validate the first product
 
-    return products;
+    return res.data;
   };
 
   static getProductById = async (productId) => {
     const res = await axios.get(`${PRODUCTS_BASE_URL}/${productId}`);
-    const product = res.data;
+    const validatedProduct = validateProductDetails(res.data);
 
-    return product;
+    return validatedProduct;
   };
 
   static getProductByName = async (productName) => {
     const res = await axios.get(`${PRODUCTS_BASE_URL}/byName/${productName}`);
-    const product = res.data;
+    const validatedProduct = validateProductDetails(res.data);
 
-    return product;
+    return validatedProduct;
   };
 
   static deleteProduct = async (productId) => {
@@ -33,9 +33,9 @@ class ProductsAPI {
   };
 
   static createProduct = async (productDetails) => {
-    validateProductDetails(productDetails);
+    const validatedProduct = validateProductDetails(productDetails);
 
-    const body = JSON.stringify(productDetails);
+    const body = JSON.stringify(validatedProduct);
     const headers = {
       "Content-Type": "application/json",
     };
@@ -47,19 +47,19 @@ class ProductsAPI {
   };
 
   static updateProduct = async (productDetails) => {
-    validateProductDetails(productDetails);
+    const validatedProduct = validateProductDetails(productDetails);
 
-    if (!productDetails.product_id) {
+    if (!validatedProduct.product_id) {
       throw new Error("Product id is required!");
     }
 
-    const body = JSON.stringify(productDetails);
+    const body = JSON.stringify(validatedProduct);
     const headers = {
       "Content-Type": "application/json",
     };
 
     const res = await axios.patch(
-      `${PRODUCTS_BASE_URL}/${productDetails.product_id}`,
+      `${PRODUCTS_BASE_URL}/${validatedProduct.product_id}`,
       body,
       {
         headers,
