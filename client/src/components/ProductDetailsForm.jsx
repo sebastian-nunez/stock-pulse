@@ -244,6 +244,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
         isRequired
       />
 
+      {/* ---------- Tags ---------- */}
       <Select
         {...register("tags")}
         defaultSelectedKeys={tags && product?.tags && new Set(product.tags)}
