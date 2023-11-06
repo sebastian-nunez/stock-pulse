@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const productSchema = z.object({
+  product_id: z.number().optional(),
   name: z
     .string()
     .min(5, "Product name must be at least 5 characters")
@@ -10,11 +11,11 @@ export const productSchema = z.object({
     .string("Product brand is required!")
     .min(2, "Product brand must be at least 2 characters")
     .max(100, "Product brand must be less than 100 characters"),
-  price: z
+  price: z.coerce
     .number("Product price is required!")
     .min(0.01, "Product price must be at least $0.01"),
-  quantity: z.number("Product quantity is required!"),
-  weight: z.number("Product weight is required!"),
+  quantity: z.coerce.number("Product quantity is required!"),
+  weight: z.coerce.number("Product weight is required!"),
   dimensions: z
     .string("Product dimensions are required!")
     .max(50, "Product dimensions must be less than 50 characters")
@@ -30,6 +31,7 @@ export const productSchema = z.object({
     .max(100, "Product description must be less than 100 characters"),
   image: z
     .string("Product image is required!")
+    .url("Product image must be a valid URL!")
     .min(10, "Product image must be at least 10 characters")
     .max(255, "Product image must be less than 255 characters"),
   notes: z
@@ -50,6 +52,7 @@ export const productSchema = z.object({
 });
 
 export const categorySchema = z.object({
+  category_id: z.number().optional(),
   name: z
     .string()
     .min(2, "Category name must be at least 2 characters")
@@ -61,6 +64,7 @@ export const categorySchema = z.object({
 });
 
 export const tagSchema = z.object({
+  tag_id: z.number().optional(),
   name: z
     .string()
     .min(2, "Category name must be at least 2 characters")
