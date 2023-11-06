@@ -9,7 +9,7 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import CategoriesAPI from "../services/CategoriesAPI";
 import TagsAPI from "../services/TagsAPI";
 import { productSchema } from "../utils/schemas";
@@ -26,8 +26,6 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
   });
 
   // react-query
-  const queryClient = useQueryClient();
-
   const categoriesQuery = useQuery(["categories"], CategoriesAPI.getCategories);
   const categories = categoriesQuery.data;
 
@@ -35,7 +33,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
   const tags = tagsQuery.data;
 
   // loading state
-  if (queryClient.isFetching(["categories", "tags", "products"])) {
+  if (categoriesQuery.isLoading || tagsQuery.isLoading) {
     return <Spinner size="md" color="primary" label="Loading..." />;
   }
 
