@@ -50,7 +50,7 @@ const Playground = () => {
   const [productId, setProductId] = useState(1);
 
   const productByIdQuery = useQuery(
-    ["products", productId],
+    ["products", { productId }],
     () => ProductsAPI.getProductById(productId),
     {
       onSuccess: (data) => {
