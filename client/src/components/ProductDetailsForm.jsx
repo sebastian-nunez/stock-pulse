@@ -41,6 +41,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
     <form
       id="product-details-form"
       onSubmit={handleSubmit(onSubmit)}
+      novalidate="novalidate"
       className="flex flex-col gap-3"
     >
       <div className="flex gap-3">
