@@ -31,7 +31,7 @@ export const productSchema = z.object({
     .max(100, "Product description must be less than 100 characters"),
   image: z
     .string("Product image is required!")
-    .url("Product image must be a valid URL!")
+    .url("Product image must be a valid URL")
     .min(10, "Product image must be at least 10 characters")
     .max(255, "Product image must be less than 255 characters"),
   notes: z
