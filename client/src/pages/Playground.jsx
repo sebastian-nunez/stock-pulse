@@ -49,14 +49,8 @@ const Playground = () => {
   const [selectedAction, setSelectedAction] = useState(null);
   const [productId, setProductId] = useState(1);
 
-  const productByIdQuery = useQuery(
-    ["products", { productId }],
-    () => ProductsAPI.getProductById(productId),
-    {
-      onSuccess: (data) => {
-        queryClient.invalidateQueries(["products"]);
-      },
-    },
+  const productByIdQuery = useQuery(["product", { productId }], () =>
+    ProductsAPI.getProductById(productId),
   );
   const product = productByIdQuery.data;
 
