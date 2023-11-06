@@ -7,7 +7,7 @@ import {
 
 export const validateProductDetails = productDetails => {
   try {
-    productSchema.parse(productDetails);
+    return productSchema.parse(productDetails);
   } catch (error) {
     throw fromZodError(error);
   }
@@ -15,7 +15,7 @@ export const validateProductDetails = productDetails => {
 
 export const validateCategoryDetails = categoryDetails => {
   try {
-    categorySchema.parse(categoryDetails);
+    return categorySchema.parse(categoryDetails);
   } catch (error) {
     throw fromZodError(error);
   }
@@ -23,7 +23,7 @@ export const validateCategoryDetails = categoryDetails => {
 
 export const validateTagDetails = tagDetails => {
   try {
-    tagSchema.parse(tagDetails);
+    return tagSchema.parse(tagDetails);
   } catch (error) {
     throw fromZodError(error);
   }
