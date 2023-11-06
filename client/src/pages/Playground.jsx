@@ -49,9 +49,12 @@ const Playground = () => {
   const [selectedAction, setSelectedAction] = useState(null);
   const [productId, setProductId] = useState(1);
 
-  const productByIdQuery = useQuery(["product", { productId }], () =>
-    ProductsAPI.getProductById(productId),
-  );
+  const productByIdQuery = useQuery(["product", { productId }], () => {
+    // avoid fetching when productId is null
+    if (productId) {
+      return ProductsAPI.getProductById(productId);
+    }
+  });
   const product = productByIdQuery.data;
 
   const productsQuery = useQuery(["products"], ProductsAPI.getAllProducts);
@@ -144,15 +147,13 @@ const Playground = () => {
             selectedAction &&
             selectedAction !== Action.CREATE && (
               <Input
-                value={productId}
+                defaultValue={productId}
                 label="Product ID"
                 placeholder="1"
                 type="number"
                 variant="bordered"
                 size="sm"
-                onChange={(e) => {
-                  setProductId(e.target.value);
-                }}
+                onValueChange={(value) => setProductId(value)}
                 className="w-fit"
               />
             )}
