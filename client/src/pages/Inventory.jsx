@@ -2,6 +2,7 @@ import { Button, Tooltip } from "@nextui-org/react";
 import { RotateCcw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import ErrorCard from "../components/ErrorCard";
 import ProductGrid from "../components/ProductGrid";
 import ProductsAPI from "../services/ProductsAPI";
 
@@ -27,12 +28,12 @@ const Inventory = () => {
     return <div>Loading...</div>;
   }
 
-  // TODO: make a proper error component
   if (productsQuery.isError) {
     return (
-      <div>
-        <strong>Something went wrong:</strong> {productsQuery?.error?.message}
-      </div>
+      <ErrorCard
+        message="Unable to fetch products"
+        error={productsQuery.error?.message}
+      />
     );
   }
 

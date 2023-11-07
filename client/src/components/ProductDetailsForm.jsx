@@ -13,6 +13,7 @@ import { useQuery } from "react-query";
 import CategoriesAPI from "../services/CategoriesAPI";
 import TagsAPI from "../services/TagsAPI";
 import { productSchema } from "../utils/schemas";
+import ErrorCard from "./ErrorCard";
 
 const ProductDetailsForm = ({ product, onSubmit }) => {
   // react-hook-form
@@ -35,6 +36,24 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
   // loading state
   if (categoriesQuery.isLoading || tagsQuery.isLoading) {
     return <Spinner size="md" color="primary" label="Loading..." />;
+  }
+
+  if (categoriesQuery.isError) {
+    return (
+      <ErrorCard
+        message="Unable to fetch categories, please try again later."
+        error={categoriesQuery.error?.message}
+      />
+    );
+  }
+
+  if (tagsQuery.isError) {
+    return (
+      <ErrorCard
+        message="Unable to fetch tags, please try again later."
+        error={tagsQuery.error?.message}
+      />
+    );
   }
 
   return (

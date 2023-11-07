@@ -14,6 +14,7 @@ import { Search, Users } from "lucide-react";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import ErrorCard from "../components/ErrorCard";
 import ProductDetailsModal from "../components/ProductDetailsModal";
 import { default as ProductEditableModal } from "../components/ProductEditableModal";
 import ProductsAPI from "../services/ProductsAPI";
@@ -101,6 +102,24 @@ const Playground = () => {
       [name]: value,
     }));
   };
+
+  if (productByIdQuery.isError) {
+    return (
+      <ErrorCard
+        message={`Unable to fetch product with ID ${productId}`}
+        error={productByIdQuery.error?.message}
+      />
+    );
+  }
+
+  if (productsQuery.isError) {
+    return (
+      <ErrorCard
+        message={`Unable to fetch all products`}
+        error={productsQuery.error?.message}
+      />
+    );
+  }
 
   return (
     <>
