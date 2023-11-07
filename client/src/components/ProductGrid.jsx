@@ -9,7 +9,7 @@ const ProductGrid = ({ products }) => {
   return (
     <>
       {/* --------------- Product Rendering --------------- */}
-      <div className="my-3 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 py-6 md:grid-cols-2 lg:grid-cols-3">
         {products?.map((product) => (
           <ProductCard key={product.product_id} product={product} />
         ))}
@@ -17,7 +17,7 @@ const ProductGrid = ({ products }) => {
 
       {/* --------------- Pagination Controls --------------- */}
       {/* TODO: implement pagination */}
-      <div>Pagination Controls</div>
+      <div className="py-3 pb-8">Pagination Controls</div>
     </>
   );
 };
