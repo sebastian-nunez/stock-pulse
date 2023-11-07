@@ -4,7 +4,7 @@ import "../styles/Footer.css";
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <div className="footer bg-neutral-100">
       <Layers3 />
       <p>
         Built by{" "}
