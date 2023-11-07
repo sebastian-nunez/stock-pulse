@@ -11,7 +11,19 @@ This unit, be sure to complete all tasks listed below. To complete a task, place
   - [x] Under each feature you have completed, **include a GIF** showing feature functionality
 - [x] In this document, complete the **Reflection** section below
 
-### E2E Form Validation
+### Product Inventory Grid
+
+> Within the Inventory view, users will be able to see the most relevant details about a product. Also, they're able to click on an item and expand all it's details; moreover, users can edit an item.
+
+![Product Grid Demo](../demos/stock-pulse-product-grid-1.gif)
+
+### Responsive Design & Accessibility
+
+> StockPulse was design with a responsive architecture while following the latest WAI-ARIA accessability standards to accommodate a mobile and desktop experience.
+
+![Responsive Design Demo](../demos/stock-pulse-responsive-1.gif)
+
+### E2E Type Validation
 
 ![demo](../demos/stock-pulse-e2e-api-validation.gif)
 

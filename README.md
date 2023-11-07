@@ -75,6 +75,12 @@
 
 ![Product Grid Demo](demos/stock-pulse-product-grid-1.gif)
 
+### Responsive Design & Accessibility
+
+> StockPulse was design with a responsive architecture while following the latest WAI-ARIA accessability standards to accommodate a mobile and desktop experience.
+
+![Responsive Design Demo](demos/stock-pulse-responsive-1.gif)
+
 ## End-to-End API Validation
 
 > All API endpoints validate their data and send helpful error messages back to the client.
