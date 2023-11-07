@@ -1,25 +1,32 @@
-import { Button, Tooltip } from "@nextui-org/react";
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Input,
+  Tooltip,
+} from "@nextui-org/react";
 import { RotateCcw } from "lucide-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import ErrorCard from "../components/ErrorCard";
 import ProductGrid from "../components/ProductGrid";
 import ProductsAPI from "../services/ProductsAPI";
-import React from "react";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from "@nextui-org/react";
-import { Input } from "@nextui-org/react";
-
 
 const PRODUCT_STALE_TIME = 5 * 60 * 1000; // 5 mins
 
 const Inventory = () => {
   // state
   const [products, setProducts] = useState(null);
+
+  // filter example
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(["product"]));
+
+  const selectedValue = React.useMemo(
+    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
+    [selectedKeys],
+  );
 
   // react-query
   const productsQuery = useQuery(["products"], ProductsAPI.getAllProducts, {
@@ -45,14 +52,6 @@ const Inventory = () => {
       />
     );
   }
-
-  // filter example
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(["product"]));
-
-  const selectedValue = React.useMemo(
-    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
-    [selectedKeys],
-  );
 
   return (
     <>
@@ -81,34 +80,34 @@ const Inventory = () => {
         </Dropdown>
 
         {/* --------------- Search Bar --------------- */}
-          <Input
-            label="Search"
-            isClearable
-            radius="sm"
-            classNames={{
-              label: "text-black/50 dark:text-white/90",
-              input: [
-                "bg-transparent",
-                "text-black/90 dark:text-white/90",
-                "placeholder:text-default-700/50 dark:placeholder:text-white/60",
-                //"w-50",
-              ],
-              innerWrapper: "bg-transparent",
-              inputWrapper: [
-                "shadow-xl",
-                "bg-default-200/50",
-                "dark:bg-default/60",
-                "backdrop-blur-xl",
-                "backdrop-saturate-200",
-                "hover:bg-default-200/70",
-                "dark:hover:bg-default/70",
-                "group-data-[focused=true]:bg-default-200/50",
-                "dark:group-data-[focused=true]:bg-default/60",
-                "!cursor-text",
-              ],
-            }}
-            placeholder="Type to search..."
-          />
+        <Input
+          label="Search"
+          isClearable
+          radius="sm"
+          classNames={{
+            label: "text-black/50 dark:text-white/90",
+            input: [
+              "bg-transparent",
+              "text-black/90 dark:text-white/90",
+              "placeholder:text-default-700/50 dark:placeholder:text-white/60",
+              //"w-50",
+            ],
+            innerWrapper: "bg-transparent",
+            inputWrapper: [
+              "shadow-xl",
+              "bg-default-200/50",
+              "dark:bg-default/60",
+              "backdrop-blur-xl",
+              "backdrop-saturate-200",
+              "hover:bg-default-200/70",
+              "dark:hover:bg-default/70",
+              "group-data-[focused=true]:bg-default-200/50",
+              "dark:group-data-[focused=true]:bg-default/60",
+              "!cursor-text",
+            ],
+          }}
+          placeholder="Type to search..."
+        />
 
         {/* --------------- Refresh Button --------------- */}
         <Tooltip content="Refresh">
