@@ -10,6 +10,7 @@ import ProductsAPI from "../services/ProductsAPI";
 
 const PRODUCT_STALE_TIME = 5 * 60 * 1000; // 5 mins
 const CATEGORY_STALE_TIME = 5 * 60 * 1000; // 5 mins
+const ANY_CATEGORY = "Any";
 
 const Inventory = () => {
   // state
@@ -17,7 +18,41 @@ const Inventory = () => {
   const [categories, setCategories] = useState(null);
 
   const [searchText, setSearchText] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(new Set([]));
+  const [selectedCategory, setSelectedCategory] = useState(ANY_CATEGORY);
+  const [selectedTags, setSelectedTags] = useState([]);
+
+  const filteredProducts = products
+    ?.filter((product) => {
+      if (selectedCategory === ANY_CATEGORY) {
+        return true;
+      }
+
+      return (
+        product.category.trim().toLowerCase() ===
+        selectedCategory.trim().toLowerCase()
+      );
+    })
+    .filter((product) => {
+      const normalizedSearchText = searchText
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "");
+
+      const normalizedProductName = product.name
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "");
+
+      return normalizedProductName.includes(normalizedSearchText);
+    })
+    .filter((product) => {
+      if (!selectedTags?.length) {
+        return true;
+      }
+
+      const productTags = product.tags;
+      return selectedTags.every((tag) => productTags.includes(tag));
+    });
 
   // react-query
   const productsQuery = useQuery(["products"], ProductsAPI.getAllProducts, {
@@ -34,7 +69,7 @@ const Inventory = () => {
   );
   const fetchedCategories = categoriesQuery.data;
 
-  // save the products to state
+  // save the products and categories to state
   useEffect(() => {
     setProducts(fetchedProducts);
     setCategories(fetchedCategories);
@@ -72,6 +107,7 @@ const Inventory = () => {
           <Input
             label="Search"
             variant="bordered"
+            size="sm"
             isClearable
             value={searchText}
             onValueChange={setSearchText}
@@ -86,12 +122,22 @@ const Inventory = () => {
           <Select
             label="Select a Category"
             variant="bordered"
+            size="sm"
+            defaultSelectedKeys={[ANY_CATEGORY]}
             onSelectionChange={(object) =>
               setSelectedCategory(object.currentKey)
             }
           >
+            <SelectItem key={ANY_CATEGORY} value={ANY_CATEGORY}>
+              {ANY_CATEGORY}
+            </SelectItem>
+
             {categories?.map((category) => (
-              <SelectItem key={category.name} value={category.name}>
+              <SelectItem
+                key={category.name}
+                value={category.name}
+                textValue={category.name}
+              >
                 {category.name}
               </SelectItem>
             ))}
@@ -114,7 +160,9 @@ const Inventory = () => {
       {/* ------------------- Product Grid ------------------- */}
       <div className="mx-break-out bg-neutral-50">
         {/* Change the full width background color */}
-        <div className="container">{<ProductGrid products={products} />}</div>
+        <div className="container">
+          {<ProductGrid products={filteredProducts} />}
+        </div>
       </div>
 
       <Toaster />
