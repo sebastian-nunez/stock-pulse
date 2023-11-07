@@ -10,7 +10,7 @@ import { ServerCrash } from "lucide-react";
 
 const ErrorCard = ({ error, message }) => {
   return (
-    <Card className="mx-auto mt-5 w-2/5">
+    <Card className="mx-auto mt-5 w-full max-w-lg">
       <CardHeader className="flex items-center gap-3">
         <ServerCrash width={45} height={45} />
         <div className="flex flex-col">
