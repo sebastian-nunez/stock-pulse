@@ -1,3 +1,5 @@
+import { Button, Tooltip } from "@nextui-org/react";
+import { RotateCcw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import ProductGrid from "../components/ProductGrid";
@@ -38,10 +40,24 @@ const Inventory = () => {
     <>
       {/* --------------- Filters --------------- */}
       {/* TODO: create the filtering options */}
-      <div>Filtering Options</div>
+      <div className="my-6">
+        Filtering Options
+        <Tooltip content="Refresh">
+          <Button
+            size="sm"
+            variant="flat"
+            onPress={() => productsQuery.refetch()}
+          >
+            <RotateCcw />
+          </Button>
+        </Tooltip>
+      </div>
 
       {/* ------------- Product Grid ------------- */}
-      {<ProductGrid products={products} />}
+      <div className="mx-break-out bg-neutral-50">
+        {/* Change the full width background color */}
+        <div className="container">{<ProductGrid products={products} />}</div>
+      </div>
     </>
   );
 };
