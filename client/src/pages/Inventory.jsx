@@ -1,4 +1,4 @@
-import { Button, Input, Select, SelectItem, Tooltip } from "@nextui-org/react";
+import { Button, Chip, Input, Select, SelectItem, Tooltip } from "@nextui-org/react";
 import { RotateCcw } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
@@ -115,7 +115,15 @@ const Inventory = () => {
           />
         </div>
 
-        <div className="w-1/3">TAGS</div>
+        {/* ------- Tags --------- */}
+        <div className="flex h-12 w-1/3 items-center space-x-2 rounded-lg border-2 p-2">
+          <Chip onClose={() => console.log("close")} radius="md">
+            New
+          </Chip>
+          <Chip onClose={() => console.log("close")} radius="md">
+            Discounted
+          </Chip>
+        </div>
 
         <div className="flex w-1/3 gap-3">
           {/* ------- Category --------- */}
