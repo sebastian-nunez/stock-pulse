@@ -6,6 +6,8 @@ import {
   DropdownTrigger,
   Input,
   Tooltip,
+  Select,
+  SelectItem,
 } from "@nextui-org/react";
 import { RotateCcw } from "lucide-react";
 import React, { useEffect, useState } from "react";
@@ -13,20 +15,19 @@ import { useQuery } from "react-query";
 import ErrorCard from "../components/ErrorCard";
 import ProductGrid from "../components/ProductGrid";
 import ProductsAPI from "../services/ProductsAPI";
+import CategoriesAPI from "../services/CategoriesAPI";
+import { toast, Toaster } from "react-hot-toast";
 
 const PRODUCT_STALE_TIME = 5 * 60 * 1000; // 5 mins
+const CATEGORY_STALE_TIME = 5 * 60 * 1000; // 5 mins
 
 const Inventory = () => {
   // state
   const [products, setProducts] = useState(null);
+  const [categories, setCategories] = useState(null);
 
-  // filter example
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(["product"]));
-
-  const selectedValue = React.useMemo(
-    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
-    [selectedKeys],
-  );
+  const [searchText, setSearchText] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(new Set([]));
 
   // react-query
   const productsQuery = useQuery(["products"], ProductsAPI.getAllProducts, {
@@ -34,21 +35,40 @@ const Inventory = () => {
   });
   const fetchedProducts = productsQuery.data;
 
+  const categoriesQuery = useQuery(
+    ["categories"],
+    CategoriesAPI.getCategories,
+    {
+      staleTime: CATEGORY_STALE_TIME,
+    },
+  );
+  const fetchedCategories = categoriesQuery.data;
+
   // save the products to state
   useEffect(() => {
     setProducts(fetchedProducts);
-  }, [fetchedProducts]);
+    setCategories(fetchedCategories);
+  }, [fetchedProducts, fetchedCategories]);
 
   // TODO: make a loading component (skeleton)
-  if (productsQuery.isLoading) {
+  if (productsQuery.isLoading || categoriesQuery.isLoading) {
     return <div>Loading...</div>;
   }
 
   if (productsQuery.isError) {
     return (
       <ErrorCard
-        message="Unable to fetch products"
+        message="Unable to products, please try again."
         error={productsQuery.error?.message}
+      />
+    );
+  }
+
+  if (categoriesQuery.isError) {
+    return (
+      <ErrorCard
+        message="Unable to categories, please try again."
+        error={categoriesQuery.error?.message}
       />
     );
   }
@@ -56,60 +76,36 @@ const Inventory = () => {
   return (
     <>
       {/* --------------- Filters --------------- */}
-      {/* TODO: create the filtering options */}
-      <div className="my-6">
-        <Dropdown>
-          <DropdownTrigger>
-            <Button variant="bordered" className="capitalize">
-              {selectedValue}
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu
-            aria-label="Single selection example"
-            variant="flat"
-            disallowEmptySelection
-            selectionMode="single"
-            selectedKeys={selectedKeys}
-            onSelectionChange={setSelectedKeys}
-            radius="sm"
+      <div className="my-6 flex gap-6">
+        <div className="w-1/3">
+          <Input
+            label="Search"
+            variant="bordered"
+            isClearable
+            value={searchText}
+            onValueChange={setSearchText}
+            type="text"
+          />
+        </div>
+
+        <div className="w-1/3">TAGS</div>
+
+        <div className="w-1/3">
+          <Select
+            label="Select a Category"
+            variant="bordered"
+            onSelectionChange={(object) =>
+              setSelectedCategory(object.currentKey)
+            }
           >
-            <DropdownItem key="product">Product</DropdownItem>
-            <DropdownItem key="category">Category</DropdownItem>
-            <DropdownItem key="tag">Tag</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+            {categories?.map((category) => (
+              <SelectItem key={category.name} value={category.name}>
+                {category.name}
+              </SelectItem>
+            ))}
+          </Select>
 
-        {/* --------------- Search Bar --------------- */}
-        <Input
-          label="Search"
-          isClearable
-          radius="sm"
-          classNames={{
-            label: "text-black/50 dark:text-white/90",
-            input: [
-              "bg-transparent",
-              "text-black/90 dark:text-white/90",
-              "placeholder:text-default-700/50 dark:placeholder:text-white/60",
-              //"w-50",
-            ],
-            innerWrapper: "bg-transparent",
-            inputWrapper: [
-              "shadow-xl",
-              "bg-default-200/50",
-              "dark:bg-default/60",
-              "backdrop-blur-xl",
-              "backdrop-saturate-200",
-              "hover:bg-default-200/70",
-              "dark:hover:bg-default/70",
-              "group-data-[focused=true]:bg-default-200/50",
-              "dark:group-data-[focused=true]:bg-default/60",
-              "!cursor-text",
-            ],
-          }}
-          placeholder="Type to search..."
-        />
-
-        {/* --------------- Refresh Button --------------- */}
+          {/* --------------- Refresh Button --------------- */}
         <Tooltip content="Refresh">
           <Button
             size="sm"
@@ -119,6 +115,7 @@ const Inventory = () => {
             <RotateCcw />
           </Button>
         </Tooltip>
+        </div>
       </div>
 
       {/* ------------- Product Grid ------------- */}
@@ -126,6 +123,8 @@ const Inventory = () => {
         {/* Change the full width background color */}
         <div className="container">{<ProductGrid products={products} />}</div>
       </div>
+
+      <Toaster />
     </>
   );
 };
