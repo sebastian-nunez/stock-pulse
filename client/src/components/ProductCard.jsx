@@ -14,7 +14,11 @@ const ProductCard = ({ product }) => {
   const [selectedAction, setSelectedAction] = useState(null);
 
   if (!product) {
-    return <div>Oops! Looks like the product is currently unavailable!</div>;
+    return (
+      <div className="rounded border px-8 py-4 shadow-md">
+        Oops! Looks like the product is currently unavailable!
+      </div>
+    );
   }
 
   return (
