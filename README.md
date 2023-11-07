@@ -67,7 +67,7 @@
 
 > Input forms are fully validated before submission including user-friendly error messages and hints. Error and success notifications are displayed.
 
-![demo 1](demos/playground-product-modals-1.gif)
+![demo 1](demos/playground-product-modals-2.gif)
 
 ## End-to-End API Validation
 
