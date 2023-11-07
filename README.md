@@ -67,13 +67,19 @@
 
 > Input forms are fully validated before submission including user-friendly error messages and hints. Error and success notifications are displayed.
 
-![demo 1](demos/playground-product-modals-2.gif)
+![Product Modal Demo](demos/playground-product-modals-2.gif)
+
+### Product Inventory Grid
+
+> Within the Inventory view, users will be able to see the most relevant details about a product. Also, they're able to click on an item and expand all it's details; moreover, users can edit an item.
+
+![Product Grid Demo](demos/stock-pulse-product-grid-1.gif)
 
 ## End-to-End API Validation
 
 > All API endpoints validate their data and send helpful error messages back to the client.
 
-![demo 2](demos/stock-pulse-e2e-api-validation.gif)
+![E2E Validation Demo](demos/stock-pulse-e2e-api-validation.gif)
 
 ## Getting Started
 
