@@ -10,7 +10,7 @@ const Footer = () => {
         Built by{" "}
         <a
           className="footer-links"
-          href="https://www.linkedin.com/in/sebastian-nunez-profile/"
+          href="https://www.sebastian-nunez.com"
           target="blank"
         >
           Sebastian Nunez
