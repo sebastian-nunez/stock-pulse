@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
   return (
     <>
       <div
-        className="rounded border px-8 py-4 shadow-md hover:cursor-pointer"
+        className="rounded border bg-white px-8 py-4 drop-shadow-sm hover:cursor-pointer"
         onClick={() => {
           setSelectedAction(Action.VIEW);
           onOpen();
