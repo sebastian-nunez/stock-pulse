@@ -24,8 +24,8 @@ export default function App() {
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
-      maxWidth="xl"
-      className="border-b-1"
+      maxWidth="2xl"
+      className="border-b-1 drop-shadow-sm"
     >
       {/* Hamburger toggle */}
       <NavbarMenuToggle

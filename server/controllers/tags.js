@@ -54,10 +54,8 @@ class TagsController {
   };
 
   static createTag = async (req, res) => {
-    let { name, description } = req.body;
-
     try {
-      validateTagDetails({ name, description });
+      const { name, description } = validateTagDetails(req.body);
 
       // check if tag already exists
       const tag = await Tag.getOneByName(name);
@@ -105,10 +103,9 @@ class TagsController {
 
   static updateTag = async (req, res) => {
     let { tagId } = req.params;
-    const { name, description } = req.body;
 
     try {
-      validateTagDetails({ name, description });
+      const { name, description } = validateTagDetails(req.body);
       tagId = parseInt(tagId);
 
       // check if the tag exists

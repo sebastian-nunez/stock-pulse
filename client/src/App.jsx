@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { useRoutes } from "react-router-dom";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
@@ -36,7 +37,9 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <div className="container mx-auto min-h-screen pb-12 pt-4">{element}</div>
+      <div className="container min-h-screen overflow-x-hidden">{element}</div>
+
+      <Toaster position="top-right" />
       <Footer />
     </>
   );

@@ -73,11 +73,9 @@ class CategoryController {
   };
 
   static createCategory = async (req, res) => {
-    let { name, description } = req.body;
-
     try {
       // check if the required fields are provided
-      validateCategoryDetails({ name, description });
+      const { name, description } = validateCategoryDetails(req.body);
 
       // check if the category already exists
       const category = await Category.getOneByName(name);
@@ -100,11 +98,10 @@ class CategoryController {
 
   static updateCategory = async (req, res) => {
     let { categoryId } = req.params;
-    const { name, description } = req.body;
 
     try {
       // check if the required fields are provided
-      validateCategoryDetails({ name, description });
+      const { name, description } = validateCategoryDetails(req.body);
       categoryId = parseInt(categoryId);
 
       // check if the category exists

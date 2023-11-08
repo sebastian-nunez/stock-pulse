@@ -8,9 +8,8 @@ import {
   Spinner,
 } from "@nextui-org/react";
 import { Save, Trash } from "lucide-react";
-import { Toaster, toast } from "react-hot-toast";
-import { useMutation, useQueryClient } from "react-query";
-import ProductsAPI from "../services/ProductsAPI";
+import { toast } from "react-hot-toast";
+import useProducts from "../hooks/useProducts";
 import ProductDetailsForm from "./ProductDetailsForm";
 
 const ProductEditableModal = ({
@@ -20,49 +19,21 @@ const ProductEditableModal = ({
   isOpen,
   onOpenChange,
 }) => {
+  // state
   const productId = product?.product_id || null;
 
   // react-query
-  const queryClient = useQueryClient();
+  const { createProduct, updateProduct, deleteProduct } = useProducts({
+    onSuccessAction: () => {
+      onOpenChange(); // close the modal
+    },
+  });
+
+  // determine if the product is loading
   const isLoading =
-    queryClient.isMutating(["products"]) ||
-    queryClient.isFetching(["tags", "categories", "products"]); // handle the loading states
-
-  const deleteProduct = useMutation(ProductsAPI.deleteProduct, {
-    onSuccess: (response) => {
-      queryClient.invalidateQueries(["products"]);
-
-      const productName = response.deletedProduct.name;
-      toast.success(`${productName} successfully deleted!`);
-
-      // close the modal
-      onOpenChange();
-    },
-  });
-
-  const updateProduct = useMutation(ProductsAPI.updateProduct, {
-    onSuccess: (response) => {
-      queryClient.invalidateQueries(["products"]);
-
-      const productName = response.updatedProduct.name;
-      toast.success(`${productName} successfully updated!`);
-
-      // close the modal (keep the state of the form)
-      onOpenChange();
-    },
-  });
-
-  const createProduct = useMutation(ProductsAPI.createProduct, {
-    onSuccess: (response) => {
-      queryClient.invalidateQueries(["products"]);
-
-      const productName = response.createdProduct.name;
-      toast.success(`${productName} successfully created!`);
-
-      // close the modal
-      onOpenChange();
-    },
-  });
+    deleteProduct.isLoading ||
+    updateProduct.isLoading ||
+    createProduct.isLoading;
 
   const handleDelete = () => {
     if (!product.product_id) {
@@ -73,7 +44,7 @@ const ProductEditableModal = ({
     deleteProduct.mutate(product.product_id);
   };
 
-  const handleSave = (productDetails) => {
+  const handleSave = async (productDetails) => {
     // if the product has an id, it means it's an existing product
     if (productId) {
       // add the product id to the product details
@@ -85,6 +56,18 @@ const ProductEditableModal = ({
       updateProduct.mutate(updatedProductDetails);
     } else {
       createProduct.mutate(productDetails);
+    }
+  };
+
+  const renderModalBody = () => {
+    if (!product) {
+      return <div>No product details available!</div>;
+    }
+
+    if (isLoading) {
+      return <Spinner size="md" color="primary" label="Loading..." />;
+    } else {
+      return <ProductDetailsForm product={product} onSubmit={handleSave} />;
     }
   };
 
@@ -105,13 +88,7 @@ const ProductEditableModal = ({
               </ModalHeader>
 
               {/* -------------------- Body -------------------- */}
-              <ModalBody>
-                {isLoading ? (
-                  <Spinner size="md" color="primary" label="Loading..." />
-                ) : (
-                  <ProductDetailsForm product={product} onSubmit={handleSave} />
-                )}
-              </ModalBody>
+              <ModalBody>{renderModalBody()}</ModalBody>
 
               {/* -------------------- Footer -------------------- */}
               <ModalFooter className="flex justify-between">
@@ -122,7 +99,7 @@ const ProductEditableModal = ({
                       color="danger"
                       startContent={<Trash />}
                       onClick={handleDelete}
-                      isDisabled={isLoading}
+                      isDisabled={isLoading || !product}
                     >
                       Delete
                     </Button>
@@ -142,7 +119,7 @@ const ProductEditableModal = ({
                     className="w-36"
                     radius="sm"
                     startContent={<Save />}
-                    isDisabled={isLoading}
+                    isDisabled={isLoading || !product}
                   >
                     Save
                   </Button>
@@ -152,8 +129,6 @@ const ProductEditableModal = ({
           )}
         </ModalContent>
       </Modal>
-
-      <Toaster position="top-right" />
     </>
   );
 };

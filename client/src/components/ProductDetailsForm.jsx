@@ -4,14 +4,15 @@ import {
   Input,
   Select,
   SelectItem,
-  Spinner,
   Switch,
   Textarea,
 } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import { useQuery, useQueryClient } from "react-query";
+import toast from "react-hot-toast";
+import { useQuery } from "react-query";
 import CategoriesAPI from "../services/CategoriesAPI";
 import TagsAPI from "../services/TagsAPI";
+import { CATEGORIES_QUERY_KEY, TAGS_QUERY_KEY } from "../utils/constants";
 import { productSchema } from "../utils/schemas";
 
 const ProductDetailsForm = ({ product, onSubmit }) => {
@@ -26,23 +27,29 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
   });
 
   // react-query
-  const queryClient = useQueryClient();
-
-  const categoriesQuery = useQuery(["categories"], CategoriesAPI.getCategories);
+  const categoriesQuery = useQuery(
+    [CATEGORIES_QUERY_KEY],
+    CategoriesAPI.getCategories,
+    {
+      onError: () => {
+        toast.error("Unable to fetch the categories, please try again.");
+      },
+    },
+  );
   const categories = categoriesQuery.data;
 
-  const tagsQuery = useQuery(["tags"], TagsAPI.getAllTags);
+  const tagsQuery = useQuery([TAGS_QUERY_KEY], TagsAPI.getAllTags, {
+    onError: () => {
+      toast.error("Unable to fetch the tags, please try again.");
+    },
+  });
   const tags = tagsQuery.data;
-
-  // loading state
-  if (queryClient.isFetching(["categories", "tags", "products"])) {
-    return <Spinner size="md" color="primary" label="Loading..." />;
-  }
 
   return (
     <form
       id="product-details-form"
       onSubmit={handleSubmit(onSubmit)}
+      noValidate
       className="flex flex-col gap-3"
     >
       <div className="flex gap-3">
@@ -105,6 +112,8 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           errorMessage={errors.category?.message}
           isRequired
           className="w-1/2"
+          isLoading={categoriesQuery.isLoading}
+          isDisabled={categoriesQuery.isError}
         >
           {categories &&
             categories.map((category) => (
@@ -244,12 +253,15 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
         isRequired
       />
 
+      {/* ---------- Tags ---------- */}
       <Select
         {...register("tags")}
         defaultSelectedKeys={tags && product?.tags && new Set(product.tags)}
         label="Tags"
         items={tags}
         variant="bordered"
+        isLoading={tagsQuery.isLoading}
+        isDisabled={tagsQuery.isError}
         onChange={
           // convert comma-separated string to array of strings
           (e) => {

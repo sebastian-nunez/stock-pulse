@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const PRODUCT_TAGS_BASE_URL = "/api/product-tag";
+import { PRODUCT_TAGS_BASE_URL } from "../utils/constants.js";
 
 class ProductTagsAPI {
   static getProductTags = async () => {

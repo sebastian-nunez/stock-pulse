@@ -23,6 +23,7 @@
     "react-hot-toast": "^2.4.1",
     "react-query": "^3.39.3",
     "sort-by": "^1.2.0",
+    "tailwind-container-break-out": "^2.0.6",
     "zod": "^3.22.4",
     "zod-validation-error": "^2.1.0"
   },

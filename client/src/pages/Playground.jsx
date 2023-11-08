@@ -14,6 +14,7 @@ import { Search, Users } from "lucide-react";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import ErrorCard from "../components/ErrorCard";
 import ProductDetailsModal from "../components/ProductDetailsModal";
 import { default as ProductEditableModal } from "../components/ProductEditableModal";
 import ProductsAPI from "../services/ProductsAPI";
@@ -49,15 +50,12 @@ const Playground = () => {
   const [selectedAction, setSelectedAction] = useState(null);
   const [productId, setProductId] = useState(1);
 
-  const productByIdQuery = useQuery(
-    ["products", productId],
-    () => ProductsAPI.getProductById(productId),
-    {
-      onSuccess: (data) => {
-        queryClient.invalidateQueries(["products"]);
-      },
-    },
-  );
+  const productByIdQuery = useQuery(["products", { productId }], () => {
+    // avoid fetching when productId is null
+    if (productId) {
+      return ProductsAPI.getProductById(productId);
+    }
+  });
   const product = productByIdQuery.data;
 
   const productsQuery = useQuery(["products"], ProductsAPI.getAllProducts);
@@ -105,6 +103,24 @@ const Playground = () => {
     }));
   };
 
+  if (productByIdQuery.isError) {
+    return (
+      <ErrorCard
+        message={`Unable to fetch product with ID ${productId}`}
+        error={productByIdQuery.error?.message}
+      />
+    );
+  }
+
+  if (productsQuery.isError) {
+    return (
+      <ErrorCard
+        message={`Unable to fetch all products`}
+        error={productsQuery.error?.message}
+      />
+    );
+  }
+
   return (
     <>
       <h1 className="pb-6 text-center text-5xl font-extrabold tracking-tighter">
@@ -150,15 +166,13 @@ const Playground = () => {
             selectedAction &&
             selectedAction !== Action.CREATE && (
               <Input
-                value={productId}
+                defaultValue={productId}
                 label="Product ID"
                 placeholder="1"
                 type="number"
                 variant="bordered"
                 size="sm"
-                onChange={(e) => {
-                  setProductId(e.target.value);
-                }}
+                onValueChange={(value) => setProductId(value)}
                 className="w-fit"
               />
             )}

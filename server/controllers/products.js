@@ -57,12 +57,10 @@ class ProductsController {
   };
 
   static createProduct = async (req, res) => {
-    const productDetails = req.body;
-    const { name, category, tags } = productDetails;
-
     try {
       // check if the required fields are provided
-      validateProductDetails(productDetails);
+      const validatedProduct = validateProductDetails(req.body);
+      const { name, category, tags } = validatedProduct;
 
       // check if the product already exists
       const product = await Product.getOneByName(name);
@@ -84,7 +82,7 @@ class ProductsController {
 
       // create the product
       const newProductDetails = {
-        ...productDetails,
+        ...validatedProduct,
         category_id: categoryFound.category_id
       };
       const createdProduct = await Product.createOne(newProductDetails);
@@ -140,12 +138,11 @@ class ProductsController {
 
   static updateProduct = async (req, res) => {
     let { productId } = req.params;
-    const productDetails = req.body;
-    const { category, tags } = productDetails;
 
     try {
       // check if the required fields are provided
-      validateProductDetails(productDetails);
+      const validatedProduct = validateProductDetails(req.body);
+      const { category, tags } = validatedProduct;
       productId = parseInt(productId);
 
       // check if the product exists
@@ -191,7 +188,7 @@ class ProductsController {
 
       // update the product
       const updatedProductDetails = {
-        ...productDetails,
+        ...validatedProduct,
         category_id: categoryFound.category_id
       };
 

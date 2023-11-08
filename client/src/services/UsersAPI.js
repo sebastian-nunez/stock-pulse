@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const USERS_BASE_URL = "/api/users";
+import { USERS_BASE_URL } from "../utils/constants.js";
 
 class UsersAPI {
   static getAllUsers = async () => {

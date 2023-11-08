@@ -1,30 +1,29 @@
 import axios from "axios";
 import { validateCategoryDetails } from "../../../server/utils/validator";
-
-const CATEGORIES_BASE_URL = "/api/categories";
+import { CATEGORIES_BASE_URL } from "../utils/constants.js";
 
 class CategoriesAPI {
   static getCategories = async () => {
     const res = await axios.get(CATEGORIES_BASE_URL);
-    const categories = res.data;
+    validateCategoryDetails(res.data[0]); // validate the first category
 
-    return categories;
+    return res.data;
   };
 
   static getCategoryById = async (categoryId) => {
     const res = await axios.get(`${CATEGORIES_BASE_URL}/${categoryId}`);
-    const category = res.data;
+    const validatedCategory = validateCategoryDetails(res.data);
 
-    return category;
+    return validatedCategory;
   };
 
   static getCategoryByName = async (categoryName) => {
     const res = await axios.get(
       `${CATEGORIES_BASE_URL}/byName/${categoryName}`,
     );
-    const category = res.data;
+    const validatedCategory = validateCategoryDetails(res.data);
 
-    return category;
+    return validatedCategory;
   };
 
   static deleteCategory = async (categoryId) => {
@@ -35,9 +34,9 @@ class CategoriesAPI {
   };
 
   static createCategory = async (categoryDetails) => {
-    validateCategoryDetails(categoryDetails);
+    const validatedCategory = validateCategoryDetails(categoryDetails);
 
-    const body = JSON.stringify(categoryDetails);
+    const body = JSON.stringify(validatedCategory);
 
     const headers = {
       "Content-Type": "application/json",
@@ -50,20 +49,20 @@ class CategoriesAPI {
   };
 
   static updateCategory = async (categoryDetails) => {
-    validateCategoryDetails(categoryDetails);
+    const validatedCategory = validateCategoryDetails(categoryDetails);
 
-    if (!categoryDetails.category_id) {
+    if (!validatedCategory.category_id) {
       throw new Error("Category id is required!");
     }
 
-    const body = JSON.stringify(categoryDetails);
+    const body = JSON.stringify(validatedCategory);
 
     const headers = {
       "Content-Type": "application/json",
     };
 
     const res = await axios.patch(
-      `${CATEGORIES_BASE_URL}/${categoryDetails.category_id}`,
+      `${CATEGORIES_BASE_URL}/${validatedCategory.category_id}`,
       body,
       {
         headers,
