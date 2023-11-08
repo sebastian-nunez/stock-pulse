@@ -1,3 +1,4 @@
+import { Spinner } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import ErrorCard from "../components/ErrorCard";
@@ -33,11 +34,6 @@ const Inventory = () => {
     selectedTags,
   });
 
-  // TODO: make a loading component (skeleton)
-  if (productsQuery.isLoading) {
-    return <div>Loading...</div>;
-  }
-
   if (productsQuery.isError) {
     return (
       <ErrorCard
@@ -61,7 +57,14 @@ const Inventory = () => {
       <div className="mx-break-out min-h-screen bg-neutral-50">
         {/* Change the full width background color */}
         <div className="container">
-          {<ProductGrid products={filteredProducts} />}
+          {productsQuery.isLoading ? (
+            <div className="flex h-80 items-center justify-center">
+              {/* TODO: create a proper loading skeleton */}
+              <Spinner size="lg" color="primary" label="Loading..." />
+            </div>
+          ) : (
+            <ProductGrid products={filteredProducts} />
+          )}
         </div>
       </div>
     </>
