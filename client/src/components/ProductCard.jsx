@@ -33,6 +33,16 @@ const ProductCard = ({ product }) => {
         <h1 className="text-2xl font-semibold tracking-tight">
           {product?.name}
         </h1>
+        <div>
+          {product.image ? (
+            <img src={product.image} alt={product.name} />
+          ) : (
+            <p>No image available</p>
+          )}
+        </div>
+        <div>Price: ${product.price}</div>
+        <div>Brand: {product.brand}</div>
+        <div>Quantity: {product.quantity}</div>
 
         <Button
           size="sm"
