@@ -1,5 +1,6 @@
-import { Button, useDisclosure } from "@nextui-org/react";
+import { Button, Code, Image, useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
 
@@ -24,26 +25,62 @@ const ProductCard = ({ product }) => {
   return (
     <>
       <div
-        className="rounded border bg-white px-8 py-4 drop-shadow-sm hover:cursor-pointer"
+        className="transform rounded-xl border bg-white p-8 drop-shadow transition duration-250 ease-in-out  hover:scale-105 hover:cursor-pointer"
         onClick={() => {
           setSelectedAction(Action.VIEW);
           onOpen();
         }}
       >
-        <h1 className="text-2xl font-semibold tracking-tight">
-          {product?.name}
-        </h1>
+        {/* ------------------- Image ------------------- */}
+        <div className="flex h-fit items-center justify-center">
+          {product?.image ? (
+            <Image
+              src={product?.image}
+              alt={product?.name}
+              className="h-60 w-80 object-cover object-center md:w-96"
+              onError={() =>
+                toast.error("Failed to load image for " + product?.name)
+              }
+            />
+          ) : (
+            <div className="flex h-60 w-full items-center justify-center rounded-lg border drop-shadow-sm">
+              No image available.
+            </div>
+          )}
+        </div>
 
-        <Button
-          size="sm"
-          color="primary"
-          onPress={() => {
-            setSelectedAction(Action.UPDATE);
-            onOpen();
-          }}
-        >
-          EDIT
-        </Button>
+        {/* ------------------- Name & Price ------------------- */}
+        <div className="mt-4 flex items-center justify-between">
+          <h1 className="text-xl font-semibold tracking-tight">
+            {product?.name}
+          </h1>
+
+          <Code>${product.price}</Code>
+        </div>
+
+        {/* ------------------- Brand ------------------- */}
+        <p className="text-gray-500">{product.brand}</p>
+
+        {/* ------------------- Quantity & Edit ------------------- */}
+        <div className="mt-5 flex items-center justify-between">
+          <p className="text-gray-700">
+            <strong>Quantity:</strong> {product.quantity}
+          </p>
+
+          <Button
+            size="sm"
+            color="primary"
+            variant="flat"
+            radius="full"
+            className="duration-500 ease-in-out hover:scale-105"
+            onPress={() => {
+              setSelectedAction(Action.UPDATE);
+              onOpen();
+            }}
+          >
+            EDIT
+          </Button>
+        </div>
       </div>
 
       {/* -------------- Modals -------------- */}

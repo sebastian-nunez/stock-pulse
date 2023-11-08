@@ -85,7 +85,7 @@
 
 > StockPulse was design with a responsive architecture while following the latest WAI-ARIA accessability standards to accommodate a mobile and desktop experience.
 
-![Responsive Design Demo](demos/stock-pulse-responsive-1.gif)
+![Responsive Design Demo](demos/stock-pulse-responsive-2.gif)
 
 ## End-to-End API Validation
 

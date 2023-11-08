@@ -28,23 +28,27 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                   <div>
                     {/* IMAGE */}
                     <div className="m-2 border p-2">
-                      <img src={product.image} alt={product.name} />
+                      {product.image ? (
+                        <img src={product.image} alt={product.name} />
+                      ) : (
+                        <p>No image available</p>
+                      )}
                     </div>
 
                     {/* BASIC INFO */}
                     <div className="m-2 border p-2">
                       <h1 className="font-bold">Basic Info</h1>
                       <div className="flex flex-row gap-4">
-                      <div className="flex flex-col">
-                        <h2>Name: {product.name}</h2>
-                        <p>Brand: {product.brand}</p>
-                        <p>Category: {product.category}</p>
-                        <p>
-                          Tags:{" "}
-                          {product.tags && product.tags.length > 0
-                            ? product.tags.join(", ")
-                            : "No tags"}
-                        </p>
+                        <div className="flex flex-col">
+                          <h2>Name: {product.name}</h2>
+                          <p>Brand: {product.brand}</p>
+                          <p>Category: {product.category}</p>
+                          <p>
+                            Tags:{" "}
+                            {product.tags && product.tags.length > 0
+                              ? product.tags.join(", ")
+                              : "No tags"}
+                          </p>
                         </div>
                         <div className="flex flex-col">
                           <p>Price: ${product.price}</p>
@@ -56,7 +60,7 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                               : "false"}
                           </p>
                           <p>Date Added: {product.date_added}</p>
-                      </div>
+                        </div>
                       </div>
                     </div>
 
@@ -76,7 +80,7 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
 
                     {/* NOTES */}
                     <div className="m-2 border p-2">
-                      <h1 className="font-bold">NOTES</h1>
+                      <h1 className="font-bold">Notes</h1>
                       <p>{product.notes}</p>
                     </div>
                   </div>
