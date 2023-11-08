@@ -16,43 +16,50 @@ export const useFilteredProducts = (
   const [filteredProducts, setFilteredProducts] = useState(products);
 
   useEffect(() => {
-    const filterProducts = products
-      ?.filter((product) => {
-        // filter by category
-        if (!selectedCategory || selectedCategory === ANY_CATEGORY) {
-          return true;
-        }
+    // debounce the filter function
+    const timeoutId = setTimeout(() => {
+      console.log("filtering");
 
-        return (
-          product.category.trim().toLowerCase() ===
-          selectedCategory.trim().toLowerCase()
-        );
-      })
-      .filter((product) => {
-        // filter by search text
-        const normalizedSearchText = searchText
-          .trim()
-          .toLowerCase()
-          .replace(/\s+/g, ""); // remove all whitespace, so "air max" can match with "airmax"
+      const filterProducts = products
+        ?.filter((product) => {
+          // filter by category
+          if (!selectedCategory || selectedCategory === ANY_CATEGORY) {
+            return true;
+          }
 
-        const normalizedProductName = product.name
-          .trim()
-          .toLowerCase()
-          .replace(/\s+/g, ""); // remove all whitespace
+          return (
+            product.category.trim().toLowerCase() ===
+            selectedCategory.trim().toLowerCase()
+          );
+        })
+        .filter((product) => {
+          // filter by search text
+          const normalizedSearchText = searchText
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, ""); // remove all whitespace, so "air max" can match with "airmax"
 
-        return normalizedProductName.includes(normalizedSearchText);
-      })
-      .filter((product) => {
-        // filter by tags
-        if (!selectedTags?.length) {
-          return true;
-        }
+          const normalizedProductName = product.name
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, ""); // remove all whitespace
 
-        const productTags = product.tags;
-        return selectedTags.every((tag) => productTags.includes(tag));
-      });
+          return normalizedProductName.includes(normalizedSearchText);
+        })
+        .filter((product) => {
+          // filter by tags
+          if (!selectedTags?.length) {
+            return true;
+          }
 
-    setFilteredProducts(filterProducts);
+          const productTags = product.tags;
+          return selectedTags.every((tag) => productTags.includes(tag));
+        });
+
+      setFilteredProducts(filterProducts);
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
   }, [products, searchText, selectedCategory, selectedTags]);
 
   return filteredProducts;
