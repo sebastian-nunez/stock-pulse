@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const ANY_CATEGORY = "Any";
-
+export const REGEX_MATCH_NON_ALPHA_NUMERIC = /[^a-zA-Z\d]/g; // non-alphanumeric characters ('., etc), so "air max g.t." can match with "airmax gt"
 /**
  * Custom hook to filter products by search text, category, and tags
  *
@@ -35,12 +35,12 @@ export const useFilteredProducts = (
           const normalizedSearchText = searchText
             .trim()
             .toLowerCase()
-            .replace(/(\s+|\.+)/g, ""); // remove all whitespace and periods, so "air max g.t." can match with "airmaxgt"
+            .replace(REGEX_MATCH_NON_ALPHA_NUMERIC, "");
 
           const normalizedProductName = product.name
             .trim()
             .toLowerCase()
-            .replace(/(\s+|\.+)/g, ""); // remove all whitespace
+            .replace(REGEX_MATCH_NON_ALPHA_NUMERIC, "");
 
           return normalizedProductName.includes(normalizedSearchText);
         })
