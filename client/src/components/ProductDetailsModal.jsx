@@ -57,7 +57,7 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
 
                     {/* ------------------- BASIC INFO ------------------- */}
                     <InfoPanel title="Basic Info">
-                      <div className="flex flex-row gap-12">
+                      <div className="flex flex-col gap-3 sm:flex-row sm:gap-12">
                         <div className="flex flex-col">
                           <h2>
                             <strong>Name:</strong> {product.name}
