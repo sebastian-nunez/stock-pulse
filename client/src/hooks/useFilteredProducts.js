@@ -18,8 +18,6 @@ export const useFilteredProducts = (
   useEffect(() => {
     // debounce the filter function
     const timeoutId = setTimeout(() => {
-      console.log("filtering");
-
       const filterProducts = products
         ?.filter((product) => {
           // filter by category
