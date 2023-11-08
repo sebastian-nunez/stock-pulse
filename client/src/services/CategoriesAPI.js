@@ -1,7 +1,6 @@
 import axios from "axios";
 import { validateCategoryDetails } from "../../../server/utils/validator";
-
-const CATEGORIES_BASE_URL = "/api/categories";
+import { CATEGORIES_BASE_URL } from "../utils/constants.js";
 
 class CategoriesAPI {
   static getCategories = async () => {
