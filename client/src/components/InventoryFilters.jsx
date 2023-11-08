@@ -68,13 +68,13 @@ const InventoryFilters = ({
   };
 
   return (
-    <div className="mb-6 mt-12 flex gap-6">
+    <div className="mb-6 mt-6 flex flex-col gap-3 px-6 sm:flex-row sm:gap-6 sm:px-0">
       {/* ------- Category --------- */}
-      <div className="w-1/3">
+      <div className="sm:w-1/3">
         <Select
-          label="Category"
           size="lg"
           variant="bordered"
+          placeholder="Select a category"
           selectedKeys={selectedCategory ? [selectedCategory] : []}
           labelPlacement="outside"
           onSelectionChange={(object) => setSelectedCategory(object.currentKey)}
@@ -98,9 +98,9 @@ const InventoryFilters = ({
       </div>
 
       {/* ------- Tags --------- */}
-      <div className="w-1/3">
+      <div className="sm:w-1/3">
         <Select
-          label="Tags"
+          placeholder="Select tags"
           items={tags}
           size="lg"
           selectedKeys={selectedTags}
@@ -132,6 +132,7 @@ const InventoryFilters = ({
                     size="md"
                     color="primary"
                     onClose={() => handleChipClose(item)}
+                    className="my-1"
                   >
                     {item.key}
                   </Chip>
@@ -149,10 +150,10 @@ const InventoryFilters = ({
         </Select>
       </div>
 
-      <div className="flex w-1/3 gap-3">
+      <div className="flex gap-3 sm:w-1/3">
         {/* ------- Search Text --------- */}
         <Input
-          label="Search"
+          placeholder="Search"
           size="lg"
           labelPlacement="outside"
           variant="bordered"
@@ -169,8 +170,8 @@ const InventoryFilters = ({
             size="sm"
             variant="flat"
             onPress={handleRefresh}
-            className="h-full"
             isDisabled={isLoading}
+            className="h-12"
           >
             <RotateCcw />
           </Button>
