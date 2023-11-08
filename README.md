@@ -58,7 +58,7 @@
   - [ ] Login via OAuth using GitHub
 
 - **Inventory Control:**
-  - [ ] Monitor product quantities and make adjustments as needed.
+  - [x] Monitor product quantities and make adjustments as needed.
   - [ ] Receive low-stock alerts for timely restocking.
 
 ## Demos
@@ -80,6 +80,12 @@
 > Users are able to filter items by their, related tags, and category.
 
 ![Product Filtering Demo](demos/stock-pulse-product-filtering-1.gif)
+
+### Product Details
+
+> Users are able to see an individual product's full details via a responsive modal
+
+![Product Details Demo](demos/stock-pulse-product-details-1.gif)
 
 ### Responsive Design & Accessibility
 
