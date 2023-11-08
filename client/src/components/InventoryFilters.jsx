@@ -7,16 +7,11 @@ import {
   Tooltip,
 } from "@nextui-org/react";
 import { RotateCcw } from "lucide-react";
-import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
 import { ANY_CATEGORY } from "../hooks/useFilteredProducts";
 import CategoriesAPI from "../services/CategoriesAPI";
 import TagsAPI from "../services/TagsAPI";
-import {
-  CATEGORY_STALE_TIME_MILLISECONDS,
-  TAG_STALE_TIME_MILLISECONDS,
-} from "../utils/constants";
 
 const InventoryFilters = ({
   setSearchText,
@@ -24,10 +19,6 @@ const InventoryFilters = ({
   setSelectedTags,
   searchText,
 }) => {
-  // state
-  const [categories, setCategories] = useState(null);
-  const [tags, setTags] = useState(null);
-
   // react-query
   const queryClient = useQueryClient();
 
@@ -35,27 +26,19 @@ const InventoryFilters = ({
     ["categories"],
     CategoriesAPI.getCategories,
     {
-      staleTime: CATEGORY_STALE_TIME_MILLISECONDS,
       onError: () => {
         toast.error("Unable to fetch the categories, please try again.");
       },
     },
   );
-  const fetchedCategories = categoriesQuery.data;
+  const categories = categoriesQuery.data;
 
   const tagsQuery = useQuery(["tags"], TagsAPI.getAllTags, {
-    staleTime: TAG_STALE_TIME_MILLISECONDS,
     onError: () => {
       toast.error("Unable to fetch the tags, please try again.");
     },
   });
-  const fetchedTags = tagsQuery.data;
-
-  // save the tags & categories to state
-  useEffect(() => {
-    setCategories(fetchedCategories);
-    setTags(fetchedTags);
-  }, [fetchedCategories, fetchedTags]);
+  const tags = tagsQuery.data;
 
   return (
     <div className="mb-6 mt-12 flex gap-6">
