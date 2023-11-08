@@ -12,17 +12,18 @@ import { Toaster } from "react-hot-toast";
 import { useQuery } from "react-query";
 import ErrorCard from "../components/ErrorCard";
 import ProductGrid from "../components/ProductGrid";
+import {
+  ANY_CATEGORY,
+  useFilteredProducts,
+} from "../hooks/useFilteredProducts";
 import CategoriesAPI from "../services/CategoriesAPI";
 import ProductsAPI from "../services/ProductsAPI";
 import TagsAPI from "../services/TagsAPI";
-import { get_milliseconds_from_minutes } from "../utils/types";
-
-// stale time
-const PRODUCT_STALE_TIME_MILLISECONDS = get_milliseconds_from_minutes(5);
-const CATEGORY_STALE_TIME_MILLISECONDS = get_milliseconds_from_minutes(30);
-const TAG_STALE_TIME_MILLISECONDS = get_milliseconds_from_minutes(30);
-
-const ANY_CATEGORY = "Any";
+import {
+  CATEGORY_STALE_TIME_MILLISECONDS,
+  PRODUCT_STALE_TIME_MILLISECONDS,
+  TAG_STALE_TIME_MILLISECONDS,
+} from "../utils/constants";
 
 const Inventory = () => {
   // state
@@ -54,51 +55,26 @@ const Inventory = () => {
   });
   const fetchedTags = tagsQuery.data;
 
-  // save the products and categories to state
+  // save the products, tags & categories to state
   useEffect(() => {
     setProducts(fetchedProducts);
     setCategories(fetchedCategories);
     setTags(fetchedTags);
   }, [fetchedProducts, fetchedCategories, fetchedTags]);
 
-  const filteredProducts = products
-    ?.filter((product) => {
-      // filter by category
-      if (!selectedCategory || selectedCategory === ANY_CATEGORY) {
-        return true;
-      }
-
-      return (
-        product.category.trim().toLowerCase() ===
-        selectedCategory.trim().toLowerCase()
-      );
-    })
-    .filter((product) => {
-      // filter by search text
-      const normalizedSearchText = searchText
-        .trim()
-        .toLowerCase()
-        .replace(/\s+/g, ""); // remove all whitespace, so "air max" can match with "airmax"
-
-      const normalizedProductName = product.name
-        .trim()
-        .toLowerCase()
-        .replace(/\s+/g, ""); // remove all whitespace
-
-      return normalizedProductName.includes(normalizedSearchText);
-    })
-    .filter((product) => {
-      // filter by tags
-      if (!selectedTags?.length) {
-        return true;
-      }
-
-      const productTags = product.tags;
-      return selectedTags.every((tag) => productTags.includes(tag));
-    });
+  // filter products
+  const filteredProducts = useFilteredProducts(products, {
+    searchText,
+    selectedCategory,
+    selectedTags,
+  });
 
   // TODO: make a loading component (skeleton)
-  if (productsQuery.isLoading || categoriesQuery.isLoading) {
+  if (
+    productsQuery.isLoading ||
+    categoriesQuery.isLoading ||
+    tagsQuery.isLoading
+  ) {
     return <div>Loading...</div>;
   }
 
