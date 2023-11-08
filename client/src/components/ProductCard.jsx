@@ -1,5 +1,6 @@
 import { Button, Code, Image, useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
 
@@ -31,13 +32,15 @@ const ProductCard = ({ product }) => {
         }}
       >
         {/* ------------------- Image ------------------- */}
-        <div className="flex h-fit max-w-full items-center justify-center">
+        <div className="flex h-fit items-center justify-center">
           {product?.image ? (
             <Image
               src={product?.image}
               alt={product?.name}
-              fallbackSrc="https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
-              className="h-60 w-96 object-cover object-center"
+              className="h-60 w-80 object-cover object-center md:w-96"
+              onError={() =>
+                toast.error("Failed to load image for " + product?.name)
+              }
             />
           ) : (
             <div className="flex h-60 w-full items-center justify-center rounded-lg border drop-shadow-sm">
