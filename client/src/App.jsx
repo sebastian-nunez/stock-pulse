@@ -37,7 +37,7 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <div className="container min-h-screen">{element}</div>
+      <div className="container min-h-screen overflow-x-hidden">{element}</div>
 
       <Toaster position="top-right" />
       <Footer />
