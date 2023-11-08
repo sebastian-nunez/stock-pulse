@@ -8,7 +8,6 @@ import {
 } from "@nextui-org/react";
 import { RotateCcw } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Toaster } from "react-hot-toast";
 import { useQuery } from "react-query";
 import ErrorCard from "../components/ErrorCard";
 import ProductGrid from "../components/ProductGrid";
@@ -216,8 +215,6 @@ const Inventory = () => {
           {<ProductGrid products={filteredProducts} />}
         </div>
       </div>
-
-      <Toaster />
     </>
   );
 };

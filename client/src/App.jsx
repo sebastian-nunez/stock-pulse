@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { useRoutes } from "react-router-dom";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
@@ -37,6 +38,8 @@ const App = () => {
     <>
       <NavBar />
       <div className="container min-h-screen">{element}</div>
+
+      <Toaster position="top-right" />
       <Footer />
     </>
   );
