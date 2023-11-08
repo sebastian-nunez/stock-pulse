@@ -50,7 +50,7 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                         </div>
                       )}
 
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm">
                         <strong>Date Added:</strong> {product.date_added}
                       </p>
                     </div>
