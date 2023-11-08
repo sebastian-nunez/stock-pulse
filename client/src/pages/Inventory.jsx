@@ -37,10 +37,12 @@ const Inventory = () => {
     <>
       {/* -------------------- Filters --------------------- */}
       <InventoryFilters
-        setSearchText={setSearchText}
-        setSelectedCategory={setSelectedCategory}
-        setSelectedTags={setSelectedTags}
         searchText={searchText}
+        setSearchText={setSearchText}
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
       />
 
       {/* ------------------- Product Grid ------------------- */}

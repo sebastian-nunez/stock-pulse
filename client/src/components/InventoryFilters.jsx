@@ -22,7 +22,9 @@ const InventoryFilters = ({
   setSearchText,
   setSelectedCategory,
   setSelectedTags,
+  selectedTags,
   searchText,
+  selectedCategory,
 }) => {
   // react-query
   const queryClient = useQueryClient();
@@ -58,6 +60,13 @@ const InventoryFilters = ({
     tagsQuery.refetch();
   };
 
+  const handleChipClose = (tagToRemove) => {
+    // remove the tag from the selected tags
+    setSelectedTags(
+      selectedTags.filter((tag) => tag !== tagToRemove.textValue),
+    );
+  };
+
   return (
     <div className="mb-6 mt-12 flex gap-6">
       {/* ------- Category --------- */}
@@ -65,7 +74,7 @@ const InventoryFilters = ({
         <Select
           label="Category"
           variant="bordered"
-          defaultSelectedKeys={[ANY_CATEGORY]}
+          selectedKeys={selectedCategory ? [selectedCategory] : []}
           labelPlacement="outside"
           onSelectionChange={(object) => setSelectedCategory(object.currentKey)}
           isDisabled={categoriesQuery.isError}
@@ -92,6 +101,7 @@ const InventoryFilters = ({
         <Select
           label="Tags"
           items={tags}
+          selectedKeys={selectedTags}
           variant="bordered"
           labelPlacement="outside"
           isMultiline={true}
@@ -115,7 +125,12 @@ const InventoryFilters = ({
             return (
               <div className="flex flex-wrap gap-2">
                 {selectedItems?.map((item) => (
-                  <Chip key={item.key} size="sm" color="primary">
+                  <Chip
+                    key={item.key}
+                    size="sm"
+                    color="primary"
+                    onClose={() => handleChipClose(item)}
+                  >
                     {item.key}
                   </Chip>
                 ))}
