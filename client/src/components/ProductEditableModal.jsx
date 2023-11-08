@@ -8,7 +8,7 @@ import {
   Spinner,
 } from "@nextui-org/react";
 import { Save, Trash } from "lucide-react";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { useMutation, useQueryClient } from "react-query";
 import ProductsAPI from "../services/ProductsAPI";
 import ProductDetailsForm from "./ProductDetailsForm";
@@ -152,8 +152,6 @@ const ProductEditableModal = ({
           )}
         </ModalContent>
       </Modal>
-
-      <Toaster position="top-right" />
     </>
   );
 };

@@ -4,16 +4,15 @@ import {
   Input,
   Select,
   SelectItem,
-  Spinner,
   Switch,
   Textarea,
 } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import CategoriesAPI from "../services/CategoriesAPI";
 import TagsAPI from "../services/TagsAPI";
 import { productSchema } from "../utils/schemas";
-import ErrorCard from "./ErrorCard";
 
 const ProductDetailsForm = ({ product, onSubmit }) => {
   // react-hook-form
@@ -27,34 +26,23 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
   });
 
   // react-query
-  const categoriesQuery = useQuery(["categories"], CategoriesAPI.getCategories);
+  const categoriesQuery = useQuery(
+    ["categories"],
+    CategoriesAPI.getCategories,
+    {
+      onError: () => {
+        toast.error("Unable to fetch the categories, please try again.");
+      },
+    },
+  );
   const categories = categoriesQuery.data;
 
-  const tagsQuery = useQuery(["tags"], TagsAPI.getAllTags);
+  const tagsQuery = useQuery(["tags"], TagsAPI.getAllTags, {
+    onError: () => {
+      toast.error("Unable to fetch the tags, please try again.");
+    },
+  });
   const tags = tagsQuery.data;
-
-  // loading state
-  if (categoriesQuery.isLoading || tagsQuery.isLoading) {
-    return <Spinner size="md" color="primary" label="Loading..." />;
-  }
-
-  if (categoriesQuery.isError) {
-    return (
-      <ErrorCard
-        message="Unable to fetch categories, please try again later."
-        error={categoriesQuery.error?.message}
-      />
-    );
-  }
-
-  if (tagsQuery.isError) {
-    return (
-      <ErrorCard
-        message="Unable to fetch tags, please try again later."
-        error={tagsQuery.error?.message}
-      />
-    );
-  }
 
   return (
     <form
@@ -123,6 +111,8 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
           errorMessage={errors.category?.message}
           isRequired
           className="w-1/2"
+          isLoading={categoriesQuery.isLoading}
+          isDisabled={categoriesQuery.isError}
         >
           {categories &&
             categories.map((category) => (
@@ -269,6 +259,8 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
         label="Tags"
         items={tags}
         variant="bordered"
+        isLoading={tagsQuery.isLoading}
+        isDisabled={tagsQuery.isError}
         onChange={
           // convert comma-separated string to array of strings
           (e) => {

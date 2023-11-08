@@ -8,6 +8,7 @@ import {
 } from "@nextui-org/react";
 import { RotateCcw } from "lucide-react";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
 import { ANY_CATEGORY } from "../hooks/useFilteredProducts";
 import CategoriesAPI from "../services/CategoriesAPI";
@@ -16,7 +17,6 @@ import {
   CATEGORY_STALE_TIME_MILLISECONDS,
   TAG_STALE_TIME_MILLISECONDS,
 } from "../utils/constants";
-import ErrorCard from "./ErrorCard";
 
 const InventoryFilters = ({
   setSearchText,
@@ -36,12 +36,18 @@ const InventoryFilters = ({
     CategoriesAPI.getCategories,
     {
       staleTime: CATEGORY_STALE_TIME_MILLISECONDS,
+      onError: () => {
+        toast.error("Unable to fetch the categories, please try again.");
+      },
     },
   );
   const fetchedCategories = categoriesQuery.data;
 
   const tagsQuery = useQuery(["tags"], TagsAPI.getAllTags, {
     staleTime: TAG_STALE_TIME_MILLISECONDS,
+    onError: () => {
+      toast.error("Unable to fetch the tags, please try again.");
+    },
   });
   const fetchedTags = tagsQuery.data;
 
@@ -50,29 +56,6 @@ const InventoryFilters = ({
     setCategories(fetchedCategories);
     setTags(fetchedTags);
   }, [fetchedCategories, fetchedTags]);
-
-  // TODO: make a loading component (skeleton)
-  if (categoriesQuery.isLoading || tagsQuery.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (categoriesQuery.isError) {
-    return (
-      <ErrorCard
-        message="Unable to fetch categories, please try again."
-        error={categoriesQuery.error?.message}
-      />
-    );
-  }
-
-  if (tagsQuery.isError) {
-    return (
-      <ErrorCard
-        message="Unable to fetch tags, please try again."
-        error={tagsQuery.error?.message}
-      />
-    );
-  }
 
   return (
     <div className="mb-6 mt-12 flex gap-6">
@@ -84,6 +67,8 @@ const InventoryFilters = ({
           defaultSelectedKeys={[ANY_CATEGORY]}
           labelPlacement="outside"
           onSelectionChange={(object) => setSelectedCategory(object.currentKey)}
+          isDisabled={categoriesQuery.isError}
+          isLoading={categoriesQuery.isLoading}
         >
           <SelectItem key={ANY_CATEGORY} value={ANY_CATEGORY}>
             {ANY_CATEGORY}
@@ -110,6 +95,8 @@ const InventoryFilters = ({
           labelPlacement="outside"
           isMultiline={true}
           selectionMode="multiple"
+          isDisabled={tagsQuery.isError}
+          isLoading={tagsQuery.isLoading}
           onChange={
             // convert comma-separated string to array of strings
             (e) => {
@@ -154,6 +141,7 @@ const InventoryFilters = ({
           value={searchText}
           onValueChange={setSearchText}
           type="text"
+          isLoading={categoriesQuery.isLoading || tagsQuery.isLoading}
         />
 
         {/* ------- Refresh Button --------- */}
@@ -169,6 +157,11 @@ const InventoryFilters = ({
               tagsQuery.refetch();
             }}
             className="h-full"
+            isDisabled={
+              categoriesQuery.isFetching ||
+              tagsQuery.isFetching ||
+              queryClient.isFetching(["products"])
+            }
           >
             <RotateCcw />
           </Button>
