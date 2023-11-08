@@ -1,4 +1,4 @@
-import { Button, useDisclosure } from "@nextui-org/react";
+import { Button, Code, Image, useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
@@ -24,36 +24,60 @@ const ProductCard = ({ product }) => {
   return (
     <>
       <div
-        className="rounded border bg-white px-8 py-4 drop-shadow-sm hover:cursor-pointer"
+        className="transform rounded-xl border bg-white p-8 drop-shadow transition duration-200 ease-in-out  hover:scale-105 hover:cursor-pointer"
         onClick={() => {
           setSelectedAction(Action.VIEW);
           onOpen();
         }}
       >
-        <h1 className="text-2xl font-semibold tracking-tight">
-          {product?.name}
-        </h1>
-        <div>
-          {product.image ? (
-            <img src={product.image} alt={product.name} />
+        {/* ------------------- Image ------------------- */}
+        <div className="flex h-fit max-w-full items-center justify-center">
+          {product?.image ? (
+            <Image
+              src={product?.image}
+              alt={product?.name}
+              fallbackSrc="https://static.vecteezy.com/system/resources/previews/005/337/799/non_2x/icon-image-not-found-free-vector.jpg"
+              className="h-60 w-96 object-cover object-center"
+            />
           ) : (
-            <p>No image available</p>
+            <div className="flex h-60 w-full items-center justify-center rounded-lg border drop-shadow-sm">
+              No image available.
+            </div>
           )}
         </div>
-        <div>Price: ${product.price}</div>
-        <div>Brand: {product.brand}</div>
-        <div>Quantity: {product.quantity}</div>
 
-        <Button
-          size="sm"
-          color="primary"
-          onPress={() => {
-            setSelectedAction(Action.UPDATE);
-            onOpen();
-          }}
-        >
-          EDIT
-        </Button>
+        {/* ------------------- Name & Price ------------------- */}
+        <div className="mt-4 flex items-center justify-between">
+          <h1 className="text-xl font-semibold tracking-tight">
+            {product?.name}
+          </h1>
+
+          <Code>${product.price}</Code>
+        </div>
+
+        {/* ------------------- Brand ------------------- */}
+        <p className="text-gray-500">{product.brand}</p>
+
+        {/* ------------------- Quantity & Edit ------------------- */}
+        <div className="mt-5 flex items-center justify-between">
+          <p className="text-gray-700">
+            <strong>Quantity:</strong> {product.quantity}
+          </p>
+
+          <Button
+            size="sm"
+            color="primary"
+            variant="flat"
+            radius="sm"
+            className="duration-500 ease-in-out hover:scale-105"
+            onPress={() => {
+              setSelectedAction(Action.UPDATE);
+              onOpen();
+            }}
+          >
+            EDIT
+          </Button>
+        </div>
       </div>
 
       {/* -------------- Modals -------------- */}
