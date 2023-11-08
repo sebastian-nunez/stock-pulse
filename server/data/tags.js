@@ -6,5 +6,13 @@ export const tagData = [
   {
     name: "Discounted",
     description: "Products with special discounts!"
+  },
+  {
+    name: "Rebate",
+    description: "Products with special discounts!"
+  },
+  {
+    name: "Hot Deal",
+    description: "Products with special discounts!"
   }
 ];
