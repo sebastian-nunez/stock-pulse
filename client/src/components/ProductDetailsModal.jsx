@@ -1,11 +1,15 @@
 import {
   Button,
+  Chip,
+  Image,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
 } from "@nextui-org/react";
+import toast from "react-hot-toast";
+import InfoPanel from "./InfoPanel";
 
 const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
   return (
@@ -19,74 +23,109 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-3xl font-bold">
+              <ModalHeader className="flex flex-col gap-3 text-3xl font-bold">
                 Product Details
               </ModalHeader>
 
               <ModalBody>
                 {product ? (
-                  <div>
-                    {/* IMAGE */}
-                    <div className="m-2 border p-2">
-                      {product.image ? (
-                        <img src={product.image} alt={product.name} />
+                  <div className="flex flex-col gap-5">
+                    {/* ------------------- IMAGE ------------------- */}
+                    <div className="flex h-fit flex-col items-center justify-center gap-2">
+                      {product?.image ? (
+                        <Image
+                          src={product?.image}
+                          alt={product?.name}
+                          isZoomed
+                          className="h-60 w-80 object-cover object-center md:w-96"
+                          onError={() =>
+                            toast.error(
+                              "Failed to load image for " + product?.name,
+                            )
+                          }
+                        />
                       ) : (
-                        <p>No image available</p>
+                        <div className="flex h-60 w-full items-center justify-center rounded-lg border drop-shadow-sm">
+                          No image available.
+                        </div>
                       )}
+
+                      <p className="text-sm text-gray-600">
+                        <strong>Date Added:</strong> {product.date_added}
+                      </p>
                     </div>
 
-                    {/* BASIC INFO */}
-                    <div className="m-2 border p-2">
-                      <h1 className="font-bold">Basic Info</h1>
-                      <div className="flex flex-row gap-4">
+                    {/* ------------------- BASIC INFO ------------------- */}
+                    <InfoPanel title="Basic Info">
+                      <div className="flex flex-row gap-12">
                         <div className="flex flex-col">
-                          <h2>Name: {product.name}</h2>
-                          <p>Brand: {product.brand}</p>
-                          <p>Category: {product.category}</p>
+                          <h2>
+                            <strong>Name:</strong> {product.name}
+                          </h2>
                           <p>
-                            Tags:{" "}
-                            {product.tags && product.tags.length > 0
-                              ? product.tags.join(", ")
-                              : "No tags"}
+                            <strong>Brand:</strong> {product.brand}
+                          </p>
+                          <p>
+                            <strong>Category:</strong> {product.category}
                           </p>
                         </div>
+
                         <div className="flex flex-col">
-                          <p>Price: ${product.price}</p>
-                          <p>Quantity: {product.quantity}</p>
                           <p>
-                            Available:{" "}
-                            {JSON.parse(product.is_available)
-                              ? "true"
-                              : "false"}
+                            <strong>Price:</strong> ${product.price}
                           </p>
-                          <p>Date Added: {product.date_added}</p>
+
+                          <p>
+                            <strong>Quantity:</strong> {product.quantity}
+                          </p>
+
+                          <p>
+                            <strong>Available: </strong>
+                            {product?.is_available ? "Yes" : "No"}
+                          </p>
                         </div>
                       </div>
-                    </div>
+                    </InfoPanel>
 
-                    {/* DESCRIPTION */}
-                    <div className="m-2 border p-2">
-                      <h1 className="font-bold">Description</h1>
+                    {/* ------------------- DESCRIPTION -------------------*/}
+                    <InfoPanel title="Description">
                       <p>{product.description}</p>
-                    </div>
+                    </InfoPanel>
 
-                    {/* MANUFACTURER */}
-                    <div className="m-2 border p-2">
-                      <h1 className="font-bold">Manufacturer</h1>
-                      <p>Weight: {product.weight}</p>
-                      <p>Dimensions: {product.dimensions}</p>
-                      <p>Warranty Info: {product.warranty_info}</p>
-                    </div>
+                    {/* ------------------- MANUFACTURER ------------------- */}
+                    <InfoPanel title="Manufacturer">
+                      <p>
+                        <strong>Weight:</strong> {product?.weight}
+                      </p>
+                      <p>
+                        <strong>Dimensions:</strong> {product?.dimensions}
+                      </p>
+                      <p>
+                        <strong>Warranty Info:</strong> {product?.warranty_info}
+                      </p>
+                    </InfoPanel>
 
-                    {/* NOTES */}
-                    <div className="m-2 border p-2">
-                      <h1 className="font-bold">Notes</h1>
-                      <p>{product.notes}</p>
-                    </div>
+                    {/* ------------------- NOTES ------------------- */}
+                    <InfoPanel title="Notes">
+                      <p>{product?.notes}</p>
+                    </InfoPanel>
                   </div>
                 ) : (
                   <div>No product details available!</div>
                 )}
+
+                {/* ------------------- TAGS ------------------- */}
+                <InfoPanel title="Tags">
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {product?.tags.map((tag, index) => {
+                      return (
+                        <Chip key={tag + index} color="primary">
+                          {tag}
+                        </Chip>
+                      );
+                    })}
+                  </div>
+                </InfoPanel>
               </ModalBody>
 
               <ModalFooter>
