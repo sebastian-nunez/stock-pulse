@@ -3,13 +3,14 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
+import { ProductCardSkeleton } from "./skeletons/ProductGridSkeleton";
 
 const Action = {
   VIEW: "View",
   UPDATE: "Update",
 };
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, isLoading = false }) => {
   // control the modals
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedAction, setSelectedAction] = useState(null);
@@ -20,6 +21,10 @@ const ProductCard = ({ product }) => {
         Oops! Looks like the product is currently unavailable!
       </div>
     );
+  }
+
+  if (isLoading) {
+    return <ProductCardSkeleton />;
   }
 
   return (
