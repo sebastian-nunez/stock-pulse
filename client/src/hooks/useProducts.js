@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "react-query";
 import ProductsAPI from "../services/ProductsAPI";
+import { PRODUCTS_QUERY_KEY } from "../utils/constants";
 
 /**
  *  Custom hook to delete, update, and create products
@@ -13,7 +14,7 @@ const useProducts = ({ onSuccessAction }) => {
 
   const deleteProduct = useMutation(ProductsAPI.deleteProduct, {
     onSuccess: (response) => {
-      queryClient.invalidateQueries(["products"]);
+      queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
 
       const productName = response.deletedProduct.name;
       toast.success(`${productName} successfully deleted!`);
@@ -24,7 +25,7 @@ const useProducts = ({ onSuccessAction }) => {
 
   const updateProduct = useMutation(ProductsAPI.updateProduct, {
     onSuccess: (response) => {
-      queryClient.invalidateQueries(["products"]);
+      queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
 
       const productName = response.updatedProduct.name;
       toast.success(`${productName} successfully updated!`);
@@ -35,7 +36,7 @@ const useProducts = ({ onSuccessAction }) => {
 
   const createProduct = useMutation(ProductsAPI.createProduct, {
     onSuccess: (response) => {
-      queryClient.invalidateQueries(["products"]);
+      queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
 
       const productName = response.createdProduct.name;
       toast.success(`${productName} successfully created!`);
