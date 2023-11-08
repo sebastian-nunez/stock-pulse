@@ -73,6 +73,7 @@ const InventoryFilters = ({
       <div className="w-1/3">
         <Select
           label="Category"
+          size="lg"
           variant="bordered"
           selectedKeys={selectedCategory ? [selectedCategory] : []}
           labelPlacement="outside"
@@ -101,6 +102,7 @@ const InventoryFilters = ({
         <Select
           label="Tags"
           items={tags}
+          size="lg"
           selectedKeys={selectedTags}
           variant="bordered"
           labelPlacement="outside"
@@ -127,7 +129,7 @@ const InventoryFilters = ({
                 {selectedItems?.map((item) => (
                   <Chip
                     key={item.key}
-                    size="sm"
+                    size="md"
                     color="primary"
                     onClose={() => handleChipClose(item)}
                   >
@@ -151,6 +153,7 @@ const InventoryFilters = ({
         {/* ------- Search Text --------- */}
         <Input
           label="Search"
+          size="lg"
           labelPlacement="outside"
           variant="bordered"
           isClearable
