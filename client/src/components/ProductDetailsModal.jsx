@@ -9,6 +9,7 @@ import {
   ModalHeader,
 } from "@nextui-org/react";
 import toast from "react-hot-toast";
+import { convertDatetimeToMMDDYYYY } from "../utils/types";
 import InfoPanel from "./InfoPanel";
 
 const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
@@ -51,7 +52,8 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                       )}
 
                       <p className="text-sm">
-                        <strong>Date Added:</strong> {product.date_added}
+                        <strong>Date Added:</strong>{" "}
+                        {convertDatetimeToMMDDYYYY(product.date_added)}
                       </p>
                     </div>
 
