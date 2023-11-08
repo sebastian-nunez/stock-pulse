@@ -12,6 +12,11 @@ import { useQuery, useQueryClient } from "react-query";
 import { ANY_CATEGORY } from "../hooks/useFilteredProducts";
 import CategoriesAPI from "../services/CategoriesAPI";
 import TagsAPI from "../services/TagsAPI";
+import {
+  CATEGORIES_QUERY_KEY,
+  PRODUCTS_QUERY_KEY,
+  TAGS_QUERY_KEY,
+} from "../utils/constants";
 
 const InventoryFilters = ({
   setSearchText,
@@ -23,7 +28,7 @@ const InventoryFilters = ({
   const queryClient = useQueryClient();
 
   const categoriesQuery = useQuery(
-    ["categories"],
+    [CATEGORIES_QUERY_KEY],
     CategoriesAPI.getCategories,
     {
       onError: () => {
@@ -33,12 +38,25 @@ const InventoryFilters = ({
   );
   const categories = categoriesQuery.data;
 
-  const tagsQuery = useQuery(["tags"], TagsAPI.getAllTags, {
+  const tagsQuery = useQuery([TAGS_QUERY_KEY], TagsAPI.getAllTags, {
     onError: () => {
       toast.error("Unable to fetch the tags, please try again.");
     },
   });
   const tags = tagsQuery.data;
+
+  const isLoading =
+    categoriesQuery.isLoading ||
+    tagsQuery.isLoading ||
+    queryClient.isFetching([PRODUCTS_QUERY_KEY]);
+
+  const handleRefresh = () => {
+    queryClient.invalidateQueries[PRODUCTS_QUERY_KEY];
+
+    queryClient.refetchQueries(PRODUCTS_QUERY_KEY);
+    categoriesQuery.refetch();
+    tagsQuery.refetch();
+  };
 
   return (
     <div className="mb-6 mt-12 flex gap-6">
@@ -124,7 +142,7 @@ const InventoryFilters = ({
           value={searchText}
           onValueChange={setSearchText}
           type="text"
-          isLoading={categoriesQuery.isLoading || tagsQuery.isLoading}
+          isLoading={isLoading}
         />
 
         {/* ------- Refresh Button --------- */}
@@ -132,19 +150,9 @@ const InventoryFilters = ({
           <Button
             size="sm"
             variant="flat"
-            onPress={() => {
-              queryClient.invalidateQueries["products"];
-              queryClient.refetchQueries("products");
-
-              categoriesQuery.refetch();
-              tagsQuery.refetch();
-            }}
+            onPress={handleRefresh}
             className="h-full"
-            isDisabled={
-              categoriesQuery.isFetching ||
-              tagsQuery.isFetching ||
-              queryClient.isFetching(["products"])
-            }
+            isDisabled={isLoading}
           >
             <RotateCcw />
           </Button>
