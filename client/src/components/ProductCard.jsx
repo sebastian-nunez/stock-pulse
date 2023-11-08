@@ -68,7 +68,7 @@ const ProductCard = ({ product }) => {
             size="sm"
             color="primary"
             variant="flat"
-            radius="sm"
+            radius="full"
             className="duration-500 ease-in-out hover:scale-105"
             onPress={() => {
               setSelectedAction(Action.UPDATE);
