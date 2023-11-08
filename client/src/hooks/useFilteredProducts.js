@@ -35,12 +35,12 @@ export const useFilteredProducts = (
           const normalizedSearchText = searchText
             .trim()
             .toLowerCase()
-            .replace(/\s+/g, ""); // remove all whitespace, so "air max" can match with "airmax"
+            .replace(/(\s+|\.+)/g, ""); // remove all whitespace and periods, so "air max g.t." can match with "airmaxgt"
 
           const normalizedProductName = product.name
             .trim()
             .toLowerCase()
-            .replace(/\s+/g, ""); // remove all whitespace
+            .replace(/(\s+|\.+)/g, ""); // remove all whitespace
 
           return normalizedProductName.includes(normalizedSearchText);
         })
