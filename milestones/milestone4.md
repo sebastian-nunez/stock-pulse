@@ -17,6 +17,12 @@ This unit, be sure to complete all tasks listed below. To complete a task, place
 
 ![Product Grid Demo](../demos/stock-pulse-product-grid-1.gif)
 
+### Filtering Capabilities
+
+> Users are able to filter items by their, related tags, and category.
+
+![Product Filtering Demo](../demos/stock-pulse-product-filtering-1.gif)
+
 ### Responsive Design & Accessibility
 
 > StockPulse was design with a responsive architecture while following the latest WAI-ARIA accessability standards to accommodate a mobile and desktop experience.
