@@ -9,8 +9,7 @@ import {
 } from "@nextui-org/react";
 import { Save, Trash } from "lucide-react";
 import { toast } from "react-hot-toast";
-import { useMutation, useQueryClient } from "react-query";
-import ProductsAPI from "../services/ProductsAPI";
+import useProducts from "../hooks/useProducts";
 import ProductDetailsForm from "./ProductDetailsForm";
 
 const ProductEditableModal = ({
@@ -20,44 +19,13 @@ const ProductEditableModal = ({
   isOpen,
   onOpenChange,
 }) => {
+  // state
   const productId = product?.product_id || null;
 
   // react-query
-  const queryClient = useQueryClient();
-
-  const deleteProduct = useMutation(ProductsAPI.deleteProduct, {
-    onSuccess: (response) => {
-      queryClient.invalidateQueries(["products"]);
-
-      const productName = response.deletedProduct.name;
-      toast.success(`${productName} successfully deleted!`);
-
-      // close the modal
-      onOpenChange();
-    },
-  });
-
-  const updateProduct = useMutation(ProductsAPI.updateProduct, {
-    onSuccess: (response) => {
-      queryClient.invalidateQueries(["products"]);
-
-      const productName = response.updatedProduct.name;
-      toast.success(`${productName} successfully updated!`);
-
-      // close the modal (keep the state of the form)
-      onOpenChange();
-    },
-  });
-
-  const createProduct = useMutation(ProductsAPI.createProduct, {
-    onSuccess: (response) => {
-      queryClient.invalidateQueries(["products"]);
-
-      const productName = response.createdProduct.name;
-      toast.success(`${productName} successfully created!`);
-
-      // close the modal
-      onOpenChange();
+  const { createProduct, updateProduct, deleteProduct } = useProducts({
+    onSuccessAction: () => {
+      onOpenChange(); // close the modal
     },
   });
 
@@ -75,7 +43,7 @@ const ProductEditableModal = ({
     deleteProduct.mutate(product.product_id);
   };
 
-  const handleSave = (productDetails) => {
+  const handleSave = async (productDetails) => {
     // if the product has an id, it means it's an existing product
     if (productId) {
       // add the product id to the product details
