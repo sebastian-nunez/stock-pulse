@@ -93,6 +93,12 @@
 
 ![Responsive Design Demo](demos/stock-pulse-responsive-2.gif)
 
+### Loading Skeletons
+
+> We've implemented loading skeletons to maximize UX and give users as much feedback as possible.
+
+![Loading Skeletons Demo](demos/../stock-pulse-product-grid-loading-skeleton.gif)
+
 ## End-to-End API Validation
 
 > All API endpoints validate their data and send helpful error messages back to the client.
