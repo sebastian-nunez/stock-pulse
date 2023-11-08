@@ -109,23 +109,23 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                     <InfoPanel title="Notes">
                       <p>{product?.notes}</p>
                     </InfoPanel>
+
+                    {/* ------------------- TAGS ------------------- */}
+                    <InfoPanel title="Tags">
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {product?.tags.map((tag, index) => {
+                          return (
+                            <Chip key={tag + index} color="primary">
+                              {tag}
+                            </Chip>
+                          );
+                        })}
+                      </div>
+                    </InfoPanel>
                   </div>
                 ) : (
                   <div>No product details available!</div>
                 )}
-
-                {/* ------------------- TAGS ------------------- */}
-                <InfoPanel title="Tags">
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {product?.tags.map((tag, index) => {
-                      return (
-                        <Chip key={tag + index} color="primary">
-                          {tag}
-                        </Chip>
-                      );
-                    })}
-                  </div>
-                </InfoPanel>
               </ModalBody>
 
               <ModalFooter>
