@@ -29,6 +29,7 @@ const ProductEditableModal = ({
     },
   });
 
+  // determine if the product is loading
   const isLoading =
     deleteProduct.isLoading ||
     updateProduct.isLoading ||
@@ -58,7 +59,7 @@ const ProductEditableModal = ({
     }
   };
 
-  const getModalBody = () => {
+  const renderModalBody = () => {
     if (!product) {
       return <div>No product details available!</div>;
     }
@@ -87,7 +88,7 @@ const ProductEditableModal = ({
               </ModalHeader>
 
               {/* -------------------- Body -------------------- */}
-              <ModalBody>{getModalBody()}</ModalBody>
+              <ModalBody>{renderModalBody()}</ModalBody>
 
               {/* -------------------- Footer -------------------- */}
               <ModalFooter className="flex justify-between">
