@@ -53,11 +53,15 @@ const InventoryFilters = ({
     queryClient.isFetching([PRODUCTS_QUERY_KEY]);
 
   const handleRefresh = () => {
-    queryClient.invalidateQueries[PRODUCTS_QUERY_KEY];
-
+    // refetch the products
     queryClient.refetchQueries(PRODUCTS_QUERY_KEY);
     categoriesQuery.refetch();
     tagsQuery.refetch();
+
+    // reset the filters
+    setSelectedCategory(null);
+    setSelectedTags([]);
+    setSearchText("");
   };
 
   const handleChipClose = (tagToRemove) => {
