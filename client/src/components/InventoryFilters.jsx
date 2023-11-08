@@ -76,6 +76,7 @@ const InventoryFilters = ({
       {/* ------- Category --------- */}
       <div className="sm:w-1/3">
         <Select
+          aria-label="Select a category"
           size="lg"
           variant="bordered"
           placeholder="Select a category"
@@ -104,6 +105,7 @@ const InventoryFilters = ({
       {/* ------- Tags --------- */}
       <div className="sm:w-1/3">
         <Select
+          aria-label="Select a tag"
           placeholder="Select tags"
           items={tags}
           size="lg"
@@ -157,6 +159,7 @@ const InventoryFilters = ({
       <div className="flex gap-3 sm:w-1/3">
         {/* ------- Search Text --------- */}
         <Input
+          aria-label="Search Text"
           placeholder="Search"
           size="lg"
           labelPlacement="outside"
