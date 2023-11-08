@@ -1,12 +1,7 @@
 import ProductCard from "./ProductCard";
 
 const ProductGrid = ({ products }) => {
-  // TODO: implement a proper loading component/skeleton
-  if (!products) {
-    return <div>Loading...</div>;
-  }
-
-  if (products?.length === 0) {
+  if (!products || products?.length === 0) {
     return (
       <div className="p-6 text-center text-lg tracking-tight">
         No results found.

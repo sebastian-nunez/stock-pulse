@@ -57,7 +57,7 @@ const Inventory = () => {
       <div className="mx-break-out min-h-screen bg-neutral-50">
         {/* Change the full width background color */}
         <div className="container">
-          {productsQuery.isLoading ? (
+          {productsQuery.isLoading || !filteredProducts ? (
             <div className="flex h-80 items-center justify-center">
               {/* TODO: create a proper loading skeleton */}
               <Spinner size="lg" color="primary" label="Loading..." />
