@@ -25,7 +25,31 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
 
               <ModalBody>
                 {product ? (
-                  JSON.stringify(product)
+                  <div>
+                <img src={product.image} alt={product.name} />
+                <h2>Name: {product.name}</h2>
+                <p>Brand: {product.brand}</p>
+                <p>Description: {product.description}</p>
+                <p>Price: ${product.price}</p>
+                <p>Quantity: {product.quantity}</p>
+                <p>Price: {product.price}</p>
+                <p>Category: {product.category}</p>
+                <p>
+                  Tags:{" "}
+                  {product.tags && product.tags.length > 0
+                    ? product.tags.join(", ")
+                    : "No tags"}
+                </p>
+                <p>Date Added: {product.date_added}</p>
+                <p>
+                  Available:{" "}
+                  {JSON.parse(product.is_available) ? "true" : "false"}
+                </p>
+                <p>Weight: {product.weight}</p>
+                <p>Dimensions: {product.dimensions}</p>
+                <p>Warranty Info: {product.warranty_info}</p>
+                <p>Notes: {product.notes}</p>
+                </div>
                 ) : (
                   <div>No product details available!</div>
                 )}
