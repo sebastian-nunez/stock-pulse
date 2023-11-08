@@ -17,6 +17,12 @@ This unit, be sure to complete all tasks listed below. To complete a task, place
 
 ![Product Grid Demo](../demos/stock-pulse-product-grid-1.gif)
 
+### Product Details
+
+> Users are able to see an individual product's full details via a responsive modal
+
+![Product Details Demo](../demos/stock-pulse-product-details-1.gif)
+
 ### Filtering Capabilities
 
 > Users are able to filter items by their, related tags, and category.

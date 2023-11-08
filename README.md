@@ -58,7 +58,7 @@
   - [ ] Login via OAuth using GitHub
 
 - **Inventory Control:**
-  - [ ] Monitor product quantities and make adjustments as needed.
+  - [x] Monitor product quantities and make adjustments as needed.
   - [ ] Receive low-stock alerts for timely restocking.
 
 ## Demos
@@ -81,11 +81,23 @@
 
 ![Product Filtering Demo](demos/stock-pulse-product-filtering-1.gif)
 
+### Product Details
+
+> Users are able to see an individual product's full details via a responsive modal
+
+![Product Details Demo](demos/stock-pulse-product-details-1.gif)
+
 ### Responsive Design & Accessibility
 
 > StockPulse was design with a responsive architecture while following the latest WAI-ARIA accessability standards to accommodate a mobile and desktop experience.
 
 ![Responsive Design Demo](demos/stock-pulse-responsive-2.gif)
+
+### Loading Skeletons
+
+> We've implemented loading skeletons to maximize UX and give users as much feedback as possible.
+
+![Loading Skeletons Demo](demos/../stock-pulse-product-grid-loading-skeleton.gif)
 
 ## End-to-End API Validation
 

@@ -42,7 +42,7 @@ export const productData = [
     category_id: 2
   },
   {
-    name: "Nike G.T. Hustle 2",
+    name: "G.T. Hustle 2",
     brand: "Nike",
     description: "Nike G.T. Hustle 2 Men's Basketball Shoes",
     image:
@@ -98,7 +98,7 @@ export const productData = [
     category_id: 2
   },
   {
-    name: "Nike Dunk Mid Premium",
+    name: "Dunk Mid Premium",
     brand: "Nike",
     description: "Nike Dunk Mid Premium Men's Shoes",
     image:
@@ -113,7 +113,7 @@ export const productData = [
     category_id: 1
   },
   {
-    name: "Nike Air Force 1 '07 Premium",
+    name: "Air Force 1 '07 Premium",
     brand: "Nike",
     description: "Nike Air Force 1 '07 Premium Men's Shoes",
     image:
@@ -127,7 +127,7 @@ export const productData = [
     category_id: 1
   },
   {
-    name: "Nike Vomero 17",
+    name: "Vomero 17",
     brand: "Nike",
     description: "Nike Vomero 17 Men's Road Running Shoes",
     image:
@@ -141,7 +141,7 @@ export const productData = [
     category_id: 3
   },
   {
-    name: "Nike Invincible 3",
+    name: "Invincible 3",
     brand: "Nike",
     description: "Nike Invincible 3 Men's Road Running Shoes",
     image:
@@ -211,7 +211,7 @@ export const productData = [
     category_id: 1
   },
   {
-    name: "Nike Dunk Low Retro BG",
+    name: "Dunk Low Retro BG",
     brand: "Nike",
     description: "Nike Dunk Low Retro Men's Shoes",
     image:
@@ -225,7 +225,7 @@ export const productData = [
     category_id: 1
   },
   {
-    name: "Nike Dunk Low Retro",
+    name: "Dunk Low Retro",
     brand: "Nike",
     description: "Nike Dunk Low Retro Men's Shoes",
     image:
@@ -239,7 +239,7 @@ export const productData = [
     category_id: 2
   },
   {
-    name: "Nike P-6000 Premium",
+    name: "P-6000 Premium",
     brand: "Nike",
     description: "Nike P-6000 Premium Shoes",
     image:
@@ -253,7 +253,7 @@ export const productData = [
     category_id: 2
   },
   {
-    name: "Nike Air Max 2013",
+    name: "Air Max 2013",
     brand: "Nike",
     description: "Nike Air Max 2013 Men's Shoes",
     image:
@@ -267,7 +267,7 @@ export const productData = [
     category_id: 2
   },
   {
-    name: "Nike Air Max Pulse Roam",
+    name: "Air Max Pulse Roam",
     brand: "Nike",
     description: "Nike Air Max Pulse Roam Men's Shoes",
     image:
@@ -279,5 +279,145 @@ export const productData = [
     dimensions: "12 x 6 x 4",
     warranty_info: "Four-year limited warranty",
     category_id: 2
+  },
+  {
+    name: "Ultraboost Light",
+    brand: "Adidas",
+    description: "Ultraboost Light Running Shoes",
+    image:
+      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/dc11ff18edbc4c0898a93fbe445e85d9_9366/ultraboost-light-running-shoes.jpg",
+    quantity: 17,
+    price: 170,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 4
+  },
+  {
+    name: "Ultraboost Heavy",
+    brand: "Adidas",
+    description: "Ultraboost Light Running Shoes",
+    image:
+      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/7f50f0848e1f4e3f9dce0d3ba97ad535_9366/ultraboost-light-running-shoes.jpg",
+    quantity: 17,
+    price: 170,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 4
+  },
+  {
+    name: "Ultraboost 1.0",
+    brand: "Adidas",
+    description: "Ultraboost 1.0 Shoes",
+    image:
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d44fa06fc83f4644b7e8acbc01160e1b_9366/NMD_R1_Shoes_Black_GZ9258_01_standard.jpg",
+    quantity: 17,
+    price: 152,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 4
+  },
+  {
+    name: "NMD_R1",
+    brand: "Adidas",
+    description: "NMD_R1 Shoes",
+    image:
+      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/49e3b5e0369142ee840c3b726c96c8a4_9366/nmd_r1-shoes.jpg",
+    quantity: 17,
+    price: 75,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 4
+  },
+  {
+    name: "NMD_R3 V3",
+    brand: "Adidas",
+    description: "NMD_R3 V3 Shoes",
+    image:
+      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/49e3b5e0369142ee840c3b726c96c8a4_9366/nmd_r1-shoes.jpg",
+    quantity: 17,
+    price: 75,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 3
+  },
+  {
+    name: "Stella McCartney",
+    brand: "Adidas",
+    description: "Stella McCartney Shoes",
+    image:
+      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/b8693cedf7e24812b835af8e0107dd68_9366/adidas-by-stella-mccartney-ultraboost-light-shoes.jpg",
+    quantity: 17,
+    price: 75,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 4
+  },
+  {
+    name: "Retrophy 5",
+    brand: "Adidas",
+    description: "Retrophy 5 Shoes",
+    image:
+      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/bd12e628eb824cbe93f8079879050da6_9366/retropy-e5-shoes.jpg",
+    quantity: 17,
+    price: 75,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 4
+  },
+  {
+    name: "NMD_R3 V1",
+    brand: "Adidas",
+    description: "NMD_R3 V1 Shoes",
+    image:
+      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/bd12e628eb824cbe93f8079879050da6_9366/retropy-e5-shoes.jpg",
+    quantity: 17,
+    price: 75,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 2
+  },
+  {
+    name: "Pureboost 23",
+    brand: "Adidas",
+    description: "The latest Pureboost 23 Shoes by Adidas",
+    image:
+      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/5f925d83b3ea43c0bdc84d7b1900ea03_9366/pureboost-23-running-shoes.jpg",
+    quantity: 17,
+    price: 75,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 1
+  },
+  {
+    name: "Terex Free",
+    brand: "Adidas",
+    description: "The latest Terex Free 23 Shoes by Adidas",
+    image:
+      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/e8ca8e23970e4d18a39ae1078c65c586_9366/terrex-free-hiker-2.0-low-gore-tex-hiking-shoes.jpg",
+    quantity: 17,
+    price: 75,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 3
   }
 ];

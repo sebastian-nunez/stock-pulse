@@ -1,9 +1,9 @@
-import { Spinner } from "@nextui-org/react";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import ErrorCard from "../components/ErrorCard";
 import InventoryFilters from "../components/InventoryFilters";
 import ProductGrid from "../components/ProductGrid";
+import ProductGridSkeleton from "../components/skeletons/ProductGridSkeleton";
 import { useFilteredProducts } from "../hooks/useFilteredProducts";
 import ProductsAPI from "../services/ProductsAPI";
 
@@ -50,10 +50,7 @@ const Inventory = () => {
         {/* Change the full width background color */}
         <div className="container">
           {productsQuery.isLoading || !filteredProducts ? (
-            <div className="flex h-80 items-center justify-center">
-              {/* TODO: create a proper loading skeleton */}
-              <Spinner size="lg" color="primary" label="Loading..." />
-            </div>
+            <ProductGridSkeleton />
           ) : (
             <ProductGrid products={filteredProducts} />
           )}
