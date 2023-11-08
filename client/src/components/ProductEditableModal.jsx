@@ -24,9 +24,6 @@ const ProductEditableModal = ({
 
   // react-query
   const queryClient = useQueryClient();
-  const isLoading =
-    queryClient.isMutating(["products"]) ||
-    queryClient.isFetching(["tags", "categories", "products"]); // handle the loading states
 
   const deleteProduct = useMutation(ProductsAPI.deleteProduct, {
     onSuccess: (response) => {
@@ -64,6 +61,11 @@ const ProductEditableModal = ({
     },
   });
 
+  const isLoading =
+    deleteProduct.isLoading ||
+    updateProduct.isLoading ||
+    createProduct.isLoading;
+
   const handleDelete = () => {
     if (!product.product_id) {
       toast.error("Product does not have a valid ID, unable to delete!");
@@ -88,6 +90,18 @@ const ProductEditableModal = ({
     }
   };
 
+  const getModalBody = () => {
+    if (!product) {
+      return <div>No product details available!</div>;
+    }
+
+    if (isLoading) {
+      return <Spinner size="md" color="primary" label="Loading..." />;
+    } else {
+      return <ProductDetailsForm product={product} onSubmit={handleSave} />;
+    }
+  };
+
   return (
     <>
       <Modal
@@ -105,13 +119,7 @@ const ProductEditableModal = ({
               </ModalHeader>
 
               {/* -------------------- Body -------------------- */}
-              <ModalBody>
-                {isLoading ? (
-                  <Spinner size="md" color="primary" label="Loading..." />
-                ) : (
-                  <ProductDetailsForm product={product} onSubmit={handleSave} />
-                )}
-              </ModalBody>
+              <ModalBody>{getModalBody()}</ModalBody>
 
               {/* -------------------- Footer -------------------- */}
               <ModalFooter className="flex justify-between">
@@ -122,7 +130,7 @@ const ProductEditableModal = ({
                       color="danger"
                       startContent={<Trash />}
                       onClick={handleDelete}
-                      isDisabled={isLoading}
+                      isDisabled={isLoading || !product}
                     >
                       Delete
                     </Button>
@@ -142,7 +150,7 @@ const ProductEditableModal = ({
                     className="w-36"
                     radius="sm"
                     startContent={<Save />}
-                    isDisabled={isLoading}
+                    isDisabled={isLoading || !product}
                   >
                     Save
                   </Button>

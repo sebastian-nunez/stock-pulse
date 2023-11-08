@@ -23,7 +23,13 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                 Product Details
               </ModalHeader>
 
-              <ModalBody>{JSON.stringify(product)}</ModalBody>
+              <ModalBody>
+                {product ? (
+                  JSON.stringify(product)
+                ) : (
+                  <div>No product details available!</div>
+                )}
+              </ModalBody>
 
               <ModalFooter>
                 <Button color="danger" onPress={onClose} radius="sm">
