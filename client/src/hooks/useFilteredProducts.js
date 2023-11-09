@@ -21,8 +21,15 @@ export const useFilteredProducts = (
       const filterProducts = products
         ?.filter((product) => {
           // filter by category
+
+          // no category or any category is selected -> return all products
           if (!selectedCategory || selectedCategory === ANY_CATEGORY) {
             return true;
+          }
+
+          // product has no category -> filter it out
+          if (selectedCategory && !product?.category) {
+            return false;
           }
 
           return (
