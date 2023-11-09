@@ -63,6 +63,24 @@
 
 ## Demos
 
+### Product Management Modals
+
+> Input forms are fully validated before submission including user-friendly error messages and hints. Error and success notifications are displayed.
+
+![Product Modal Demo](demos/playground-product-modals-2.gif)
+
+### Product Inventory Grid
+
+> Within the Inventory view, users will be able to see the most relevant details about a product. Also, they're able to click on an item and expand all it's details; moreover, users can edit an item.
+
+![Product Grid Demo](demos/stock-pulse-product-grid-1.gif)
+
+### Filtering Capabilities
+
+> Users are able to filter items by their, related tags, and category.
+
+![Product Filtering Demo](demos/stock-pulse-product-filtering-1.gif)
+
 ### Product Details
 
 > Users are able to see an individual product's full details via a responsive modal
@@ -75,35 +93,11 @@
 
 ![Responsive Design Demo](demos/stock-pulse-responsive-2.gif)
 
-### Product Management Modals
-
-> Input forms are fully validated before submission including user-friendly error messages and hints. Error and success notifications are displayed.
-
-![Product Modal Demo](demos/playground-product-modals-2.gif)
-
-### Inventory Pagination
-
-> Users are able to scroll through different pages of products
-
-![Pagination Demo](demos/stock-pulse-pagination-1.gif)
-
 ### Loading Skeletons
 
 > We've implemented loading skeletons to maximize UX and give users as much feedback as possible.
 
-![Loading Skeletons Demo](demos/stock-pulse-product-grid-loading-skeleton.gif)
-
-### Filtering Capabilities
-
-> Users are able to filter items by their, related tags, and category.
-
-![Product Filtering Demo](demos/stock-pulse-product-filtering-1.gif)
-
-### Product Inventory Grid
-
-> Within the Inventory view, users will be able to see the most relevant details about a product. Also, they're able to click on an item and expand all it's details; moreover, users can edit an item.
-
-![Product Grid Demo](demos/stock-pulse-product-grid-1.gif)
+![Loading Skeletons Demo](demos/../stock-pulse-product-grid-loading-skeleton.gif)
 
 ## End-to-End API Validation
 
