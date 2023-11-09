@@ -1,6 +1,5 @@
-import { Button, Code, Image, useDisclosure } from "@nextui-org/react";
+import { Button, Code, useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
-import toast from "react-hot-toast";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
 import { ProductCardSkeleton } from "./skeletons/ProductGridSkeleton";
@@ -30,7 +29,7 @@ const ProductCard = ({ product, isLoading = false }) => {
   return (
     <>
       <div
-        className="transform rounded-xl border bg-white p-8 drop-shadow transition duration-250 ease-in-out  hover:scale-105 hover:cursor-pointer"
+        className="transform rounded-xl border bg-white p-8 drop-shadow transition duration-250 ease-in-out  hover:scale-[1.025] hover:cursor-pointer"
         onClick={() => {
           setSelectedAction(Action.VIEW);
           onOpen();
@@ -39,16 +38,13 @@ const ProductCard = ({ product, isLoading = false }) => {
         {/* ------------------- Image ------------------- */}
         <div className="flex h-fit items-center justify-center">
           {product?.image ? (
-            <Image
+            <img
               src={product?.image}
               alt={product?.name}
-              className="h-60 w-80 object-cover object-center md:w-96"
-              onError={() =>
-                toast.error("Failed to load image for " + product?.name)
-              }
+              className="h-60 w-80 rounded-xl object-cover object-center md:w-96"
             />
           ) : (
-            <div className="flex h-60 w-full items-center justify-center rounded-lg border drop-shadow-sm">
+            <div className="flex h-60 w-full items-center justify-center rounded-xl border drop-shadow-sm">
               No image available.
             </div>
           )}
