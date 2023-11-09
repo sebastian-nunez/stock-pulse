@@ -8,7 +8,7 @@ import { PRODUCTS_QUERY_KEY } from "../utils/constants";
  * @param {Function} onSuccessAction callback function to execute after a successful action
  * @returns {Object} deleteProduct, updateProduct, createProduct
  */
-const useProducts = ({ onSuccessAction }) => {
+const useProducts = ({ onSuccessAction = () => {} }) => {
   // react-query
   const queryClient = useQueryClient();
 

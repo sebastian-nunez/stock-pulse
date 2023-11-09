@@ -8,7 +8,7 @@ import { TAGS_QUERY_KEY } from "../utils/constants";
  * @param {Function} onSuccessAction callback function to execute after a successful action
  * @returns {Object} deleteTag, updateTag, createTag
  */
-const useTags = ({ onSuccessAction }) => {
+const useTags = ({ onSuccessAction = () => {} }) => {
   // react-query
   const queryClient = useQueryClient();
 
