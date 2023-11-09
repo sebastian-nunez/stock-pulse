@@ -22,3 +22,4 @@ export const TAG_STALE_TIME_MILLISECONDS = get_milliseconds_from_minutes(30);
 
 // --------------- misc ---------------
 export const PRODUCTS_PER_PAGE = 18;
+export const DEFAULT_ROWS_PER_PAGE = 5;
