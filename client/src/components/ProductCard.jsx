@@ -29,7 +29,7 @@ const ProductCard = ({ product, isLoading = false }) => {
   return (
     <>
       <div
-        className="transform rounded-xl border bg-white p-8 drop-shadow transition duration-250 ease-in-out  hover:scale-105 hover:cursor-pointer"
+        className="transform rounded-xl border bg-white p-8 drop-shadow transition duration-250 ease-in-out  hover:scale-[1.025] hover:cursor-pointer"
         onClick={() => {
           setSelectedAction(Action.VIEW);
           onOpen();
