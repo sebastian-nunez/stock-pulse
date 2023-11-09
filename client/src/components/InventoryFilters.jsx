@@ -1,6 +1,7 @@
 import {
   Button,
   Chip,
+  Divider,
   Input,
   Select,
   SelectItem,
@@ -72,117 +73,125 @@ const InventoryFilters = ({
   };
 
   return (
-    <div className="mb-6 mt-6 flex flex-col gap-3 px-6 sm:flex-row sm:gap-6 sm:px-0">
-      {/* ------- Category --------- */}
-      <div className="sm:w-1/3">
-        <Select
-          aria-label="Select a category"
-          size="lg"
-          variant="bordered"
-          placeholder="Select a category"
-          selectedKeys={selectedCategory ? [selectedCategory] : []}
-          labelPlacement="outside"
-          onSelectionChange={(object) => setSelectedCategory(object.currentKey)}
-          isDisabled={categoriesQuery.isError}
-          isLoading={categoriesQuery.isLoading}
-        >
-          <SelectItem key={ANY_CATEGORY} value={ANY_CATEGORY}>
-            {ANY_CATEGORY}
-          </SelectItem>
+    <div className="my-3 px-6 sm:px-0">
+      <h1 className="text-xl font-bold tracking-tight">Filters</h1>
 
-          {categories?.map((category) => (
-            <SelectItem
-              key={category.name}
-              value={category.name}
-              textValue={category.name}
-            >
-              {category.name}
+      <Divider className="mb-3" />
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
+        {/* ------- Category --------- */}
+        <div className="sm:w-1/3">
+          <Select
+            aria-label="Select a category"
+            size="lg"
+            variant="bordered"
+            placeholder="Select a category"
+            selectedKeys={selectedCategory ? [selectedCategory] : []}
+            labelPlacement="outside"
+            onSelectionChange={(object) =>
+              setSelectedCategory(object.currentKey)
+            }
+            isDisabled={categoriesQuery.isError}
+            isLoading={categoriesQuery.isLoading}
+          >
+            <SelectItem key={ANY_CATEGORY} value={ANY_CATEGORY}>
+              {ANY_CATEGORY}
             </SelectItem>
-          ))}
-        </Select>
-      </div>
 
-      {/* ------- Tags --------- */}
-      <div className="sm:w-1/3">
-        <Select
-          aria-label="Select a tag"
-          placeholder="Select tags"
-          items={tags}
-          size="lg"
-          selectedKeys={selectedTags}
-          variant="bordered"
-          labelPlacement="outside"
-          isMultiline={true}
-          selectionMode="multiple"
-          isDisabled={tagsQuery.isError}
-          isLoading={tagsQuery.isLoading}
-          onChange={
-            // convert comma-separated string to array of strings
-            (e) => {
-              const selectedTags = e.target.value;
+            {categories?.map((category) => (
+              <SelectItem
+                key={category.name}
+                value={category.name}
+                textValue={category.name}
+              >
+                {category.name}
+              </SelectItem>
+            ))}
+          </Select>
+        </div>
 
-              if (selectedTags?.length > 0) {
-                setSelectedTags(selectedTags.split(","));
-              } else {
-                setSelectedTags([]);
+        {/* ------- Tags --------- */}
+        <div className="sm:w-1/3">
+          <Select
+            aria-label="Select a tag"
+            placeholder="Select tags"
+            items={tags}
+            size="lg"
+            selectedKeys={selectedTags}
+            variant="bordered"
+            labelPlacement="outside"
+            isMultiline={true}
+            selectionMode="multiple"
+            isDisabled={tagsQuery.isError}
+            isLoading={tagsQuery.isLoading}
+            onChange={
+              // convert comma-separated string to array of strings
+              (e) => {
+                const selectedTags = e.target.value;
+
+                if (selectedTags?.length > 0) {
+                  setSelectedTags(selectedTags.split(","));
+                } else {
+                  setSelectedTags([]);
+                }
               }
             }
-          }
-          renderValue={(selectedItems) => {
-            // selected tags as chips
-            return (
-              <div className="flex flex-wrap gap-2">
-                {selectedItems?.map((item) => (
-                  <Chip
-                    key={item.key}
-                    size="md"
-                    color="primary"
-                    onClose={() => handleChipClose(item)}
-                    className="my-1"
-                  >
-                    {item.key}
-                  </Chip>
-                ))}
-              </div>
-            );
-          }}
-        >
-          {/* Tag options */}
-          {tags?.map((tag) => (
-            <SelectItem key={tag.name} textValue={tag.name}>
-              {tag.name}
-            </SelectItem>
-          ))}
-        </Select>
-      </div>
-
-      <div className="flex gap-3 sm:w-1/3">
-        {/* ------- Search Text --------- */}
-        <Input
-          aria-label="Search Text"
-          placeholder="Search"
-          size="lg"
-          labelPlacement="outside"
-          variant="bordered"
-          isClearable
-          value={searchText}
-          onValueChange={setSearchText}
-          type="text"
-          isLoading={isLoading}
-        />
-
-        {/* ------- Refresh Button --------- */}
-        <Tooltip content="Refresh">
-          <Button
-            size="sm"
-            variant="flat"
-            onPress={handleRefresh}
-            isDisabled={isLoading}
-            className="h-12"
+            renderValue={(selectedItems) => {
+              // selected tags as chips
+              return (
+                <div className="flex flex-wrap gap-2">
+                  {selectedItems?.map((item) => (
+                    <Chip
+                      key={item.key}
+                      size="md"
+                      color="primary"
+                      onClose={() => handleChipClose(item)}
+                      className="my-1"
+                    >
+                      {item.key}
+                    </Chip>
+                  ))}
+                </div>
+              );
+            }}
           >
-            <RotateCcw />
-          </Button>
-        </Tooltip>
+            {/* Tag options */}
+            {tags?.map((tag) => (
+              <SelectItem key={tag.name} textValue={tag.name}>
+                {tag.name}
+              </SelectItem>
+            ))}
+          </Select>
+        </div>
+
+        <div className="flex gap-3 sm:w-1/3">
+          {/* ------- Search Text --------- */}
+          <Input
+            aria-label="Search Text"
+            placeholder="Search"
+            size="lg"
+            labelPlacement="outside"
+            variant="bordered"
+            isClearable
+            value={searchText}
+            onValueChange={setSearchText}
+            type="text"
+            isLoading={isLoading}
+          />
+
+          {/* ------- Refresh Button --------- */}
+          <Tooltip content="Refresh">
+            <Button
+              size="sm"
+              variant="flat"
+              onPress={handleRefresh}
+              isDisabled={isLoading}
+              className="h-12"
+            >
+              <RotateCcw />
+            </Button>
+          </Tooltip>
+        </div>
       </div>
     </div>
   );
