@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Hook for managing pagination logic.
@@ -25,6 +25,13 @@ export const usePagination = (totalItems, itemsPerPage) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, left: 0, behavior: "instant" }); // scroll to top of page
   };
+
+  // if current page is greater than number of pages, set current page to 1
+  useEffect(() => {
+    if (currentPage > numberOfPages) {
+      setCurrentPage(1);
+    }
+  }, [currentPage, numberOfPages]);
 
   return {
     currentPage,
