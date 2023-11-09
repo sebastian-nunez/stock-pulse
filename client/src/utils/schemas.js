@@ -47,7 +47,8 @@ export const productSchema = z.object({
   category: z
     .string("Product category is required!")
     .min(2, "Product category must be at least 2 characters")
-    .max(25, "Product category must be less than 25 characters"),
+    .max(25, "Product category must be less than 25 characters")
+    .nullable(),
   tags: z.array(z.string()).default([]),
 });
 
