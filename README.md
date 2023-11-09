@@ -89,9 +89,15 @@
 
 ### Loading Skeletons & Error Handling
 
-> We've implemented loading skeletons to maximize UX and give users as much feedback as possible.
+> We've implemented loading skeletons to maximize UX and give users as much feedback as possible. Moreover, we've implemented extensive error handling through messages, modals, and cards.
 
 ![Loading Skeletons Demo](demos/stock-pulse-product-grid-loading-skeleton.gif)
+
+> _Loading Skeletons_
+
+![Error Handling Demo](demos/stock-pulse-error-handling.gif)
+
+> _Error Handling_
 
 ### Filtering Capabilities
 
