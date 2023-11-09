@@ -15,6 +15,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import ErrorCard from "../components/ErrorCard";
+import CategoryEditableModal from "../components/categories/CategoryEditableModal";
 import ProductDetailsModal from "../components/products/ProductDetailsModal";
 import { default as ProductEditableModal } from "../components/products/ProductEditableModal";
 import ProductsAPI from "../services/ProductsAPI";
@@ -220,6 +221,18 @@ const Playground = () => {
             <ProductDetailsModal
               product={product}
               isOpen={isOpen}
+              onOpenChange={onOpenChange}
+            />
+          )}
+
+        {/* Create a category */}
+        {selectedFilter === Filter.CATEGORY &&
+          selectedAction === Action.CREATE && (
+            <CategoryEditableModal
+              title="Add Category"
+              canDelete={false}
+              isOpen={isOpen}
+              category={null}
               onOpenChange={onOpenChange}
             />
           )}
