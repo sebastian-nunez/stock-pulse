@@ -80,23 +80,24 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                         <div className="flex flex-col gap-3 sm:flex-row">
                           <div className="flex flex-col sm:w-1/2">
                             <h2>
-                              <strong>Name:</strong> {product.name}
+                              <strong>Name:</strong> {product?.name}
                             </h2>
                             <p>
-                              <strong>Brand:</strong> {product.brand}
+                              <strong>Brand:</strong> {product?.brand}
                             </p>
                             <p>
-                              <strong>Category:</strong> {product.category}
+                              <strong>Category:</strong>{" "}
+                              {product?.category || "Unknown"}
                             </p>
                           </div>
 
                           <div className="flex flex-col sm:w-1/2">
                             <p>
-                              <strong>Price:</strong> ${product.price}
+                              <strong>Price:</strong> ${product?.price}
                             </p>
 
                             <p>
-                              <strong>Quantity:</strong> {product.quantity}
+                              <strong>Quantity:</strong> {product?.quantity}
                             </p>
 
                             <p>
@@ -108,7 +109,7 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                       </InfoPanel>
                       {/* ------------------- DESCRIPTION -------------------*/}
                       <InfoPanel title="Description">
-                        <p>{product.description}</p>
+                        <p>{product?.description}</p>
                       </InfoPanel>
 
                       {/* ------------------- MANUFACTURER ------------------- */}

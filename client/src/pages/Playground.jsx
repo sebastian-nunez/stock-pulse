@@ -14,10 +14,11 @@ import { Search, Users } from "lucide-react";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import ErrorCard from "../components/ErrorCard";
+import CategoryDetailsModal from "../components/categories/CategoryDetailsModal";
 import CategoryEditableModal from "../components/categories/CategoryEditableModal";
 import ProductDetailsModal from "../components/products/ProductDetailsModal";
-import { default as ProductEditableModal } from "../components/products/ProductEditableModal";
+import ProductEditableModal from "../components/products/ProductEditableModal";
+import CategoriesAPI from "../services/CategoriesAPI";
 import ProductsAPI from "../services/ProductsAPI";
 import UsersAPI from "../services/UsersAPI";
 
@@ -49,18 +50,23 @@ const Playground = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [selectedAction, setSelectedAction] = useState(null);
-  const [productId, setProductId] = useState(1);
+  const [id, setId] = useState(null);
 
-  const productByIdQuery = useQuery(["products", { productId }], () => {
+  const productByIdQuery = useQuery(["products", { id: id }], () => {
     // avoid fetching when productId is null
-    if (productId) {
-      return ProductsAPI.getProductById(productId);
+    if (id) {
+      return ProductsAPI.getProductById(id);
     }
   });
   const product = productByIdQuery.data;
 
-  const productsQuery = useQuery(["products"], ProductsAPI.getAllProducts);
-  const products = productsQuery.data;
+  const categoryByIdQuery = useQuery(["categories", { id }], () => {
+    // avoid fetching when  is null
+    if (id) {
+      return CategoriesAPI.getCategoryById(id);
+    }
+  });
+  const category = categoryByIdQuery.data;
 
   {
     /* --------------------------- Users ---------------------------*/
@@ -104,24 +110,6 @@ const Playground = () => {
     }));
   };
 
-  if (productByIdQuery.isError) {
-    return (
-      <ErrorCard
-        message={`Unable to fetch product with ID ${productId}`}
-        error={productByIdQuery.error?.message}
-      />
-    );
-  }
-
-  if (productsQuery.isError) {
-    return (
-      <ErrorCard
-        message={`Unable to fetch all products`}
-        error={productsQuery.error?.message}
-      />
-    );
-  }
-
   return (
     <>
       <h1 className="pb-6 text-center text-5xl font-extrabold tracking-tighter">
@@ -162,18 +150,20 @@ const Playground = () => {
             ))}
           </Select>
 
-          {/* Product ID Selector */}
-          {selectedFilter === Filter.PRODUCT &&
+          {/* ID Selector */}
+          {selectedFilter &&
             selectedAction &&
             selectedAction !== Action.CREATE && (
               <Input
-                defaultValue={productId}
-                label="Product ID"
+                defaultValue={id}
+                label="ID"
                 placeholder="1"
                 type="number"
                 variant="bordered"
                 size="sm"
-                onValueChange={(value) => setProductId(value)}
+                onValueChange={(value) => {
+                  setId(value);
+                }}
                 className="w-fit"
               />
             )}
@@ -233,6 +223,28 @@ const Playground = () => {
               canDelete={false}
               isOpen={isOpen}
               category={null}
+              onOpenChange={onOpenChange}
+            />
+          )}
+
+        {/* Update a category */}
+        {selectedFilter === Filter.CATEGORY &&
+          selectedAction === Action.UPDATE && (
+            <CategoryEditableModal
+              title="Edit Category"
+              canDelete={true}
+              isOpen={isOpen}
+              category={category}
+              onOpenChange={onOpenChange}
+            />
+          )}
+
+        {/* View a category */}
+        {selectedFilter === Filter.CATEGORY &&
+          selectedAction === Action.VIEW && (
+            <CategoryDetailsModal
+              category={category}
+              isOpen={isOpen}
               onOpenChange={onOpenChange}
             />
           )}
