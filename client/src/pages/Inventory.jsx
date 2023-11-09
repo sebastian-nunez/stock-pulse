@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import ErrorCard from "../components/ErrorCard";
 import InventoryFilters from "../components/InventoryFilters";
-import ProductGrid from "../components/ProductGrid";
+import ProductGrid from "../components/products/ProductGrid";
 import ProductGridSkeleton from "../components/skeletons/ProductGridSkeleton";
 import { useFilteredProducts } from "../hooks/useFilteredProducts";
 import ProductsAPI from "../services/ProductsAPI";

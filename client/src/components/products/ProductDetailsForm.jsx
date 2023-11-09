@@ -10,10 +10,10 @@ import {
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
-import CategoriesAPI from "../services/CategoriesAPI";
-import TagsAPI from "../services/TagsAPI";
-import { CATEGORIES_QUERY_KEY, TAGS_QUERY_KEY } from "../utils/constants";
-import { productSchema } from "../utils/schemas";
+import CategoriesAPI from "../../services/CategoriesAPI";
+import TagsAPI from "../../services/TagsAPI";
+import { CATEGORIES_QUERY_KEY, TAGS_QUERY_KEY } from "../../utils/constants";
+import { productSchema } from "../../utils/schemas";
 
 const ProductDetailsForm = ({ product, onSubmit }) => {
   // react-hook-form

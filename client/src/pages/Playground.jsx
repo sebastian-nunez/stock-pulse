@@ -15,8 +15,8 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import ErrorCard from "../components/ErrorCard";
-import ProductDetailsModal from "../components/ProductDetailsModal";
-import { default as ProductEditableModal } from "../components/ProductEditableModal";
+import ProductDetailsModal from "../components/products/ProductDetailsModal";
+import { default as ProductEditableModal } from "../components/products/ProductEditableModal";
 import ProductsAPI from "../services/ProductsAPI";
 import UsersAPI from "../services/UsersAPI";
 
