@@ -341,7 +341,7 @@ export const productData = [
     brand: "Adidas",
     description: "NMD_R3 V3 Shoes",
     image:
-      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/49e3b5e0369142ee840c3b726c96c8a4_9366/nmd_r1-shoes.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/caecb76d53cc4b1a9787f2e96dd44c04_9366/NMD_W1_Shoes_Brown_IE0251_06_standard.jpg",
     quantity: 17,
     price: 75,
     is_available: true,
@@ -355,7 +355,7 @@ export const productData = [
     brand: "Adidas",
     description: "Stella McCartney Shoes",
     image:
-      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/b8693cedf7e24812b835af8e0107dd68_9366/adidas-by-stella-mccartney-ultraboost-light-shoes.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/72995ea2d2194424b18caf8e0107a762_9366/adidas_by_Stella_McCartney_Ultraboost_Light_Shoes_Black_HQ8666_01_standard.jpg",
     quantity: 17,
     price: 75,
     is_available: true,
@@ -365,11 +365,11 @@ export const productData = [
     category_id: 4
   },
   {
-    name: "Retrophy 5",
+    name: "Retrophy E5",
     brand: "Adidas",
     description: "Retrophy 5 Shoes",
     image:
-      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/bd12e628eb824cbe93f8079879050da6_9366/retropy-e5-shoes.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/3275949756d447fe870cd106d1a58b8b_9366/Retropy_E5_Shoes_Beige_IE7728_06_standard.jpg",
     quantity: 17,
     price: 75,
     is_available: true,
@@ -397,7 +397,7 @@ export const productData = [
     brand: "Adidas",
     description: "The latest Pureboost 23 Shoes by Adidas",
     image:
-      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/5f925d83b3ea43c0bdc84d7b1900ea03_9366/pureboost-23-running-shoes.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/6d679fb7b15647ee97a687959adebad7_9366/Pureboost_23_Running_Shoes_Black_IF2375_06_standard.jpg",
     quantity: 17,
     price: 75,
     is_available: true,
@@ -411,7 +411,7 @@ export const productData = [
     brand: "Adidas",
     description: "The latest Terex Free 23 Shoes by Adidas",
     image:
-      "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/e8ca8e23970e4d18a39ae1078c65c586_9366/terrex-free-hiker-2.0-low-gore-tex-hiking-shoes.jpg",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/edf66dc6445448c08380cbd82d70ea1f_9366/Terrex_Free_Hiker_2.0_Low_GORE-TEX_Hiking_Shoes_Beige_IG5459_01_standard.jpg",
     quantity: 17,
     price: 75,
     is_available: true,

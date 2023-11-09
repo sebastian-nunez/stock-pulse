@@ -36,7 +36,7 @@ const ProductEditableModal = ({
     createProduct.isLoading;
 
   const handleDelete = () => {
-    if (!product.product_id) {
+    if (!product?.product_id) {
       toast.error("Product does not have a valid ID, unable to delete!");
       return;
     }
@@ -59,18 +59,6 @@ const ProductEditableModal = ({
     }
   };
 
-  const renderModalBody = () => {
-    if (!product) {
-      return <div>No product details available!</div>;
-    }
-
-    if (isLoading) {
-      return <Spinner size="md" color="primary" label="Loading..." />;
-    } else {
-      return <ProductDetailsForm product={product} onSubmit={handleSave} />;
-    }
-  };
-
   return (
     <>
       <Modal
@@ -88,7 +76,13 @@ const ProductEditableModal = ({
               </ModalHeader>
 
               {/* -------------------- Body -------------------- */}
-              <ModalBody>{renderModalBody()}</ModalBody>
+              <ModalBody>
+                {isLoading ? (
+                  <Spinner size="md" color="primary" label="Loading..." />
+                ) : (
+                  <ProductDetailsForm product={product} onSubmit={handleSave} />
+                )}
+              </ModalBody>
 
               {/* -------------------- Footer -------------------- */}
               <ModalFooter className="flex justify-between">
@@ -99,7 +93,7 @@ const ProductEditableModal = ({
                       color="danger"
                       startContent={<Trash />}
                       onClick={handleDelete}
-                      isDisabled={isLoading || !product}
+                      isDisabled={isLoading}
                     >
                       Delete
                     </Button>
@@ -119,7 +113,7 @@ const ProductEditableModal = ({
                     className="w-36"
                     radius="sm"
                     startContent={<Save />}
-                    isDisabled={isLoading || !product}
+                    isDisabled={isLoading}
                   >
                     Save
                   </Button>

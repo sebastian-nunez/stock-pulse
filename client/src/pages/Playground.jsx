@@ -14,10 +14,15 @@ import { Search, Users } from "lucide-react";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import ErrorCard from "../components/ErrorCard";
+import CategoryDetailsModal from "../components/CategoryDetailsModal";
+import CategoryEditableModal from "../components/CategoryEditableModal";
 import ProductDetailsModal from "../components/ProductDetailsModal";
-import { default as ProductEditableModal } from "../components/ProductEditableModal";
+import ProductEditableModal from "../components/ProductEditableModal";
+import TagDetailsModal from "../components/TagDetailsModal";
+import TagEditableModal from "../components/TagEditableModal";
+import CategoriesAPI from "../services/CategoriesAPI";
 import ProductsAPI from "../services/ProductsAPI";
+import TagsAPI from "../services/TagsAPI";
 import UsersAPI from "../services/UsersAPI";
 
 export const Action = {
@@ -48,18 +53,31 @@ const Playground = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [selectedAction, setSelectedAction] = useState(null);
-  const [productId, setProductId] = useState(1);
+  const [id, setId] = useState(null);
 
-  const productByIdQuery = useQuery(["products", { productId }], () => {
+  const productByIdQuery = useQuery(["products", { id: id }], () => {
     // avoid fetching when productId is null
-    if (productId) {
-      return ProductsAPI.getProductById(productId);
+    if (id) {
+      return ProductsAPI.getProductById(id);
     }
   });
   const product = productByIdQuery.data;
 
-  const productsQuery = useQuery(["products"], ProductsAPI.getAllProducts);
-  const products = productsQuery.data;
+  const categoryByIdQuery = useQuery(["categories", { id }], () => {
+    // avoid fetching when  is null
+    if (id) {
+      return CategoriesAPI.getCategoryById(id);
+    }
+  });
+  const category = categoryByIdQuery.data;
+
+  const tagByIdQuery = useQuery(["tags", { id }], () => {
+    // avoid fetching when  is null
+    if (id) {
+      return TagsAPI.getTagById(id);
+    }
+  });
+  const tag = tagByIdQuery.data;
 
   {
     /* --------------------------- Users ---------------------------*/
@@ -103,24 +121,6 @@ const Playground = () => {
     }));
   };
 
-  if (productByIdQuery.isError) {
-    return (
-      <ErrorCard
-        message={`Unable to fetch product with ID ${productId}`}
-        error={productByIdQuery.error?.message}
-      />
-    );
-  }
-
-  if (productsQuery.isError) {
-    return (
-      <ErrorCard
-        message={`Unable to fetch all products`}
-        error={productsQuery.error?.message}
-      />
-    );
-  }
-
   return (
     <>
       <h1 className="pb-6 text-center text-5xl font-extrabold tracking-tighter">
@@ -161,18 +161,20 @@ const Playground = () => {
             ))}
           </Select>
 
-          {/* Product ID Selector */}
-          {selectedFilter === Filter.PRODUCT &&
+          {/* ID Selector */}
+          {selectedFilter &&
             selectedAction &&
             selectedAction !== Action.CREATE && (
               <Input
-                defaultValue={productId}
-                label="Product ID"
+                defaultValue={id}
+                label="ID"
                 placeholder="1"
                 type="number"
                 variant="bordered"
                 size="sm"
-                onValueChange={(value) => setProductId(value)}
+                onValueChange={(value) => {
+                  setId(value);
+                }}
                 className="w-fit"
               />
             )}
@@ -223,6 +225,71 @@ const Playground = () => {
               onOpenChange={onOpenChange}
             />
           )}
+
+        {/* Create a category */}
+        {selectedFilter === Filter.CATEGORY &&
+          selectedAction === Action.CREATE && (
+            <CategoryEditableModal
+              title="Add Category"
+              canDelete={false}
+              isOpen={isOpen}
+              category={null}
+              onOpenChange={onOpenChange}
+            />
+          )}
+
+        {/* Update a category */}
+        {selectedFilter === Filter.CATEGORY &&
+          selectedAction === Action.UPDATE && (
+            <CategoryEditableModal
+              title="Edit Category"
+              canDelete={true}
+              isOpen={isOpen}
+              category={category}
+              onOpenChange={onOpenChange}
+            />
+          )}
+
+        {/* View a category */}
+        {selectedFilter === Filter.CATEGORY &&
+          selectedAction === Action.VIEW && (
+            <CategoryDetailsModal
+              category={category}
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+            />
+          )}
+
+        {/* Create a tag */}
+        {selectedFilter === Filter.TAG && selectedAction === Action.CREATE && (
+          <TagEditableModal
+            title="Add Tag"
+            canDelete={false}
+            isOpen={isOpen}
+            tag={null}
+            onOpenChange={onOpenChange}
+          />
+        )}
+
+        {/* Update a tag */}
+        {selectedFilter === Filter.TAG && selectedAction === Action.UPDATE && (
+          <TagEditableModal
+            title="Edit Tag"
+            canDelete={true}
+            isOpen={isOpen}
+            tag={tag}
+            onOpenChange={onOpenChange}
+          />
+        )}
+
+        {/* View a tag */}
+        {selectedFilter === Filter.TAG && selectedAction === Action.VIEW && (
+          <TagDetailsModal
+            tag={tag}
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+          />
+        )}
       </section>
 
       <Divider className="my-12" />
