@@ -9,8 +9,8 @@ import {
   ModalHeader,
 } from "@nextui-org/react";
 import toast from "react-hot-toast";
-import { convertDatetimeToMMDDYYYY } from "../../utils/types";
-import InfoPanel from "../InfoPanel";
+import { convertDatetimeToMMDDYYYY } from "../utils/types";
+import InfoPanel from "./InfoPanel";
 
 const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
   return (

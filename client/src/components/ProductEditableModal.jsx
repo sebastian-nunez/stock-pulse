@@ -9,7 +9,7 @@ import {
 } from "@nextui-org/react";
 import { Save, Trash } from "lucide-react";
 import { toast } from "react-hot-toast";
-import useProducts from "../../hooks/useProducts";
+import useProducts from "../hooks/useProducts";
 import ProductDetailsForm from "./ProductDetailsForm";
 
 const ProductEditableModal = ({

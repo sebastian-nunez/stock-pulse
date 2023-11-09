@@ -9,7 +9,7 @@ import {
 } from "@nextui-org/react";
 import { Save, Trash } from "lucide-react";
 import { toast } from "react-hot-toast";
-import useCategories from "../../hooks/useCategories";
+import useCategories from "../hooks/useCategories";
 import CategoryDetailsForm from "./CategoryDetailsForm";
 
 const CategoryEditableModal = ({

@@ -1,6 +1,6 @@
 import { Pagination } from "@nextui-org/react";
-import { usePagination } from "../../hooks/usePagination";
-import { PRODUCTS_PER_PAGE } from "../../utils/constants";
+import { usePagination } from "../hooks/usePagination";
+import { PRODUCTS_PER_PAGE } from "../utils/constants";
 import ProductCard from "./ProductCard";
 
 const ProductGrid = ({ products }) => {

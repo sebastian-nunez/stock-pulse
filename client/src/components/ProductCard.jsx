@@ -1,8 +1,8 @@
 import { Button, Code, useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
-import { ProductCardSkeleton } from "../skeletons/ProductGridSkeleton";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
+import { ProductCardSkeleton } from "./skeletons/ProductGridSkeleton";
 
 const Action = {
   VIEW: "View",

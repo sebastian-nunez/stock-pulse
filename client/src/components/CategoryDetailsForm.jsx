@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input, Textarea } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import { categorySchema } from "../../utils/schemas";
+import { categorySchema } from "../utils/schemas";
 
 const CategoryDetailsForm = ({ category, onSubmit }) => {
   // react-hook-form

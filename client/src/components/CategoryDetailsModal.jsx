@@ -6,7 +6,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@nextui-org/react";
-import InfoPanel from "../InfoPanel";
+import InfoPanel from "./InfoPanel";
 
 const CategoryDetailsModal = ({ category, isOpen, onOpenChange }) => {
   return (
