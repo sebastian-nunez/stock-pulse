@@ -67,7 +67,7 @@
 
 > Users are able to see an individual product's full details via a responsive modal
 
-![Product Details Demo](demos/stock-pulse-product-details-1.gif)
+![Product Details Demo](demos/stock-pulse-details-2.gif)
 
 ### Responsive Design & Accessibility
 
@@ -75,19 +75,19 @@
 
 ![Responsive Design Demo](demos/stock-pulse-responsive-2.gif)
 
-### Product Management Modals
-
-> Input forms are fully validated before submission including user-friendly error messages and hints. Error and success notifications are displayed.
-
-![Product Modal Demo](demos/playground-product-modals-2.gif)
-
 ### Inventory Pagination
 
 > Users are able to scroll through different pages of products
 
 ![Pagination Demo](demos/stock-pulse-pagination-1.gif)
 
-### Loading Skeletons
+### Product Management Modals
+
+> Input forms are fully validated before submission including user-friendly error messages and hints. Error and success notifications are displayed.
+
+![Product Modal Demo](demos/playground-product-modals-2.gif)
+
+### Loading Skeletons & Error Handling
 
 > We've implemented loading skeletons to maximize UX and give users as much feedback as possible.
 
