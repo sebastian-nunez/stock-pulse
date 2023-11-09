@@ -4,7 +4,7 @@ import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
 import { ProductCardSkeleton } from "./skeletons/ProductGridSkeleton";
 
-const Action = {
+export const Action = {
   VIEW: "View",
   UPDATE: "Update",
 };
