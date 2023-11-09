@@ -18,8 +18,11 @@ import CategoryDetailsModal from "../components/CategoryDetailsModal";
 import CategoryEditableModal from "../components/CategoryEditableModal";
 import ProductDetailsModal from "../components/ProductDetailsModal";
 import ProductEditableModal from "../components/ProductEditableModal";
+import TagDetailsModal from "../components/TagDetailsModal";
+import TagEditableModal from "../components/TagEditableModal";
 import CategoriesAPI from "../services/CategoriesAPI";
 import ProductsAPI from "../services/ProductsAPI";
+import TagsAPI from "../services/TagsAPI";
 import UsersAPI from "../services/UsersAPI";
 
 export const Action = {
@@ -67,6 +70,14 @@ const Playground = () => {
     }
   });
   const category = categoryByIdQuery.data;
+
+  const tagByIdQuery = useQuery(["tags", { id }], () => {
+    // avoid fetching when  is null
+    if (id) {
+      return TagsAPI.getTagById(id);
+    }
+  });
+  const tag = tagByIdQuery.data;
 
   {
     /* --------------------------- Users ---------------------------*/
@@ -248,6 +259,37 @@ const Playground = () => {
               onOpenChange={onOpenChange}
             />
           )}
+
+        {/* Create a tag */}
+        {selectedFilter === Filter.TAG && selectedAction === Action.CREATE && (
+          <TagEditableModal
+            title="Add Tag"
+            canDelete={false}
+            isOpen={isOpen}
+            tag={null}
+            onOpenChange={onOpenChange}
+          />
+        )}
+
+        {/* Update a tag */}
+        {selectedFilter === Filter.TAG && selectedAction === Action.UPDATE && (
+          <TagEditableModal
+            title="Edit Tag"
+            canDelete={true}
+            isOpen={isOpen}
+            tag={tag}
+            onOpenChange={onOpenChange}
+          />
+        )}
+
+        {/* View a tag */}
+        {selectedFilter === Filter.TAG && selectedAction === Action.VIEW && (
+          <TagDetailsModal
+            tag={tag}
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+          />
+        )}
       </section>
 
       <Divider className="my-12" />
