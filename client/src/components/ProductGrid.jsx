@@ -22,7 +22,7 @@ const ProductGrid = ({ products }) => {
   }
 
   return (
-    <div className="flex flex-col gap-3 px-6 pb-8 sm:px-0">
+    <div className="flex min-h-screen flex-col justify-between gap-3 px-6 pb-8 sm:px-0">
       {/* --------------- Product Rendering --------------- */}
       <div className="grid gap-6 py-6 md:grid-cols-2 lg:grid-cols-3">
         {products?.slice(sliceRange.start, sliceRange.end).map((product) => (
