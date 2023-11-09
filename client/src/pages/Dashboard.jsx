@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
+import ErrorCard from "../components/ErrorCard";
 import ProductsTable from "../components/ProductsTable";
 import ProductsAPI from "../services/ProductsAPI";
 import { PRODUCTS_QUERY_KEY } from "../utils/constants";
@@ -20,6 +21,19 @@ const Dashboard = () => {
   );
   const products = productsQuery.data;
   const numberOfProducts = products?.length;
+
+  if (productsQuery.isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (productsQuery.isError) {
+    return (
+      <ErrorCard
+        message="Unable to fetch products, please try again."
+        error={productsQuery?.error?.message}
+      />
+    );
+  }
 
   return (
     <div className="flex flex-col gap-6">
