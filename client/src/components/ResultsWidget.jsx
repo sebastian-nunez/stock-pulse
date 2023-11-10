@@ -7,7 +7,7 @@ import {
   TAGS_QUERY_KEY,
 } from "../utils/constants";
 
-export const rowsPerPageOptions = [18, 24, 30, 42, 54, 72, 96];
+export const rowsPerPageOptions = [12, 18, 24, 30, 42, 54, 72, 96];
 
 const ResultsWidget = ({
   rowsPerPage,
