@@ -14,6 +14,7 @@ const ResultsWidget = ({
   setRowsPerPage,
   numberOfResults,
   changePage,
+  onRefreshAction = () => {},
 }) => {
   const queryClient = useQueryClient();
 
@@ -50,6 +51,9 @@ const ResultsWidget = ({
               queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
               queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
               queryClient.invalidateQueries([TAGS_QUERY_KEY]);
+
+              // call back function
+              onRefreshAction();
 
               changePage(1); // reset page to 1
             }}
