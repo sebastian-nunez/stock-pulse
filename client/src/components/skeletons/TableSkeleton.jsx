@@ -10,7 +10,7 @@ export const ResultsWidgetSkeleton = () => {
       <div className="flex gap-2">
         <Skeleton className="h-6 w-24 rounded" />
         <Skeleton className="h-6 w-8 rounded" />
-        <Skeleton className="h-6 w-5 rounded" />
+        <Skeleton className="ml-2 h-6 w-7 rounded" />
       </div>
     </div>
   );
