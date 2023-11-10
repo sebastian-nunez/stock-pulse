@@ -194,7 +194,7 @@ const ProductsTable = () => {
         </Table>
 
         {/* -------------- Table -------------- */}
-        <div className="my-6 flex w-full justify-center">
+        <div className="mt-6 flex w-full justify-center">
           <div className="rounded-lg border p-3 drop-shadow-sm">
             <Pagination
               showControls
