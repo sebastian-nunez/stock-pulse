@@ -55,9 +55,10 @@ const ProductGrid = ({ products }) => {
           <Tooltip content="Refresh">
             <button
               className="ml-3 rounded-lg p-1 text-small text-default-400 hover:bg-gray-100 active:text-default-500"
-              onClick={() =>
-                queryClient.invalidateQueries([PRODUCTS_QUERY_KEY])
-              }
+              onClick={() => {
+                queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
+                changePage(1);
+              }}
             >
               <RefreshCcw width={20} height={20} />
             </button>
