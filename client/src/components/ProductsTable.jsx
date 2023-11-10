@@ -1,10 +1,5 @@
 import {
-  Button,
   CircularProgress,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
   Table,
   TableBody,
   TableCell,
@@ -13,7 +8,6 @@ import {
   TableRow,
   useDisclosure,
 } from "@nextui-org/react";
-import { MoreVertical } from "lucide-react";
 import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
@@ -29,15 +23,16 @@ import { Action } from "./ProductCard";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
 import ResultsWidget from "./ResultsWidget";
+import TableDropdownActionMenu from "./TableDropdownActionMenu";
 
 const columns = [
-  { key: "name", label: "Name" },
-  { key: "brand", label: "Brand" },
-  { key: "price", label: "Price" },
-  { key: "quantity", label: "Quantity" },
-  { key: "category", label: "Category" },
-  { key: "tags", label: "Tags" },
-  { key: "actions", label: "Actions" },
+  { key: "name", label: "NAME" },
+  { key: "brand", label: "BRAND" },
+  { key: "price", label: "PRICE" },
+  { key: "quantity", label: "QUANTITY" },
+  { key: "category", label: "CATEGORY" },
+  { key: "tags", label: "TAGS" },
+  { key: "actions", label: "ACTIONS" },
 ];
 
 const ProductsTable = () => {
@@ -99,43 +94,12 @@ const ProductsTable = () => {
     switch (columnKey) {
       case "actions":
         return (
-          <div className="relative flex items-center justify-end gap-2">
-            <Dropdown aria-label="Actions Menu">
-              <DropdownTrigger aria-label="Toggle Actions Menu">
-                <Button isIconOnly size="sm" variant="light">
-                  <MoreVertical />
-                </Button>
-              </DropdownTrigger>
-
-              <DropdownMenu aria-label="Menu Options">
-                <DropdownItem
-                  aria-label="View"
-                  key={"View"}
-                  onClick={() => handleView(product)}
-                >
-                  View
-                </DropdownItem>
-
-                <DropdownItem
-                  aria-label="Edit"
-                  key={"Edit"}
-                  onClick={() => handleEdit(product)}
-                >
-                  Edit
-                </DropdownItem>
-
-                <DropdownItem
-                  aria-label="Delete"
-                  key={"Delete"}
-                  onClick={() => handleDelete(product?.product_id)}
-                  className="text-danger"
-                  color="danger"
-                >
-                  Delete
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
+          <TableDropdownActionMenu
+            product={product}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+            handleView={handleView}
+          />
         );
       default:
         return cellValue;
@@ -181,7 +145,11 @@ const ProductsTable = () => {
             }
           >
             {(product, idx) => (
-              <TableRow key={product?.product_id || idx}>
+              <TableRow
+                key={product?.product_id || idx}
+                className="cursor-pointer hover:bg-default-100"
+                onClick={() => handleView(product)}
+              >
                 {(columnKey) => (
                   <TableCell>{renderCell(product, columnKey)}</TableCell>
                 )}
