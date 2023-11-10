@@ -1,7 +1,7 @@
 import {
   Chip,
-  CircularProgress,
   Pagination,
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -20,20 +20,24 @@ import {
   DEFAULT_ROWS_PER_PAGE_TABLE as DEFAULT_ROWS_PER_PAGE_TABLE_VIEW,
   PRODUCTS_QUERY_KEY,
 } from "../utils/constants";
+import { convertDatetimeToMMDDYYYY } from "../utils/types";
 import ErrorCard from "./ErrorCard";
 import { Action } from "./ProductCard";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
 import ResultsWidget from "./ResultsWidget";
 import TableDropdownActionMenu from "./TableDropdownActionMenu";
+import TableSkeleton from "./skeletons/TableSkeleton";
 
 const columns = [
+  { key: "product_id", label: "ID" },
   { key: "name", label: "NAME" },
   { key: "brand", label: "BRAND" },
   { key: "price", label: "PRICE" },
   { key: "quantity", label: "QUANTITY" },
   { key: "category", label: "CATEGORY" },
   { key: "is_available", label: "AVAILABLE" },
+  { key: "date_added", label: "DATE ADDED" },
   { key: "tags", label: "TAGS" },
   { key: "actions", label: "ACTIONS" },
 ];
@@ -60,9 +64,6 @@ const ProductsTable = () => {
   const products = productsQuery.data;
   const numberOfProducts = products?.length;
 
-  // determine if the products are loading
-  const isLoading = productsQuery.isLoading;
-
   // pagination
   const { currentPage, numberOfPages, sliceRange, changePage } = usePagination(
     numberOfProducts,
@@ -75,6 +76,11 @@ const ProductsTable = () => {
 
     return products?.slice(start, end);
   }, [JSON.stringify(products), sliceRange.start, sliceRange.end]);
+
+  // determine if the products are loading
+  const isLoading = productsQuery.isLoading;
+  const loadingState =
+    isLoading || paginatedProducts?.length === 0 ? "loading" : "idle";
 
   const handleView = (product) => {
     setCurrentProduct(product);
@@ -111,6 +117,8 @@ const ProductsTable = () => {
             handleView={handleView}
           />
         );
+      case "price":
+        return `$${cellValue}`;
       case "tags":
         return (
           <div className="flex flex-wrap gap-2">
@@ -123,6 +131,8 @@ const ProductsTable = () => {
         );
       case "is_available":
         return cellValue ? "Yes" : "No";
+      case "date_added":
+        return cellValue ? convertDatetimeToMMDDYYYY(cellValue) : "Unknown";
       default:
         return cellValue;
     }
@@ -137,6 +147,10 @@ const ProductsTable = () => {
     );
   }
 
+  if (isLoading) {
+    return <TableSkeleton />;
+  }
+
   return (
     <div className="mb-6 mt-3">
       {/* ---------- Result Widget  ---------- */}
@@ -149,27 +163,9 @@ const ProductsTable = () => {
         />
       </div>
 
-      {/* -------------- Table -------------- */}
-      {paginatedProducts && (
-        <Table
-          aria-label="Products Table"
-          isHeaderSticky
-          isCompact
-          bottomContent={
-            // ----------- Pagination Controls ---------
-            <div className="my-3 flex w-full justify-center">
-              <div className="rounded-lg border p-3 drop-shadow-sm">
-                <Pagination
-                  showControls
-                  color="primary"
-                  page={currentPage}
-                  total={numberOfPages}
-                  onChange={changePage}
-                />
-              </div>
-            </div>
-          }
-        >
+      <div className="flex min-h-screen flex-col justify-between">
+        {/* -------------- Table -------------- */}
+        <Table aria-label="Products Table" isHeaderSticky isCompact>
           <TableHeader columns={columns}>
             {(column) => (
               <TableColumn key={column.key}>{column.label}</TableColumn>
@@ -177,13 +173,11 @@ const ProductsTable = () => {
           </TableHeader>
 
           <TableBody
-            items={paginatedProducts}
-            emptyContent={"No rows to display."}
+            items={isLoading ? [] : paginatedProducts}
+            emptyContent={!isLoading && "No rows to display."}
             isLoading={isLoading}
-            className="flex min-h-screen flex-col justify-between"
-            loadingContent={
-              <CircularProgress size="lg" aria-label="Loading..." />
-            }
+            loadingState={loadingState}
+            loadingContent={<Spinner />}
           >
             {(product, idx) => (
               <TableRow
@@ -198,7 +192,20 @@ const ProductsTable = () => {
             )}
           </TableBody>
         </Table>
-      )}
+
+        {/* -------------- Table -------------- */}
+        <div className="my-6 flex w-full justify-center">
+          <div className="rounded-lg border p-3 drop-shadow-sm">
+            <Pagination
+              showControls
+              color="primary"
+              page={currentPage}
+              total={numberOfPages}
+              onChange={changePage}
+            />
+          </div>
+        </div>
+      </div>
 
       {/* -------------- Modals -------------- */}
       {selectedAction === Action.VIEW && (
@@ -208,6 +215,7 @@ const ProductsTable = () => {
           onOpenChange={onOpenChange}
         />
       )}
+
       {selectedAction === Action.UPDATE && (
         <ProductEditableModal
           title="Edit Product"
