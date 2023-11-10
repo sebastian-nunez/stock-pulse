@@ -7,12 +7,21 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  useDisclosure,
 } from "@nextui-org/react";
+import { ExternalLink } from "lucide-react";
 import toast from "react-hot-toast";
 import { convertDatetimeToMMDDYYYY } from "../utils/types";
 import InfoPanel from "./InfoPanel";
+import ProductEditableModal from "./ProductEditableModal";
 
 const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
+  const {
+    isOpen: isOpen_Edit,
+    onOpen: onOpen_Edit,
+    onOpenChange: onOpenChange_Edit,
+  } = useDisclosure();
+
   return (
     <>
       <Modal
@@ -137,8 +146,26 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                 )}
               </ModalBody>
 
-              <ModalFooter>
-                <Button color="danger" onPress={onClose} radius="sm">
+              <ModalFooter className="jus flex justify-between gap-3">
+                <Button
+                  color="primary"
+                  variant="ghost"
+                  onPress={() => {
+                    onClose();
+                    onOpen_Edit();
+                  }}
+                  radius="sm"
+                  startContent={<ExternalLink height={20} width={20} />}
+                >
+                  Edit
+                </Button>
+
+                <Button
+                  color="danger"
+                  onPress={onClose}
+                  radius="sm"
+                  className="w-40"
+                >
                   Close
                 </Button>
               </ModalFooter>
@@ -146,6 +173,14 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
           )}
         </ModalContent>
       </Modal>
+
+      <ProductEditableModal
+        title="Edit Product"
+        canDelete={true}
+        product={product}
+        isOpen={isOpen_Edit}
+        onOpenChange={onOpenChange_Edit}
+      />
     </>
   );
 };
