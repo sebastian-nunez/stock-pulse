@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
+import BrowserFilters from "../components/BrowserFilters";
 import ErrorCard from "../components/ErrorCard";
-import InventoryFilters from "../components/InventoryFilters";
 import ProductGrid from "../components/ProductGrid";
 import ProductGridSkeleton from "../components/skeletons/ProductGridSkeleton";
 import { useFilteredProducts } from "../hooks/useFilteredProducts";
 import ProductsAPI from "../services/ProductsAPI";
 
-const Inventory = () => {
+const Browser = () => {
   // state
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -36,7 +36,7 @@ const Inventory = () => {
   return (
     <>
       {/* -------------------- Filters --------------------- */}
-      <InventoryFilters
+      <BrowserFilters
         searchText={searchText}
         setSearchText={setSearchText}
         selectedTags={selectedTags}
@@ -60,4 +60,4 @@ const Inventory = () => {
   );
 };
 
-export default Inventory;
+export default Browser;
