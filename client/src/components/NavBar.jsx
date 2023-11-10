@@ -70,6 +70,11 @@ export default function App() {
         className="hidden gap-4 sm:flex"
         justify="end"
       ></NavbarContent>
+      <NavbarItem>
+        <Link to="/login" className="text-slate-700">
+          Login
+        </Link>
+      </NavbarItem>
 
       {/* Mobile Menu */}
       <NavbarMenu>
