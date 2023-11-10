@@ -3,8 +3,8 @@ import { useRoutes } from "react-router-dom";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Browser from "./pages/Browser";
-import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
+import Inventory from "./pages/Inventory";
 import PageNotFound from "./pages/PageNotFound";
 import Playground from "./pages/Playground";
 import "./styles/App.css";
@@ -16,13 +16,12 @@ const App = () => {
       element: <Home />,
     },
     {
-      path: "/dashboard",
-      element: <Dashboard />,
-    },
-
-    {
       path: "/browser",
       element: <Browser />,
+    },
+    {
+      path: "/inventory",
+      element: <Inventory />,
     },
     {
       path: "/playground",

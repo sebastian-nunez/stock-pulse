@@ -14,7 +14,7 @@ import { Link, useLocation } from "react-router-dom";
 export const menuItems = [
   { name: "Home", path: "/" },
   { name: "Browser", path: "/browser" },
-  { name: "Dashboard", path: "/dashboard" },
+  { name: "Inventory", path: "/inventory" },
 ];
 
 export default function App() {

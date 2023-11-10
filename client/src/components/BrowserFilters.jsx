@@ -19,7 +19,7 @@ import {
   TAGS_QUERY_KEY,
 } from "../utils/constants";
 
-const InventoryFilters = ({
+const BrowserFilters = ({
   setSearchText,
   setSelectedCategory,
   setSelectedTags,
@@ -192,4 +192,4 @@ const InventoryFilters = ({
   );
 };
 
-export default InventoryFilters;
+export default BrowserFilters;

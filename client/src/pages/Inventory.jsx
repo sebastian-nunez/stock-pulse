@@ -7,7 +7,7 @@ const Item = {
   TAG: "Tag",
 };
 
-const Dashboard = () => {
+const Inventory = () => {
   const [selectedItem, setSelectedItem] = useState(Item.PRODUCT);
 
   return (
@@ -21,4 +21,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Inventory;
