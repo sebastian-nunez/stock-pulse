@@ -1,6 +1,7 @@
 import {
   Chip,
   CircularProgress,
+  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -9,7 +10,7 @@ import {
   TableRow,
   useDisclosure,
 } from "@nextui-org/react";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { usePagination } from "../hooks/usePagination";
@@ -68,6 +69,13 @@ const ProductsTable = () => {
     rowsPerPage,
   );
 
+  // memoized paginated products
+  const paginatedProducts = useMemo(() => {
+    const { start, end } = sliceRange;
+
+    return products?.slice(start, end);
+  }, [JSON.stringify(products), sliceRange.start, sliceRange.end]);
+
   const handleView = (product) => {
     setCurrentProduct(product);
     setSelectedAction(Action.VIEW);
@@ -106,7 +114,7 @@ const ProductsTable = () => {
       case "tags":
         return (
           <div className="flex flex-wrap gap-2">
-            {cellValue.map((tag, idx) => (
+            {cellValue?.map((tag, idx) => (
               <Chip key={tag + idx} size="sm" color="primary">
                 {tag}
               </Chip>
@@ -142,8 +150,26 @@ const ProductsTable = () => {
       </div>
 
       {/* -------------- Table -------------- */}
-      {products && (
-        <Table aria-label="Products Table" isHeaderSticky>
+      {paginatedProducts && (
+        <Table
+          aria-label="Products Table"
+          isHeaderSticky
+          isCompact
+          bottomContent={
+            // ----------- Pagination Controls ---------
+            <div className="my-3 flex w-full justify-center">
+              <div className="rounded-lg border p-3 drop-shadow-sm">
+                <Pagination
+                  showControls
+                  color="primary"
+                  page={currentPage}
+                  total={numberOfPages}
+                  onChange={changePage}
+                />
+              </div>
+            </div>
+          }
+        >
           <TableHeader columns={columns}>
             {(column) => (
               <TableColumn key={column.key}>{column.label}</TableColumn>
@@ -151,9 +177,10 @@ const ProductsTable = () => {
           </TableHeader>
 
           <TableBody
-            items={products}
+            items={paginatedProducts}
             emptyContent={"No rows to display."}
             isLoading={isLoading}
+            className="flex min-h-screen flex-col justify-between"
             loadingContent={
               <CircularProgress size="lg" aria-label="Loading..." />
             }
