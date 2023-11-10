@@ -1,3 +1,4 @@
+import { rowsPerPageOptions } from "../components/ResultsWidget";
 import { get_milliseconds_from_minutes } from "../utils/types";
 
 // --------------- base urls ---------------
@@ -21,5 +22,8 @@ export const CATEGORY_STALE_TIME_MILLISECONDS =
 export const TAG_STALE_TIME_MILLISECONDS = get_milliseconds_from_minutes(30);
 
 // --------------- misc ---------------
-export const PRODUCTS_PER_PAGE = 18;
-export const DEFAULT_ROWS_PER_PAGE = 5;
+export const DEFAULT_ROWS_PER_PAGE_CARD = rowsPerPageOptions[0] || 18;
+export const DEFAULT_ROWS_PER_PAGE_TABLE =
+  rowsPerPageOptions?.length >= 2
+    ? rowsPerPageOptions[2]
+    : rowsPerPageOptions[0] || 40;
