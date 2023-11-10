@@ -104,7 +104,9 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
         {/* ---------- Category ---------- */}
         <Select
           {...register("category")}
-          defaultSelectedKeys={product?.category && new Set([product.category])}
+          defaultSelectedKeys={
+            product?.category ? new Set([product.category]) : []
+          }
           label="Category"
           placeholder="Select a category"
           variant="bordered"
@@ -256,7 +258,7 @@ const ProductDetailsForm = ({ product, onSubmit }) => {
       {/* ---------- Tags ---------- */}
       <Select
         {...register("tags")}
-        defaultSelectedKeys={tags && product?.tags && new Set(product.tags)}
+        defaultSelectedKeys={product?.tags ? new Set(product.tags) : []}
         label="Tags"
         items={tags}
         variant="bordered"
