@@ -36,6 +36,7 @@ export const RowSkeleton = () => {
 export const TableCardSkeleton = ({ numberOfRows }) => {
   return (
     <Card className="flex flex-col gap-6 p-6">
+      <Skeleton className="h-10 w-full rounded" />
       {Array.from({ length: numberOfRows }, (_, index) => (
         <RowSkeleton key={index} />
       ))}
@@ -48,7 +49,7 @@ const TableSkeleton = () => {
     <div className="mt-3 flex flex-col gap-3 px-6 py-6 sm:px-0">
       <ResultsWidgetSkeleton />
 
-      <TableCardSkeleton numberOfRows={8} />
+      <TableCardSkeleton numberOfRows={12} />
 
       <PaginationControlsSkeleton />
     </div>
