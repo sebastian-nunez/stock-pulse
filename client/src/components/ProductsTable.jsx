@@ -169,9 +169,8 @@ const ProductsTable = () => {
   }
 
   return (
-    <div className="mb-6 mt-3">
-      {/* ---------- Results Widget  ---------- */}
-      <div className="mb-2">
+    <div className="flex min-h-screen flex-col justify-between gap-3 px-6 pb-8 sm:px-0">
+      <div className="mt-4 flex flex-col gap-2">
         <ResultsWidget
           rowsPerPage={rowsPerPage}
           setRowsPerPage={setRowsPerPage}
@@ -179,9 +178,7 @@ const ProductsTable = () => {
           changePage={changePage}
           onRefreshAction={() => sortedList.reload()}
         />
-      </div>
 
-      <div className="flex min-h-screen flex-col justify-between">
         {/* -------------- Table -------------- */}
         <Table
           aria-label="Products Table"
@@ -223,18 +220,18 @@ const ProductsTable = () => {
             )}
           </TableBody>
         </Table>
+      </div>
 
-        {/* -------------- Pagination Controls -------------- */}
-        <div className="mt-6 flex w-full justify-center">
-          <div className="rounded-lg border p-3 drop-shadow-sm">
-            <Pagination
-              showControls
-              color="primary"
-              page={currentPage}
-              total={numberOfPages}
-              onChange={changePage}
-            />
-          </div>
+      {/* -------------- Pagination Controls -------------- */}
+      <div className="mt-6 flex w-full justify-center">
+        <div className="rounded-lg border p-3 drop-shadow-sm">
+          <Pagination
+            showControls
+            color="primary"
+            page={currentPage}
+            total={numberOfPages}
+            onChange={changePage}
+          />
         </div>
       </div>
 
