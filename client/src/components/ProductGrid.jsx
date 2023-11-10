@@ -23,7 +23,7 @@ const ProductGrid = ({ products }) => {
     const { start, end } = sliceRange;
 
     return products.slice(start, end);
-  }, [products.length, sliceRange.start, sliceRange.end]);
+  }, [JSON.stringify(products), sliceRange.start, sliceRange.end]);
 
   if (!products || products?.length === 0) {
     return (
