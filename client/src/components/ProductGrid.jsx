@@ -1,13 +1,16 @@
 import { Pagination } from "@nextui-org/react";
 import { useMemo, useState } from "react";
 import { usePagination } from "../hooks/usePagination";
+import { DEFAULT_ROWS_PER_PAGE_CARD as DEFAULT_ROWS_PER_PAGE_CARD_VIEW } from "../utils/constants";
 import ProductCard from "./ProductCard";
-import ResultsWidget, { rowsPerPageOptions } from "./ResultsWidget";
+import ResultsWidget from "./ResultsWidget";
 
 const ProductGrid = ({ products }) => {
   // state
   const numberOfProducts = products?.length;
-  const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0]);
+  const [rowsPerPage, setRowsPerPage] = useState(
+    DEFAULT_ROWS_PER_PAGE_CARD_VIEW,
+  );
 
   // pagination
   const { currentPage, numberOfPages, sliceRange, changePage } = usePagination(
