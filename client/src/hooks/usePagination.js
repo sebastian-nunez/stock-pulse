@@ -18,7 +18,7 @@ export const usePagination = (totalItems, itemsPerPage) => {
 
   const sliceRange = {
     start: (currentPage - 1) * itemsPerPage,
-    end: currentPage * itemsPerPage,
+    end: start + itemsPerPage,
   };
 
   const changePage = (page) => {
