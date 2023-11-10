@@ -22,7 +22,11 @@ export const CATEGORY_STALE_TIME_MILLISECONDS =
 export const TAG_STALE_TIME_MILLISECONDS = get_milliseconds_from_minutes(30);
 
 // --------------- misc ---------------
-export const DEFAULT_ROWS_PER_PAGE_CARD = rowsPerPageOptions[0] || 18;
+export const DEFAULT_ROWS_PER_PAGE_CARD =
+  rowsPerPageOptions?.length >= 1
+    ? rowsPerPageOptions[1]
+    : rowsPerPageOptions[0] || 18;
+
 export const DEFAULT_ROWS_PER_PAGE_TABLE =
   rowsPerPageOptions?.length >= 2
     ? rowsPerPageOptions[2]
