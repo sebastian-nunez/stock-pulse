@@ -7,7 +7,7 @@ import {
   SelectItem,
   Tooltip,
 } from "@nextui-org/react";
-import { RotateCcw } from "lucide-react";
+import { RouteOff } from "lucide-react";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
 import { ANY_CATEGORY } from "../hooks/useFilteredProducts";
@@ -53,12 +53,7 @@ const InventoryFilters = ({
     tagsQuery.isLoading ||
     queryClient.isFetching([PRODUCTS_QUERY_KEY]);
 
-  const handleRefresh = () => {
-    // refetch the products
-    queryClient.refetchQueries(PRODUCTS_QUERY_KEY);
-    categoriesQuery.refetch();
-    tagsQuery.refetch();
-
+  const handleReset = () => {
     // reset the filters
     setSelectedCategory(null);
     setSelectedTags([]);
@@ -73,7 +68,7 @@ const InventoryFilters = ({
   };
 
   return (
-    <div className="my-3 px-6 sm:px-0">
+    <div className="my-6 px-6 sm:px-0">
       <h1 className="text-xl font-bold tracking-tight">Filters</h1>
 
       <Divider className="mb-3" />
@@ -180,15 +175,15 @@ const InventoryFilters = ({
           />
 
           {/* ------- Refresh Button --------- */}
-          <Tooltip content="Refresh">
+          <Tooltip content="Reset">
             <Button
               size="sm"
               variant="flat"
-              onPress={handleRefresh}
+              onPress={handleReset}
               isDisabled={isLoading}
               className="h-12"
             >
-              <RotateCcw />
+              <RouteOff />
             </Button>
           </Tooltip>
         </div>
