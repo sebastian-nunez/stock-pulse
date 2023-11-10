@@ -146,7 +146,7 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                 )}
               </ModalBody>
 
-              <ModalFooter className="jus flex justify-between gap-3">
+              <ModalFooter className="flex justify-between gap-3">
                 <Button
                   color="primary"
                   variant="ghost"
