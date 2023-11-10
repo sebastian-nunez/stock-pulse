@@ -1,9 +1,16 @@
 import {
   Button,
+  CircularProgress,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
   useDisclosure,
 } from "@nextui-org/react";
 import { MoreVertical } from "lucide-react";
@@ -13,10 +20,15 @@ import { useQuery } from "react-query";
 import { usePagination } from "../hooks/usePagination";
 import useProducts from "../hooks/useProducts";
 import ProductsAPI from "../services/ProductsAPI";
-import { DEFAULT_ROWS_PER_PAGE, PRODUCTS_QUERY_KEY } from "../utils/constants";
+import {
+  DEFAULT_ROWS_PER_PAGE_TABLE as DEFAULT_ROWS_PER_PAGE_TABLE_VIEW,
+  PRODUCTS_QUERY_KEY,
+} from "../utils/constants";
+import ErrorCard from "./ErrorCard";
 import { Action } from "./ProductCard";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
+import ResultsWidget from "./ResultsWidget";
 
 const columns = [
   { key: "name", label: "Name" },
@@ -27,49 +39,49 @@ const columns = [
   { key: "tags", label: "Tags" },
   { key: "actions", label: "Actions" },
 ];
-const headerColumns = columns.map((column) => column.label);
 
-const ProductsTable = ({ products }) => {
+const ProductsTable = () => {
   // modal controls
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedAction, setSelectedAction] = useState(null);
 
   // state
-  const [productId, setProductId] = useState(null);
+  const [currentProduct, setCurrentProduct] = useState(null);
+  const [rowsPerPage, setRowsPerPage] = useState(
+    DEFAULT_ROWS_PER_PAGE_TABLE_VIEW,
+  );
+
+  // react-query
+  const { deleteProduct } = useProducts({});
+
+  const productsQuery = useQuery(
+    [PRODUCTS_QUERY_KEY],
+    ProductsAPI.getAllProducts,
+  );
+
+  const products = productsQuery.data;
   const numberOfProducts = products?.length;
-  const [rowsPerPage, setRowsPerPage] = useState(DEFAULT_ROWS_PER_PAGE);
+
+  // determine if the products are loading
+  const isLoading = productsQuery.isLoading;
+
+  // pagination
   const { currentPage, numberOfPages, sliceRange, changePage } = usePagination(
     numberOfProducts,
     rowsPerPage,
   );
 
-  // react-query
-  const productByIdQuery = useQuery([PRODUCTS_QUERY_KEY, { productId }], () => {
-    if (productId) {
-      return ProductsAPI.getProductById(productId);
-    }
-  });
-  const product = productByIdQuery.data;
-
-  const { deleteProduct } = useProducts({});
-
-  const handleView = (productId) => {
-    if (!productId) {
-      toast.error("Product does not have a valid ID, unable to view it!");
-    }
-
-    setProductId(productId);
+  const handleView = (product) => {
+    setCurrentProduct(product);
     setSelectedAction(Action.VIEW);
+
     onOpen(); // open the modal
   };
 
-  const handleEdit = (productId) => {
-    if (!productId) {
-      toast.error("Product does not have a valid ID, unable to edit it!");
-    }
-
-    setProductId(productId);
+  const handleEdit = (product) => {
+    setCurrentProduct(product);
     setSelectedAction(Action.UPDATE);
+
     onOpen(); // open the modal
   };
 
@@ -81,7 +93,7 @@ const ProductsTable = ({ products }) => {
     deleteProduct.mutate(productId);
   };
 
-  const renderCell = useCallback((product, columnKey = "") => {
+  const renderCell = useCallback((product, columnKey) => {
     const cellValue = product[columnKey];
 
     switch (columnKey) {
@@ -99,7 +111,7 @@ const ProductsTable = ({ products }) => {
                 <DropdownItem
                   aria-label="View"
                   key={"View"}
-                  onClick={() => handleView(product?.product_id)}
+                  onClick={() => handleView(product)}
                 >
                   View
                 </DropdownItem>
@@ -107,7 +119,7 @@ const ProductsTable = ({ products }) => {
                 <DropdownItem
                   aria-label="Edit"
                   key={"Edit"}
-                  onClick={() => handleEdit(product?.product_id)}
+                  onClick={() => handleEdit(product)}
                 >
                   Edit
                 </DropdownItem>
@@ -130,51 +142,73 @@ const ProductsTable = ({ products }) => {
     }
   }, []);
 
-  // replace this with making the table show loading state
-  //   if (productByIdQuery.isLoading) {
-  //     return (
-  //       <div className="my-auto flex items-center justify-center">
-  //         <CircularProgress size="lg" aria-label="Loading..." />
-  //       </div>
-  //     );
-  //   }
+  if (productsQuery.isError) {
+    return (
+      <ErrorCard
+        message="Unable to fetch products, please try again."
+        error={productsQuery.error?.message}
+      />
+    );
+  }
 
   return (
-    <>
-      {/* -------------- Table -------------- */}
-      <div className="flex flex-col">
-        {products?.map((product) => (
-          <div key={product.product_id} className="flex justify-between gap-3">
-            {columns.map((column) => (
-              <div key={column.key}>{renderCell(product, column.key)}</div>
-            ))}
-          </div>
-        ))}
-
-        {product && JSON.stringify(product)}
+    <div className="mb-6 mt-3">
+      {/* ---------- Result Widget  ---------- */}
+      <div className="mb-2">
+        <ResultsWidget
+          rowsPerPage={rowsPerPage}
+          setRowsPerPage={setRowsPerPage}
+          numberOfResults={numberOfProducts}
+          changePage={changePage}
+        />
       </div>
 
-      {/* -------------- Modals -------------- */}
-      {selectedAction === Action.VIEW &&
-        !productByIdQuery.isLoading && ( // TODO: remove loading check
-          <ProductDetailsModal
-            product={product}
-            isOpen={isOpen}
-            onOpenChange={onOpenChange}
-          />
-        )}
+      {/* -------------- Table -------------- */}
+      {products && (
+        <Table aria-label="Products Table" isHeaderSticky>
+          <TableHeader columns={columns}>
+            {(column) => (
+              <TableColumn key={column.key}>{column.label}</TableColumn>
+            )}
+          </TableHeader>
 
-      {selectedAction === Action.UPDATE &&
-        !productByIdQuery.isLoading && ( // TODO: remove loading check
-          <ProductEditableModal
-            title="Edit Product"
-            canDelete={true}
-            product={product}
-            isOpen={isOpen}
-            onOpenChange={onOpenChange}
-          />
-        )}
-    </>
+          <TableBody
+            items={products}
+            emptyContent={"No rows to display."}
+            isLoading={isLoading}
+            loadingContent={
+              <CircularProgress size="lg" aria-label="Loading..." />
+            }
+          >
+            {(product, idx) => (
+              <TableRow key={product?.product_id || idx}>
+                {(columnKey) => (
+                  <TableCell>{renderCell(product, columnKey)}</TableCell>
+                )}
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      )}
+
+      {/* -------------- Modals -------------- */}
+      {selectedAction === Action.VIEW && (
+        <ProductDetailsModal
+          product={currentProduct}
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+        />
+      )}
+      {selectedAction === Action.UPDATE && (
+        <ProductEditableModal
+          title="Edit Product"
+          canDelete={true}
+          product={currentProduct}
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+        />
+      )}
+    </div>
   );
 };
 
