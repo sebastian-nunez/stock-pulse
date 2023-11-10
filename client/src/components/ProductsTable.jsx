@@ -1,4 +1,5 @@
 import {
+  Chip,
   CircularProgress,
   Table,
   TableBody,
@@ -31,6 +32,7 @@ const columns = [
   { key: "price", label: "PRICE" },
   { key: "quantity", label: "QUANTITY" },
   { key: "category", label: "CATEGORY" },
+  { key: "is_available", label: "AVAILABLE" },
   { key: "tags", label: "TAGS" },
   { key: "actions", label: "ACTIONS" },
 ];
@@ -101,6 +103,18 @@ const ProductsTable = () => {
             handleView={handleView}
           />
         );
+      case "tags":
+        return (
+          <div className="flex flex-wrap gap-2">
+            {cellValue.map((tag, idx) => (
+              <Chip key={tag + idx} size="sm" color="primary">
+                {tag}
+              </Chip>
+            ))}
+          </div>
+        );
+      case "is_available":
+        return cellValue ? "Yes" : "No";
       default:
         return cellValue;
     }
