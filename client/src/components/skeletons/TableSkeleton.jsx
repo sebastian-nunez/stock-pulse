@@ -45,10 +45,10 @@ export const TableCardSkeleton = ({ numberOfRows }) => {
 
 const TableSkeleton = () => {
   return (
-    <div className="mt-3 flex flex-col gap-3 px-6 sm:px-0">
+    <div className="px-6sm:px-0 mt-3 flex flex-col gap-3">
       <ResultsWidgetSkeleton />
 
-      <TableCardSkeleton numberOfRows={6} />
+      <TableCardSkeleton numberOfRows={8} />
 
       <PaginationControlsSkeleton />
     </div>
