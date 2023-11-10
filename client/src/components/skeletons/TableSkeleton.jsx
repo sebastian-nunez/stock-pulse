@@ -45,7 +45,7 @@ export const TableCardSkeleton = ({ numberOfRows }) => {
 
 const TableSkeleton = () => {
   return (
-    <div className="mt-3 flex flex-col gap-3">
+    <div className="mt-3 flex flex-col gap-3 px-6 sm:px-0">
       <ResultsWidgetSkeleton />
 
       <TableCardSkeleton numberOfRows={6} />
