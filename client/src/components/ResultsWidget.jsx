@@ -1,4 +1,4 @@
-import { Tooltip } from "@nextui-org/react";
+import { Button, Tooltip } from "@nextui-org/react";
 import { RefreshCcw } from "lucide-react";
 import { useQueryClient } from "react-query";
 import {
@@ -41,8 +41,11 @@ const ResultsWidget = ({
 
         {/* ---------- Refresh Button ---------- */}
         <Tooltip content="Refresh">
-          <button
-            className="ml-3 rounded-lg p-1 hover:bg-gray-200 active:text-default-500"
+          <Button
+            isIconOnly
+            size="sm"
+            variant="light"
+            className="ml-3"
             onClick={() => {
               queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
               queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
@@ -51,8 +54,8 @@ const ResultsWidget = ({
               changePage(1); // reset page to 1
             }}
           >
-            <RefreshCcw width={20} height={20} />
-          </button>
+            <RefreshCcw width={20} height={20} className="text-default-400" />
+          </Button>
         </Tooltip>
       </div>
     </div>
