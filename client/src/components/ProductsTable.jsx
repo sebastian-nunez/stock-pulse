@@ -10,9 +10,10 @@ import {
   TableRow,
   useDisclosure,
 } from "@nextui-org/react";
+import { useAsyncList } from "@react-stately/data";
 import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { useQuery } from "react-query";
+import { useQueryClient } from "react-query";
 import { usePagination } from "../hooks/usePagination";
 import useProducts from "../hooks/useProducts";
 import ProductsAPI from "../services/ProductsAPI";
@@ -20,8 +21,8 @@ import {
   DEFAULT_ROWS_PER_PAGE_TABLE as DEFAULT_ROWS_PER_PAGE_TABLE_VIEW,
   PRODUCTS_QUERY_KEY,
 } from "../utils/constants";
+import { sortItemsAscDesc } from "../utils/sorting";
 import { convertDatetimeToMMDDYYYY } from "../utils/types";
-import ErrorCard from "./ErrorCard";
 import { Action } from "./ProductCard";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
@@ -29,20 +30,22 @@ import ResultsWidget from "./ResultsWidget";
 import TableDropdownActionMenu from "./TableDropdownActionMenu";
 import TableSkeleton from "./skeletons/TableSkeleton";
 
+// table columns. Key is the column name in the data, label is the visible column name in the table
 const columns = [
-  { key: "product_id", label: "ID" },
-  { key: "name", label: "NAME" },
-  { key: "brand", label: "BRAND" },
-  { key: "price", label: "PRICE" },
-  { key: "quantity", label: "QUANTITY" },
-  { key: "category", label: "CATEGORY" },
-  { key: "is_available", label: "AVAILABLE" },
-  { key: "date_added", label: "DATE ADDED" },
+  { key: "product_id", label: "ID", sortable: true },
+  { key: "name", label: "NAME", sortable: true },
+  { key: "brand", label: "BRAND", sortable: true },
+  { key: "price", label: "PRICE", sortable: true },
+  { key: "quantity", label: "QUANTITY", sortable: true },
+  { key: "category", label: "CATEGORY", sortable: true },
+  { key: "is_available", label: "AVAILABLE", sortable: true },
   { key: "tags", label: "TAGS" },
   { key: "actions", label: "ACTIONS" },
 ];
 
 const ProductsTable = () => {
+  const queryClient = useQueryClient();
+
   // modal controls
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [selectedAction, setSelectedAction] = useState(null);
@@ -53,16 +56,43 @@ const ProductsTable = () => {
     DEFAULT_ROWS_PER_PAGE_TABLE_VIEW,
   );
 
-  // react-query
-  const { deleteProduct } = useProducts({});
+  // retrieve the products (via a FETCH) and sort them
+  const sortedList = useAsyncList({
+    async load() {
+      // IMPORTANT: we have to FETCH to make sure items are available for sorting
+      const products = await queryClient.fetchQuery(
+        [PRODUCTS_QUERY_KEY],
+        async () => {
+          return await ProductsAPI.getAllProducts();
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
+          },
+        },
+      );
 
-  const productsQuery = useQuery(
-    [PRODUCTS_QUERY_KEY],
-    ProductsAPI.getAllProducts,
-  );
+      return {
+        items: products,
+      };
+    },
+    async sort({ items, sortDescriptor }) {
+      return {
+        items: sortItemsAscDesc(items, sortDescriptor),
+      };
+    },
+  });
 
-  const products = productsQuery.data;
+  const { deleteProduct } = useProducts({
+    onSuccessAction: () => {
+      sortedList.reload(); // reload the list
+    },
+  });
+
+  // extract the products from the sorted list
+  const products = sortedList?.items;
   const numberOfProducts = products?.length;
+  const isLoading = sortedList.isLoading || deleteProduct.isLoading;
 
   // pagination
   const { currentPage, numberOfPages, sliceRange, changePage } = usePagination(
@@ -71,16 +101,11 @@ const ProductsTable = () => {
   );
 
   // memoized paginated products
-  const paginatedProducts = useMemo(() => {
+  const currentPageItems = useMemo(() => {
     const { start, end } = sliceRange;
 
     return products?.slice(start, end);
   }, [JSON.stringify(products), sliceRange.start, sliceRange.end]);
-
-  // determine if the products are loading
-  const isLoading = productsQuery.isLoading;
-  const loadingState =
-    isLoading || paginatedProducts?.length === 0 ? "loading" : "idle";
 
   const handleView = (product) => {
     setCurrentProduct(product);
@@ -104,6 +129,7 @@ const ProductsTable = () => {
     deleteProduct.mutate(productId);
   };
 
+  // render the cell based on the column key
   const renderCell = useCallback((product, columnKey) => {
     const cellValue = product[columnKey];
 
@@ -138,46 +164,51 @@ const ProductsTable = () => {
     }
   }, []);
 
-  if (productsQuery.isError) {
-    return (
-      <ErrorCard
-        message="Unable to fetch products, please try again."
-        error={productsQuery.error?.message}
-      />
-    );
-  }
-
   if (isLoading) {
     return <TableSkeleton />;
   }
 
   return (
     <div className="mb-6 mt-3">
-      {/* ---------- Result Widget  ---------- */}
+      {/* ---------- Results Widget  ---------- */}
       <div className="mb-2">
         <ResultsWidget
           rowsPerPage={rowsPerPage}
           setRowsPerPage={setRowsPerPage}
           numberOfResults={numberOfProducts}
           changePage={changePage}
+          onRefreshAction={() => sortedList.reload()}
         />
       </div>
 
       <div className="flex min-h-screen flex-col justify-between">
         {/* -------------- Table -------------- */}
-        <Table aria-label="Products Table" isHeaderSticky isCompact>
+        <Table
+          aria-label="Products Table"
+          isHeaderSticky
+          isCompact
+          onSortChange={sortedList.sort}
+          sortDescriptor={sortedList.sortDescriptor}
+          classNames={{
+            table: "min-h-[400px]",
+          }}
+        >
           <TableHeader columns={columns}>
             {(column) => (
-              <TableColumn key={column.key}>{column.label}</TableColumn>
+              <TableColumn
+                key={column.key}
+                allowsSorting={column?.sortable === true}
+              >
+                {column.label}
+              </TableColumn>
             )}
           </TableHeader>
 
           <TableBody
-            items={isLoading ? [] : paginatedProducts}
+            items={isLoading ? [] : currentPageItems}
             emptyContent={!isLoading && "No rows to display."}
             isLoading={isLoading}
-            loadingState={loadingState}
-            loadingContent={<Spinner />}
+            loadingContent={<Spinner aria-label="Loading..." />}
           >
             {(product, idx) => (
               <TableRow
@@ -193,7 +224,7 @@ const ProductsTable = () => {
           </TableBody>
         </Table>
 
-        {/* -------------- Table -------------- */}
+        {/* -------------- Pagination Controls -------------- */}
         <div className="mt-6 flex w-full justify-center">
           <div className="rounded-lg border p-3 drop-shadow-sm">
             <Pagination
