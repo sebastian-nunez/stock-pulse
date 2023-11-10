@@ -2,15 +2,15 @@ import { Card, Skeleton } from "@nextui-org/react";
 export const ResultsWidgetSkeleton = () => {
   return (
     <div className="flex justify-between">
-      <div className="flex gap-3">
-        <Skeleton className="h-6 w-16 rounded" />
+      <div className="flex gap-1">
+        <Skeleton className="h-6 w-14 rounded" />
         <Skeleton className="h-6 w-6 rounded" />
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex gap-2">
         <Skeleton className="h-6 w-24 rounded" />
-        <Skeleton className="h-6 w-5 rounded" />
         <Skeleton className="h-6 w-8 rounded" />
+        <Skeleton className="h-6 w-5 rounded" />
       </div>
     </div>
   );
@@ -45,7 +45,7 @@ export const TableCardSkeleton = ({ numberOfRows }) => {
 
 const TableSkeleton = () => {
   return (
-    <div className="px-6sm:px-0 mt-3 flex flex-col gap-3">
+    <div className="mt-3 flex flex-col gap-3 px-6 py-6 sm:px-0">
       <ResultsWidgetSkeleton />
 
       <TableCardSkeleton numberOfRows={8} />
