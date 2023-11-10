@@ -5,10 +5,19 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  useDisclosure,
 } from "@nextui-org/react";
+import { ExternalLink } from "lucide-react";
 import InfoPanel from "./InfoPanel";
+import TagEditableModal from "./TagEditableModal";
 
 const TagDetailsModal = ({ tag, isOpen, onOpenChange }) => {
+  const {
+    isOpen: isOpen_Edit,
+    onOpen: onOpen_Edit,
+    onOpenChange: onOpenChange_Edit,
+  } = useDisclosure();
+
   return (
     <>
       <Modal
@@ -44,8 +53,26 @@ const TagDetailsModal = ({ tag, isOpen, onOpenChange }) => {
                 )}
               </ModalBody>
 
-              <ModalFooter>
-                <Button color="danger" onPress={onClose} radius="sm">
+              <ModalFooter className="jus flex justify-between gap-3">
+                <Button
+                  color="primary"
+                  variant="ghost"
+                  onPress={() => {
+                    onClose();
+                    onOpen_Edit();
+                  }}
+                  radius="sm"
+                  startContent={<ExternalLink height={20} width={20} />}
+                >
+                  Edit
+                </Button>
+
+                <Button
+                  color="danger"
+                  onPress={onClose}
+                  radius="sm"
+                  className="w-40"
+                >
                   Close
                 </Button>
               </ModalFooter>
@@ -53,6 +80,14 @@ const TagDetailsModal = ({ tag, isOpen, onOpenChange }) => {
           )}
         </ModalContent>
       </Modal>
+
+      <TagEditableModal
+        title="Edit Tag"
+        canDelete={true}
+        tag={tag}
+        isOpen={isOpen_Edit}
+        onOpenChange={onOpenChange_Edit}
+      />
     </>
   );
 };
