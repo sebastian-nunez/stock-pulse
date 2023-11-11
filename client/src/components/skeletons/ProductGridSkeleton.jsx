@@ -1,15 +1,23 @@
 import { Card, Skeleton } from "@nextui-org/react";
+import { ResultsWidgetSkeleton } from "./TableSkeleton";
 
 export const ProductCardSkeleton = () => {
   return (
     <Card className="w-full space-y-8 p-10" radius="lg">
-      <Skeleton className="h-40 rounded-lg " />
+      <Skeleton className="h-52 rounded-lg " />
 
       <div className="space-y-6">
-        <Skeleton className="h-6 w-3/5 rounded-lg" />
+        <div className="flex items-end justify-between">
+          <Skeleton className="h-7 w-3/5 rounded-lg" />
+          <Skeleton className="h-7 w-1/5 rounded-lg" />
+        </div>
 
-        <Skeleton className="h-3 w-2/5 rounded-lg" />
-        <Skeleton className="h-3 w-2/5 rounded-lg" />
+        <Skeleton className="h-3 w-1/5 rounded-lg" />
+
+        <div className="item-center flex justify-between">
+          <Skeleton className="h-6 w-2/5 rounded-lg" />
+          <Skeleton className="h-8 w-20 rounded-full" />
+        </div>
       </div>
     </Card>
   );
@@ -19,10 +27,14 @@ const ProductGridSkeleton = () => {
   const numberOfSkeletons = 12;
 
   return (
-    <div className="grid gap-6 px-6 py-6 md:grid-cols-2 md:px-0 lg:grid-cols-3">
-      {Array.from(Array(numberOfSkeletons).keys()).map((index) => (
-        <ProductCardSkeleton key={index} />
-      ))}
+    <div className="flex flex-col gap-3 py-6">
+      <ResultsWidgetSkeleton />
+
+      <div className="grid gap-6 px-6 md:grid-cols-2 md:px-0 lg:grid-cols-3">
+        {Array.from(Array(numberOfSkeletons).keys()).map((index) => (
+          <ProductCardSkeleton key={index} />
+        ))}
+      </div>
     </div>
   );
 };
