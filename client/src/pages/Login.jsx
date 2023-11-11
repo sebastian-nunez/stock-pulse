@@ -4,11 +4,13 @@ import LoginForm from "../components/LoginForm";
 
 const Login = () => {
   return (
-    <div className="mx-auto my-12 flex w-1/3 flex-col gap-6">
+    <div className="mx-auto my-6 flex flex-col gap-6 px-6 sm:my-12 sm:px-0 lg:w-1/3">
       {/* ------------- Header ------------ */}
       <div className="inline-flex items-center gap-1">
         <Layers3 size={50} />
-        <h1 className="text-6xl font-extrabold tracking-tighter">StockPulse</h1>
+        <h1 className="text-5xl font-extrabold tracking-tighter sm:text-6xl">
+          StockPulse
+        </h1>
       </div>
 
       <div className="flex w-full flex-col gap-4 rounded-xl bg-neutral-100 px-6 py-10 shadow-lg">
