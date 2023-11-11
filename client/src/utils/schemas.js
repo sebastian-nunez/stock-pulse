@@ -75,29 +75,48 @@ export const tagSchema = z.object({
     .min(10, "Category description must be at least 10 characters")
     .max(255, "Category description must be less than 255 characters"),
 });
+
+export const passwordSchema = z
+  .string()
+  .min(8, "Password must be at least 8 characters")
+  .max(32, "Password must be less than 32 characters")
+  .refine((value) => {
+    const regex = /(?=.*[A-Z])/;
+    return regex.test(value);
+  }, "Password must contain at least 1 uppercase letters")
+  .refine((value) => {
+    const regex = /(?=.*[!@#$&*])/;
+    return regex.test(value);
+  }, "Password must contain at least 1 special character (!@#$&*)")
+  .refine((value) => {
+    const regex = /(?=.*[0-9].*[0-9])/;
+    return regex.test(value);
+  }, "Password must contain at least 2 numbers")
+  .refine((value) => {
+    const regex = /(?=.*[a-z].*[a-z].*[a-z])/;
+    return regex.test(value);
+  }, "Password must contain at least 3 lowercase letters");
+
+export const usernameSchema = z
+  .string()
+  .min(5, "Username must be at least 5 characters")
+  .max(20, "Username must be less than 25 characters")
+  .refine((value) => {
+    const regex = /^[a-zA-Z0-9-]+$/;
+    return regex.test(value);
+  }, "Username must contain only letters, numbers or dashes (-)");
+
 export const loginSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  password: z
-    .string()
-    .min(8, "Password must be at least 8 characters")
-    .max(25, "Password must be less than 25 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  password: passwordSchema,
 });
 
 export const signUpSchema = z
   .object({
-    username: z
-      .string()
-      .min(5, "Username must be at least 5 characters")
-      .max(25, "Username must be less than 25 characters"),
-    email: z.string().email("Invalid email address"),
-    password: z
-      .string()
-      .min(8, "Password must be at least 8 characters")
-      .max(25, "Password must be less than 25 characters"),
-    confirmPassword: z
-      .string()
-      .min(8, "Confirm password must be at least 8 characters")
-      .max(25, "Confirm password must be less than 25 characters"),
+    username: usernameSchema,
+    email: z.string().email("Please enter a valid email address"),
+    password: passwordSchema,
+    confirmPassword: passwordSchema,
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
