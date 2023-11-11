@@ -6,7 +6,7 @@ import LoginForm from "../components/LoginForm";
 const Login = () => {
   return (
     <div className="mx-auto my-6 px-6 sm:px-0 lg:w-1/3">
-      <div className="flex w-full flex-col gap-4 rounded-xl bg-neutral-100 px-6 py-8 shadow-lg">
+      <div className="flex w-full flex-col gap-3 rounded-xl bg-neutral-100 px-6 py-8 shadow-lg">
         {/* ------------- Header ------------ */}
         <div>
           <h2 className="text-2xl font-bold tracking-tight">Welcome, back!</h2>

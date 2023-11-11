@@ -38,7 +38,7 @@ const LoginForm = () => {
     <form
       id="login-form"
       noValidate
-      className="flex flex-col gap-5"
+      className="flex flex-col gap-3"
       onSubmit={handleSubmit(onSubmit)}
     >
       {/* --------------- Email -------------- */}

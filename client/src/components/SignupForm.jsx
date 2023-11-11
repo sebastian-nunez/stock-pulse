@@ -37,7 +37,7 @@ const SignupForm = () => {
   return (
     <form
       id="signup-form"
-      className="flex flex-col gap-5"
+      className="flex flex-col gap-3"
       noValidate
       onSubmit={handleSubmit(onSubmit)}
     >
