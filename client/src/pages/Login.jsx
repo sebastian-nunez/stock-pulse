@@ -1,19 +1,19 @@
-import { Link } from "@nextui-org/react";
-import { Layers3 } from "lucide-react";
+import { Divider, Link } from "@nextui-org/react";
+import { Github } from "lucide-react";
+import { Link as NavLink } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 
 const Login = () => {
   return (
-    <div className="mx-auto my-6 flex flex-col gap-6 px-6 sm:my-12 sm:px-0 lg:w-1/3">
-      {/* ------------- Header ------------ */}
-      <div className="inline-flex items-center gap-1">
-        <Layers3 size={50} />
-        <h1 className="text-5xl font-extrabold tracking-tighter sm:text-6xl">
-          StockPulse
-        </h1>
-      </div>
+    <div className="mx-auto my-6 px-6 sm:px-0 lg:w-1/3">
+      <div className="flex w-full flex-col gap-4 rounded-xl bg-neutral-100 px-6 py-8 shadow-lg">
+        {/* ------------- Header ------------ */}
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">Welcome, back!</h2>
 
-      <div className="flex w-full flex-col gap-4 rounded-xl bg-neutral-100 px-6 py-10 shadow-lg">
+          <Divider className="my-1" />
+        </div>
+
         {/* ------------- Form ------------ */}
         <LoginForm />
 
@@ -28,7 +28,6 @@ const Login = () => {
             Forgot password?
           </Link>
         </div>
-
         {/* ------------- Sign up ------------- */}
         <p className="mt-3 text-neutral-600">
           Not a member?{" "}
@@ -41,6 +40,17 @@ const Login = () => {
             Sign up
           </Link>
         </p>
+
+        {/* ------------- Login with GitHub ------------- */}
+        <Divider className="my-1" content="OR" />
+
+        <NavLink to="/auth/github">
+          <button className="w-full rounded bg-gray-900 py-3 text-lg font-semibold text-white hover:bg-gray-800">
+            <span className="inline-flex gap-2">
+              <Github /> Login with GitHub
+            </span>
+          </button>
+        </NavLink>
       </div>
     </div>
   );

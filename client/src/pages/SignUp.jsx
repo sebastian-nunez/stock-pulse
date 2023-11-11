@@ -1,75 +1,46 @@
-import { Link } from "react-router-dom";
-import { Layers3 } from "lucide-react";
-import { Input } from "@nextui-org/react";
+import { Divider, Link } from "@nextui-org/react";
+import { Github } from "lucide-react";
+import { Link as NavLink } from "react-router-dom";
+import SignupForm from "../components/SignupForm";
 
 const SignUp = () => {
   return (
-    <div className="mt-20 flex items-center justify-center md:flex-row">
-      <div className="mr-8 text-left">
-        <div className="flex">
-          {/* LOGO & SUBTITLE */}
-          <Layers3 size={50} className="my-auto" />
-          <h1 className="ml-2 mr-9 text-7xl font-extrabold tracking-tighter">
-            StockPulse
-          </h1>
+    <div className="mx-auto my-6 px-6 sm:px-0 lg:w-1/3">
+      <div className="flex w-full flex-col gap-4 rounded-xl bg-neutral-100 px-6 py-8 shadow-lg">
+        {/* ------------- Header ------------ */}
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">
+            Create an account
+          </h2>
+
+          <Divider className="my-1" />
         </div>
-        <p className="my-2.5 pb-6 text-center text-gray-500">
-          Managing inventory made effortless!
-        </p>
 
-        {/* INPUTS */}
-        <div className="rounded-xl bg-gray-100 p-14">
-          <Input
-            variant="bordered"
-            isClearable
-            size="lg"
-            type="name"
-            label="First Name"
-            className="mb-5 rounded-xl bg-white"
-          />
-          <Input
-            variant="bordered"
-            isClearable
-            size="lg"
-            type="name"
-            label="Last Name"
-            className="mb-5 rounded-xl bg-white"
-          />
-          <Input
-            variant="bordered"
-            isClearable
-            size="lg"
-            type="email"
-            label="Email"
-            className="mb-5 rounded-xl bg-white"
-          />
-          <Input
-            variant="bordered"
-            isClearable
-            size="lg"
-            type="password"
-            label="Password"
-            className="rounded-xl bg-white"
-          />
+        {/* ------------- Form ------------ */}
+        <SignupForm />
 
-          {/* SIGN UP BUTTON */}
-          <Link to="/">
-            <button className="mt-5 rounded bg-gray-900 font-semibold text-white hover:bg-gray-600 md:w-full md:px-7 md:py-2.5">
-              Sign Up
-            </button>
+        {/* ------------- Sign up ------------- */}
+        <p className="mt-6 text-neutral-600">
+          Already a member?{" "}
+          <Link
+            href="/login"
+            className="font-semibold"
+            underline="always"
+            color="foreground"
+          >
+            Log In
           </Link>
+        </p>
+        {/* ------------- Sign up with GitHub ------------- */}
+        <Divider className="my-1" content="OR" />
 
-          {/* LOGIN BUTTON */}
-          <p className="mt-5 text-sm">
-            Already a member?
-            <Link to="/login">
-              {" "}
-              <button className="font-semibold text-gray-700 underline hover:text-gray-400 md:ml-auto md:py-2.5">
-                Login
-              </button>
-            </Link>
-          </p>
-        </div>
+        <NavLink to="/auth/github">
+          <button className="w-full rounded bg-gray-900 py-3 text-lg font-semibold text-white hover:bg-gray-800">
+            <span className="inline-flex gap-2">
+              <Github /> Sign up with GitHub
+            </span>
+          </button>
+        </NavLink>
       </div>
     </div>
   );

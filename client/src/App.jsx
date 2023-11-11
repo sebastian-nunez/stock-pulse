@@ -33,6 +33,12 @@ const App = () => {
       ),
     },
     {
+      path: "/auth/github",
+      element: (
+        <ErrorCard message="We're sorry, but login/sign up via GitHub is not available." />
+      ),
+    },
+    {
       path: "/browser",
       element: <Browser />,
     },
