@@ -1,4 +1,5 @@
 import {
+  Button,
   Divider,
   Navbar,
   NavbarBrand,
@@ -72,7 +73,14 @@ export default function App() {
       ></NavbarContent>
       <NavbarItem>
         <Link to="/login" className="text-default-800 hover:text-default-500">
-          Login
+          <Button
+            variant="flat"
+            color="primary"
+            radius="sm"
+            className="font-semibold"
+          >
+            Log in
+          </Button>
         </Link>
       </NavbarItem>
 
