@@ -4,6 +4,7 @@ import ErrorCard from "./components/ErrorCard";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Browser from "./pages/Browser";
+import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
 import Inventory from "./pages/Inventory";
 import Login from "./pages/Login";
@@ -28,9 +29,7 @@ const App = () => {
     },
     {
       path: "/forgot-password",
-      element: (
-        <ErrorCard message="Please contact your system administrator to reset your password." />
-      ),
+      element: <ForgotPassword />,
     },
     {
       path: "/auth/github",
