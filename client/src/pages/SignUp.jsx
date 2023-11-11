@@ -1,6 +1,6 @@
-import { Divider, Link } from "@nextui-org/react";
+import { Divider } from "@nextui-org/react";
 import { Github } from "lucide-react";
-import { Link as NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SignupForm from "../components/SignupForm";
 
 const SignUp = () => {
@@ -19,14 +19,12 @@ const SignUp = () => {
         {/* ------------- Form ------------ */}
         <SignupForm />
 
-        {/* ------------- Sign up ------------- */}
+        {/* ------------- Login ------------- */}
         <p className="mt-6 text-neutral-600">
           Already a member?{" "}
           <Link
-            href="/login"
-            className="font-semibold"
-            underline="always"
-            color="foreground"
+            to="/login"
+            className="border-b-2 border-black pb-0.5 font-semibold"
           >
             Log In
           </Link>
@@ -34,13 +32,16 @@ const SignUp = () => {
         {/* ------------- Sign up with GitHub ------------- */}
         <Divider className="my-1" content="OR" />
 
-        <NavLink to="/auth/github">
-          <button className="w-full rounded bg-gray-900 py-3 text-lg font-semibold text-white hover:bg-gray-800">
+        <Link to="/auth/github">
+          <button
+            type="button"
+            className="w-full rounded bg-gray-900 py-3 text-lg font-semibold text-white hover:bg-gray-800"
+          >
             <span className="inline-flex gap-2">
               <Github /> Sign up with GitHub
             </span>
           </button>
-        </NavLink>
+        </Link>
       </div>
     </div>
   );

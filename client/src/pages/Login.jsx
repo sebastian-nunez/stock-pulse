@@ -1,6 +1,6 @@
-import { Divider, Link } from "@nextui-org/react";
+import { Divider } from "@nextui-org/react";
 import { Github } from "lucide-react";
-import { Link as NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoginForm from "../components/LoginForm";
 
 const Login = () => {
@@ -18,12 +18,10 @@ const Login = () => {
         <LoginForm />
 
         {/* --------- Forgot Password --------- */}
-        <div className="text-right">
+        <div className="text-right text-sm">
           <Link
-            href="/forgot-password"
-            className="text-sm font-semibold text-neutral-600"
-            underline="always"
-            color="foreground"
+            to="/forgot-password"
+            className="border-b-2 border-black pb-0.5 font-semibold"
           >
             Forgot password?
           </Link>
@@ -32,10 +30,8 @@ const Login = () => {
         <p className="mt-3 text-neutral-600">
           Not a member?{" "}
           <Link
-            href="/signup"
-            className="font-semibold"
-            underline="always"
-            color="foreground"
+            to="/signup"
+            className="border-b-2 border-black pb-0.5 font-semibold text-black"
           >
             Sign up
           </Link>
@@ -44,13 +40,13 @@ const Login = () => {
         {/* ------------- Login with GitHub ------------- */}
         <Divider className="my-1" content="OR" />
 
-        <NavLink to="/auth/github">
+        <Link to="/auth/github">
           <button className="w-full rounded bg-gray-900 py-3 text-lg font-semibold text-white hover:bg-gray-800">
             <span className="inline-flex gap-2">
               <Github /> Login with GitHub
             </span>
           </button>
-        </NavLink>
+        </Link>
       </div>
     </div>
   );
