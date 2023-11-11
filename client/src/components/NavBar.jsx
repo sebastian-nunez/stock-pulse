@@ -1,5 +1,4 @@
 import {
-  Button,
   Divider,
   Navbar,
   NavbarBrand,
@@ -71,14 +70,9 @@ export default function App() {
       <NavbarContent className="hidden gap-4 sm:flex" justify="end">
         <NavbarItem>
           <Link to="/login" className="text-default-800 hover:text-default-500">
-            <Button
-              variant="flat"
-              color="primary"
-              radius="sm"
-              className="font-semibold"
-            >
-              Log in
-            </Button>
+            <button className="w-full rounded-md bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600">
+              Login
+            </button>
           </Link>
         </NavbarItem>
       </NavbarContent>
