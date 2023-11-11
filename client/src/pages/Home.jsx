@@ -4,12 +4,16 @@ const Home = () => {
   return (
     <div className="flex h-screen items-center justify-center md:flex-row">
       <div className="mr-8 text-left">
+
+        {/* LOGO & SUBTITLE */}
         <h1 className="mr-9 text-7xl font-extrabold tracking-tighter">
           Inventory <br /> Management
         </h1>
         <p className="my-2.5 pb-6 text-gray-500">
           Managing inventory made effortless!
         </p>
+          
+          {/* GET STARTED BUTTON */}
         <Link to="/404">
           <button className="rounded bg-blue-500 font-semibold text-white hover:bg-blue-600 md:px-7 md:py-2.5">
             Get Started
@@ -17,6 +21,7 @@ const Home = () => {
         </Link>
       </div>
 
+      {/* PAGE HERO */}
       <div>
         <img
           src="../src/assets/stockpulseimage.png"
