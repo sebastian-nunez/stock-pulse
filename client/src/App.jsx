@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Browser from "./pages/Browser";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Inventory from "./pages/Inventory";
 import PageNotFound from "./pages/PageNotFound";
 import Playground from "./pages/Playground";
@@ -14,6 +15,10 @@ const App = () => {
     {
       path: "/",
       element: <Home />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
     },
     {
       path: "/browser",
