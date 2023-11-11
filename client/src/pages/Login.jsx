@@ -37,7 +37,7 @@ const Login = () => {
           />
 
           {/* LOGIN BUTTON */}
-          <Link to="/404">
+          <Link to="/">
             <button className="mt-5 rounded bg-gray-900 font-semibold text-white hover:bg-gray-600 md:w-full md:px-7 md:py-2.5">
               Login
             </button>
