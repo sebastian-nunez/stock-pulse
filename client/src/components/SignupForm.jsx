@@ -82,6 +82,18 @@ const SignupForm = () => {
         isRequired
         isInvalid={errors.password !== undefined}
         errorMessage={errors.password?.message}
+        description={
+          <div>
+            <h2 className="font-bold">Password Requirements:</h2>
+            <ul>
+              <li>- Be at least 8 characters</li>
+              <li>- Contain at least 1 uppercase letter</li>
+              <li>- Contain at least 1 special character (!@#$&*)</li>
+              <li>- Contain at least 2 numbers</li>
+              <li>- Contain at least 3 lowercase letters</li>
+            </ul>
+          </div>
+        }
         endContent={
           <button
             type="button"
