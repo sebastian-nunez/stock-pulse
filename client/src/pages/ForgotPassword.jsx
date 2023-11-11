@@ -1,7 +1,8 @@
-import { Divider, Input, Link, Spinner } from "@nextui-org/react";
+import { Divider, Input, Spinner } from "@nextui-org/react";
 import { Eye, EyeOff, EyeOffIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
   // state
@@ -19,12 +20,14 @@ const ForgotPassword = () => {
     e.preventDefault();
     // TODO: Add logic to send the code to the provided email
     setStep(2);
+    toast.success(`Email sent!`);
   };
 
   const handleCodeSubmit = (e) => {
     e.preventDefault();
     // TODO: Add logic to verify the code and proceed to the next step
     setStep(3);
+    toast.success(`Confirmation code submitted!`);
   };
 
   const handlePasswordSubmit = (e) => {
@@ -164,11 +167,14 @@ const ForgotPassword = () => {
       case 4:
         return (
           <div>
-            <p className="text-lg  text-default-500">
+            <p className="text-default-500">
               Password changed successfully! <br />
               <br />
               You can now{" "}
-              <Link href="/login" underline="always" color="foreground">
+              <Link
+                to="/login"
+                className="border-b-2 border-black pb-0.5 font-semibold text-black"
+              >
                 Login
               </Link>{" "}
               with your new password.
@@ -180,11 +186,6 @@ const ForgotPassword = () => {
         return null;
     }
   };
-
-  useEffect(() => {
-    // TODO: Add any additional logic you need when the step changes
-    toast.success(`Step ${step - 1} was successful!`);
-  }, [step]);
 
   return (
     <div className="mx-auto my-6 px-6 sm:px-0 lg:w-1/3">
@@ -212,20 +213,6 @@ const ForgotPassword = () => {
           </div>
         ) : (
           renderBody()
-        )}
-
-        {/* ------------- Back to Login Link ------------- */}
-        {step !== 1 && step !== 4 && (
-          <div className="mt-4 text-left">
-            <Link
-              onClick={() => setStep(1)}
-              className="cursor-pointer text-sm font-semibold text-neutral-600"
-              underline="always"
-              color="foreground"
-            >
-              Back to email
-            </Link>
-          </div>
         )}
       </div>
     </div>

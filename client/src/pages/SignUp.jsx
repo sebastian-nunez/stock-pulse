@@ -20,11 +20,11 @@ const SignUp = () => {
         <SignupForm />
 
         {/* ------------- Login ------------- */}
-        <p className="mt-6 text-neutral-600">
+        <p className="mt-6 text-default-600">
           Already a member?{" "}
           <Link
             to="/login"
-            className="border-b-2 border-black pb-0.5 font-semibold"
+            className="border-b-2 border-black pb-0.5 font-semibold text-black"
           >
             Log In
           </Link>

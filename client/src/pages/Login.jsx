@@ -21,13 +21,13 @@ const Login = () => {
         <div className="text-right text-sm">
           <Link
             to="/forgot-password"
-            className="border-b-2 border-black pb-0.5 font-semibold"
+            className="border-b-2 border-black pb-0.5 font-semibold "
           >
             Forgot password?
           </Link>
         </div>
         {/* ------------- Sign up ------------- */}
-        <p className="mt-3 text-neutral-600">
+        <p className="mt-3 text-default-600">
           Not a member?{" "}
           <Link
             to="/signup"
