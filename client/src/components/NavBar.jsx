@@ -68,22 +68,20 @@ export default function App() {
       <div className="w-full" />
 
       {/* Desktop Menu (RIGHT) */}
-      <NavbarContent
-        className="hidden gap-4 sm:flex"
-        justify="end"
-      ></NavbarContent>
-      <NavbarItem>
-        <Link to="/login" className="text-default-800 hover:text-default-500">
-          <Button
-            variant="flat"
-            color="primary"
-            radius="sm"
-            className="font-semibold"
-          >
-            Log in
-          </Button>
-        </Link>
-      </NavbarItem>
+      <NavbarContent className="hidden gap-4 sm:flex" justify="end">
+        <NavbarItem>
+          <Link to="/login" className="text-default-800 hover:text-default-500">
+            <Button
+              variant="flat"
+              color="primary"
+              radius="sm"
+              className="font-semibold"
+            >
+              Log in
+            </Button>
+          </Link>
+        </NavbarItem>
+      </NavbarContent>
 
       {/* Mobile Menu */}
       <NavbarMenu>
