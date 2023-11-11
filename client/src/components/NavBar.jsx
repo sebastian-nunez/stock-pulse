@@ -16,6 +16,7 @@ export const menuItems = [
   { name: "Home", path: "/" },
   { name: "Browser", path: "/browser" },
   { name: "Inventory", path: "/inventory" },
+  { name: "Login", path: "/login" },
 ];
 
 export default function App() {
