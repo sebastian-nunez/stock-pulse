@@ -33,13 +33,19 @@ const Inventory = () => {
       <div className="mx-break-out min-h-screen bg-neutral-50">
         {/* Change the full width background color */}
         <div className="container">
+          {/* ------------------ Products ------------------- */}
           {selectedFilter === FilterOptions.PRODUCTS && (
             <ProductsTable filterText={searchText} />
           )}
+
+          {/* ------------------ Categories ------------------- */}
           {selectedFilter === FilterOptions.CATEGORIES && <p>CATEGORIES</p>}
+
+          {/* ------------------ Tags ------------------- */}
           {selectedFilter === FilterOptions.TAGS && <p>TAGS</p>}
         </div>
       </div>
+
       {/* ------------------ Modals ------------------- */}
       {/* Create a product */}
       {selectedFilter === FilterOptions.PRODUCTS && (
