@@ -75,3 +75,31 @@ export const tagSchema = z.object({
     .min(10, "Category description must be at least 10 characters")
     .max(255, "Category description must be less than 255 characters"),
 });
+export const loginSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .max(25, "Password must be less than 25 characters"),
+});
+
+export const signUpSchema = z
+  .object({
+    username: z
+      .string()
+      .min(5, "Username must be at least 5 characters")
+      .max(25, "Username must be less than 25 characters"),
+    email: z.string().email("Invalid email address"),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .max(25, "Password must be less than 25 characters"),
+    confirmPassword: z
+      .string()
+      .min(8, "Confirm password must be at least 8 characters")
+      .max(25, "Confirm password must be less than 25 characters"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
