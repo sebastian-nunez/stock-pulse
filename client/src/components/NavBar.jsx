@@ -13,10 +13,10 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 export const menuItems = [
-  { name: "Home", path: "/" },
-  { name: "Browser", path: "/browser" },
-  { name: "Inventory", path: "/inventory" },
-  { name: "Login", path: "/login" },
+  { name: "Home", path: "/", side: "left" },
+  { name: "Browser", path: "/browser", side: "left" },
+  { name: "Inventory", path: "/inventory", side: "left" },
+  { name: "Login", path: "/login", side: "right" },
 ];
 
 export default function App() {
@@ -53,7 +53,7 @@ export default function App() {
 
         {/* Menu Items */}
         {menuItems
-          .filter((item) => item.name !== "Home")
+          .filter((item) => item.name !== "Home" && item.side === "left")
           .map((item) => (
             <NavbarItem
               key={item.name}
