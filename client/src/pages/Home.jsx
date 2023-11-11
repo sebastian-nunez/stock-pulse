@@ -14,7 +14,7 @@ const Home = () => {
         </p>
           
           {/* GET STARTED BUTTON */}
-        <Link to="/404">
+        <Link to="/signup">
           <button className="rounded bg-blue-500 font-semibold text-white hover:bg-blue-600 md:px-7 md:py-2.5">
             Get Started
           </button>

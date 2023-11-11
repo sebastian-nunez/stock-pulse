@@ -55,7 +55,7 @@ const Login = () => {
           {/* SIGN UP BUTTON */}
           <p className="mt-5 text-sm">
             Not a member?
-            <Link to="/404">
+            <Link to="/signup">
               {" "}
               <button className="font-semibold text-gray-700 underline hover:text-gray-400 md:ml-auto md:py-2.5">
                 Sign up
