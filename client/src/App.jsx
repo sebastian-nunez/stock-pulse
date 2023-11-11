@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import Browser from "./pages/Browser";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 import Inventory from "./pages/Inventory";
 import PageNotFound from "./pages/PageNotFound";
 import Playground from "./pages/Playground";
@@ -19,6 +20,10 @@ const App = () => {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/signup",
+      element: <SignUp />,
     },
     {
       path: "/browser",
