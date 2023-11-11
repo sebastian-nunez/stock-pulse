@@ -56,7 +56,7 @@ export default function App() {
             <NavbarItem
               key={item.name}
               isActive={item.path === pathname} // highlight active item from URL
-              className="text-slate-700"
+              className="text-default-800 hover:text-default-500"
             >
               <Link to={item.path}>{item.name}</Link>
             </NavbarItem>
@@ -71,7 +71,7 @@ export default function App() {
         justify="end"
       ></NavbarContent>
       <NavbarItem>
-        <Link to="/login" className="text-slate-700">
+        <Link to="/login" className="text-default-800 hover:text-default-500">
           Login
         </Link>
       </NavbarItem>
