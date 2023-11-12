@@ -29,7 +29,7 @@ const Login = () => {
           <UILink
             as={Link}
             to="/forgot-password"
-            underline="hover"
+            underline="always"
             color="foreground"
           >
             Forgot password?
@@ -39,7 +39,7 @@ const Login = () => {
         <p className="mt-3 text-default-600">
           Not a member?{" "}
           <UILink as={Link} to="/signup" underline="always" color="foreground">
-            <strong>Sign up</strong>
+            Sign up
           </UILink>
         </p>
 
