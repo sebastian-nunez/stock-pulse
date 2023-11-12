@@ -29,7 +29,7 @@ const ProductCard = ({ product, isLoading = false }) => {
   return (
     <>
       <Card
-        className="transform p-8 drop-shadow-sm transition duration-250 ease-in-out hover:scale-[1.025] hover:cursor-pointer"
+        className="transform p-4 drop-shadow-sm transition duration-250 ease-in-out hover:scale-[1.025] hover:cursor-pointer"
         isPressable
         disableRipple
         fullWidth

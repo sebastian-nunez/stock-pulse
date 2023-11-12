@@ -3,7 +3,7 @@ import { ResultsWidgetSkeleton } from "./TableSkeleton";
 
 export const ProductCardSkeleton = () => {
   return (
-    <Card className="w-full space-y-8 p-8" radius="lg">
+    <Card className="w-full space-y-8 p-4" radius="lg">
       <Skeleton className="h-52 rounded-lg " />
 
       <div className="space-y-6">
