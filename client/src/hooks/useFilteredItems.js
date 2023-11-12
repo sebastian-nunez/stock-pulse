@@ -7,10 +7,11 @@ import { normalizeText } from "../utils/helpers";
  * @param {Array} items list of items
  * @param {string} searchText search text
  * @param {Array} filterKeys keys to filter items by
- * @returns {Array} filtered items
+ * @returns {Array} filtered items and isFiltering state
  */
 const useFilteredItems = (items, searchText, filterKeys) => {
   const [filteredItems, setFilteredItems] = useState(items);
+  const [isFiltering, setIsFiltering] = useState(true);
 
   // memoized normalized search text
   const normalizedSearchText = useMemo(
@@ -31,15 +32,18 @@ const useFilteredItems = (items, searchText, filterKeys) => {
   );
 
   useEffect(() => {
+    setIsFiltering(true);
+
     // debounce the filter function
     const timeoutId = setTimeout(() => {
       setFilteredItems(filtered);
+      setIsFiltering(false);
     }, 300);
 
     return () => clearTimeout(timeoutId);
   }, [filtered]);
 
-  return filteredItems;
+  return { filteredItems, isFiltering };
 };
 
 export default useFilteredItems;

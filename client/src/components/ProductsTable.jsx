@@ -93,15 +93,14 @@ const ProductsTable = ({ filterText }) => {
 
   // extract the products from the sorted list
   const sortedProducts = sortedList?.items;
-  const isLoading = sortedList.isLoading || deleteProduct.isLoading;
 
-  const filteredProducts = useFilteredItems(sortedProducts, filterText, [
-    "name",
-    "brand",
-    "category",
-  ]);
+  const { filteredItems, isFiltering } = useFilteredItems(
+    sortedProducts,
+    filterText,
+    ["name", "brand", "category"],
+  );
 
-  const numberOfProducts = filteredProducts?.length;
+  const numberOfProducts = filteredItems?.length;
 
   // pagination
   const { currentPage, numberOfPages, sliceRange, changePage } = usePagination(
@@ -113,8 +112,8 @@ const ProductsTable = ({ filterText }) => {
   const currentPageItems = useMemo(() => {
     const { start, end } = sliceRange;
 
-    return filteredProducts?.slice(start, end);
-  }, [JSON.stringify(filteredProducts), sliceRange.start, sliceRange.end]);
+    return filteredItems?.slice(start, end);
+  }, [JSON.stringify(filteredItems), sliceRange.start, sliceRange.end]);
 
   const handleView = (product) => {
     setCurrentProduct(product);
@@ -173,7 +172,9 @@ const ProductsTable = ({ filterText }) => {
     }
   }, []);
 
-  if (isLoading || !currentPageItems?.length === 0) {
+  const isLoading =
+    sortedList.isLoading || deleteProduct.isLoading || isFiltering;
+  if (isLoading) {
     return <TableSkeleton />;
   }
 
@@ -191,7 +192,7 @@ const ProductsTable = ({ filterText }) => {
             <ResultsWidget
               rowsPerPage={rowsPerPage}
               setRowsPerPage={setRowsPerPage}
-              numberOfResults={numberOfPages}
+              numberOfResults={numberOfProducts}
               changePage={changePage}
               onRefreshAction={() => sortedList.reload()}
             />
@@ -213,7 +214,7 @@ const ProductsTable = ({ filterText }) => {
 
           <TableBody
             items={isLoading ? [] : currentPageItems}
-            emptyContent={!isLoading && "No rows to display."}
+            emptyContent={"No rows to display."}
             isLoading={isLoading}
             loadingContent={<Spinner aria-label="Loading..." />}
           >
