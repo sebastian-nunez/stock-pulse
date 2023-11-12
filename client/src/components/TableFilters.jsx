@@ -6,7 +6,7 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import { PackagePlus, ScanSearch, Search } from "lucide-react";
+import { FileArchive, PackagePlus, Search } from "lucide-react";
 
 export const FilterOptions = {
   PRODUCTS: "Products",
@@ -28,7 +28,7 @@ const TableFilters = ({
   };
 
   return (
-    <Card className="p-4 drop-shadow-sm">
+    <Card className="mx-6 p-4 drop-shadow-sm sm:mx-0">
       <h1 className="text-xl font-bold tracking-tight">Filters</h1>
 
       <Divider className="mb-3" />
@@ -40,7 +40,7 @@ const TableFilters = ({
             aria-label="Select a filter"
             size="lg"
             variant="bordered"
-            startContent={<ScanSearch size={20} />}
+            startContent={<FileArchive size={20} />}
             placeholder="Select a filter"
             selectedKeys={selectedFilter ? [selectedFilter] : []}
             labelPlacement="outside"
@@ -74,6 +74,7 @@ const TableFilters = ({
             size="lg"
             labelPlacement="outside"
             variant="bordered"
+            description="Search by name, brand or category"
             startContent={<Search size={20} />}
             isClearable
             value={searchText}

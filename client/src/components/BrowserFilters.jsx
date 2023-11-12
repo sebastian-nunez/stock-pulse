@@ -69,7 +69,7 @@ const BrowserFilters = ({
   };
 
   return (
-    <Card className="p-4 drop-shadow-sm">
+    <Card className="mx-6 p-4 drop-shadow-sm sm:mx-0">
       <h1 className="text-xl font-bold tracking-tight">Filters</h1>
       <Divider className="mb-3" />
       <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
@@ -167,6 +167,7 @@ const BrowserFilters = ({
             placeholder="Search"
             size="lg"
             labelPlacement="outside"
+            description="Search by name or brand"
             variant="bordered"
             isClearable
             startContent={<Search size={20} />}
