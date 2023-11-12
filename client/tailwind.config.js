@@ -15,5 +15,9 @@ export default {
     extend: {},
   },
   darkMode: "class",
-  plugins: [nextui(), require("tailwind-container-break-out")],
+  plugins: [
+    nextui(),
+    require("tailwind-container-break-out"),
+    require("@tailwindcss/typography"),
+  ],
 };
