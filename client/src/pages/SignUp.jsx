@@ -8,8 +8,8 @@ const SignUp = () => {
   return (
     <div className="mx-auto my-6 flex flex-col gap-6 px-6 sm:px-0 lg:w-1/3 ">
       <DisclaimerBanner>
-        <strong>DEMO DISCLAIMER:</strong> The sign up feature is currently under
-        development. We apologize for any inconvenience.
+        The sign up feature is currently under development. We apologize for any
+        inconvenience.
       </DisclaimerBanner>
 
       <div className="flex w-full flex-col gap-3 rounded-xl bg-neutral-100 px-6 py-8 shadow-lg">
