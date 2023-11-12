@@ -11,7 +11,6 @@ import {
 import { ListFilter, RouteOff, Search, Tag } from "lucide-react";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
-import { ANY_CATEGORY } from "../hooks/useFilteredProducts";
 import CategoriesAPI from "../services/CategoriesAPI";
 import TagsAPI from "../services/TagsAPI";
 import {
@@ -19,6 +18,7 @@ import {
   PRODUCTS_QUERY_KEY,
   TAGS_QUERY_KEY,
 } from "../utils/constants";
+import { ANY_CATEGORY } from "../utils/helpers";
 
 const BrowserFilters = ({
   setSearchText,

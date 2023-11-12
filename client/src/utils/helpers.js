@@ -1,5 +1,3 @@
-import { REGEX_MATCH_NON_ALPHA_NUMERIC } from "../hooks/useFilteredProducts";
-
 export const EMPTY_PRODUCT = {
   name: "",
   brand: "",
@@ -15,6 +13,9 @@ export const EMPTY_PRODUCT = {
   category: "",
   tags: [],
 };
+
+export const REGEX_MATCH_NON_ALPHA_NUMERIC = /[^a-zA-Z0-9]/g;
+export const ANY_CATEGORY = "Any";
 
 /**
 * Helper function to get milliseconds from minutes
