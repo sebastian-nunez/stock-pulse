@@ -20,14 +20,13 @@ const ForgotPassword = () => {
     e.preventDefault();
     // TODO: Add logic to send the code to the provided email
     setStep(2);
-    toast.success(`Email sent!`);
+    toast.success(`Confirmation code sent to ${email}!`);
   };
 
   const handleCodeSubmit = (e) => {
     e.preventDefault();
     // TODO: Add logic to verify the code and proceed to the next step
     setStep(3);
-    toast.success(`Confirmation code submitted!`);
   };
 
   const handlePasswordSubmit = (e) => {
@@ -41,127 +40,147 @@ const ForgotPassword = () => {
     switch (step) {
       case 1:
         return (
-          <form onSubmit={handleEmailSubmit}>
-            <Input
-              type="email"
-              variant="bordered"
-              label="Email"
-              description="Enter the email associated with your account"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              isRequired
-              classNames={{
-                inputWrapper: ["bg-white"],
-                helperWrapper: ["bg-transparent"], // error message
-              }}
-            />
+          <div className="flex flex-col gap-3">
+            <p className="text-sm text-default-500">
+              In order to set up a new password, we need to confirm you identity
+              via email.
+            </p>
 
-            <button
-              type="submit"
-              className="mt-4 w-full rounded bg-blue-500 py-3 text-lg font-semibold text-white hover:bg-blue-600"
-            >
-              Send Code
-            </button>
-          </form>
+            <form onSubmit={handleEmailSubmit}>
+              <Input
+                type="email"
+                variant="bordered"
+                label="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                isRequired
+                classNames={{
+                  inputWrapper: ["bg-white"],
+                  helperWrapper: ["bg-transparent"], // error message
+                }}
+              />
+
+              <button
+                type="submit"
+                className="mt-4 w-full rounded bg-blue-500 py-3 text-lg font-semibold text-white hover:bg-blue-600"
+              >
+                Send Code
+              </button>
+            </form>
+          </div>
         );
 
       case 2:
         return (
-          <form onSubmit={handleCodeSubmit}>
-            <Input
-              type="text"
-              variant="bordered"
-              label="Confirmation Code"
-              description="Enter the confirmation code sent to your email"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              isRequired
-              classNames={{
-                inputWrapper: ["bg-white"],
-                helperWrapper: ["bg-transparent"], // error message
-              }}
-            />
-            <button
-              type="submit"
-              className="mt-4 w-full rounded bg-blue-500 py-3 text-lg font-semibold text-white hover:bg-blue-600"
-            >
-              Verify Code
-            </button>
-          </form>
+          <div className="flex flex-col gap-3">
+            <p className="text-sm text-default-500">
+              Enter the confirmation code sent to your email.
+            </p>
+
+            <form onSubmit={handleCodeSubmit}>
+              <Input
+                type="text"
+                variant="bordered"
+                label="Confirmation Code"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                isRequired
+                classNames={{
+                  inputWrapper: ["bg-white"],
+                  helperWrapper: ["bg-transparent"], // error message
+                }}
+              />
+              <button
+                type="submit"
+                className="mt-4 w-full rounded bg-blue-500 py-3 text-lg font-semibold text-white hover:bg-blue-600"
+              >
+                Verify Code
+              </button>
+            </form>
+          </div>
         );
 
       case 3:
         return (
-          <form onSubmit={handlePasswordSubmit} className="flex flex-col gap-3">
-            {/* --------------- New Password -------------- */}
-            <Input
-              label="New Password"
-              variant="bordered"
-              type={isVisible ? "text" : "password"}
-              isRequired
-              description={
-                <div>
-                  <h2 className="font-bold">Password Requirements:</h2>
-                  <ul>
-                    <li>- Be at least 8 characters</li>
-                    <li>- Contain at least 1 uppercase letter</li>
-                    <li>- Contain at least 1 special character (!@#$&*)</li>
-                    <li>- Contain at least 2 numbers</li>
-                    <li>- Contain at least 3 lowercase letters</li>
-                  </ul>
-                </div>
-              }
-              endContent={
-                <button
-                  type="button"
-                  onClick={toggleVisibility}
-                  className="flex items-center justify-center focus:outline-none"
-                >
-                  {isVisible ? (
-                    <Eye height={18} width={18} />
-                  ) : (
-                    <EyeOff height={18} width={18} />
-                  )}
-                </button>
-              }
-              classNames={{
-                inputWrapper: ["bg-white"],
-                helperWrapper: ["bg-transparent"], // error message
-              }}
-            />
-
-            {/* --------------- Confirm New Password -------------- */}
-            <Input
-              label="Confirm New Password"
-              variant="bordered"
-              type={isVisible ? "text" : "password"}
-              isRequired
-              endContent={
-                <button
-                  type="button"
-                  onClick={toggleVisibility}
-                  className="flex items-center justify-center focus:outline-none"
-                >
-                  {isVisible ? (
-                    <Eye height={18} width={18} />
-                  ) : (
-                    <EyeOffIcon height={18} width={18} />
-                  )}
-                </button>
-              }
-              classNames={{
-                inputWrapper: ["bg-white"],
-                helperWrapper: ["bg-transparent"], // error message
-              }}
-            />
-
-            <button
-              type="submit"
-              className="mt-4 w-full rounded bg-blue-500 py-3 text-lg font-semibold text-white hover:bg-blue-600"
+          <div className="flex flex-col gap-3">
+            <p className="text-sm text-default-500">
+              Now, set up your new password. Make sure it meets the specified
+              requirements.
+            </p>
+            <form
+              onSubmit={handlePasswordSubmit}
+              className="flex flex-col gap-3"
             >
-              Change Password
-            </button>
-          </form>
+              {/* --------------- New Password -------------- */}
+              <Input
+                label="New Password"
+                variant="bordered"
+                type={isVisible ? "text" : "password"}
+                isRequired
+                description={
+                  <div>
+                    <h2 className="font-bold">Password Requirements:</h2>
+                    <ul>
+                      <li>- Be at least 8 characters</li>
+                      <li>- Contain at least 1 uppercase letter</li>
+                      <li>- Contain at least 1 special character (!@#$&*)</li>
+                      <li>- Contain at least 2 numbers</li>
+                      <li>- Contain at least 3 lowercase letters</li>
+                    </ul>
+                  </div>
+                }
+                endContent={
+                  <button
+                    type="button"
+                    onClick={toggleVisibility}
+                    className="flex items-center justify-center focus:outline-none"
+                  >
+                    {isVisible ? (
+                      <Eye height={18} width={18} />
+                    ) : (
+                      <EyeOff height={18} width={18} />
+                    )}
+                  </button>
+                }
+                classNames={{
+                  inputWrapper: ["bg-white"],
+                  helperWrapper: ["bg-transparent"], // error message
+                }}
+              />
+
+              {/* --------------- Confirm New Password -------------- */}
+              <Input
+                label="Confirm New Password"
+                variant="bordered"
+                type={isVisible ? "text" : "password"}
+                isRequired
+                endContent={
+                  <button
+                    type="button"
+                    onClick={toggleVisibility}
+                    className="flex items-center justify-center focus:outline-none"
+                  >
+                    {isVisible ? (
+                      <Eye height={18} width={18} />
+                    ) : (
+                      <EyeOffIcon height={18} width={18} />
+                    )}
+                  </button>
+                }
+                classNames={{
+                  inputWrapper: ["bg-white"],
+                  helperWrapper: ["bg-transparent"], // error message
+                }}
+              />
+
+              <button
+                type="submit"
+                className="mt-4 w-full rounded bg-blue-500 py-3 text-lg font-semibold text-white hover:bg-blue-600"
+              >
+                Change Password
+              </button>
+            </form>
+          </div>
         );
 
       case 4:
