@@ -214,7 +214,7 @@ const ForgotPassword = () => {
         apologize for any inconvenience.
       </DisclaimerBanner>
 
-      <div className="flex w-full flex-col gap-3 rounded-xl bg-neutral-100 px-6 py-8 shadow-lg">
+      <div className="flex w-full flex-col gap-3 rounded-xl bg-neutral-50 px-6 py-8 shadow-xl">
         {/* ------------- Header ------------ */}
         <div>
           <div className="flex justify-between">
