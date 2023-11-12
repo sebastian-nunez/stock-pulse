@@ -3,6 +3,7 @@ import { Eye, EyeOff, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import DisclaimerBanner from "../components/DisclaimerBanner";
 
 const ForgotPassword = () => {
   // state
@@ -207,7 +208,12 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="mx-auto my-6 px-6 sm:px-0 lg:w-1/3">
+    <div className="mx-auto my-6 flex flex-col gap-6 px-6 sm:px-0 lg:w-1/3">
+      <DisclaimerBanner>
+        <strong>DEMO DISCLAIMER:</strong> The password recovery feature is
+        currently under development. We apologize for any inconvenience.
+      </DisclaimerBanner>
+
       <div className="flex w-full flex-col gap-3 rounded-xl bg-neutral-100 px-6 py-8 shadow-lg">
         {/* ------------- Header ------------ */}
         <div>
