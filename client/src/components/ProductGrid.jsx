@@ -34,7 +34,7 @@ const ProductGrid = ({ products }) => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col justify-between gap-3 px-6 pb-8 sm:px-0">
+    <div className="flex min-h-screen flex-col justify-between gap-3 px-6 pb-4 sm:px-0">
       <div className="mt-4 flex flex-col gap-2">
         {/* ---------- Result Widget  ---------- */}
         <ResultsWidget
