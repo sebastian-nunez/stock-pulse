@@ -49,7 +49,7 @@ const Browser = () => {
       <div className="mx-break-out min-h-screen bg-neutral-50">
         {/* Change the full width background color */}
         <div className="container">
-          {productsQuery.isLoading || !filteredProducts ? (
+          {!filteredProducts || productsQuery.isFetching ? (
             <ProductGridSkeleton />
           ) : (
             <ProductGrid products={filteredProducts} />
