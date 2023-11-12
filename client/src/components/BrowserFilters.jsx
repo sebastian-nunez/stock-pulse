@@ -1,5 +1,6 @@
 import {
   Button,
+  Card,
   Chip,
   Divider,
   Input,
@@ -68,11 +69,9 @@ const BrowserFilters = ({
   };
 
   return (
-    <div className="px-6 sm:px-0">
+    <Card className="p-4 drop-shadow-sm">
       <h1 className="text-xl font-bold tracking-tight">Filters</h1>
-
       <Divider className="mb-3" />
-
       <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
         {/* ------- Category --------- */}
         <div className="sm:w-1/3">
@@ -188,7 +187,7 @@ const BrowserFilters = ({
           </Tooltip>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

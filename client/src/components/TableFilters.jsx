@@ -1,4 +1,11 @@
-import { Button, Divider, Input, Select, SelectItem } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  Divider,
+  Input,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
 import { PackagePlus } from "lucide-react";
 
 export const FilterOptions = {
@@ -21,7 +28,7 @@ const TableFilters = ({
   };
 
   return (
-    <div className="sm:px-0">
+    <Card className="p-4 drop-shadow-sm">
       <h1 className="text-xl font-bold tracking-tight">Filters</h1>
 
       <Divider className="mb-3" />
@@ -74,7 +81,7 @@ const TableFilters = ({
           />
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

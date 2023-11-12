@@ -20,7 +20,7 @@ const Inventory = () => {
   };
 
   return (
-    <div className="py-3">
+    <div className="py-4">
       {/* ------------ Filters ------------- */}
       <TableFilters
         searchText={searchText}

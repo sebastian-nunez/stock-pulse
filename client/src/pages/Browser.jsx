@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
+import BackgroundGradient from "../components/BackgroundGradient";
 import BrowserFilters from "../components/BrowserFilters";
 import ErrorCard from "../components/ErrorCard";
 import ProductGrid from "../components/ProductGrid";
@@ -34,7 +35,7 @@ const Browser = () => {
   }
 
   return (
-    <div className="py-3">
+    <div className="py-4">
       {/* -------------------- Filters --------------------- */}
       <BrowserFilters
         searchText={searchText}
@@ -46,16 +47,17 @@ const Browser = () => {
       />
 
       {/* ------------------- Product Grid ------------------- */}
-      <div className="mx-break-out min-h-screen bg-neutral-50">
+      <div className="min-h-screen ">
         {/* Change the full width background color */}
-        <div className="container">
-          {!filteredProducts || productsQuery.isFetching ? (
-            <ProductGridSkeleton />
-          ) : (
-            <ProductGrid products={filteredProducts} />
-          )}
-        </div>
+        {!filteredProducts || productsQuery.isFetching ? (
+          <ProductGridSkeleton />
+        ) : (
+          <ProductGrid products={filteredProducts} />
+        )}
       </div>
+
+      {/* ------------- Blurred Background -------------- */}
+      <BackgroundGradient variant="subtle" />
     </div>
   );
 };
