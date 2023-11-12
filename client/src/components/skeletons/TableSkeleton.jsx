@@ -2,8 +2,8 @@ import { Card, Skeleton } from "@nextui-org/react";
 export const ResultsWidgetSkeleton = () => {
   return (
     <div className="flex justify-between">
-      <div className="flex gap-1">
-        <Skeleton className="h-6 w-14 rounded" />
+      <div className="flex gap-1.5">
+        <Skeleton className="h-6 w-12 rounded" />
         <Skeleton className="h-6 w-6 rounded" />
       </div>
 
@@ -23,6 +23,7 @@ export const PaginationControlsSkeleton = () => {
 export const RowSkeleton = () => {
   return (
     <div className="flex gap-3">
+      <Skeleton className="h-10 w-12 rounded" />
       <Skeleton className="h-10 w-64 rounded" />
       <Skeleton className="h-10 w-64 rounded" />
       <Skeleton className="h-10 w-16 rounded" />
@@ -35,7 +36,9 @@ export const RowSkeleton = () => {
 
 export const TableCardSkeleton = ({ numberOfRows }) => {
   return (
-    <Card className="flex flex-col gap-6 p-6">
+    <Card className="flex flex-col gap-6 px-4 pt-6">
+      <ResultsWidgetSkeleton />
+
       <Skeleton className="h-10 w-full rounded" />
       {Array.from({ length: numberOfRows }, (_, index) => (
         <RowSkeleton key={index} />
@@ -46,9 +49,7 @@ export const TableCardSkeleton = ({ numberOfRows }) => {
 
 const TableSkeleton = () => {
   return (
-    <div className="mt-3 flex flex-col gap-3 px-6 py-6 sm:px-0">
-      <ResultsWidgetSkeleton />
-
+    <div className="flex flex-col gap-3 px-6 py-4 sm:px-0">
       <TableCardSkeleton numberOfRows={12} />
 
       <PaginationControlsSkeleton />

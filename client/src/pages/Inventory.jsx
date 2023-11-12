@@ -20,7 +20,7 @@ const Inventory = () => {
   };
 
   return (
-    <>
+    <div className="py-3">
       {/* ------------ Filters ------------- */}
       <TableFilters
         searchText={searchText}
@@ -77,7 +77,7 @@ const Inventory = () => {
 
       {/* ------------- Blurred Background -------------- */}
       <BackgroundGradient variant="subtle" />
-    </>
+    </div>
   );
 };
 

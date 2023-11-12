@@ -68,7 +68,7 @@ const BrowserFilters = ({
   };
 
   return (
-    <div className="my-6 px-6 sm:px-0">
+    <div className="px-6 sm:px-0">
       <h1 className="text-xl font-bold tracking-tight">Filters</h1>
 
       <Divider className="mb-3" />

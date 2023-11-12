@@ -34,7 +34,7 @@ const Browser = () => {
   }
 
   return (
-    <>
+    <div className="py-3">
       {/* -------------------- Filters --------------------- */}
       <BrowserFilters
         searchText={searchText}
@@ -56,7 +56,7 @@ const Browser = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
