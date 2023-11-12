@@ -1,4 +1,4 @@
-import { Divider, Input, Spinner } from "@nextui-org/react";
+import { Card, Divider, Input, Spinner } from "@nextui-org/react";
 import { Eye, EyeOff, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -209,12 +209,12 @@ const ForgotPassword = () => {
 
   return (
     <div className="mx-auto my-6 flex flex-col gap-6 px-6 sm:px-0 lg:w-1/3">
-      <DisclaimerBanner>
+      <DisclaimerBanner durationSeconds={10}>
         The password recovery feature is currently under development. We
         apologize for any inconvenience.
       </DisclaimerBanner>
 
-      <div className="flex w-full flex-col gap-3 rounded-xl bg-neutral-50 px-6 py-8 shadow-xl">
+      <Card className="flex w-full flex-col gap-3  px-6 py-8 drop-shadow-lg">
         {/* ------------- Header ------------ */}
         <div>
           <div className="flex justify-between">
@@ -239,7 +239,7 @@ const ForgotPassword = () => {
         ) : (
           renderBody()
         )}
-      </div>
+      </Card>
 
       {/* ------------- Blurred Background ------------ */}
       <div class="blob absolute inset-x-1/2 inset-y-1/4 -z-10 h-[40rem] w-[40rem] rounded-full bg-opacity-60 bg-gradient-to-bl from-indigo-200 via-purple-200 to-pink-200 blur-3xl" />
