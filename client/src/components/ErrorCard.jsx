@@ -12,7 +12,7 @@ import BackgroundGradient from "./BackgroundGradient";
 const ErrorCard = ({ error, message }) => {
   return (
     <>
-      <Card className="m-6 w-fit max-w-lg bg-gray-50 shadow-xl sm:mx-auto">
+      <Card className="m-6 drop-shadow-lg sm:mx-auto sm:w-1/2">
         <CardHeader className="flex items-center gap-3">
           <ServerCrash width={45} height={45} />
           <div className="flex flex-col">
@@ -48,8 +48,6 @@ const ErrorCard = ({ error, message }) => {
             </p>
           )}
         </CardBody>
-
-        <Divider />
 
         <CardFooter>
           <Link showAnchorIcon href="/">

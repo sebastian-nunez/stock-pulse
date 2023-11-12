@@ -1,4 +1,4 @@
-import { Divider } from "@nextui-org/react";
+import { Card, Divider } from "@nextui-org/react";
 import { Github } from "lucide-react";
 import { Link } from "react-router-dom";
 import BackgroundGradient from "../components/BackgroundGradient";
@@ -14,7 +14,7 @@ const SignUp = () => {
         inconvenience.
       </DisclaimerBanner>
 
-      <div className="flex w-full flex-col gap-3 rounded-xl bg-neutral-50 px-6 py-8 shadow-xl">
+      <Card className="flex w-full flex-col gap-3  px-6 py-8 drop-shadow-lg">
         {/* ------------- Header ------------ */}
         <div>
           <h2 className="text-2xl font-bold tracking-tight">
@@ -50,7 +50,7 @@ const SignUp = () => {
             </span>
           </button>
         </Link>
-      </div>
+      </Card>
 
       {/* ------------- Blurred Background ------------ */}
       <BackgroundGradient variant="accent" />

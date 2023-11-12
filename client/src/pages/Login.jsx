@@ -1,4 +1,4 @@
-import { Divider } from "@nextui-org/react";
+import { Card, Divider } from "@nextui-org/react";
 import { Github } from "lucide-react";
 import { Link } from "react-router-dom";
 import DisclaimerBanner from "../components/DisclaimerBanner";
@@ -13,7 +13,7 @@ const Login = () => {
         inconvenience.
       </DisclaimerBanner>
 
-      <div className="flex w-full flex-col gap-3 rounded-xl bg-neutral-50 px-6 py-8 shadow-xl">
+      <Card className="flex w-full flex-col gap-3  px-6 py-8 drop-shadow-lg">
         {/* ------------- Header ------------ */}
         <div>
           <h2 className="text-2xl font-bold tracking-tight">Welcome, back!</h2>
@@ -54,7 +54,7 @@ const Login = () => {
             </span>
           </button>
         </Link>
-      </div>
+      </Card>
 
       {/* ------------- Blurred Background ------------ */}
       <div class="blob absolute inset-x-1/2 inset-y-1/4 -z-10 h-[40rem] w-[40rem] rounded-full bg-opacity-60 bg-gradient-to-bl from-indigo-200 via-purple-200 to-pink-200 blur-3xl" />

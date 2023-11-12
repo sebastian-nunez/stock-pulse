@@ -1,28 +1,32 @@
+import { Link } from "@nextui-org/react";
 import { Layers3 } from "lucide-react";
 import React from "react";
 import "../styles/Footer.css";
 
 const Footer = () => {
   return (
-    <div className="footer bg-neutral-50">
+    <div className="footer bg-neutral-50 text-default-600">
       <Layers3 />
+
       <p>
         Built by{" "}
-        <a
-          className="footer-links"
+        <Link
           href="https://www.sebastian-nunez.com"
-          target="blank"
+          underline="always"
+          color="foreground"
+          isExternal
         >
           Sebastian Nunez
-        </a>{" "}
+        </Link>{" "}
         and{" "}
-        <a
-          className="footer-links"
+        <Link
           href="https://www.linkedin.com/in/priscillalynn/"
-          target="blank"
+          underline="always"
+          color="foreground"
+          isExternal
         >
           Priscilla Colon.
-        </a>
+        </Link>
       </p>
     </div>
   );
