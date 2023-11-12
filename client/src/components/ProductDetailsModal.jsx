@@ -9,7 +9,14 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import { ExternalLink } from "lucide-react";
+import {
+  ClipboardList,
+  ExternalLink,
+  Info,
+  LayoutDashboard,
+  Tag,
+  Text,
+} from "lucide-react";
 import toast from "react-hot-toast";
 import { convertDatetimeToMMDDYYYY } from "../utils/types";
 import InfoPanel from "./InfoPanel";
@@ -70,8 +77,8 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                       </div>
 
                       {/* ------------------- TAGS ------------------- */}
-                      <InfoPanel title="Tags">
-                        <div className="mt-2 flex flex-wrap gap-2">
+                      <InfoPanel title="Tags" icon={<Tag size={25} />}>
+                        <div className="flex flex-wrap gap-2">
                           {product?.tags.map((tag, index) => {
                             return (
                               <Chip key={tag + index} color="primary">
@@ -85,7 +92,7 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
 
                     <div className="flex flex-col gap-3 md:w-2/3">
                       {/* ------------------- BASIC INFO ------------------- */}
-                      <InfoPanel title="Basic Info">
+                      <InfoPanel title="Basic Info" icon={<Info size={25} />}>
                         <div className="flex flex-col gap-3 sm:flex-row">
                           <div className="flex flex-col sm:w-1/2">
                             <h2>
@@ -117,12 +124,18 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                         </div>
                       </InfoPanel>
                       {/* ------------------- DESCRIPTION -------------------*/}
-                      <InfoPanel title="Description">
+                      <InfoPanel
+                        title="Description"
+                        icon={<LayoutDashboard size={25} />}
+                      >
                         <p>{product?.description}</p>
                       </InfoPanel>
 
                       {/* ------------------- MANUFACTURER ------------------- */}
-                      <InfoPanel title="Manufacturer">
+                      <InfoPanel
+                        title="Manufacturer"
+                        icon={<ClipboardList size={25} />}
+                      >
                         <p>
                           <strong>Weight:</strong> {product?.weight}
                         </p>
@@ -136,7 +149,7 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                       </InfoPanel>
 
                       {/* ------------------- NOTES ------------------- */}
-                      <InfoPanel title="Notes">
+                      <InfoPanel title="Notes" icon={<Text size={25} />}>
                         <p>{product?.notes}</p>
                       </InfoPanel>
                     </div>

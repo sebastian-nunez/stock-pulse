@@ -7,7 +7,7 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Info, LayoutDashboard } from "lucide-react";
 import CategoryEditableModal from "./CategoryEditableModal";
 import InfoPanel from "./InfoPanel";
 
@@ -37,14 +37,17 @@ const CategoryDetailsModal = ({ category, isOpen, onOpenChange }) => {
                 {category ? (
                   <div className="flex flex-col gap-3">
                     {/* ------------------- BASIC INFO ------------------- */}
-                    <InfoPanel title="Basic Info">
+                    <InfoPanel title="Basic Info" icon={<Info size={25} />}>
                       <h2>
                         <strong>Name:</strong> {category?.name}
                       </h2>
                     </InfoPanel>
 
                     {/* ------------------- DESCRIPTION -------------------*/}
-                    <InfoPanel title="Description">
+                    <InfoPanel
+                      title="Description"
+                      icon={<LayoutDashboard size={25} />}
+                    >
                       <p>{category?.description}</p>
                     </InfoPanel>
                   </div>
