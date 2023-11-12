@@ -8,7 +8,7 @@ import {
   SelectItem,
   Tooltip,
 } from "@nextui-org/react";
-import { RouteOff } from "lucide-react";
+import { ListFilter, RouteOff, Search, Tag } from "lucide-react";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
 import { ANY_CATEGORY } from "../hooks/useFilteredProducts";
@@ -79,6 +79,7 @@ const BrowserFilters = ({
             aria-label="Select a category"
             size="lg"
             variant="bordered"
+            startContent={<ListFilter size={20} />}
             placeholder="Select a category"
             selectedKeys={selectedCategory ? [selectedCategory] : []}
             labelPlacement="outside"
@@ -111,6 +112,7 @@ const BrowserFilters = ({
             placeholder="Select tags"
             items={tags}
             size="lg"
+            startContent={<Tag size={20} />}
             selectedKeys={selectedTags}
             variant="bordered"
             labelPlacement="outside"
@@ -167,6 +169,7 @@ const BrowserFilters = ({
             labelPlacement="outside"
             variant="bordered"
             isClearable
+            startContent={<Search size={20} />}
             value={searchText}
             onValueChange={setSearchText}
             type="text"
@@ -176,11 +179,12 @@ const BrowserFilters = ({
           {/* ------- Refresh Button --------- */}
           <Tooltip content="Reset">
             <Button
-              size="sm"
+              size="lg"
               variant="flat"
               onPress={handleReset}
               isDisabled={isLoading}
               className="h-12"
+              isIconOnly
             >
               <RouteOff />
             </Button>
