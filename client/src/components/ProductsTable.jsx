@@ -22,8 +22,8 @@ import {
   DEFAULT_ROWS_PER_PAGE_TABLE as DEFAULT_ROWS_PER_PAGE_TABLE_VIEW,
   PRODUCTS_QUERY_KEY,
 } from "../utils/constants";
+import { convertDatetimeToMMDDYYYY } from "../utils/helpers";
 import { sortItemsAscDesc } from "../utils/sorting";
-import { convertDatetimeToMMDDYYYY } from "../utils/types";
 import { Action } from "./ProductCard";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
