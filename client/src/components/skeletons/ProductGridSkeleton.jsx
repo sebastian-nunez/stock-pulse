@@ -3,7 +3,7 @@ import { ResultsWidgetSkeleton } from "./TableSkeleton";
 
 export const ProductCardSkeleton = () => {
   return (
-    <Card className="w-full space-y-8 p-10" radius="lg">
+    <Card className="w-full space-y-8 p-8" radius="lg">
       <Skeleton className="h-52 rounded-lg " />
 
       <div className="space-y-6">
@@ -12,11 +12,11 @@ export const ProductCardSkeleton = () => {
           <Skeleton className="h-7 w-1/5 rounded-lg" />
         </div>
 
-        <Skeleton className="h-3 w-1/5 rounded-lg" />
+        <Skeleton className="h-4 w-1/6 rounded-lg" />
 
         <div className="item-center flex justify-between">
           <Skeleton className="h-6 w-2/5 rounded-lg" />
-          <Skeleton className="h-8 w-20 rounded-full" />
+          <Skeleton className="h-8 w-16 rounded-full" />
         </div>
       </div>
     </Card>

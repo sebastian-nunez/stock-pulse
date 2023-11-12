@@ -1,4 +1,4 @@
-import { Button, Code, useDisclosure } from "@nextui-org/react";
+import { Button, Card, Code, useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
@@ -28,9 +28,12 @@ const ProductCard = ({ product, isLoading = false }) => {
 
   return (
     <>
-      <div
-        className="transform rounded-xl border bg-white p-8 drop-shadow transition duration-250 ease-in-out  hover:scale-[1.025] hover:cursor-pointer"
-        onClick={() => {
+      <Card
+        className="transform p-8 drop-shadow-sm transition duration-250 ease-in-out hover:scale-[1.025] hover:cursor-pointer"
+        isPressable
+        disableRipple
+        fullWidth
+        onPress={() => {
           setSelectedAction(Action.VIEW);
           onOpen();
         }}
@@ -51,7 +54,7 @@ const ProductCard = ({ product, isLoading = false }) => {
         </div>
 
         {/* ------------------- Name & Price ------------------- */}
-        <div className="mt-4 flex items-center justify-between">
+        <div className="mt-4 flex w-full items-center justify-between">
           <h1 className="text-xl font-semibold tracking-tight">
             {product?.name}
           </h1>
@@ -63,7 +66,7 @@ const ProductCard = ({ product, isLoading = false }) => {
         <p className="text-gray-500">{product.brand}</p>
 
         {/* ------------------- Quantity & Edit ------------------- */}
-        <div className="mt-5 flex items-center justify-between">
+        <div className="mt-5 flex w-full items-center justify-between">
           <p className="text-gray-700">
             <strong>Quantity:</strong> {product.quantity}
           </p>
@@ -82,7 +85,7 @@ const ProductCard = ({ product, isLoading = false }) => {
             EDIT
           </Button>
         </div>
-      </div>
+      </Card>
 
       {/* -------------- Modals -------------- */}
       {selectedAction === Action.VIEW && (

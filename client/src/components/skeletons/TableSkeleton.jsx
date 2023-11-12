@@ -1,16 +1,16 @@
 import { Card, Skeleton } from "@nextui-org/react";
 export const ResultsWidgetSkeleton = () => {
   return (
-    <div className="flex justify-between">
+    <div className="flex items-center justify-between">
       <div className="flex gap-1.5">
-        <Skeleton className="h-6 w-12 rounded" />
-        <Skeleton className="h-6 w-6 rounded" />
+        <Skeleton className="h-5 w-12 rounded" />
+        <Skeleton className="h-5 w-6 rounded" />
       </div>
 
       <div className="flex gap-2">
-        <Skeleton className="h-6 w-24 rounded" />
-        <Skeleton className="h-6 w-8 rounded" />
-        <Skeleton className="ml-2 h-6 w-7 rounded" />
+        <Skeleton className="h-5 w-24 rounded" />
+        <Skeleton className="h-5 w-8 rounded" />
+        <Skeleton className="ml-2 h-5 w-7 rounded" />
       </div>
     </div>
   );
