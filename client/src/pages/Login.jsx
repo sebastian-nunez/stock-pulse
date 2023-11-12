@@ -1,4 +1,4 @@
-import { Card, Divider } from "@nextui-org/react";
+import { Button, Card, Divider, Link as UILink } from "@nextui-org/react";
 import { Github } from "lucide-react";
 import { Link } from "react-router-dom";
 import DisclaimerBanner from "../components/DisclaimerBanner";
@@ -26,34 +26,35 @@ const Login = () => {
 
         {/* --------- Forgot Password --------- */}
         <div className="text-right text-sm">
-          <Link
+          <UILink
+            as={Link}
             to="/forgot-password"
-            className="border-b-2 border-black pb-0.5 font-semibold "
+            underline="hover"
+            color="foreground"
           >
             Forgot password?
-          </Link>
+          </UILink>
         </div>
         {/* ------------- Sign up ------------- */}
         <p className="mt-3 text-default-600">
           Not a member?{" "}
-          <Link
-            to="/signup"
-            className="border-b-2 border-black pb-0.5 font-semibold text-black"
-          >
-            Sign up
-          </Link>
+          <UILink as={Link} to="/signup" underline="always" color="foreground">
+            <strong>Sign up</strong>
+          </UILink>
         </p>
 
         {/* ------------- Login with GitHub ------------- */}
         <Divider className="my-1" content="OR" />
 
-        <Link to="/auth/github">
-          <button className="w-full rounded bg-gray-900 py-3 text-lg font-semibold text-white hover:bg-gray-800">
-            <span className="inline-flex gap-2">
-              <Github /> Login with GitHub
-            </span>
-          </button>
-        </Link>
+        <Button
+          as={Link}
+          to="/auth/github"
+          className="w-full rounded bg-gray-900 py-7 text-lg font-semibold text-white hover:bg-gray-800"
+        >
+          <span className="inline-flex gap-2">
+            <Github /> Login with GitHub
+          </span>
+        </Button>
       </Card>
 
       {/* ------------- Blurred Background ------------ */}

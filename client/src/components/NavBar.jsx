@@ -1,4 +1,5 @@
 import {
+  Button,
   Divider,
   Navbar,
   NavbarBrand,
@@ -6,6 +7,7 @@ import {
   NavbarItem,
   NavbarMenu,
   NavbarMenuToggle,
+  Link as UILink,
 } from "@nextui-org/react";
 import { Layers3 } from "lucide-react";
 import { useState } from "react";
@@ -25,7 +27,7 @@ export default function App() {
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
-      maxWidth="2xl"
+      maxWidth="xl"
       className="border-b-1 drop-shadow-sm"
     >
       {/* Hamburger toggle */}
@@ -38,14 +40,16 @@ export default function App() {
       <NavbarContent className="hidden gap-4 sm:flex" justify="start">
         {/* Branding */}
         <NavbarBrand>
-          <Link
+          <UILink
+            as={Link}
             to="/"
             className="inline-flex gap-2 text-2xl font-extrabold tracking-tight"
+            color="foreground"
           >
             {/* Logo */}
             <Layers3 size={25} className="my-auto" />
             StockPulse
-          </Link>
+          </UILink>
         </NavbarBrand>
 
         <Divider orientation="vertical" className="h-1/2" />
@@ -57,9 +61,15 @@ export default function App() {
             <NavbarItem
               key={item.name}
               isActive={item.path === pathname} // highlight active item from URL
-              className="text-default-800 hover:text-default-500"
             >
-              <Link to={item.path}>{item.name}</Link>
+              <UILink
+                as={Link}
+                to={item.path}
+                color="foreground"
+                underline="hover"
+              >
+                {item.name}
+              </UILink>
             </NavbarItem>
           ))}
       </NavbarContent>
@@ -69,25 +79,33 @@ export default function App() {
       {/* Desktop Menu (RIGHT) */}
       <NavbarContent className="gap-4 sm:flex" justify="end">
         <NavbarItem>
-          <Link to="/login" className="text-default-800 hover:text-default-500">
-            <button className="w-full rounded-full bg-primary px-6 py-1.5 font-semibold text-white transition duration-250 ease-in-out hover:scale-[1.03] hover:bg-primary-600">
-              Login
-            </button>
-          </Link>
+          <Button
+            as={Link}
+            to="/login"
+            variant="flat"
+            color="primary"
+            className="font-semibold"
+          >
+            Login
+          </Button>
         </NavbarItem>
       </NavbarContent>
 
       {/* Mobile Menu */}
       <NavbarMenu>
         {menuItems.map((item) => (
-          <Link
-            className="w-full rounded border bg-white p-4 text-center text-xl font-semibold drop-shadow-sm"
-            to={item.path}
-            size="lg"
-            key={item.name}
-          >
-            {item.name}
-          </Link>
+          <NavbarItem>
+            <UILink
+              as={Link}
+              className="w-full justify-center rounded border bg-white p-4 text-center text-xl font-semibold drop-shadow-sm"
+              to={item.path}
+              size="lg"
+              color="foreground"
+              key={item.name}
+            >
+              {item.name}
+            </UILink>
+          </NavbarItem>
         ))}
       </NavbarMenu>
     </Navbar>
