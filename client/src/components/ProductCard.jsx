@@ -39,7 +39,7 @@ const ProductCard = ({ product, isLoading = false }) => {
         }}
       >
         {/* ------------------- Image ------------------- */}
-        <div className="flex h-fit items-center justify-center">
+        <div className="flex h-fit w-full items-center justify-center">
           {product?.image ? (
             <img
               src={product?.image}
