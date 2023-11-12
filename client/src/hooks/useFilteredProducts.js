@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { normalizeText } from "../utils/helpers";
 
 export const ANY_CATEGORY = "Any";
 export const REGEX_MATCH_NON_ALPHA_NUMERIC = /[^a-zA-Z\d]/g; // non-alphanumeric characters ('., etc), so "air max g.t." can match with "airmax gt"
@@ -33,23 +34,18 @@ export const useFilteredProducts = (
           }
 
           return (
-            product.category.trim().toLowerCase() ===
-            selectedCategory.trim().toLowerCase()
+            normalizeText(product.category) === normalizeText(selectedCategory)
           );
         })
         .filter((product) => {
           // filter by search text
-          const normalizedSearchText = searchText
-            .trim()
-            .toLowerCase()
-            .replace(REGEX_MATCH_NON_ALPHA_NUMERIC, "");
+          const normalizedSearchText = normalizeText(searchText);
+          const normalizedProductName = normalizeText(product?.name);
+          const normalizedProductBrand = normalizeText(product?.brand);
 
-          const normalizedProductName = product.name
-            .trim()
-            .toLowerCase()
-            .replace(REGEX_MATCH_NON_ALPHA_NUMERIC, "");
+          const productTokens = normalizedProductName + normalizedProductBrand;
 
-          return normalizedProductName.includes(normalizedSearchText);
+          return productTokens.includes(normalizedSearchText);
         })
         .filter((product) => {
           // filter by tags
@@ -57,8 +53,11 @@ export const useFilteredProducts = (
             return true;
           }
 
+          // every selected tag must be included in product's tags list
           const productTags = product.tags;
-          return selectedTags.every((tag) => productTags.includes(tag));
+          return selectedTags.every((tag) =>
+            productTags.includes(normalizeText(tag)),
+          );
         });
 
       setFilteredProducts(filterProducts);
