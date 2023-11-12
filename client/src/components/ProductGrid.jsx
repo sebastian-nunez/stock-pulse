@@ -1,4 +1,4 @@
-import { Pagination } from "@nextui-org/react";
+import { Card, Pagination } from "@nextui-org/react";
 import { useMemo, useState } from "react";
 import { usePagination } from "../hooks/usePagination";
 import { DEFAULT_ROWS_PER_PAGE_CARD as DEFAULT_ROWS_PER_PAGE_CARD_VIEW } from "../utils/constants";
@@ -54,7 +54,7 @@ const ProductGrid = ({ products }) => {
 
       {/* ----------- Pagination Controls --------- */}
       <div className="flex justify-center">
-        <div className="rounded-lg border bg-neutral-50 p-3 drop-shadow-sm">
+        <Card className="p-4 drop-shadow-sm">
           <Pagination
             showControls
             initialPage={1}
@@ -62,7 +62,7 @@ const ProductGrid = ({ products }) => {
             page={currentPage}
             onChange={changePage}
           />
-        </div>
+        </Card>
       </div>
     </div>
   );

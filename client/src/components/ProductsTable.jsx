@@ -1,4 +1,5 @@
 import {
+  Card,
   Chip,
   Pagination,
   Spinner,
@@ -225,7 +226,7 @@ const ProductsTable = () => {
 
       {/* -------------- Pagination Controls -------------- */}
       <div className="mt-6 flex w-full justify-center">
-        <div className="rounded-lg border bg-neutral-50 p-3 drop-shadow-sm">
+        <Card className="p-4 drop-shadow-sm">
           <Pagination
             showControls
             color="primary"
@@ -233,7 +234,7 @@ const ProductsTable = () => {
             total={numberOfPages}
             onChange={changePage}
           />
-        </div>
+        </Card>
       </div>
 
       {/* -------------- Modals -------------- */}
