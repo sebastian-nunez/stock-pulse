@@ -63,7 +63,7 @@ const ForgotPassword = () => {
 
               <button
                 type="submit"
-                className="mt-4 w-full rounded bg-blue-500 py-3 text-lg font-semibold text-white hover:bg-blue-600"
+                className="mt-4 w-full rounded bg-primary py-3 text-lg font-semibold text-white hover:bg-primary-600"
               >
                 Send Code
               </button>
@@ -93,7 +93,7 @@ const ForgotPassword = () => {
               />
               <button
                 type="submit"
-                className="mt-4 w-full rounded bg-blue-500 py-3 text-lg font-semibold text-white hover:bg-blue-600"
+                className="mt-4 w-full rounded bg-primary py-3 text-lg font-semibold text-white hover:bg-primary-600"
               >
                 Verify Code
               </button>
@@ -176,7 +176,7 @@ const ForgotPassword = () => {
 
               <button
                 type="submit"
-                className="mt-4 w-full rounded bg-blue-500 py-3 text-lg font-semibold text-white hover:bg-blue-600"
+                className="mt-4 w-full rounded bg-primary py-3 text-lg font-semibold text-white hover:bg-primary-600"
               >
                 Change Password
               </button>

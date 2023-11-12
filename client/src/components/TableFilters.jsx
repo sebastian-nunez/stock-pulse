@@ -1,5 +1,5 @@
 import { Button, Divider, Input, Select, SelectItem } from "@nextui-org/react";
-import { Plus } from "lucide-react";
+import { PackagePlus } from "lucide-react";
 
 export const FilterOptions = {
   PRODUCTS: "Products",
@@ -50,9 +50,9 @@ const TableFilters = ({
             size="md"
             color="primary"
             radius="sm"
-            startContent={<Plus size={20} />}
+            startContent={<PackagePlus size={20} />}
             onPress={handleOpenModal}
-            className="text-md h-12 w-1/3 transition duration-250 ease-in-out hover:scale-[1.03] sm:w-2/5"
+            className="text-md h-12 w-1/3 text-lg font-semibold transition duration-250 ease-in-out hover:scale-[1.03] sm:w-2/5"
           >
             Add
           </Button>
