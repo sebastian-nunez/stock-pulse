@@ -67,10 +67,10 @@ export default function App() {
       <div className="w-full" />
 
       {/* Desktop Menu (RIGHT) */}
-      <NavbarContent className="hidden gap-4 sm:flex" justify="end">
+      <NavbarContent className="gap-4 sm:flex" justify="end">
         <NavbarItem>
           <Link to="/login" className="text-default-800 hover:text-default-500">
-            <button className="w-full rounded-full bg-primary px-6 py-2 font-semibold text-white transition duration-250 ease-in-out hover:scale-[1.03] hover:bg-primary-600">
+            <button className="w-full rounded-full bg-primary px-6 py-1.5 font-semibold text-white transition duration-250 ease-in-out hover:scale-[1.03] hover:bg-primary-600">
               Login
             </button>
           </Link>
