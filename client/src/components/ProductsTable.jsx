@@ -15,6 +15,7 @@ import { useAsyncList } from "@react-stately/data";
 import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
+import useFilteredItems from "../hooks/useFilteredItems";
 import { usePagination } from "../hooks/usePagination";
 import useProducts from "../hooks/useProducts";
 import ProductsAPI from "../services/ProductsAPI";
@@ -44,7 +45,7 @@ const columns = [
   { key: "actions", label: "ACTIONS" },
 ];
 
-const ProductsTable = () => {
+const ProductsTable = ({ filterText }) => {
   const queryClient = useQueryClient();
 
   // modal controls
@@ -91,9 +92,16 @@ const ProductsTable = () => {
   });
 
   // extract the products from the sorted list
-  const products = sortedList?.items;
-  const numberOfProducts = products?.length;
+  const sortedProducts = sortedList?.items;
   const isLoading = sortedList.isLoading || deleteProduct.isLoading;
+
+  const filteredProducts = useFilteredItems(sortedProducts, filterText, [
+    "name",
+    "brand",
+    "category",
+  ]);
+
+  const numberOfProducts = filteredProducts?.length;
 
   // pagination
   const { currentPage, numberOfPages, sliceRange, changePage } = usePagination(
@@ -105,8 +113,8 @@ const ProductsTable = () => {
   const currentPageItems = useMemo(() => {
     const { start, end } = sliceRange;
 
-    return products?.slice(start, end);
-  }, [JSON.stringify(products), sliceRange.start, sliceRange.end]);
+    return filteredProducts?.slice(start, end);
+  }, [JSON.stringify(filteredProducts), sliceRange.start, sliceRange.end]);
 
   const handleView = (product) => {
     setCurrentProduct(product);
@@ -165,7 +173,7 @@ const ProductsTable = () => {
     }
   }, []);
 
-  if (isLoading) {
+  if (isLoading || !currentPageItems?.length === 0) {
     return <TableSkeleton />;
   }
 
@@ -183,7 +191,7 @@ const ProductsTable = () => {
             <ResultsWidget
               rowsPerPage={rowsPerPage}
               setRowsPerPage={setRowsPerPage}
-              numberOfResults={numberOfProducts}
+              numberOfResults={numberOfPages}
               changePage={changePage}
               onRefreshAction={() => sortedList.reload()}
             />
