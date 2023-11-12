@@ -1,5 +1,6 @@
 import { useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
+import BackgroundGradient from "../components/BackgroundGradient";
 import CategoryEditableModal from "../components/CategoryEditableModal";
 import ProductEditableModal from "../components/ProductEditableModal";
 import ProductsTable from "../components/ProductsTable";
@@ -30,20 +31,17 @@ const Inventory = () => {
       />
 
       {/* ------------ Products Table ------------- */}
-      <div className="mx-break-out min-h-screen bg-neutral-50">
-        {/* Change the full width background color */}
-        <div className="container">
-          {/* ------------------ Products ------------------- */}
-          {selectedFilter === FilterOptions.PRODUCTS && (
-            <ProductsTable filterText={searchText} />
-          )}
+      <div className="min-h-screen">
+        {/* ------------------ Products ------------------- */}
+        {selectedFilter === FilterOptions.PRODUCTS && (
+          <ProductsTable filterText={searchText} />
+        )}
 
-          {/* ------------------ Categories ------------------- */}
-          {selectedFilter === FilterOptions.CATEGORIES && <p>CATEGORIES</p>}
+        {/* ------------------ Categories ------------------- */}
+        {selectedFilter === FilterOptions.CATEGORIES && <p>CATEGORIES</p>}
 
-          {/* ------------------ Tags ------------------- */}
-          {selectedFilter === FilterOptions.TAGS && <p>TAGS</p>}
-        </div>
+        {/* ------------------ Tags ------------------- */}
+        {selectedFilter === FilterOptions.TAGS && <p>TAGS</p>}
       </div>
 
       {/* ------------------ Modals ------------------- */}
@@ -76,6 +74,9 @@ const Inventory = () => {
           onOpenChange={onOpenChange}
         />
       )}
+
+      {/* ------------- Blurred Background -------------- */}
+      <BackgroundGradient variant="subtle" />
     </>
   );
 };

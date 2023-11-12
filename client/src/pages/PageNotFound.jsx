@@ -1,6 +1,7 @@
 import { Link as UILink } from "@nextui-org/react";
 import React from "react";
 import { Link } from "react-router-dom";
+import BackgroundGradient from "../components/BackgroundGradient";
 import "../styles/PageNotFound.css";
 
 const PageNotFound = () => {
@@ -19,6 +20,9 @@ const PageNotFound = () => {
           </UILink>
         </div>
       </main>
+
+      {/* ------------- Blurred Background -------------- */}
+      <BackgroundGradient variant={"secondary"} />
     </div>
   );
 };

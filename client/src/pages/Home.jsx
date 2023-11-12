@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import BackgroundGradient from "../components/BackgroundGradient";
 
 const Home = () => {
   return (
@@ -28,6 +29,9 @@ const Home = () => {
           className="max-w-lg"
         />
       </div>
+
+      {/* ------------- Blurred Background ------------ */}
+      <BackgroundGradient variant={"primary"} />
     </div>
   );
 };
