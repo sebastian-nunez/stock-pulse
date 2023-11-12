@@ -56,13 +56,13 @@ const App = () => {
   ]);
 
   return (
-    <>
+    <div className="relative overflow-hidden">
       <NavBar />
       <div className="container min-h-screen">{element}</div>
 
       <Toaster position="top-right" />
       <Footer />
-    </>
+    </div>
   );
 };
 
