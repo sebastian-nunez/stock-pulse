@@ -18,7 +18,7 @@ import {
   Text,
 } from "lucide-react";
 import toast from "react-hot-toast";
-import { convertDatetimeToMMDDYYYY } from "../utils/types";
+import { convertDatetimeToMMDDYYYY } from "../utils/helpers";
 import InfoPanel from "./InfoPanel";
 import ProductEditableModal from "./ProductEditableModal";
 

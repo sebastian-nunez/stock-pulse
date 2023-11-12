@@ -1,5 +1,5 @@
 import { rowsPerPageOptions } from "../components/ResultsWidget";
-import { get_milliseconds_from_minutes } from "../utils/types";
+import { get_milliseconds_from_minutes } from "./helpers";
 
 // --------------- base urls ---------------
 export const USERS_BASE_URL = "/api/users";
