@@ -54,7 +54,7 @@ const ProductGrid = ({ products }) => {
 
       {/* ----------- Pagination Controls --------- */}
       <div className="flex justify-center">
-        <div className="rounded-lg border p-3 drop-shadow-sm">
+        <div className="rounded-lg border bg-neutral-50 p-3 drop-shadow-sm">
           <Pagination
             showControls
             initialPage={1}
