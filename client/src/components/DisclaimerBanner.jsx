@@ -1,10 +1,21 @@
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const DisclaimerBanner = ({ children }) => {
+const DisclaimerBanner = ({ children, durationSeconds = 5 }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
+
+  // remove disclaimer after
+  useEffect(() => {
+    const id = setTimeout(() => {
+      setIsVisible(false);
+    }, durationSeconds * 1000);
+
+    return () => {
+      clearTimeout(id);
+    };
+  }, []);
 
   if (!isVisible) return null;
   return (
