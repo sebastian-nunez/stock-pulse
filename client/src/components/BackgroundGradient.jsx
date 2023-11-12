@@ -41,7 +41,7 @@ const BackgroundGradient = ({ variant }) => {
 
             <div className="blob absolute -left-1/4 top-1/2 -z-10 h-[800px] w-[800px] rounded-full bg-opacity-60 bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-300 blur-3xl" />
 
-            <div className="blob absolute -right-1/2 top-1/4 -z-10 h-[800px] w-[800px] rounded-full bg-opacity-60 bg-gradient-to-r from-slate-100 via-teal-100 to-blue-300 blur-3xl" />
+            <div className="blob absolute -right-1/2 top-1/4 -z-10 h-[600px] w-[850px] rounded-full bg-opacity-60 bg-gradient-to-r from-slate-100 via-teal-100 to-blue-300 blur-3xl" />
           </>
         );
       default:
