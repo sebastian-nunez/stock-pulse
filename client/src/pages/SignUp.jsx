@@ -7,14 +7,14 @@ import SignupForm from "../components/SignupForm";
 
 const SignUp = () => {
   return (
-    <div className="mx-auto my-6 flex flex-col gap-6 px-6 sm:px-0 lg:w-1/3 ">
+    <div className="mx-auto flex flex-col gap-4 px-6 sm:px-0 md:w-2/5">
       {/* ------------- Disclaimer ------------ */}
       <DisclaimerBanner>
         The sign up feature is currently under development. We apologize for any
         inconvenience.
       </DisclaimerBanner>
 
-      <Card className="flex w-full flex-col gap-3  px-6 py-8 drop-shadow-lg">
+      <Card className="flex w-full flex-col gap-3 px-6 py-8 drop-shadow-lg">
         {/* ------------- Header ------------ */}
         <div>
           <h2 className="text-2xl font-bold tracking-tight">

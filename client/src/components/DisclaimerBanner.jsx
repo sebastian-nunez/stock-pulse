@@ -1,7 +1,7 @@
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const DisclaimerBanner = ({ children, durationSeconds = 5 }) => {
+const DisclaimerBanner = ({ children, durationSeconds = 20 }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   const toggleVisibility = () => setIsVisible(!isVisible);

@@ -60,7 +60,7 @@ const App = () => {
       <NavBar />
 
       <div className="relative overflow-hidden">
-        <main className="container min-h-screen">{element}</main>
+        <main className="container min-h-screen py-4">{element}</main>
       </div>
 
       <Toaster position="top-right" />

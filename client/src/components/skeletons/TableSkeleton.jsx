@@ -17,7 +17,7 @@ export const ResultsWidgetSkeleton = () => {
 };
 
 export const PaginationControlsSkeleton = () => {
-  return <Skeleton className="mx-auto mb-6 mt-3 h-12 w-2/5 rounded-lg" />;
+  return <Skeleton className="mx-auto mb-6 mt-3 h-12 w-1/5 rounded-lg" />;
 };
 
 export const RowSkeleton = () => {

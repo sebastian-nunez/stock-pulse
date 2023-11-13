@@ -35,7 +35,7 @@ const Browser = () => {
   }
 
   return (
-    <div className="py-4">
+    <>
       {/* -------------------- Filters --------------------- */}
       <BrowserFilters
         searchText={searchText}
@@ -47,7 +47,7 @@ const Browser = () => {
       />
 
       {/* ------------------- Product Grid ------------------- */}
-      <div className="min-h-screen ">
+      <div className="min-h-screen">
         {/* Change the full width background color */}
         {!filteredProducts || productsQuery.isFetching ? (
           <ProductGridSkeleton />
@@ -58,7 +58,7 @@ const Browser = () => {
 
       {/* ------------- Blurred Background -------------- */}
       <BackgroundGradient variant="subtle" />
-    </div>
+    </>
   );
 };
 
