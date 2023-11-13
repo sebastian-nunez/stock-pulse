@@ -43,7 +43,7 @@ export const useFilteredProducts = (
           const normalizedProductName = normalizeText(product?.name);
           const normalizedProductBrand = normalizeText(product?.brand);
 
-          const productTokens = normalizedProductName + normalizedProductBrand;
+          const productTokens = normalizedProductBrand + normalizedProductName;
 
           return productTokens.includes(normalizedSearchText);
         })
@@ -61,7 +61,7 @@ export const useFilteredProducts = (
         });
 
       setFilteredProducts(filterProducts);
-    }, 300);
+    }, 500);
 
     return () => clearTimeout(timeoutId);
   }, [products, searchText, selectedCategory, selectedTags]);
