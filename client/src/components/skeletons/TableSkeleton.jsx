@@ -23,13 +23,12 @@ export const PaginationControlsSkeleton = () => {
 export const RowSkeleton = () => {
   return (
     <div className="flex gap-3">
-      <Skeleton className="h-10 w-12 rounded" />
-      <Skeleton className="h-10 w-64 rounded" />
-      <Skeleton className="h-10 w-64 rounded" />
-      <Skeleton className="h-10 w-16 rounded" />
-      <Skeleton className="h-10 w-32 rounded" />
-      <Skeleton className="h-10 w-32 rounded" />
-      <Skeleton className="h-10 w-96 rounded" />
+      <Skeleton className="h-10 w-1/12 rounded" />
+      <Skeleton className="h-10 w-2/12 rounded" />
+      <Skeleton className="h-10 w-1/12 rounded" />
+      <Skeleton className="h-10 w-3/12 rounded" />
+      <Skeleton className="h-10 w-2/12 rounded" />
+      <Skeleton className="h-10 w-3/12 rounded" />
     </div>
   );
 };
