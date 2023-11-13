@@ -5,10 +5,19 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  useDisclosure,
 } from "@nextui-org/react";
+import { ExternalLink, Info, LayoutDashboard } from "lucide-react";
 import InfoPanel from "./InfoPanel";
+import TagEditableModal from "./TagEditableModal";
 
 const TagDetailsModal = ({ tag, isOpen, onOpenChange }) => {
+  const {
+    isOpen: isOpen_Edit,
+    onOpen: onOpen_Edit,
+    onOpenChange: onOpenChange_Edit,
+  } = useDisclosure();
+
   return (
     <>
       <Modal
@@ -28,14 +37,17 @@ const TagDetailsModal = ({ tag, isOpen, onOpenChange }) => {
                 {tag ? (
                   <div className="flex flex-col gap-3">
                     {/* ------------------- BASIC INFO ------------------- */}
-                    <InfoPanel title="Basic Info">
+                    <InfoPanel title="Basic Info" icon={<Info size={25} />}>
                       <h2>
                         <strong>Name:</strong> {tag?.name}
                       </h2>
                     </InfoPanel>
 
                     {/* ------------------- DESCRIPTION -------------------*/}
-                    <InfoPanel title="Description">
+                    <InfoPanel
+                      title="Description"
+                      icon={<LayoutDashboard size={25} />}
+                    >
                       <p>{tag?.description}</p>
                     </InfoPanel>
                   </div>
@@ -44,8 +56,26 @@ const TagDetailsModal = ({ tag, isOpen, onOpenChange }) => {
                 )}
               </ModalBody>
 
-              <ModalFooter>
-                <Button color="danger" onPress={onClose} radius="sm">
+              <ModalFooter className="flex justify-between gap-3">
+                <Button
+                  color="primary"
+                  variant="ghost"
+                  onPress={() => {
+                    onClose();
+                    onOpen_Edit();
+                  }}
+                  radius="sm"
+                  startContent={<ExternalLink height={20} width={20} />}
+                >
+                  Edit
+                </Button>
+
+                <Button
+                  color="danger"
+                  onPress={onClose}
+                  radius="sm"
+                  className="w-40"
+                >
                   Close
                 </Button>
               </ModalFooter>
@@ -53,6 +83,14 @@ const TagDetailsModal = ({ tag, isOpen, onOpenChange }) => {
           )}
         </ModalContent>
       </Modal>
+
+      <TagEditableModal
+        title="Edit Tag"
+        canDelete={true}
+        tag={tag}
+        isOpen={isOpen_Edit}
+        onOpenChange={onOpenChange_Edit}
+      />
     </>
   );
 };

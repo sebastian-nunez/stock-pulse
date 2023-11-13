@@ -1,12 +1,19 @@
-import { Divider } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 
-const InfoPanel = ({ children, title }) => {
+const InfoPanel = ({ children, title, icon }) => {
   return (
-    <div className="rounded-xl border px-6 py-4 hover:cursor-context-menu hover:border-gray-300 hover:shadow-sm">
-      <h1 className="text-xl font-bold tracking-tight">{title}</h1>
-      <Divider className="mb-1" />
-      {children}
-    </div>
+    <Card shadow="sm" className="hover:cursor-context-menu">
+      <CardHeader className="item-center flex gap-2">
+        {icon}
+        <div className="flex flex-col">
+          <p className="text-xl font-bold tracking-tight">{title}</p>
+        </div>
+      </CardHeader>
+
+      <Divider />
+
+      <CardBody>{children}</CardBody>
+    </Card>
   );
 };
 

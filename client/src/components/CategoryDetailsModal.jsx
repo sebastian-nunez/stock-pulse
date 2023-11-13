@@ -5,10 +5,19 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  useDisclosure,
 } from "@nextui-org/react";
+import { ExternalLink, Info, LayoutDashboard } from "lucide-react";
+import CategoryEditableModal from "./CategoryEditableModal";
 import InfoPanel from "./InfoPanel";
 
 const CategoryDetailsModal = ({ category, isOpen, onOpenChange }) => {
+  const {
+    isOpen: isOpen_Edit,
+    onOpen: onOpen_Edit,
+    onOpenChange: onOpenChange_Edit,
+  } = useDisclosure();
+
   return (
     <>
       <Modal
@@ -28,14 +37,17 @@ const CategoryDetailsModal = ({ category, isOpen, onOpenChange }) => {
                 {category ? (
                   <div className="flex flex-col gap-3">
                     {/* ------------------- BASIC INFO ------------------- */}
-                    <InfoPanel title="Basic Info">
+                    <InfoPanel title="Basic Info" icon={<Info size={25} />}>
                       <h2>
                         <strong>Name:</strong> {category?.name}
                       </h2>
                     </InfoPanel>
 
                     {/* ------------------- DESCRIPTION -------------------*/}
-                    <InfoPanel title="Description">
+                    <InfoPanel
+                      title="Description"
+                      icon={<LayoutDashboard size={25} />}
+                    >
                       <p>{category?.description}</p>
                     </InfoPanel>
                   </div>
@@ -44,8 +56,26 @@ const CategoryDetailsModal = ({ category, isOpen, onOpenChange }) => {
                 )}
               </ModalBody>
 
-              <ModalFooter>
-                <Button color="danger" onPress={onClose} radius="sm">
+              <ModalFooter className="jus flex justify-between gap-3">
+                <Button
+                  color="primary"
+                  variant="ghost"
+                  onPress={() => {
+                    onClose();
+                    onOpen_Edit();
+                  }}
+                  radius="sm"
+                  startContent={<ExternalLink height={20} width={20} />}
+                >
+                  Edit
+                </Button>
+
+                <Button
+                  color="danger"
+                  onPress={onClose}
+                  radius="sm"
+                  className="w-40"
+                >
                   Close
                 </Button>
               </ModalFooter>
@@ -53,6 +83,14 @@ const CategoryDetailsModal = ({ category, isOpen, onOpenChange }) => {
           )}
         </ModalContent>
       </Modal>
+
+      <CategoryEditableModal
+        title="Edit Category"
+        canDelete={true}
+        category={category}
+        isOpen={isOpen_Edit}
+        onOpenChange={onOpenChange_Edit}
+      />
     </>
   );
 };

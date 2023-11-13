@@ -7,12 +7,28 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  useDisclosure,
 } from "@nextui-org/react";
+import {
+  ClipboardList,
+  ExternalLink,
+  Info,
+  LayoutDashboard,
+  Tag,
+  Text,
+} from "lucide-react";
 import toast from "react-hot-toast";
-import { convertDatetimeToMMDDYYYY } from "../utils/types";
+import { convertDatetimeToMMDDYYYY } from "../utils/helpers";
 import InfoPanel from "./InfoPanel";
+import ProductEditableModal from "./ProductEditableModal";
 
 const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
+  const {
+    isOpen: isOpen_Edit,
+    onOpen: onOpen_Edit,
+    onOpenChange: onOpenChange_Edit,
+  } = useDisclosure();
+
   return (
     <>
       <Modal
@@ -61,26 +77,30 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                       </div>
 
                       {/* ------------------- TAGS ------------------- */}
-                      <InfoPanel title="Tags">
-                        <div className="mt-2 flex flex-wrap gap-2">
-                          {product?.tags.map((tag, index) => {
-                            return (
-                              <Chip key={tag + index} color="primary">
-                                {tag}
-                              </Chip>
-                            );
-                          })}
-                        </div>
+                      <InfoPanel title="Tags" icon={<Tag size={25} />}>
+                        {product?.tags?.length > 0 ? (
+                          <div className="flex flex-wrap gap-2">
+                            {product?.tags.map((tag, index) => {
+                              return (
+                                <Chip key={tag + index} color="primary">
+                                  {tag}
+                                </Chip>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <p>None</p>
+                        )}
                       </InfoPanel>
                     </div>
 
                     <div className="flex flex-col gap-3 md:w-2/3">
                       {/* ------------------- BASIC INFO ------------------- */}
-                      <InfoPanel title="Basic Info">
+                      <InfoPanel title="Basic Info" icon={<Info size={25} />}>
                         <div className="flex flex-col gap-3 sm:flex-row">
                           <div className="flex flex-col sm:w-1/2">
                             <h2>
-                              <strong>Name:</strong> {product?.name}
+                              <strong>Name:</strong> {!product?.name}
                             </h2>
                             <p>
                               <strong>Brand:</strong> {product?.brand}
@@ -108,12 +128,20 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                         </div>
                       </InfoPanel>
                       {/* ------------------- DESCRIPTION -------------------*/}
-                      <InfoPanel title="Description">
-                        <p>{product?.description}</p>
+                      <InfoPanel
+                        title="Description"
+                        icon={<LayoutDashboard size={25} />}
+                      >
+                        <p>
+                          {product?.description || "No description available."}
+                        </p>
                       </InfoPanel>
 
                       {/* ------------------- MANUFACTURER ------------------- */}
-                      <InfoPanel title="Manufacturer">
+                      <InfoPanel
+                        title="Manufacturer"
+                        icon={<ClipboardList size={25} />}
+                      >
                         <p>
                           <strong>Weight:</strong> {product?.weight}
                         </p>
@@ -122,13 +150,13 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                         </p>
                         <p>
                           <strong>Warranty Info:</strong>{" "}
-                          {product?.warranty_info}
+                          {product?.warranty_info || "None"}
                         </p>
                       </InfoPanel>
 
                       {/* ------------------- NOTES ------------------- */}
-                      <InfoPanel title="Notes">
-                        <p>{product?.notes}</p>
+                      <InfoPanel title="Notes" icon={<Text size={25} />}>
+                        <p>{product?.notes || "No notes available."}</p>
                       </InfoPanel>
                     </div>
                   </div>
@@ -137,8 +165,26 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                 )}
               </ModalBody>
 
-              <ModalFooter>
-                <Button color="danger" onPress={onClose} radius="sm">
+              <ModalFooter className="flex justify-between gap-3">
+                <Button
+                  color="primary"
+                  variant="ghost"
+                  onPress={() => {
+                    onClose();
+                    onOpen_Edit();
+                  }}
+                  radius="sm"
+                  startContent={<ExternalLink height={20} width={20} />}
+                >
+                  Edit
+                </Button>
+
+                <Button
+                  color="danger"
+                  onPress={onClose}
+                  radius="sm"
+                  className="w-40"
+                >
                   Close
                 </Button>
               </ModalFooter>
@@ -146,6 +192,14 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
           )}
         </ModalContent>
       </Modal>
+
+      <ProductEditableModal
+        title="Edit Product"
+        canDelete={true}
+        product={product}
+        isOpen={isOpen_Edit}
+        onOpenChange={onOpenChange_Edit}
+      />
     </>
   );
 };

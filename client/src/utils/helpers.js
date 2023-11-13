@@ -14,6 +14,9 @@ export const EMPTY_PRODUCT = {
   tags: [],
 };
 
+export const REGEX_MATCH_NON_ALPHA_NUMERIC = /[^a-zA-Z0-9]/g;
+export const ANY_CATEGORY = "Any";
+
 /**
 * Helper function to get milliseconds from minutes
 
@@ -38,4 +41,17 @@ export const convertDatetimeToMMDDYYYY = (datetimeString) => {
 
   const formattedDate = `${month}/${day}/${year}`;
   return formattedDate;
+};
+
+/**
+ * Helper function to normalize text. Removes leading and trailing whitespace, converts to lowercase, and removes all non-alphanumeric characters
+ * @param {String} text text to normalize
+ * @returns {String} normalized text
+ */
+export const normalizeText = (text) => {
+  if (!text) {
+    return "";
+  }
+
+  return text.trim().toLowerCase().replace(REGEX_MATCH_NON_ALPHA_NUMERIC, "");
 };

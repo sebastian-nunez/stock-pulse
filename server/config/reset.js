@@ -63,6 +63,8 @@ const createCategoryTable = async () => {
         name                VARCHAR(25) UNIQUE NOT NULL,
         description         VARCHAR(255) DEFAULT 'No description provided.'
       );
+
+      CREATE INDEX idx_category_name ON category(name);
     `;
 
   try {
@@ -102,6 +104,8 @@ const createTagTable = async () => {
         name                VARCHAR(25) UNIQUE NOT NULL,
         description         VARCHAR(255) DEFAULT 'No description provided.'
       );
+
+      CREATE INDEX idx_tag_name ON tag(name);
     `;
 
   try {
@@ -152,7 +156,9 @@ const createProductTable = async () => {
         date_added          DATE DEFAULT CURRENT_DATE,
         category_id         INT,
         FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE SET NULL
-    );
+      );
+
+      CREATE INDEX idx_product_name ON product(name);
     `;
 
   try {
@@ -206,7 +212,7 @@ const createProductTagTable = async () => {
         PRIMARY KEY (product_id, tag_id),
         FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE,
         FOREIGN KEY (tag_id) REFERENCES tag(tag_id) ON DELETE CASCADE
-    );
+      );
     `;
 
   try {

@@ -1,5 +1,6 @@
 import {
   Button,
+  Card,
   Chip,
   Divider,
   Input,
@@ -7,10 +8,9 @@ import {
   SelectItem,
   Tooltip,
 } from "@nextui-org/react";
-import { RotateCcw } from "lucide-react";
+import { ListFilter, RouteOff, Search, Tag } from "lucide-react";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
-import { ANY_CATEGORY } from "../hooks/useFilteredProducts";
 import CategoriesAPI from "../services/CategoriesAPI";
 import TagsAPI from "../services/TagsAPI";
 import {
@@ -18,8 +18,9 @@ import {
   PRODUCTS_QUERY_KEY,
   TAGS_QUERY_KEY,
 } from "../utils/constants";
+import { ANY_CATEGORY } from "../utils/helpers";
 
-const InventoryFilters = ({
+const BrowserFilters = ({
   setSearchText,
   setSelectedCategory,
   setSelectedTags,
@@ -53,12 +54,7 @@ const InventoryFilters = ({
     tagsQuery.isLoading ||
     queryClient.isFetching([PRODUCTS_QUERY_KEY]);
 
-  const handleRefresh = () => {
-    // refetch the products
-    queryClient.refetchQueries(PRODUCTS_QUERY_KEY);
-    categoriesQuery.refetch();
-    tagsQuery.refetch();
-
+  const handleReset = () => {
     // reset the filters
     setSelectedCategory(null);
     setSelectedTags([]);
@@ -73,11 +69,9 @@ const InventoryFilters = ({
   };
 
   return (
-    <div className="my-3 px-6 sm:px-0">
+    <Card className="p-4 drop-shadow-sm">
       <h1 className="text-xl font-bold tracking-tight">Filters</h1>
-
       <Divider className="mb-3" />
-
       <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
         {/* ------- Category --------- */}
         <div className="sm:w-1/3">
@@ -85,6 +79,7 @@ const InventoryFilters = ({
             aria-label="Select a category"
             size="lg"
             variant="bordered"
+            startContent={<ListFilter size={20} />}
             placeholder="Select a category"
             selectedKeys={selectedCategory ? [selectedCategory] : []}
             labelPlacement="outside"
@@ -117,6 +112,7 @@ const InventoryFilters = ({
             placeholder="Select tags"
             items={tags}
             size="lg"
+            startContent={<Tag size={20} />}
             selectedKeys={selectedTags}
             variant="bordered"
             labelPlacement="outside"
@@ -173,6 +169,7 @@ const InventoryFilters = ({
             labelPlacement="outside"
             variant="bordered"
             isClearable
+            startContent={<Search size={20} />}
             value={searchText}
             onValueChange={setSearchText}
             type="text"
@@ -180,21 +177,22 @@ const InventoryFilters = ({
           />
 
           {/* ------- Refresh Button --------- */}
-          <Tooltip content="Refresh">
+          <Tooltip content="Reset">
             <Button
-              size="sm"
+              size="lg"
               variant="flat"
-              onPress={handleRefresh}
+              onPress={handleReset}
               isDisabled={isLoading}
               className="h-12"
+              isIconOnly
             >
-              <RotateCcw />
+              <RouteOff />
             </Button>
           </Tooltip>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
-export default InventoryFilters;
+export default BrowserFilters;

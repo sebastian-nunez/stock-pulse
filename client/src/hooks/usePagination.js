@@ -16,9 +16,12 @@ export const usePagination = (totalItems, itemsPerPage) => {
   const numberOfPages = Math.ceil(totalItems / itemsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+
   const sliceRange = {
-    start: (currentPage - 1) * itemsPerPage,
-    end: currentPage * itemsPerPage,
+    start,
+    end,
   };
 
   const changePage = (page) => {

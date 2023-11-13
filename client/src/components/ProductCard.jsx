@@ -1,10 +1,10 @@
-import { Button, Code, useDisclosure } from "@nextui-org/react";
+import { Button, Card, Code, useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
 import ProductDetailsModal from "./ProductDetailsModal";
 import ProductEditableModal from "./ProductEditableModal";
 import { ProductCardSkeleton } from "./skeletons/ProductGridSkeleton";
 
-const Action = {
+export const Action = {
   VIEW: "View",
   UPDATE: "Update",
 };
@@ -28,20 +28,23 @@ const ProductCard = ({ product, isLoading = false }) => {
 
   return (
     <>
-      <div
-        className="transform rounded-xl border bg-white p-8 drop-shadow transition duration-250 ease-in-out  hover:scale-[1.025] hover:cursor-pointer"
-        onClick={() => {
+      <Card
+        className="transform p-4 drop-shadow-sm transition duration-250 ease-in-out hover:scale-[1.025] hover:cursor-pointer"
+        isPressable
+        disableRipple
+        fullWidth
+        onPress={() => {
           setSelectedAction(Action.VIEW);
           onOpen();
         }}
       >
         {/* ------------------- Image ------------------- */}
-        <div className="flex h-fit items-center justify-center">
+        <div className="flex h-fit w-full items-center justify-center">
           {product?.image ? (
             <img
               src={product?.image}
               alt={product?.name}
-              className="h-60 w-80 rounded-xl object-cover object-center md:w-96"
+              className="h-60 w-full rounded-xl object-cover object-center"
             />
           ) : (
             <div className="flex h-60 w-full items-center justify-center rounded-xl border drop-shadow-sm">
@@ -51,7 +54,7 @@ const ProductCard = ({ product, isLoading = false }) => {
         </div>
 
         {/* ------------------- Name & Price ------------------- */}
-        <div className="mt-4 flex items-center justify-between">
+        <div className="mt-4 flex w-full items-center justify-between">
           <h1 className="text-xl font-semibold tracking-tight">
             {product?.name}
           </h1>
@@ -63,7 +66,7 @@ const ProductCard = ({ product, isLoading = false }) => {
         <p className="text-gray-500">{product.brand}</p>
 
         {/* ------------------- Quantity & Edit ------------------- */}
-        <div className="mt-5 flex items-center justify-between">
+        <div className="mt-5 flex w-full items-center justify-between">
           <p className="text-gray-700">
             <strong>Quantity:</strong> {product.quantity}
           </p>
@@ -82,7 +85,7 @@ const ProductCard = ({ product, isLoading = false }) => {
             EDIT
           </Button>
         </div>
-      </div>
+      </Card>
 
       {/* -------------- Modals -------------- */}
       {selectedAction === Action.VIEW && (

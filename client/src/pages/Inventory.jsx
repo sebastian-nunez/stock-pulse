@@ -1,61 +1,88 @@
-import React, { useState } from "react";
-import { useQuery } from "react-query";
-import ErrorCard from "../components/ErrorCard";
-import InventoryFilters from "../components/InventoryFilters";
-import ProductGrid from "../components/ProductGrid";
-import ProductGridSkeleton from "../components/skeletons/ProductGridSkeleton";
-import { useFilteredProducts } from "../hooks/useFilteredProducts";
-import ProductsAPI from "../services/ProductsAPI";
+import { useDisclosure } from "@nextui-org/react";
+import { useState } from "react";
+import BackgroundGradient from "../components/BackgroundGradient";
+import CategoriesTable from "../components/CategoriesTable";
+import CategoryEditableModal from "../components/CategoryEditableModal";
+import ProductEditableModal from "../components/ProductEditableModal";
+import ProductsTable from "../components/ProductsTable";
+import TableFilters, { FilterOptions } from "../components/TableFilters";
+import TagEditableModal from "../components/TagEditableModal";
+import TagsTable from "../components/TagsTable";
 
 const Inventory = () => {
-  // state
+  // modal controller
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  // filters
+  const [selectedFilter, setSelectedFilter] = useState(FilterOptions.PRODUCTS);
   const [searchText, setSearchText] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedTags, setSelectedTags] = useState([]);
 
-  // react-query
-  const productsQuery = useQuery(["products"], ProductsAPI.getAllProducts);
-  const products = productsQuery.data;
-
-  // filter products
-  const filteredProducts = useFilteredProducts(products, {
-    searchText,
-    selectedCategory,
-    selectedTags,
-  });
-
-  if (productsQuery.isError) {
-    return (
-      <ErrorCard
-        message="Unable to fetch products, please try again."
-        error={productsQuery.error?.message}
-      />
-    );
-  }
+  const handleOpenModal = () => {
+    onOpen();
+  };
 
   return (
     <>
-      {/* -------------------- Filters --------------------- */}
-      <InventoryFilters
+      {/* ------------ Filters ------------- */}
+      <TableFilters
         searchText={searchText}
         setSearchText={setSearchText}
-        selectedTags={selectedTags}
-        setSelectedTags={setSelectedTags}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
+        selectedFilter={selectedFilter}
+        setSelectedFilter={setSelectedFilter}
+        handleOpenModal={handleOpenModal}
       />
 
-      {/* ------------------- Product Grid ------------------- */}
-      <div className="mx-break-out min-h-screen bg-neutral-50">
-        {/* Change the full width background color */}
-        <div className="container">
-          {productsQuery.isLoading || !filteredProducts ? (
-            <ProductGridSkeleton />
-          ) : (
-            <ProductGrid products={filteredProducts} />
-          )}
-        </div>
+      {/* ------------ Products Table ------------- */}
+      <div className="min-h-screen">
+        {/* ------------------ Products ------------------- */}
+        {selectedFilter === FilterOptions.PRODUCTS && (
+          <ProductsTable filterText={searchText} />
+        )}
+
+        {/* ------------------ Categories ------------------- */}
+        {selectedFilter === FilterOptions.CATEGORIES && (
+          <CategoriesTable filterText={searchText} />
+        )}
+
+        {/* ------------------ Tags ------------------- */}
+        {selectedFilter === FilterOptions.TAGS && (
+          <TagsTable filterText={searchText} />
+        )}
       </div>
+
+      {/* ------------------ Modals ------------------- */}
+      {/* Create a product */}
+      {selectedFilter === FilterOptions.PRODUCTS && (
+        <ProductEditableModal
+          title="Add Product"
+          canDelete={false}
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+        />
+      )}
+
+      {/* Create a category */}
+      {selectedFilter === FilterOptions.CATEGORIES && (
+        <CategoryEditableModal
+          title="Add Category"
+          canDelete={false}
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+        />
+      )}
+
+      {/* Create a tag */}
+      {selectedFilter === FilterOptions.TAGS && (
+        <TagEditableModal
+          title="Add Tag"
+          canDelete={false}
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+        />
+      )}
+
+      {/* ------------- Blurred Background -------------- */}
+      <BackgroundGradient variant="subtle" />
     </>
   );
 };

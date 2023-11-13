@@ -8,7 +8,7 @@ import { CATEGORIES_QUERY_KEY } from "../utils/constants";
  * @param {Function} onSuccessAction callback function to execute after a successful action
  * @returns {Object} deleteCategory, updateCategory, createCategory
  */
-const useCategories = ({ onSuccessAction }) => {
+const useCategories = ({ onSuccessAction = () => {} }) => {
   // react-query
   const queryClient = useQueryClient();
 
