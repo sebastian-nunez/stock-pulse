@@ -30,7 +30,7 @@ const ProductGridSkeleton = () => {
     <div className="flex flex-col gap-3 py-6 sm:px-0">
       <ResultsWidgetSkeleton />
 
-      <div className="grid w-full gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {Array.from(Array(numberOfSkeletons).keys()).map((index) => (
           <ProductCardSkeleton key={index} />
         ))}
