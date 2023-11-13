@@ -28,7 +28,7 @@ const TableFilters = ({
   };
 
   return (
-    <Card className="mx-6 p-4 drop-shadow-sm sm:mx-0">
+    <Card className="p-4 drop-shadow-sm">
       <h1 className="text-xl font-bold tracking-tight">Filters</h1>
 
       <Divider className="mb-3" />
