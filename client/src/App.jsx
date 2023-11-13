@@ -3,6 +3,7 @@ import { useRoutes } from "react-router-dom";
 import ErrorCard from "./components/ErrorCard";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
+import MainContainer from "./components/layout/MainContainer";
 import Browser from "./pages/Browser";
 import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
@@ -59,9 +60,7 @@ const App = () => {
     <>
       <NavBar />
 
-      <div className="relative overflow-hidden">
-        <main className="container min-h-screen p-4">{element}</main>
-      </div>
+      <MainContainer>{element}</MainContainer>
 
       <Toaster position="top-right" />
       <Footer />
