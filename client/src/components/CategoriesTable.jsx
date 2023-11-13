@@ -1,5 +1,4 @@
 import {
-  Chip,
   Pagination,
   Spinner,
   Table,
@@ -14,41 +13,31 @@ import { useAsyncList } from "@react-stately/data";
 import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
+import useCategories from "../hooks/useCategories";
 import useFilteredItems from "../hooks/useFilteredItems";
 import { usePagination } from "../hooks/usePagination";
-import useProducts from "../hooks/useProducts";
-import ProductsAPI from "../services/ProductsAPI";
+import CategoriesAPI from "../services/CategoriesAPI";
 import {
+  CATEGORIES_QUERY_KEY,
   DEFAULT_ROWS_PER_PAGE_TABLE as DEFAULT_ROWS_PER_PAGE_TABLE_VIEW,
-  PRODUCTS_QUERY_KEY,
 } from "../utils/constants";
-import { convertDatetimeToMMDDYYYY } from "../utils/helpers";
 import { sortItemsAscDesc } from "../utils/sorting";
+import CategoryDetailsModal from "./CategoryDetailsModal";
+import CategoryEditableModal from "./CategoryEditableModal";
 import { Action } from "./ProductCard";
-import ProductDetailsModal from "./ProductDetailsModal";
-import ProductEditableModal from "./ProductEditableModal";
 import ResultsWidget from "./ResultsWidget";
 import TableDropdownActionMenu from "./TableDropdownActionMenu";
 import TableSkeleton from "./skeletons/TableSkeleton";
 
 // table columns. Key is the column name in the data, label is the visible column name in the table
 const columns = [
-  { key: "product_id", label: "ID", sortable: true },
+  { key: "category_id", label: "ID", sortable: true },
   { key: "name", label: "NAME", sortable: true },
-  { key: "brand", label: "BRAND", sortable: true },
-  { key: "price", label: "PRICE", sortable: true },
-  { key: "quantity", label: "QUANTITY", sortable: true },
-  { key: "category", label: "CATEGORY", sortable: true },
-  {
-    key: "is_available",
-    label: "AVAILABLE",
-    sortable: true,
-  },
-  { key: "tags", label: "TAGS" },
+  { key: "Description", label: "DESCRIPTION", sortable: true },
   { key: "actions", label: "ACTIONS" },
 ];
 
-const ProductsTable = ({ filterText }) => {
+const CategoriesTable = ({ filterText }) => {
   const queryClient = useQueryClient();
 
   // modal controls
@@ -56,29 +45,29 @@ const ProductsTable = ({ filterText }) => {
   const [selectedAction, setSelectedAction] = useState(null);
 
   // state
-  const [currentProduct, setCurrentProduct] = useState(null);
+  const [currentCategory, setCurrentCategory] = useState(null);
   const [rowsPerPage, setRowsPerPage] = useState(
     DEFAULT_ROWS_PER_PAGE_TABLE_VIEW,
   );
 
-  // retrieve the products (via a FETCH) and sort them
+  // retrieve the categories (via a FETCH) and sort them
   const sortedList = useAsyncList({
     async load() {
       // IMPORTANT: we have to FETCH to make sure items are available for sorting
-      const products = await queryClient.fetchQuery(
-        [PRODUCTS_QUERY_KEY],
+      const categories = await queryClient.fetchQuery(
+        [CATEGORIES_QUERY_KEY],
         async () => {
-          return await ProductsAPI.getAllProducts();
+          return await CategoriesAPI.getCategories();
         },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries([PRODUCTS_QUERY_KEY]);
+            queryClient.invalidateQueries([CATEGORIES_QUERY_KEY]);
           },
         },
       );
 
       return {
-        items: products,
+        items: categories,
       };
     },
     async sort({ items, sortDescriptor }) {
@@ -88,88 +77,71 @@ const ProductsTable = ({ filterText }) => {
     },
   });
 
-  const { deleteProduct } = useProducts({
+  const { deleteCategory } = useCategories({
     onSuccessAction: () => {
       sortedList.reload(); // reload the list
     },
   });
 
-  // extract the products from the sorted list
-  const sortedProducts = sortedList?.items;
+  // extract the categories from the sorted list
+  const sortedCategories = sortedList?.items;
 
-  const filteredItems = useFilteredItems(sortedProducts, filterText, [
+  const filteredItems = useFilteredItems(sortedCategories, filterText, [
     "name",
-    "brand",
-    "category",
+    "description",
   ]);
 
-  const numberOfProducts = filteredItems?.length;
+  const numberOfCategories = filteredItems?.length;
 
   // pagination
   const { currentPage, numberOfPages, sliceRange, changePage } = usePagination(
-    numberOfProducts,
+    numberOfCategories,
     rowsPerPage,
   );
 
-  // memoized paginated products
+  // memoized paginated categories
   const currentPageItems = useMemo(() => {
     const { start, end } = sliceRange;
 
     return filteredItems?.slice(start, end);
   }, [JSON.stringify(filteredItems), sliceRange.start, sliceRange.end]);
 
-  const handleView = (product) => {
-    setCurrentProduct(product);
+  const handleView = (category) => {
+    setCurrentCategory(category);
     setSelectedAction(Action.VIEW);
 
     onOpen(); // open the modal
   };
 
-  const handleEdit = (product) => {
-    setCurrentProduct(product);
+  const handleEdit = (category) => {
+    setCurrentCategory(category);
     setSelectedAction(Action.UPDATE);
 
     onOpen(); // open the modal
   };
 
-  const handleDelete = (productId) => {
-    if (!productId) {
-      toast.error("Product does not have a valid ID, unable to delete it!");
+  const handleDelete = (categoryId) => {
+    if (!categoryId) {
+      toast.error("Category does not have a valid ID, unable to delete it!");
     }
 
-    deleteProduct.mutate(productId);
+    deleteCategory.mutate(categoryId);
   };
 
   // render the cell based on the column key
-  const renderCell = useCallback((product, columnKey) => {
-    const cellValue = product[columnKey];
+  const renderCell = useCallback((category, columnKey) => {
+    const cellValue = category[columnKey];
 
     switch (columnKey) {
       case "actions":
         return (
           <TableDropdownActionMenu
-            item={product}
+            item={category}
             handleDelete={handleDelete}
             handleEdit={handleEdit}
             handleView={handleView}
           />
         );
-      case "price":
-        return `$${cellValue}`;
-      case "tags":
-        return (
-          <div className="flex flex-wrap gap-2">
-            {cellValue?.map((tag, idx) => (
-              <Chip key={tag + idx} size="sm" color="primary">
-                {tag}
-              </Chip>
-            ))}
-          </div>
-        );
-      case "is_available":
-        return cellValue ? "Yes" : "No";
-      case "date_added":
-        return cellValue ? convertDatetimeToMMDDYYYY(cellValue) : "Unknown";
       default:
         return cellValue;
     }
@@ -177,8 +149,8 @@ const ProductsTable = ({ filterText }) => {
 
   const isLoading =
     sortedList.isLoading ||
-    deleteProduct.isLoading ||
-    (numberOfProducts <= 0 && !filterText); // if there are no products and no filter text, we are loading
+    deleteCategory.isLoading ||
+    (numberOfCategories <= 0 && !filterText); // if there are no categories and no filter text, we are loading
   if (isLoading) {
     return <TableSkeleton />;
   }
@@ -188,7 +160,7 @@ const ProductsTable = ({ filterText }) => {
       <div className="mt-4 flex flex-col gap-2">
         {/* -------------- Table -------------- */}
         <Table
-          aria-label="Products Table"
+          aria-label="Categories Table"
           isHeaderSticky
           isCompact
           onSortChange={sortedList.sort}
@@ -197,14 +169,14 @@ const ProductsTable = ({ filterText }) => {
             <ResultsWidget
               rowsPerPage={rowsPerPage}
               setRowsPerPage={setRowsPerPage}
-              numberOfResults={numberOfProducts}
+              numberOfResults={numberOfCategories}
               changePage={changePage}
               onRefreshAction={() => sortedList.reload()}
             />
           }
           bottomContent={
             !isLoading &&
-            numberOfProducts > 0 && (
+            numberOfCategories > 0 && (
               <Pagination
                 showControls
                 color="primary"
@@ -217,7 +189,7 @@ const ProductsTable = ({ filterText }) => {
             )
           }
           classNames={{
-            table: "min-h-[25rem]",
+            table: "min-h-[400px]",
           }}
         >
           <TableHeader columns={columns}>
@@ -225,8 +197,6 @@ const ProductsTable = ({ filterText }) => {
               <TableColumn
                 key={column.key}
                 allowsSorting={column?.sortable === true}
-                allowsResizing={false}
-                minWidth={column?.minWidth || null}
               >
                 {column.label}
               </TableColumn>
@@ -239,14 +209,14 @@ const ProductsTable = ({ filterText }) => {
             isLoading={isLoading}
             loadingContent={<Spinner aria-label="Loading..." />}
           >
-            {(product, idx) => (
+            {(category, idx) => (
               <TableRow
-                key={product?.product_id || idx}
+                key={category?.category_id || idx}
                 className="cursor-pointer hover:bg-default-100"
-                onClick={() => handleView(product)}
+                onClick={() => handleView(category)}
               >
                 {(columnKey) => (
-                  <TableCell>{renderCell(product, columnKey)}</TableCell>
+                  <TableCell>{renderCell(category, columnKey)}</TableCell>
                 )}
               </TableRow>
             )}
@@ -259,18 +229,18 @@ const ProductsTable = ({ filterText }) => {
 
       {/* -------------- Modals -------------- */}
       {selectedAction === Action.VIEW && (
-        <ProductDetailsModal
-          product={currentProduct}
+        <CategoryDetailsModal
+          category={currentCategory}
           isOpen={isOpen}
           onOpenChange={onOpenChange}
         />
       )}
 
       {selectedAction === Action.UPDATE && (
-        <ProductEditableModal
-          title="Edit Product"
+        <CategoryEditableModal
+          title="Edit Category"
           canDelete={true}
-          product={currentProduct}
+          category={currentCategory}
           isOpen={isOpen}
           onOpenChange={onOpenChange}
         />
@@ -279,4 +249,4 @@ const ProductsTable = ({ filterText }) => {
   );
 };
 
-export default ProductsTable;
+export default CategoriesTable;

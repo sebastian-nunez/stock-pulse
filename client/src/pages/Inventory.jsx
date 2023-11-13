@@ -1,6 +1,7 @@
 import { useDisclosure } from "@nextui-org/react";
 import { useState } from "react";
 import BackgroundGradient from "../components/BackgroundGradient";
+import CategoriesTable from "../components/CategoriesTable";
 import CategoryEditableModal from "../components/CategoryEditableModal";
 import ProductEditableModal from "../components/ProductEditableModal";
 import ProductsTable from "../components/ProductsTable";
@@ -38,7 +39,9 @@ const Inventory = () => {
         )}
 
         {/* ------------------ Categories ------------------- */}
-        {selectedFilter === FilterOptions.CATEGORIES && <p>CATEGORIES</p>}
+        {selectedFilter === FilterOptions.CATEGORIES && (
+          <CategoriesTable filterText={searchText} />
+        )}
 
         {/* ------------------ Tags ------------------- */}
         {selectedFilter === FilterOptions.TAGS && <p>TAGS</p>}

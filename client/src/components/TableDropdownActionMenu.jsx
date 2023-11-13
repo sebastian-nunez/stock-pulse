@@ -8,7 +8,7 @@ import {
 import { MoreVertical } from "lucide-react";
 
 const TableDropdownActionMenu = ({
-  product,
+  item,
   handleDelete,
   handleEdit,
   handleView,
@@ -26,7 +26,7 @@ const TableDropdownActionMenu = ({
           <DropdownItem
             aria-label="View"
             key={"View"}
-            onClick={() => handleView(product)}
+            onClick={() => handleView(item)}
           >
             View
           </DropdownItem>
@@ -34,7 +34,7 @@ const TableDropdownActionMenu = ({
           <DropdownItem
             aria-label="Edit"
             key={"Edit"}
-            onClick={() => handleEdit(product)}
+            onClick={() => handleEdit(item)}
           >
             Edit
           </DropdownItem>
@@ -42,7 +42,11 @@ const TableDropdownActionMenu = ({
           <DropdownItem
             aria-label="Delete"
             key={"Delete"}
-            onClick={() => handleDelete(product?.product_id)}
+            onClick={() =>
+              handleDelete(
+                item?.product_id || item?.category_id || item?.tag_id,
+              )
+            }
             className="text-danger"
             color="danger"
           >
