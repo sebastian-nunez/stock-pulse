@@ -39,6 +39,7 @@ const TableFilters = ({
           <Select
             aria-label="Select a filter"
             size="lg"
+            disallowEmptySelection
             variant="bordered"
             startContent={<FileArchive size={20} />}
             placeholder="Select a filter"
@@ -58,9 +59,9 @@ const TableFilters = ({
             size="md"
             color="primary"
             radius="sm"
-            startContent={<PackagePlus size={20} />}
+            startContent={<PackagePlus width={20} height={20} />}
             onPress={handleOpenModal}
-            className="text-md text-md h-12 w-1/3 font-semibold transition duration-250 ease-in-out hover:scale-[1.03] sm:w-2/5"
+            className="sm:text-md h-12 w-1/3 font-semibold transition duration-250 ease-in-out hover:scale-[1.03] sm:w-2/5"
           >
             Add
           </Button>
@@ -74,7 +75,7 @@ const TableFilters = ({
             size="lg"
             labelPlacement="outside"
             variant="bordered"
-            startContent={<Search size={20} />}
+            startContent={<Search width={20} height={20} />}
             isClearable
             value={searchText}
             onValueChange={setSearchText}
