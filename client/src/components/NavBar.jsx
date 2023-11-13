@@ -27,7 +27,7 @@ export default function App() {
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
-      maxWidth="xl"
+      maxWidth="2xl"
       className="border-b-1 drop-shadow-sm"
     >
       {/* Hamburger toggle */}
@@ -84,6 +84,7 @@ export default function App() {
             to="/login"
             variant="flat"
             color="primary"
+            radius="full"
             className="font-semibold"
           >
             Login
