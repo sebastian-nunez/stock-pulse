@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import BackgroundGradient from "../components/BackgroundGradient";
 import DisclaimerBanner from "../components/DisclaimerBanner";
 import SignupForm from "../components/SignupForm";
+import CenteredContainer from "../components/layout/CenteredContainer";
 
 const SignUp = () => {
   return (
-    <div className="mx-auto flex flex-col gap-4 px-6 sm:px-0 md:w-2/5">
+    <CenteredContainer>
       {/* ------------- Disclaimer ------------ */}
       <DisclaimerBanner>
         The sign up feature is currently under development. We apologize for any
@@ -51,7 +52,7 @@ const SignUp = () => {
 
       {/* ------------- Blurred Background ------------ */}
       <BackgroundGradient variant="accent" />
-    </div>
+    </CenteredContainer>
   );
 };
 

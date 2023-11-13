@@ -3,10 +3,11 @@ import { Github } from "lucide-react";
 import { Link } from "react-router-dom";
 import DisclaimerBanner from "../components/DisclaimerBanner";
 import LoginForm from "../components/LoginForm";
+import CenteredContainer from "../components/layout/CenteredContainer";
 
 const Login = () => {
   return (
-    <div className="mx-auto flex flex-col gap-4 px-6 sm:px-0 md:w-2/5">
+    <CenteredContainer>
       {/* ------------- Disclaimer ------------ */}
       <DisclaimerBanner>
         The login feature is currently under development. We apologize for any
@@ -62,7 +63,7 @@ const Login = () => {
       <div class="blob absolute inset-x-1/2 inset-y-1/4 -z-10 h-[40rem] w-[40rem] rounded-full bg-opacity-60 bg-gradient-to-bl from-indigo-200 via-purple-200 to-pink-200 blur-3xl" />
 
       <div class="blob absolute inset-x-0 inset-y-0 -z-10 h-[30rem] w-[30rem] rounded-full bg-opacity-60 bg-gradient-to-br from-slate-100 via-purple-200 to-blue-300 blur-3xl" />
-    </div>
+    </CenteredContainer>
   );
 };
 
