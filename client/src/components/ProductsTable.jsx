@@ -45,7 +45,7 @@ const columns = [
     sortable: true,
   },
   { key: "tags", label: "TAGS" },
-  { key: "actions", label: "ACTIONS" },
+  { key: "actions", label: "" },
 ];
 
 const ProductsTable = ({ filterText }) => {
@@ -204,11 +204,10 @@ const ProductsTable = ({ filterText }) => {
           }
           bottomContent={
             !isLoading &&
-            numberOfProducts > 0 && (
+            numberOfPages > 1 && (
               <Pagination
                 showControls
                 color="primary"
-                showShadow
                 page={currentPage}
                 total={numberOfPages}
                 onChange={changePage}
@@ -216,9 +215,6 @@ const ProductsTable = ({ filterText }) => {
               />
             )
           }
-          classNames={{
-            table: "min-h-[25rem]",
-          }}
         >
           <TableHeader columns={columns}>
             {(column) => (

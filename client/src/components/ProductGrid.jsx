@@ -53,17 +53,19 @@ const ProductGrid = ({ products }) => {
       </div>
 
       {/* ----------- Pagination Controls --------- */}
-      <div className="flex justify-center">
-        <Card className="p-4 drop-shadow-sm">
-          <Pagination
-            showControls
-            showShadow
-            total={numberOfPages}
-            page={currentPage}
-            onChange={changePage}
-          />
-        </Card>
-      </div>
+      {numberOfPages > 1 && (
+        <div className="flex justify-center">
+          <Card className="p-4 drop-shadow-sm">
+            <Pagination
+              showControls
+              showShadow
+              total={numberOfPages}
+              page={currentPage}
+              onChange={changePage}
+            />
+          </Card>
+        </div>
+      )}
     </div>
   );
 };

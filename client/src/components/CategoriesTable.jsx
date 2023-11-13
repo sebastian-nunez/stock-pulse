@@ -33,8 +33,8 @@ import TableSkeleton from "./skeletons/TableSkeleton";
 const columns = [
   { key: "category_id", label: "ID", sortable: true },
   { key: "name", label: "NAME", sortable: true },
-  { key: "Description", label: "DESCRIPTION", sortable: true },
-  { key: "actions", label: "ACTIONS" },
+  { key: "description", label: "DESCRIPTION", sortable: true },
+  { key: "actions", label: "" },
 ];
 
 const CategoriesTable = ({ filterText }) => {
@@ -176,11 +176,12 @@ const CategoriesTable = ({ filterText }) => {
           }
           bottomContent={
             !isLoading &&
-            numberOfCategories > 0 && (
+            numberOfCategories > 0 &&
+            numberOfPages > 1 && (
               <Pagination
                 showControls
                 color="primary"
-                showShadow
+                initialPage={1}
                 page={currentPage}
                 total={numberOfPages}
                 onChange={changePage}
@@ -188,9 +189,6 @@ const CategoriesTable = ({ filterText }) => {
               />
             )
           }
-          classNames={{
-            table: "min-h-[400px]",
-          }}
         >
           <TableHeader columns={columns}>
             {(column) => (
