@@ -45,7 +45,7 @@ const ProductGrid = ({ products }) => {
         />
 
         {/* ---------- Product Rendering ---------- */}
-        <div className="grid gap-6 pb-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div className="grid gap-6 pb-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {paginatedProducts?.map((product) => (
             <ProductCard key={product.product_id} product={product} />
           ))}
