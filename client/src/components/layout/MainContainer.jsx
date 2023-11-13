@@ -1,7 +1,9 @@
 const MainContainer = ({ children }) => {
   return (
     <div className="relative overflow-hidden">
-      <main className="container min-h-screen p-4">{children}</main>
+      <main className="min-h-screen px-4 py-4 2xl:container lg:px-6">
+        {children}
+      </main>
     </div>
   );
 };
