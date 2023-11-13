@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   Divider,
   Input,
@@ -18,6 +19,7 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   // password visibility
@@ -54,7 +56,7 @@ const ForgotPassword = () => {
               via email.
             </p>
 
-            <form onSubmit={handleEmailSubmit}>
+            <form onSubmit={handleEmailSubmit} className="flex flex-col gap-3">
               <Input
                 type="email"
                 variant="bordered"
@@ -68,12 +70,13 @@ const ForgotPassword = () => {
                 }}
               />
 
-              <button
+              <Button
                 type="submit"
-                className="mt-4 w-full rounded bg-primary py-3 text-lg font-semibold text-white hover:bg-primary-600"
+                color="primary"
+                className="w-full rounded py-7 text-lg font-semibold hover:bg-primary-400"
               >
                 Send Code
-              </button>
+              </Button>
             </form>
           </div>
         );
@@ -85,7 +88,7 @@ const ForgotPassword = () => {
               Enter the confirmation code sent to your email.
             </p>
 
-            <form onSubmit={handleCodeSubmit}>
+            <form onSubmit={handleCodeSubmit} className="flex flex-col gap-3">
               <Input
                 type="text"
                 variant="bordered"
@@ -98,12 +101,13 @@ const ForgotPassword = () => {
                   helperWrapper: ["bg-transparent"], // error message
                 }}
               />
-              <button
+              <Button
                 type="submit"
-                className="mt-4 w-full rounded bg-primary py-3 text-lg font-semibold text-white hover:bg-primary-600"
+                color="primary"
+                className="w-full rounded py-7 text-lg font-semibold hover:bg-primary-400"
               >
                 Verify Code
-              </button>
+              </Button>
             </form>
           </div>
         );
@@ -125,6 +129,7 @@ const ForgotPassword = () => {
                 variant="bordered"
                 type={isVisible ? "text" : "password"}
                 isRequired
+                onChange={(e) => setNewPassword(e.target.value)}
                 description={
                   <div>
                     <h2 className="font-bold">Password Requirements:</h2>
@@ -162,6 +167,7 @@ const ForgotPassword = () => {
                 variant="bordered"
                 type={isVisible ? "text" : "password"}
                 isRequired
+                onChange={(e) => setNewPasswordConfirm(e.target.value)}
                 endContent={
                   <button
                     type="button"
@@ -181,12 +187,13 @@ const ForgotPassword = () => {
                 }}
               />
 
-              <button
+              <Button
                 type="submit"
-                className="mt-4 w-full rounded bg-primary py-3 text-lg font-semibold text-white hover:bg-primary-600"
+                color="primary"
+                className="w-full rounded py-7 text-lg font-semibold hover:bg-primary-400"
               >
                 Change Password
-              </button>
+              </Button>
             </form>
           </div>
         );

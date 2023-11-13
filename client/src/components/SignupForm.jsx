@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@nextui-org/react";
+import { Button, Input } from "@nextui-org/react";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -142,12 +142,13 @@ const SignupForm = () => {
       />
 
       {/* --------------- Sign up Button -------------- */}
-      <button
+      <Button
         type="submit"
-        className="w-full rounded bg-primary py-3 text-lg font-semibold text-white hover:bg-primary-600"
+        color="primary"
+        className="w-full rounded py-7 text-lg font-semibold hover:bg-primary-400"
       >
         Sign up
-      </button>
+      </Button>
     </form>
   );
 };

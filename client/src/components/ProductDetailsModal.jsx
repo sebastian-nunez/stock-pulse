@@ -78,15 +78,19 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
 
                       {/* ------------------- TAGS ------------------- */}
                       <InfoPanel title="Tags" icon={<Tag size={25} />}>
-                        <div className="flex flex-wrap gap-2">
-                          {product?.tags.map((tag, index) => {
-                            return (
-                              <Chip key={tag + index} color="primary">
-                                {tag}
-                              </Chip>
-                            );
-                          })}
-                        </div>
+                        {product?.tags?.length > 0 ? (
+                          <div className="flex flex-wrap gap-2">
+                            {product?.tags.map((tag, index) => {
+                              return (
+                                <Chip key={tag + index} color="primary">
+                                  {tag}
+                                </Chip>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <p>None</p>
+                        )}
                       </InfoPanel>
                     </div>
 
@@ -96,7 +100,7 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                         <div className="flex flex-col gap-3 sm:flex-row">
                           <div className="flex flex-col sm:w-1/2">
                             <h2>
-                              <strong>Name:</strong> {product?.name}
+                              <strong>Name:</strong> {!product?.name}
                             </h2>
                             <p>
                               <strong>Brand:</strong> {product?.brand}
@@ -128,7 +132,9 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                         title="Description"
                         icon={<LayoutDashboard size={25} />}
                       >
-                        <p>{product?.description}</p>
+                        <p>
+                          {product?.description || "No description available."}
+                        </p>
                       </InfoPanel>
 
                       {/* ------------------- MANUFACTURER ------------------- */}
@@ -144,13 +150,13 @@ const ProductDetailsModal = ({ product, isOpen, onOpenChange }) => {
                         </p>
                         <p>
                           <strong>Warranty Info:</strong>{" "}
-                          {product?.warranty_info}
+                          {product?.warranty_info || "None"}
                         </p>
                       </InfoPanel>
 
                       {/* ------------------- NOTES ------------------- */}
                       <InfoPanel title="Notes" icon={<Text size={25} />}>
-                        <p>{product?.notes}</p>
+                        <p>{product?.notes || "No notes available."}</p>
                       </InfoPanel>
                     </div>
                   </div>
