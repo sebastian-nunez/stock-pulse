@@ -6,6 +6,7 @@ import {
   NavbarContent,
   NavbarItem,
   NavbarMenu,
+  NavbarMenuItem,
   NavbarMenuToggle,
   Link as UILink,
 } from "@nextui-org/react";
@@ -94,19 +95,21 @@ export default function App() {
 
       {/* Mobile Menu */}
       <NavbarMenu>
-        {menuItems.map((item) => (
-          <NavbarItem>
+        {menuItems?.map((item, idx) => (
+          <NavbarMenuItem
+            key={item?.name || idx}
+            onPress={() => setIsMenuOpen(false)}
+          >
             <UILink
               as={Link}
               className="w-full justify-center rounded border bg-white p-4 text-center text-xl font-semibold drop-shadow-sm"
               to={item.path}
               size="lg"
               color="foreground"
-              key={item.name}
             >
               {item.name}
             </UILink>
-          </NavbarItem>
+          </NavbarMenuItem>
         ))}
       </NavbarMenu>
     </Navbar>
