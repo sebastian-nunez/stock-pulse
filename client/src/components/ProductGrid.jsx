@@ -34,7 +34,7 @@ const ProductGrid = ({ products }) => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col justify-between gap-3 px-6 pb-4 sm:px-0">
+    <div className="flex min-h-screen flex-col justify-between gap-3 pb-4">
       <div className="mt-4 flex flex-col gap-2">
         {/* ---------- Result Widget  ---------- */}
         <ResultsWidget
@@ -45,7 +45,7 @@ const ProductGrid = ({ products }) => {
         />
 
         {/* ---------- Product Rendering ---------- */}
-        <div className="grid gap-6 pb-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 pb-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {paginatedProducts?.map((product) => (
             <ProductCard key={product.product_id} product={product} />
           ))}
