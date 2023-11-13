@@ -167,7 +167,6 @@ const BrowserFilters = ({
             placeholder="Search"
             size="lg"
             labelPlacement="outside"
-            description="Search by name or brand"
             variant="bordered"
             isClearable
             startContent={<Search size={20} />}

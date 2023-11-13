@@ -74,7 +74,6 @@ const TableFilters = ({
             size="lg"
             labelPlacement="outside"
             variant="bordered"
-            description="Search by name, brand or category"
             startContent={<Search size={20} />}
             isClearable
             value={searchText}
