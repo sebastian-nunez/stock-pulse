@@ -44,7 +44,7 @@ const ProductCard = ({ product, isLoading = false }) => {
             <img
               src={product?.image}
               alt={product?.name}
-              className="h-60 w-80 rounded-xl object-cover object-center md:w-96"
+              className="h-60 w-96 rounded-xl object-cover object-center"
             />
           ) : (
             <div className="flex h-60 w-full items-center justify-center rounded-xl border drop-shadow-sm">
