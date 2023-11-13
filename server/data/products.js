@@ -28,7 +28,7 @@ export const productData = [
     category_id: 2
   },
   {
-    name: "LeBron XXI 'Dragon Pearl",
+    name: "LeBron XXI Dragon Pearl",
     brand: "Nike",
     description: "LeBron XXI 'Dragon Pearl' Basketball Shoes",
     image:
@@ -169,7 +169,7 @@ export const productData = [
     category_id: 1
   },
   {
-    name: "Air Jordan 1 Retro High OG",
+    name: "Air Jordan 1 Retro High",
     brand: "Nike",
     description: "Air Jordan 1 Retro High OG Men's Shoes",
     image:
