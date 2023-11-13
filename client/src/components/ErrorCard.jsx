@@ -4,9 +4,10 @@ import {
   CardFooter,
   CardHeader,
   Divider,
-  Link,
+  Link as UILink,
 } from "@nextui-org/react";
 import { ServerCrash } from "lucide-react";
+import { Link } from "react-router-dom";
 import BackgroundGradient from "./BackgroundGradient";
 
 const ErrorCard = ({ error, message }) => {
@@ -50,9 +51,9 @@ const ErrorCard = ({ error, message }) => {
         </CardBody>
 
         <CardFooter>
-          <Link showAnchorIcon href="/">
+          <UILink as={Link} showAnchorIcon to="/">
             Go back home
-          </Link>
+          </UILink>
         </CardFooter>
       </Card>
 

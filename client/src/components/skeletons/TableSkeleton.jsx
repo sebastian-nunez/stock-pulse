@@ -39,7 +39,8 @@ export const TableCardSkeleton = ({ numberOfRows }) => {
     <Card className="flex flex-col gap-6 px-4 pt-6">
       <ResultsWidgetSkeleton />
 
-      <Skeleton className="h-10 w-full rounded" />
+      <Skeleton className="h-10 w-full rounded-xl" />
+
       {Array.from({ length: numberOfRows }, (_, index) => (
         <RowSkeleton key={index} />
       ))}
