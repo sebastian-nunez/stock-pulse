@@ -55,9 +55,7 @@ export const useFilteredProducts = (
 
           // every selected tag must be included in product's tags list
           const productTags = product.tags;
-          return selectedTags.every((tag) =>
-            productTags.includes(normalizeText(tag)),
-          );
+          return selectedTags.every((tag) => productTags.includes(tag));
         });
 
       setFilteredProducts(filterProducts);
