@@ -7,6 +7,7 @@ import ProductEditableModal from "../components/ProductEditableModal";
 import ProductsTable from "../components/ProductsTable";
 import TableFilters, { FilterOptions } from "../components/TableFilters";
 import TagEditableModal from "../components/TagEditableModal";
+import TagsTable from "../components/TagsTable";
 
 const Inventory = () => {
   // modal controller
@@ -44,7 +45,9 @@ const Inventory = () => {
         )}
 
         {/* ------------------ Tags ------------------- */}
-        {selectedFilter === FilterOptions.TAGS && <p>TAGS</p>}
+        {selectedFilter === FilterOptions.TAGS && (
+          <TagsTable filterText={searchText} />
+        )}
       </div>
 
       {/* ------------------ Modals ------------------- */}
