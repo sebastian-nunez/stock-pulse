@@ -4,7 +4,7 @@ import { ResultsWidgetSkeleton } from "./TableSkeleton";
 export const ProductCardSkeleton = () => {
   return (
     <Card className="w-full p-4" radius="lg">
-      <Skeleton className="h-60 rounded-xl " />
+      <Skeleton className="h-60 w-full rounded-xl" />
 
       <div className="mt-4 space-y-6">
         <div className="flex items-end justify-between">
