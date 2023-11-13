@@ -1,5 +1,4 @@
 import {
-  Card,
   Chip,
   Pagination,
   Spinner,
@@ -197,6 +196,16 @@ const ProductsTable = ({ filterText }) => {
               onRefreshAction={() => sortedList.reload()}
             />
           }
+          bottomContent={
+            <Pagination
+              showControls
+              color="primary"
+              page={currentPage}
+              total={numberOfPages}
+              onChange={changePage}
+              className="mx-auto"
+            />
+          }
           classNames={{
             table: "min-h-[400px]",
           }}
@@ -234,17 +243,7 @@ const ProductsTable = ({ filterText }) => {
       </div>
 
       {/* -------------- Pagination Controls -------------- */}
-      <div className="mt-6 flex w-full justify-center">
-        <Card className="p-4 drop-shadow-sm">
-          <Pagination
-            showControls
-            color="primary"
-            page={currentPage}
-            total={numberOfPages}
-            onChange={changePage}
-          />
-        </Card>
-      </div>
+      <div className="mt-6 flex w-full justify-center"></div>
 
       {/* -------------- Modals -------------- */}
       {selectedAction === Action.VIEW && (

@@ -17,7 +17,7 @@ export const ResultsWidgetSkeleton = () => {
 };
 
 export const PaginationControlsSkeleton = () => {
-  return <Skeleton className="mx-auto mb-6 mt-3 h-12 w-1/5 rounded-lg" />;
+  return <Skeleton className="mx-auto mb-6 mt-1 h-12 w-1/5 rounded-lg" />;
 };
 
 export const RowSkeleton = () => {
@@ -43,6 +43,8 @@ export const TableCardSkeleton = ({ numberOfRows }) => {
       {Array.from({ length: numberOfRows }, (_, index) => (
         <RowSkeleton key={index} />
       ))}
+
+      <PaginationControlsSkeleton />
     </Card>
   );
 };
@@ -51,8 +53,6 @@ const TableSkeleton = () => {
   return (
     <div className="flex flex-col gap-3 px-6 py-4 sm:px-0">
       <TableCardSkeleton numberOfRows={12} />
-
-      <PaginationControlsSkeleton />
     </div>
   );
 };
