@@ -2,16 +2,15 @@ import { useEffect, useMemo, useState } from "react";
 import { normalizeText } from "../utils/helpers";
 
 /**
- * Custom hook to filter products by search text, category, and tags
+ * Custom hook to filter products by search text and filter keys
  *
  * @param {Array} items list of items
  * @param {string} searchText search text
- * @param {Array} filterKeys keys to filter items by
- * @returns {Array} filtered items and isFiltering state
+ * @param {Array} filterBy keys to filter items by
+ * @returns {Array} filtered items
  */
-const useFilteredItems = (items, searchText, filterKeys) => {
+const useFilteredItems = (items, searchText, filterBy) => {
   const [filteredItems, setFilteredItems] = useState(items);
-  const [isFiltering, setIsFiltering] = useState(true);
 
   // memoized normalized search text
   const normalizedSearchText = useMemo(
@@ -22,28 +21,25 @@ const useFilteredItems = (items, searchText, filterKeys) => {
   const filtered = useMemo(
     () =>
       items?.filter((item) => {
-        const itemTokens = filterKeys
+        const itemTokens = filterBy
           .map((key) => normalizeText(item?.[key]))
           .join("");
 
         return itemTokens.includes(normalizedSearchText);
       }),
-    [JSON.stringify(items), normalizedSearchText, JSON.stringify(filterKeys)],
+    [JSON.stringify(items), normalizedSearchText, JSON.stringify(filterBy)],
   );
 
   useEffect(() => {
-    setIsFiltering(true);
-
     // debounce the filter function
     const timeoutId = setTimeout(() => {
       setFilteredItems(filtered);
-      setIsFiltering(false);
-    }, 300);
+    }, 500);
 
     return () => clearTimeout(timeoutId);
   }, [filtered]);
 
-  return { filteredItems, isFiltering };
+  return filteredItems;
 };
 
 export default useFilteredItems;

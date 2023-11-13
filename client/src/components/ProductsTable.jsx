@@ -93,11 +93,11 @@ const ProductsTable = ({ filterText }) => {
   // extract the products from the sorted list
   const sortedProducts = sortedList?.items;
 
-  const { filteredItems, isFiltering } = useFilteredItems(
-    sortedProducts,
-    filterText,
-    ["name", "brand", "category"],
-  );
+  const filteredItems = useFilteredItems(sortedProducts, filterText, [
+    "name",
+    "brand",
+    "category",
+  ]);
 
   const numberOfProducts = filteredItems?.length;
 
@@ -172,7 +172,9 @@ const ProductsTable = ({ filterText }) => {
   }, []);
 
   const isLoading =
-    sortedList.isLoading || deleteProduct.isLoading || isFiltering;
+    sortedList.isLoading ||
+    deleteProduct.isLoading ||
+    (numberOfProducts <= 0 && !filterText); // if there are no products and no filter text, we are loading
   if (isLoading) {
     return <TableSkeleton />;
   }
@@ -197,14 +199,18 @@ const ProductsTable = ({ filterText }) => {
             />
           }
           bottomContent={
-            <Pagination
-              showControls
-              color="primary"
-              page={currentPage}
-              total={numberOfPages}
-              onChange={changePage}
-              className="mx-auto"
-            />
+            !isLoading &&
+            numberOfProducts > 0 && (
+              <Pagination
+                showControls
+                color="primary"
+                showShadow
+                page={currentPage}
+                total={numberOfPages}
+                onChange={changePage}
+                className="mx-auto"
+              />
+            )
           }
           classNames={{
             table: "min-h-[400px]",
