@@ -52,7 +52,7 @@ export const TableCardSkeleton = ({ numberOfRows }) => {
 
 const TableSkeleton = () => {
   return (
-    <div className="flex flex-col gap-3 px-6 py-4 sm:px-0">
+    <div className="flex flex-col gap-3 pt-4">
       <TableCardSkeleton numberOfRows={12} />
     </div>
   );

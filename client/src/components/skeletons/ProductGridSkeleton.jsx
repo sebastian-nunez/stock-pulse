@@ -27,7 +27,7 @@ const ProductGridSkeleton = () => {
   const numberOfSkeletons = 12;
 
   return (
-    <div className="flex flex-col gap-3 px-6 py-6 sm:px-0">
+    <div className="flex flex-col gap-3 py-6 sm:px-0">
       <ResultsWidgetSkeleton />
 
       <div className="grid w-full gap-6 md:grid-cols-2 lg:grid-cols-3">

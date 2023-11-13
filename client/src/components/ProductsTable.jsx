@@ -184,7 +184,7 @@ const ProductsTable = ({ filterText }) => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col justify-between gap-3 px-6 pb-4 drop-shadow-sm sm:px-0">
+    <div className="flex min-h-screen flex-col justify-between gap-3 drop-shadow-sm sm:px-0">
       <div className="mt-4 flex flex-col gap-2">
         {/* -------------- Table -------------- */}
         <Table
