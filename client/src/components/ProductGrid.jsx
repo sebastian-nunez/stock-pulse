@@ -58,7 +58,6 @@ const ProductGrid = ({ products }) => {
           <Card className="p-4 drop-shadow-sm">
             <Pagination
               showControls
-              showShadow
               total={numberOfPages}
               page={currentPage}
               onChange={changePage}

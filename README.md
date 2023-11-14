@@ -13,6 +13,7 @@
 ## Table of Contents
 
 - [About](#about)
+- [Screenshots](#screenshots)
 - [Features](#features)
 - [Demos](#demos)
 - [Getting Started](#getting-started)
@@ -38,6 +39,28 @@
 
 **Inspiration:** StockPulse was created with the vision to promote growth and customer satisfaction while effortlessly overseeing and organizing its products and sales.
 
+## Screenshots
+
+### Landing Page
+
+![landing page](demos/screenshots/landingpage.png)
+
+### Product Browser
+
+![product view](demos/screenshots/productgrid.png)
+
+### Inventory Table
+
+![table view](demos/screenshots/tableview.png)
+
+### Login
+
+![login](demos/screenshots/login.png)
+
+### Error Handling
+
+![404](demos/screenshots/404.png)
+
 ## Features
 
 - **Product Management:**
@@ -47,13 +70,13 @@
 
 - **Category & Tag Management:**
 
-  - [ ] Create, update, and remove categories and tags for products.
+  - [x] Create, update, and remove categories and tags for products.
   - [x] Assign products to multiple tags.
 
 - **User-friendly Interface:**
 
   - [x] Browse products, view details, and manage inventory via an **Inventory** or "card view"
-  - [ ] Browse products, view details, and manage inventory via a **Dashboard** or "tabular view"
+  - [x] Browse products, view details, and manage inventory via a **Dashboard** or "tabular view"
   - [x] End-to-end form and input validation
   - [ ] Login via OAuth using GitHub
 

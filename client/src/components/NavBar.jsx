@@ -12,7 +12,7 @@ import {
 } from "@nextui-org/react";
 import { Layers3 } from "lucide-react";
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const menuItems = [
   { name: "Home", path: "/", side: "left" },
@@ -22,7 +22,6 @@ export const menuItems = [
 ];
 
 export default function App() {
-  const { pathname } = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -59,10 +58,7 @@ export default function App() {
         {menuItems
           .filter((item) => item.name !== "Home" && item.side === "left")
           .map((item) => (
-            <NavbarItem
-              key={item.name}
-              isActive={item.path === pathname} // highlight active item from URL
-            >
+            <NavbarItem key={item.name}>
               <UILink
                 as={Link}
                 to={item.path}

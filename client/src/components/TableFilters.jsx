@@ -61,7 +61,7 @@ const TableFilters = ({
             radius="sm"
             startContent={<PackagePlus width={20} height={20} />}
             onPress={handleOpenModal}
-            className="sm:text-md h-12 w-1/3 font-semibold transition duration-250 ease-in-out hover:scale-[1.03] sm:w-2/5"
+            className="sm:text-md h-12 w-1/3 font-medium transition duration-250 ease-in-out hover:scale-[1.03] sm:w-2/5 lg:text-lg"
           >
             Add
           </Button>

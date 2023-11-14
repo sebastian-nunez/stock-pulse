@@ -12,7 +12,7 @@ This unit, be sure to complete all tasks listed below. To complete a task, place
 - [x] In `readme.md`, check off the features you have completed in this unit by adding a ✅ emoji in front of their title
   - [x] Under each feature you have completed, **include a GIF** showing feature functionality
 - [x] In this document, complete the **Reflection** section below
-- [ ] 🚩🚩🚩**Complete the Final Project Feature Checklist section below**, detailing each feature you completed in the project (ONLY include features you implemented, not features you planned)
+- [x] 🚩🚩🚩**Complete the Final Project Feature Checklist section below**, detailing each feature you completed in the project (ONLY include features you implemented, not features you planned)
 - [ ] 🚩🚩🚩**Record a GIF showing a complete run-through of your app** that displays all the components included in the **Final Project Feature Checklist** below
   - [ ] Include this GIF in the **Final Demo GIF** section below
 
@@ -25,7 +25,7 @@ Complete the checklist below detailing each baseline, custom, and stretch featur
 👉🏾👉🏾👉🏾 Check off each completed feature below.
 
 - [x] The project includes an Express backend app and a React frontend app
-- [ ] The project includes these backend-specific features:
+- [x] The project includes these backend-specific features:
   - [x] At least one of each of the following database relationship in Postgres
     - [x] one-to-many
     - [x] many-to-many with a join table
@@ -48,9 +48,9 @@ Complete the checklist below detailing each baseline, custom, and stretch featur
 👉🏾👉🏾👉🏾 Check off each completed feature below.
 
 - [x] The project gracefully handles errors
-- [ ] The project includes a one-to-one database relationship
+- [x] The project includes a one-to-one database relationship
 - [x] The project includes a slide-out pane or modal as appropriate for your use case
-- [ ] The project includes a unique field within the join table
+- [x] The project includes a unique field within the join table
 - [ ] The project includes a custom non-RESTful route with corresponding controller actions
 - [x] The project allows filtering and/or sorting as appropriate for your use case
 - [ ] Data is automatically generated in response to a certain event or user action. Examples include generating a default inventory for a new user starting a game or creating a starter set of tasks for a user creating a new task app account
@@ -93,4 +93,4 @@ Complete the checklist below detailing each baseline, custom, and stretch featur
 
 ### 5. Looking ahead, what are your goals related to web development, and what steps do you plan to take to achieve them?
 
-- Keep making more apps and get interships!
+- Keep making more apps and get internships!
