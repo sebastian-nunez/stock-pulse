@@ -8,18 +8,6 @@ class UsersAPI {
 
     return users;
   };
-
-  static createUser = async (user) => {
-    const body = JSON.stringify(user);
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    const res = await axios.post(USERS_BASE_URL, body, { headers });
-    const createdUser = res.data;
-
-    return createdUser;
-  };
 }
 
 export default UsersAPI;

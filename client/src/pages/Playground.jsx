@@ -1,19 +1,14 @@
 import {
   Button,
-  Card,
-  CardBody,
-  Divider,
   Input,
   Select,
   SelectItem,
   Tooltip,
-  User,
   useDisclosure,
 } from "@nextui-org/react";
-import { Search, Users } from "lucide-react";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { Toaster } from "react-hot-toast";
+import { useQuery } from "react-query";
 import CategoryDetailsModal from "../components/CategoryDetailsModal";
 import CategoryEditableModal from "../components/CategoryEditableModal";
 import ProductDetailsModal from "../components/ProductDetailsModal";
@@ -23,7 +18,6 @@ import TagEditableModal from "../components/TagEditableModal";
 import CategoriesAPI from "../services/CategoriesAPI";
 import ProductsAPI from "../services/ProductsAPI";
 import TagsAPI from "../services/TagsAPI";
-import UsersAPI from "../services/UsersAPI";
 
 export const Action = {
   CREATE: "Create",
@@ -78,48 +72,6 @@ const Playground = () => {
     }
   });
   const tag = tagByIdQuery.data;
-
-  {
-    /* --------------------------- Users ---------------------------*/
-  }
-  const queryClient = useQueryClient();
-
-  const createUser = useMutation(UsersAPI.createUser, {
-    onSuccess: (userData) => {
-      queryClient.invalidateQueries(["users"]);
-
-      toast.success(
-        `${userData.firstname} ${userData.lastname} successfully added!`,
-      );
-    },
-  });
-
-  const usersQuery = useQuery(["users"], UsersAPI.getAllUsers, {
-    enabled: false,
-  });
-  const users = usersQuery.data;
-
-  // state
-  const [searchInput, setSearchInput] = useState("");
-  const [user, setUser] = useState(DEFAULT_USER);
-
-  // form submission
-  const handleAddUser = (e) => {
-    e.preventDefault();
-
-    createUser.mutate(user);
-    setUser(DEFAULT_USER);
-  };
-
-  // form fields
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
-  };
 
   return (
     <>
@@ -290,79 +242,6 @@ const Playground = () => {
             onOpenChange={onOpenChange}
           />
         )}
-      </section>
-
-      <Divider className="my-12" />
-
-      {/* --------------------------- Users ---------------------------*/}
-      <section>
-        <h2 className="pb-6 text-3xl font-extrabold">Users</h2>
-
-        <Button
-          color="primary"
-          radius="md"
-          variant="shadow"
-          startContent={!usersQuery.isLoading && <Users />}
-          onClick={() => usersQuery.refetch()}
-          isLoading={usersQuery.isLoading}
-          className="mx-auto w-1/3"
-        >
-          Get Users
-        </Button>
-
-        {/* ------------ Filter Options -------------- */}
-        {usersQuery.isSuccess && (
-          <div className="my-6 flex justify-end gap-6">
-            <Input
-              type="text"
-              name="name"
-              placeholder="Tim Cook"
-              variant="bordered"
-              startContent={<Search className="text-default-400" />}
-              className="w-1/3"
-              value={searchInput}
-              onValueChange={setSearchInput}
-            />
-          </div>
-        )}
-
-        {/* ------------ User Grid -------------- */}
-        <div className="grid grid-cols-3 gap-6">
-          {users?.length > 0
-            ? users
-                .filter((user) => {
-                  const normalizedInput = searchInput.trim().toLowerCase();
-                  const firstName = user.firstname.trim().toLowerCase();
-                  const lastName = user.lastname.trim().toLowerCase();
-                  const fullName = `${firstName} ${lastName}`;
-
-                  return (
-                    firstName.startsWith(normalizedInput) ||
-                    lastName.startsWith(normalizedInput) ||
-                    fullName.startsWith(normalizedInput)
-                  );
-                })
-                .map((user) => (
-                  <Card key={user.id}>
-                    <CardBody className="flex flex-row">
-                      <User
-                        name={`${user.firstname} ${user.lastname}`}
-                        description={user.role}
-                        avatarProps={{
-                          src: user.image,
-                          size: "lg",
-                          isBordered: true,
-                          isFocusable: true,
-                          showFallback: true,
-                        }}
-                      />
-                    </CardBody>
-                  </Card>
-                ))
-            : usersQuery.isError && (
-                <div>ERROR: {usersQuery.error?.message}</div>
-              )}
-        </div>
 
         {/* ------------ Toaster Notification -------------- */}
         <Toaster position="top-right" />
