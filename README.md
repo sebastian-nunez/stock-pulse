@@ -69,11 +69,9 @@
 
 ![table view](demos/screenshots/tableview.png)
 
-### Login/Sign up
+### Login
 
 ![login](demos/screenshots/login.png)
-
-![sign up](demos/screenshots/signup.png)
 
 ### Error Handling
 
