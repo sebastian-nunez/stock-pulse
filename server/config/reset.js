@@ -11,10 +11,10 @@ const createUserTable = async () => {
 
       CREATE TABLE IF NOT EXISTS users (
         id                  SERIAL PRIMARY KEY,
-        username            VARCHAR(50),
-        githubid            VARCHAR(50),
-        avatarurl           VARCHAR(255),
-        accesstoken         VARCHAR(255)
+        githubid            INT NOT NULL,
+        username            VARCHAR(200) NOT NULL,
+        avatarurl           VARCHAR(500),
+        accesstoken         VARCHAR(500) NOT NULL
       );
     `;
 
