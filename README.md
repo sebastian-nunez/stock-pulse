@@ -1,23 +1,22 @@
 # StockPulse
 
+> An efficient and intuitive inventory management application designed for e-commerce businesses.
+
 ## CodePath WEB103 Final Project
 
 **Designed and developed by:** Priscilla Colon, Sebastian Nunez
 
 🔗 **Link to deployed app:**
 
-![All wireframes](demos/stock-pulse-wireframes-overview.png)
-
-> _StockPulse - Design Process Overview_
+![landing page](demos/screenshots/landingpage.png)
 
 ## Table of Contents
 
-- [About](#about)
-- [Screenshots](#screenshots)
 - [Features](#features)
+- [Screenshots](#screenshots)
+- [Technologies](#technologies)
 - [Demos](#demos)
 - [Getting Started](#getting-started)
-- [Technologies](#technologies)
 - [Kanban Board](#kanban-board)
 - [Wireframes](#wireframes)
 - [ER Diagram](#er-diagram)
@@ -30,36 +29,6 @@
   - [`tag`](#tag)
   - [`product_tag`](#product_tag)
 - [License](#license)
-
-## About
-
-**Description:** An efficient and intuitive inventory management application designed for e-commerce businesses.
-
-**Purpose:** To streamline your stock control, categorize products, track sales, and manage your inventory seamlessly.
-
-**Inspiration:** StockPulse was created with the vision to promote growth and customer satisfaction while effortlessly overseeing and organizing its products and sales.
-
-## Screenshots
-
-### Landing Page
-
-![landing page](demos/screenshots/landingpage.png)
-
-### Product Browser
-
-![product view](demos/screenshots/productgrid.png)
-
-### Inventory Table
-
-![table view](demos/screenshots/tableview.png)
-
-### Login
-
-![login](demos/screenshots/login.png)
-
-### Error Handling
-
-![404](demos/screenshots/404.png)
 
 ## Features
 
@@ -83,6 +52,48 @@
 - **Inventory Control:**
   - [x] Monitor product quantities and make adjustments as needed.
   - [ ] Receive low-stock alerts for timely restocking.
+
+## Screenshots
+
+### Project Overview
+
+![All wireframes](demos/stock-pulse-wireframes-overview.png)
+
+> _StockPulse - Design Process Overview_
+
+### Product Browser
+
+![product view](demos/screenshots/productgrid.png)
+
+### Inventory Table
+
+![table view](demos/screenshots/tableview.png)
+
+### Login
+
+![login](demos/screenshots/login.png)
+
+### Error Handling
+
+![404](demos/screenshots/404.png)
+
+## Technologies
+
+- **Frontend**
+  - **Languages:** JavaScript
+  - **Frameworks:** React.js (Vite)
+  - **UI Components:** NextUI, TailwindCSS
+  - **Icons:** Lucide Icons
+  - **Data Fetching:** useQuery, Axios
+  - **Form Validation:** react-hook-form, Zod
+  - **Notifications/Toasts:** react-hot-toast
+- **Backend:**
+  - **Languages:** Node.js
+  - **Frameworks:** Express
+  - **Authentication:** Passport, OAuth2
+- **Database:** PostgreSQL
+- **Hosting:** Railway
+- **Design:** Whimsical
 
 ## Demos
 
@@ -155,24 +166,6 @@
 4. Open your browser and visit [http://localhost:5173](http://localhost:5173) to access StockPulse.
    **Note:** The service currently relies on `Railway` for database hosting and management. You can sign up and host your own instance. [Learn more about Railway](https://railway.app/)
 
-## Technologies
-
-- **Frontend**
-  - **Languages:** JavaScript
-  - **Frameworks:** React.js (Vite)
-  - **UI Components:** NextUI, TailwindCSS
-  - **Icons:** Lucide Icons
-  - **Data Fetching:** useQuery, Axios
-  - **Form Validation:** react-hook-form, Zod
-  - **Notifications/Toasts:** react-hot-toast
-- **Backend:**
-  - **Languages:** Node.js
-  - **Frameworks:** Express
-  - **Authentication:** Passport, OAuth2
-- **Database:** PostgreSQL
-- **Hosting:** Railway
-- **Design:** Whimsical
-
 ## Kanban Board
 
 > You can find the full board on [Whimsical.](https://whimsical.com/kanban-board-7xwirWDMp5HDHfk6cUiFwX)
@@ -216,8 +209,9 @@
 
 ### "Get All Users" Trace
 
-High-level trace](demos/stock-pulse-design-1.png)
-_Diagram ignores any authentication/authorization measures_.
+![High-level trace](demos/stock-pulse-design-1.png)
+
+_The diagram ignores any authentication/authorization measures_.
 
 ## Tables
 
