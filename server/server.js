@@ -4,6 +4,7 @@ import express from "express";
 import session from "express-session";
 import passport from "passport";
 import { GitHub } from "./config/auth.js";
+import authRoutes from "./routes/auth.js";
 import CategoryRoutes from "./routes/categories.js";
 import ProductTagRoutes from "./routes/productTag.js";
 import ProductRoutes from "./routes/products.js";
@@ -54,6 +55,9 @@ app.use("/api/tags", TagRoutes);
 app.use("/api/categories", CategoryRoutes);
 app.use("/api/products", ProductRoutes);
 app.use("/api/product-tag", ProductTagRoutes);
+
+// auth routes
+app.use("/auth", authRoutes);
 
 // health check endpoints
 app.get("/api", (req, res) => {
