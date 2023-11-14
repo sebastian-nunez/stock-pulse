@@ -1,12 +1,14 @@
 import { rowsPerPageOptions } from "../components/ResultsWidget";
 import { get_milliseconds_from_minutes } from "./helpers";
 
+export const API_URL = "http://localhost:3001";
+
 // --------------- base urls ---------------
-export const USERS_BASE_URL = "/api/users";
-export const TAGS_BASE_URL = "/api/tags";
-export const PRODUCT_TAGS_BASE_URL = "/api/product-tag";
-export const PRODUCTS_BASE_URL = "/api/products";
-export const CATEGORIES_BASE_URL = "/api/categories";
+export const USERS_BASE_URL = `${API_URL}/api/users`;
+export const PRODUCTS_BASE_URL = `${API_URL}/api/products`;
+export const CATEGORIES_BASE_URL = `${API_URL}/api/categories`;
+export const TAGS_BASE_URL = `${API_URL}/api/tags`;
+export const PRODUCT_TAG_BASE_URL = `${API_URL}/api/product-tag`;
 
 // --------------- query keys ---------------
 export const USERS_QUERY_KEY = "users";
