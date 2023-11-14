@@ -1,45 +1,50 @@
-import { Strategy as GitHubStrategy } from "passport-github2";
+import GitHubStrategy from "passport-github2";
 
 const options = {
   clientID: process.env.GITHUB_CLIENT_ID,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "http://localhost:3001/auth/github/callback",
+  clientSecret: process.env.GITHUB_CLIENT_SECRET
 };
 
 const verify = async (accessToken, refreshToken, profile, callback) => {
   const {
-    _json: { id, name, login, avatar_url },
+    _json: { id, login, avatar_url }
   } = profile;
+
   const userData = {
     githubId: id,
     username: login,
     avatarUrl: avatar_url,
-    accessToken,
+    accessToken
   };
 
   try {
+    // check if user exists
     const results = await pool.query(
-      "SELECT * FROM users WHERE username = $1",
+      `SELECT * FROM users WHERE username = $1`,
       [userData.username]
     );
-    const user = results.rows[0];
+    let user = results.rows[0];
 
+    // if user doesn't exist, create one
     if (!user) {
       const results = await pool.query(
-        `INSERT INTO users (githubid, username, avatarurl, accesstoken)
-                VALUES($1, $2, $3, $4)
-                RETURNING *`,
+        `
+          INSERT INTO users (githubid, username, avatarurl, accesstoken)
+          VALUES($1, $2, $3, $4)
+          RETURNING *
+        `,
         [userData.githubId, userData.username, userData.avatarUrl, accessToken]
       );
 
-      const newUser = results.rows[0];
-      return callback(null, newUser);
+      // set user to new user
+      user = results.rows[0];
     }
 
+    // return new user
     return callback(null, user);
   } catch (error) {
     return callback(error);
   }
 };
 
-export const githubStrategy = new GitHubStrategy(options, verify);
+export const GitHubStrategy = new GitHubStrategy(options, verify);
