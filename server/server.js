@@ -1,6 +1,9 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import session from "express-session";
+import passport from "passport";
+import { GitHub } from "./config/auth.js";
 import CategoryRoutes from "./routes/categories.js";
 import ProductTagRoutes from "./routes/productTag.js";
 import ProductRoutes from "./routes/products.js";
@@ -12,8 +15,37 @@ dotenv.config();
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+// auth middleware
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+  })
+);
+
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    methods: "GET,POST,PUT,DELETE,PATCH",
+    credentials: true
+  })
+);
+
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(GitHub);
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
 // middleware
-app.use(cors());
 app.use(express.json());
 
 // routes
@@ -29,11 +61,7 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res
-    .status(200)
-    .send(
-      '<h1 style="text-align: center; margin-top: 50px;">StockPulse API</h1>'
-    );
+  res.redirect(process.env.CLIENT_URL);
 });
 
 // launch server
