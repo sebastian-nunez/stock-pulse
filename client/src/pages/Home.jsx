@@ -1,5 +1,9 @@
 import { Button } from "@nextui-org/react";
+import { MoveRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { LogoOne } from "../assets/LogoOne";
+import { LogoThree } from "../assets/LogoThree";
+import { LogoTwo } from "../assets/LogoTwo";
 import BackgroundGradient from "../components/BackgroundGradient";
 
 const Home = () => {
@@ -22,10 +26,23 @@ const Home = () => {
         to="/signup"
         color="primary"
         variant="shadow"
-        className="rounded px-12 py-6 text-lg font-semibold transition duration-250 ease-in-out hover:scale-[1.05]"
+        className="rounded px-8 py-6 text-lg font-semibold transition duration-250 ease-in-out hover:scale-[1.05] active:animate-appearance-out"
+        endContent={<MoveRight />}
       >
         Get Started
       </Button>
+
+      {/* --------------- Featured In ----------------- */}
+      <div class="mx-auto hidden pt-24 text-center sm:block lg:px-36">
+        <span class="text-lg font-semibold uppercase text-gray-400">
+          FEATURED IN
+        </span>
+        <div class="flex flex-col items-center justify-center gap-12 py-8 text-gray-500 sm:flex-row sm:justify-between md:gap-32">
+          <LogoOne />
+          <LogoTwo />
+          <LogoThree />
+        </div>
+      </div>
 
       {/* ------------- Blurred Background ------------ */}
       <BackgroundGradient variant={"primary"} />
