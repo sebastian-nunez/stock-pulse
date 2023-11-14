@@ -69,13 +69,23 @@
 
 ![table view](demos/screenshots/tableview.png)
 
-### Login
+### Login/Sign up
 
 ![login](demos/screenshots/login.png)
+
+![sign up](demos/screenshots/signup.png)
 
 ### Error Handling
 
 ![404](demos/screenshots/404.png)
+
+![500](demos/screenshots/500%20error.png)
+
+### Loading Skeletons
+
+![loading skeleton 1](demos/screenshots/loading_skeleton_1.png)
+
+![loading skeleton 2](demos/screenshots/loading_skeleton_2.png)
 
 ## Technologies
 
