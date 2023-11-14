@@ -32,10 +32,10 @@ const Home = () => {
         Get Started
       </Button>
 
-      {/* --------------- Featured In ----------------- */}
+      {/* --------------- TRUSTED BY ----------------- */}
       <div class="mx-auto hidden pt-24 text-center sm:block lg:px-36">
         <span class="text-lg font-semibold uppercase text-gray-400">
-          FEATURED IN
+          TRUSTED BY
         </span>
         <div class="flex flex-col items-center justify-center gap-12 py-8 text-gray-500 sm:flex-row sm:justify-between md:gap-32">
           <LogoOne />
