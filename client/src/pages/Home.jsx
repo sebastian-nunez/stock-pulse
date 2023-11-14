@@ -26,8 +26,8 @@ const Home = () => {
         to="/signup"
         color="primary"
         variant="shadow"
-        className="rounded px-8 py-6 text-lg font-semibold transition duration-250 ease-in-out hover:scale-[1.05] active:animate-appearance-out"
-        endContent={<MoveRight />}
+        className=" rounded px-8 py-6 text-lg font-semibold transition duration-250 ease-in-out hover:scale-[1.05] active:animate-appearance-out"
+        endContent={<MoveRight className="animate-pulse" />}
       >
         Get Started
       </Button>
