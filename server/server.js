@@ -4,6 +4,7 @@ import express from "express";
 import session from "express-session";
 import passport from "passport";
 import { GitHub } from "./config/auth.js";
+import authMiddleware from "./middleware/auth.js";
 import authRoutes from "./routes/auth.js";
 import CategoryRoutes from "./routes/categories.js";
 import ProductTagRoutes from "./routes/productTag.js";
@@ -51,7 +52,7 @@ passport.deserializeUser((user, done) => {
 app.use(express.json());
 
 // Apply authMiddleware to all API routes
-// app.use("/api", authMiddleware);
+app.use("/api", authMiddleware);
 
 // routes
 app.use("/api/users", UserRoutes);
