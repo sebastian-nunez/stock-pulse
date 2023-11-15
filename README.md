@@ -6,7 +6,7 @@
 
 **Designed and developed by:** Priscilla Colon, Sebastian Nunez
 
-🔗 **Link to deployed app:**
+🔗 **Link to deployed app:** <https://stockpulse.up.railway.app/>
 
 ![landing page](demos/screenshots/landingpage.png)
 
