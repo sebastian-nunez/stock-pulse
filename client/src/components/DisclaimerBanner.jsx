@@ -21,7 +21,7 @@ const DisclaimerBanner = ({ children, durationSeconds = 20 }) => {
   return (
     <div className="rounded border-l-4 border-yellow-500 bg-yellow-100 p-4 text-sm text-yellow-700 drop-shadow">
       <h1 className="flex items-center justify-between">
-        <strong>DEMO DISCLAIMER</strong>
+        <strong>DISCLAIMER</strong>
 
         <button
           aria-label="Close banner"

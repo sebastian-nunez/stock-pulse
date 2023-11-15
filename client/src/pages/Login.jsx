@@ -11,8 +11,7 @@ const Login = () => {
     <CenteredContainer>
       {/* ------------- Disclaimer ------------ */}
       <DisclaimerBanner>
-        The login feature is currently under development. We apologize for any
-        inconvenience.
+        Currently, we only support login via GitHub.
       </DisclaimerBanner>
 
       <Card className="flex flex-col gap-3 px-6 py-8 drop-shadow-lg">

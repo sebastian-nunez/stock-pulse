@@ -12,8 +12,7 @@ const SignUp = () => {
     <CenteredContainer>
       {/* ------------- Disclaimer ------------ */}
       <DisclaimerBanner>
-        The sign up feature is currently under development. We apologize for any
-        inconvenience.
+        Currently, we only support sign up via GitHub.
       </DisclaimerBanner>
 
       <Card className="flex w-full flex-col gap-3 px-6 py-8 drop-shadow-lg">
