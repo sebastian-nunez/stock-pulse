@@ -67,12 +67,7 @@ export default function App() {
       if (item?.side === "left") {
         return (
           <NavbarMenuItem key={item?.name || idx}>
-            <UILink
-              as={Link}
-              to={item.path}
-              className="text-4xl font-semibold tracking-tight"
-              color="foreground"
-            >
+            <UILink as={Link} to={item.path} color="foreground">
               {item.name}
             </UILink>
           </NavbarMenuItem>
@@ -174,7 +169,7 @@ export default function App() {
       </NavbarContent>
 
       {/* Mobile Menu */}
-      <NavbarMenu className="flex flex-col gap-6">
+      <NavbarMenu className="flex flex-col gap-6 text-4xl font-semibold tracking-tight">
         {renderMobileMenuItems()}
       </NavbarMenu>
     </Navbar>
