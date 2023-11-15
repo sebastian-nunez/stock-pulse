@@ -19,7 +19,7 @@ const App = () => {
   const element = useRoutes([
     {
       path: "/",
-      element: <Home />,
+      element: isLoggedIn ? <Browser /> : <Home />,
     },
     {
       path: "/login",
