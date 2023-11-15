@@ -6,6 +6,7 @@ const router = express.Router();
 router.get("/login/success", (req, res) => {
   if (req.user) {
     res.status(200).json({ success: true, user: req.user });
+    return;
   }
 
   res.status(401).json({ success: false, message: "failure" });
@@ -39,7 +40,7 @@ router.get(
   "/github/callback",
   passport.authenticate("github", {
     successRedirect: "/",
-    failureRedirect: "/login"
+    failureRedirect: "/"
   })
 );
 

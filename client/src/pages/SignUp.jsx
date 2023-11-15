@@ -5,6 +5,7 @@ import BackgroundGradient from "../components/BackgroundGradient";
 import DisclaimerBanner from "../components/DisclaimerBanner";
 import SignupForm from "../components/SignupForm";
 import CenteredContainer from "../components/layout/CenteredContainer";
+import { API_URL } from "../utils/constants";
 
 const SignUp = () => {
   return (
@@ -41,7 +42,7 @@ const SignUp = () => {
 
         <Button
           as={Link}
-          to="/auth/github"
+          to={`${API_URL}/auth/github`}
           className="w-full rounded bg-gray-900 py-7 text-lg font-semibold text-white hover:bg-gray-800"
         >
           <span className="inline-flex gap-2">

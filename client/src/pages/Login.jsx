@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import DisclaimerBanner from "../components/DisclaimerBanner";
 import LoginForm from "../components/LoginForm";
 import CenteredContainer from "../components/layout/CenteredContainer";
+import { API_URL } from "../utils/constants";
 
 const Login = () => {
   return (
@@ -50,7 +51,7 @@ const Login = () => {
 
         <Button
           as={Link}
-          to="/auth/github"
+          to={`${API_URL}/auth/github`}
           className="w-full rounded bg-gray-900 py-7 text-lg font-semibold text-white hover:bg-gray-800"
         >
           <span className="inline-flex gap-2">

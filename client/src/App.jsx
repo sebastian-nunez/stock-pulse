@@ -1,6 +1,7 @@
+import { Button } from "@nextui-org/react";
+import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useRoutes } from "react-router-dom";
-import ErrorCard from "./components/ErrorCard";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import MainContainer from "./components/layout/MainContainer";
@@ -13,8 +14,35 @@ import PageNotFound from "./pages/PageNotFound";
 import Playground from "./pages/Playground";
 import SignUp from "./pages/SignUp";
 import "./styles/App.css";
+import { API_URL } from "./utils/constants";
 
 const App = () => {
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const response = await fetch(`${API_URL}/auth/login/success`, {
+        credentials: "include",
+      });
+      const json = await response.json();
+      setUser(json.user);
+    };
+
+    getUser();
+  }, []);
+
+  const logout = () => {
+    (async () => {
+      const response = await fetch(`${API_URL}/auth/logout`, {
+        credentials: "include",
+      });
+
+      await response.json();
+
+      window.location.href = "/";
+    })();
+  };
+
   const element = useRoutes([
     {
       path: "/",
@@ -33,22 +61,16 @@ const App = () => {
       element: <ForgotPassword />,
     },
     {
-      path: "/auth/github",
-      element: (
-        <ErrorCard message="We're sorry, but login/sign up via GitHub is not available." />
-      ),
-    },
-    {
       path: "/browser",
-      element: <Browser />,
+      element: user?.id ? <Browser /> : <Login />,
     },
     {
       path: "/inventory",
-      element: <Inventory />,
+      element: user?.id ? <Inventory /> : <Login />,
     },
     {
       path: "/playground",
-      element: <Playground />,
+      element: user?.id ? <Playground /> : <Login />,
     },
     {
       path: "/*",
@@ -60,7 +82,12 @@ const App = () => {
     <>
       <NavBar />
 
-      <MainContainer>{element}</MainContainer>
+      <MainContainer>
+        {element}
+        <Button onPress={logout}>Logout</Button>
+        {user && <p>{user.username}</p>}
+        {user && <img src={user.avatarurl} alt="profile" />}
+      </MainContainer>
 
       <Toaster position="top-right" />
       <Footer />
