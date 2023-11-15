@@ -1,8 +1,8 @@
+import { validateProductDetails } from "../../client/src/utils/validator.js";
 import Category from "../models/category.js";
 import Product from "../models/product.js";
 import ProductTag from "../models/productTag.js";
 import Tag from "../models/tag.js";
-import { validateProductDetails } from "../utils/validator.js";
 
 class ProductsController {
   static getProducts = async (req, res) => {

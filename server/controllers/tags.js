@@ -1,5 +1,5 @@
+import { validateTagDetails } from "../../client/src/utils/validator.js";
 import Tag from "../models/tag.js";
-import { validateTagDetails } from "../utils/validator.js";
 
 class TagsController {
   static getTags = async (req, res) => {

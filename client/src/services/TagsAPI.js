@@ -1,6 +1,6 @@
 import axios from "axios";
-import { validateTagDetails } from "../../../server/utils/validator.js";
 import { TAGS_BASE_URL } from "../utils/constants.js";
+import { validateTagDetails } from "../utils/validator.js";
 
 class TagsAPI {
   static getAllTags = async () => {

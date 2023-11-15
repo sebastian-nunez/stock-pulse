@@ -1,6 +1,6 @@
 import axios from "axios";
-import { validateProductDetails } from "../../../server/utils/validator.js";
 import { PRODUCTS_BASE_URL } from "../utils/constants.js";
+import { validateProductDetails } from "../utils/validator.js";
 
 class ProductsAPI {
   static getAllProducts = async () => {

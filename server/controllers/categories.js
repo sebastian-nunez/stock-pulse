@@ -1,6 +1,6 @@
+import { validateCategoryDetails } from "../../client/src/utils/validator.js";
 import "../config/dotenv.js";
 import Category from "../models/category.js";
-import { validateCategoryDetails } from "../utils/validator.js";
 
 class CategoryController {
   static getCategories = async (req, res) => {
