@@ -70,7 +70,7 @@ export default function App() {
             <UILink
               as={Link}
               to={item.path}
-              className="text-lg font-semibold tracking-tight"
+              className="text-4xl font-semibold tracking-tight"
               color="foreground"
             >
               {item.name}
@@ -98,7 +98,7 @@ export default function App() {
         <DropdownMenu aria-label="Profile Actions" variant="flat">
           <DropdownItem key="profile" className="h-14 gap-2">
             <p className="font-semibold">Signed in as</p>
-            <p className="font-semibold">{user.username}</p>
+            <p className="font-semibold">{user?.username}</p>
           </DropdownItem>
           {/* <DropdownItem key="settings">Settings</DropdownItem> */}
           <DropdownItem
@@ -174,7 +174,9 @@ export default function App() {
       </NavbarContent>
 
       {/* Mobile Menu */}
-      <NavbarMenu>{renderMobileMenuItems()}</NavbarMenu>
+      <NavbarMenu className="flex flex-col gap-6">
+        {renderMobileMenuItems()}
+      </NavbarMenu>
     </Navbar>
   );
 }
