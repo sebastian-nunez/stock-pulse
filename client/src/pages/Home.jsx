@@ -8,7 +8,7 @@ import BackgroundGradient from "../components/BackgroundGradient";
 
 const Home = () => {
   return (
-    <div className="flex min-h-[calc(100vh-6rem)] flex-col justify-between pt-24 sm:pt-28">
+    <div className="flex min-h-[calc(100vh-6rem)] flex-col justify-between gap-10 pt-6 lg:pt-24 xl:pt-28">
       <div className="flex flex-col gap-6 sm:text-center">
         <h1 className="text-5xl font-extrabold tracking-tight lg:text-6xl xl:text-7xl">
           Empower Your Business with <br />
