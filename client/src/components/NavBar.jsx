@@ -1,6 +1,10 @@
 import {
   Button,
   Divider,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Navbar,
   NavbarBrand,
   NavbarContent,
@@ -9,6 +13,7 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
   Link as UILink,
+  User,
 } from "@nextui-org/react";
 import { Layers3 } from "lucide-react";
 import { useState } from "react";
@@ -26,7 +31,7 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isLoggedIn, logout, user } = useAuth();
 
-  const getDesktopMenuItems = () => {
+  const renderDesktopMenuItems = () => {
     if (!isLoggedIn) {
       return null;
     }
@@ -42,7 +47,7 @@ export default function App() {
       ));
   };
 
-  const getMobileMenuItems = () => {
+  const renderMobileMenuItems = () => {
     if (!isLoggedIn) {
       return null;
     }
@@ -63,6 +68,42 @@ export default function App() {
         );
       }
     });
+  };
+
+  const renderProfileDropdown = () => {
+    return (
+      <Dropdown placement="bottom-end">
+        <DropdownTrigger>
+          <User
+            as="button"
+            avatarProps={{
+              isBordered: true,
+              src: user?.avatarurl,
+              fallback: user?.username[0],
+            }}
+            className="mt-1.5 transition-transform"
+          />
+        </DropdownTrigger>
+        <DropdownMenu aria-label="Profile Actions" variant="flat">
+          <DropdownItem key="profile" className="h-14 gap-2">
+            <p className="font-semibold">Signed in as</p>
+            <p className="font-semibold">{user.username}</p>
+          </DropdownItem>
+          {/* <DropdownItem key="settings">Settings</DropdownItem> */}
+          <DropdownItem
+            key="help_and_feedback"
+            as={Link}
+            to="https://github.com/sebastian-nunez/stock-pulse"
+            target="_blank"
+          >
+            Help & Feedback
+          </DropdownItem>
+          <DropdownItem key="logout" color="danger" onClick={logout}>
+            Log Out
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    );
   };
 
   return (
@@ -96,7 +137,7 @@ export default function App() {
         <Divider orientation="vertical" className="h-1/2" />
 
         {/* Menu Items */}
-        {getDesktopMenuItems()}
+        {renderDesktopMenuItems()}
       </NavbarContent>
 
       <div className="w-full" />
@@ -105,15 +146,7 @@ export default function App() {
       <NavbarContent className="gap-4 sm:flex" justify="end">
         <NavbarItem>
           {isLoggedIn ? (
-            <Button
-              variant="flat"
-              color="primary"
-              radius="full"
-              className="font-semibold"
-              onClick={logout}
-            >
-              Logout
-            </Button>
+            renderProfileDropdown()
           ) : (
             <Button
               as={Link}
@@ -130,7 +163,7 @@ export default function App() {
       </NavbarContent>
 
       {/* Mobile Menu */}
-      <NavbarMenu>{getMobileMenuItems()}</NavbarMenu>
+      <NavbarMenu>{renderMobileMenuItems()}</NavbarMenu>
     </Navbar>
   );
 }
