@@ -105,6 +105,10 @@
 
 ## Demos
 
+### Video Walkthrough
+
+[Here's a GIF walkthrough of the final project](https://www.dropbox.com/scl/fi/e2hte8dno0llvpnrawel0/stockpulse_video_walkthrough_1.gif?rlkey=xc512ui054e5kgomrj5w2ogtw&dl=0)
+
 ### Product Details
 
 > Users are able to see an individual product's full details via a responsive modal
