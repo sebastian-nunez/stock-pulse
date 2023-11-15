@@ -1,7 +1,10 @@
 import { rowsPerPageOptions } from "../components/ResultsWidget";
 import { get_milliseconds_from_minutes } from "./helpers";
 
-export const API_URL = "http://localhost:3001";
+export const API_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://stockpulse-server.up.railway.app"
+    : "http://localhost:3001";
 
 // --------------- base urls ---------------
 export const USERS_BASE_URL = `${API_URL}/api/users`;
