@@ -1,9 +1,9 @@
 import { Toaster } from "react-hot-toast";
 import { useRoutes } from "react-router-dom";
-import ErrorCard from "./components/ErrorCard";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import MainContainer from "./components/layout/MainContainer";
+import { useAuth } from "./context/AuthProvider";
 import Browser from "./pages/Browser";
 import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
@@ -15,10 +15,11 @@ import SignUp from "./pages/SignUp";
 import "./styles/App.css";
 
 const App = () => {
+  const { isLoggedIn, user, logout } = useAuth();
   const element = useRoutes([
     {
       path: "/",
-      element: <Home />,
+      element: isLoggedIn ? <Browser /> : <Home />,
     },
     {
       path: "/login",
@@ -33,22 +34,16 @@ const App = () => {
       element: <ForgotPassword />,
     },
     {
-      path: "/auth/github",
-      element: (
-        <ErrorCard message="We're sorry, but login/sign up via GitHub is not available." />
-      ),
-    },
-    {
       path: "/browser",
-      element: <Browser />,
+      element: isLoggedIn ? <Browser /> : <Login />,
     },
     {
       path: "/inventory",
-      element: <Inventory />,
+      element: isLoggedIn ? <Inventory /> : <Login />,
     },
     {
       path: "/playground",
-      element: <Playground />,
+      element: isLoggedIn ? <Playground /> : <Login />,
     },
     {
       path: "/*",

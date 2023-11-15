@@ -3,55 +3,30 @@ import { categoryData } from "../data/categories.js";
 import { productTagData } from "../data/productTags.js";
 import { productData } from "../data/products.js";
 import { tagData } from "../data/tags.js";
-import { userData } from "../data/users.js";
 
-// ------------------------- user_table -------------------------
+// ------------------------- users -------------------------
 const createUserTable = async () => {
   const createQuery = `
-      DROP TABLE IF EXISTS user_table;
+      DROP TABLE IF EXISTS users;
 
-      CREATE TABLE IF NOT EXISTS user_table (
+      CREATE TABLE IF NOT EXISTS users (
         id                  SERIAL PRIMARY KEY,
-        firstname           VARCHAR(50) NOT NULL,
-        lastname            VARCHAR(50) NOT NULL,
-        role                VARCHAR(25) NOT NULL,
-        image               VARCHAR(255)
+        githubid            INT NOT NULL,
+        username            VARCHAR(200) NOT NULL,
+        avatarurl           VARCHAR(500),
+        accesstoken         VARCHAR(500) NOT NULL
       );
     `;
 
   try {
     await pool.query(createQuery);
-    console.log("Created the user_table!");
+    console.log("Created the users!");
   } catch (error) {
     console.log(error);
   }
 };
 
-const seedUsers = async () => {
-  const insertQuery = `
-      INSERT INTO user_table (firstname, lastname, role, image)
-      VALUES ($1, $2, $3, $4);
-    `;
-
-  userData.map(async user => {
-    try {
-      await pool.query(insertQuery, [
-        user.firstname,
-        user.lastname,
-        user.role,
-        user.image
-      ]);
-      console.log(
-        `Inserted ${user.firstname} ${user.lastname} into user_table!`
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  });
-};
-
 await createUserTable();
-await seedUsers();
 
 // ------------------------- category -------------------------
 const createCategoryTable = async () => {

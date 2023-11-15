@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import DisclaimerBanner from "../components/DisclaimerBanner";
 import LoginForm from "../components/LoginForm";
 import CenteredContainer from "../components/layout/CenteredContainer";
+import { API_URL } from "../utils/constants";
 
 const Login = () => {
   return (
     <CenteredContainer>
       {/* ------------- Disclaimer ------------ */}
       <DisclaimerBanner>
-        The login feature is currently under development. We apologize for any
-        inconvenience.
+        Currently, we only support login via GitHub.
       </DisclaimerBanner>
 
       <Card className="flex flex-col gap-3 px-6 py-8 drop-shadow-lg">
@@ -50,7 +50,7 @@ const Login = () => {
 
         <Button
           as={Link}
-          to="/auth/github"
+          to={`${API_URL}/auth/github`}
           className="w-full rounded bg-gray-900 py-7 text-lg font-semibold text-white hover:bg-gray-800"
         >
           <span className="inline-flex gap-2">

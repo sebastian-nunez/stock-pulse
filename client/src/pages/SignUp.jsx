@@ -5,14 +5,14 @@ import BackgroundGradient from "../components/BackgroundGradient";
 import DisclaimerBanner from "../components/DisclaimerBanner";
 import SignupForm from "../components/SignupForm";
 import CenteredContainer from "../components/layout/CenteredContainer";
+import { API_URL } from "../utils/constants";
 
 const SignUp = () => {
   return (
     <CenteredContainer>
       {/* ------------- Disclaimer ------------ */}
       <DisclaimerBanner>
-        The sign up feature is currently under development. We apologize for any
-        inconvenience.
+        Currently, we only support sign up via GitHub.
       </DisclaimerBanner>
 
       <Card className="flex w-full flex-col gap-3 px-6 py-8 drop-shadow-lg">
@@ -41,7 +41,7 @@ const SignUp = () => {
 
         <Button
           as={Link}
-          to="/auth/github"
+          to={`${API_URL}/auth/github`}
           className="w-full rounded bg-gray-900 py-7 text-lg font-semibold text-white hover:bg-gray-800"
         >
           <span className="inline-flex gap-2">
