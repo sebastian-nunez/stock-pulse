@@ -477,20 +477,6 @@ export const productData = [
     category_id: 4
   },
   {
-    name: "Woodside 3",
-    brand: "Nike",
-    description: "The latest Woodside 3 Shoes by Nike",
-    image:
-      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/5112a862-f38b-4a22-bc31-5bf1217c309e/woodside-2-mens-boots-Tc46Gf.png",
-    quantity: 30,
-    price: 125,
-    is_available: true,
-    weight: 2.5,
-    dimensions: "12 x 6 x 4",
-    warranty_info: "Four-year limited warranty",
-    category_id: 3
-  },
-  {
     name: "Jordan 5 NV",
     brand: "Nike",
     description: "The latest Jordan 5 NV Shoes by Nike",
