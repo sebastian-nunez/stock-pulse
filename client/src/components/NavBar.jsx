@@ -49,7 +49,18 @@ export default function App() {
 
   const renderMobileMenuItems = () => {
     if (!isLoggedIn) {
-      return null;
+      return (
+        <NavbarMenuItem key={"home"}>
+          <UILink
+            as={Link}
+            to={"/"}
+            className="text-lg font-semibold tracking-tight"
+            color="foreground"
+          >
+            Home
+          </UILink>
+        </NavbarMenuItem>
+      );
     }
 
     return menuItems?.map((item, idx) => {
@@ -113,12 +124,10 @@ export default function App() {
       className="border-b-1 drop-shadow-sm"
     >
       {/* Hamburger toggle */}
-      {isLoggedIn && (
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
-      )}
+      <NavbarMenuToggle
+        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        className="sm:hidden"
+      />
 
       {/* Desktop Menu (LEFT) */}
       <NavbarContent className="hidden gap-4 sm:flex" justify="start">
