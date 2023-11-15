@@ -54,7 +54,7 @@ export default function App() {
           <UILink
             as={Link}
             to={"/"}
-            className="text-lg font-semibold tracking-tight"
+            className="text-4xl font-semibold tracking-tight"
             color="foreground"
           >
             Home
@@ -67,7 +67,12 @@ export default function App() {
       if (item?.side === "left") {
         return (
           <NavbarMenuItem key={item?.name || idx}>
-            <UILink as={Link} to={item.path} color="foreground">
+            <UILink
+              as={Link}
+              to={item.path}
+              color="foreground"
+              className="text-4xl font-semibold tracking-tight"
+            >
               {item.name}
             </UILink>
           </NavbarMenuItem>
@@ -169,7 +174,7 @@ export default function App() {
       </NavbarContent>
 
       {/* Mobile Menu */}
-      <NavbarMenu className="flex flex-col gap-6 text-4xl font-semibold tracking-tight">
+      <NavbarMenu className="flex flex-col gap-6">
         {renderMobileMenuItems()}
       </NavbarMenu>
     </Navbar>
