@@ -50,16 +50,29 @@ export default function App() {
   const renderMobileMenuItems = () => {
     if (!isLoggedIn) {
       return (
-        <NavbarMenuItem key={"home"}>
-          <UILink
-            as={Link}
-            to={"/"}
-            className="text-4xl font-semibold tracking-tight"
-            color="foreground"
-          >
-            Home
-          </UILink>
-        </NavbarMenuItem>
+        <>
+          <NavbarMenuItem key={"home"}>
+            <UILink
+              as={Link}
+              to={"/"}
+              className="text-4xl font-semibold tracking-tight"
+              color="foreground"
+            >
+              Home
+            </UILink>
+          </NavbarMenuItem>
+
+          <NavbarMenuItem key={"login"}>
+            <UILink
+              as={Link}
+              to={"/login"}
+              className="text-4xl font-semibold tracking-tight"
+              color="foreground"
+            >
+              Login
+            </UILink>
+          </NavbarMenuItem>
+        </>
       );
     }
 
@@ -174,7 +187,7 @@ export default function App() {
       </NavbarContent>
 
       {/* Mobile Menu */}
-      <NavbarMenu className="flex flex-col gap-6">
+      <NavbarMenu className="flex flex-col gap-6 pt-6">
         {renderMobileMenuItems()}
       </NavbarMenu>
     </Navbar>
