@@ -10,6 +10,7 @@ import {
 } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
+import { AuthProvider } from "./context/AuthProvider";
 import "./styles/index.css";
 
 // react-query
@@ -44,11 +45,13 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <NextUIProvider>
-        <QueryClientProvider client={queryClient}>
-          <App />
-        </QueryClientProvider>
-      </NextUIProvider>
+      <AuthProvider>
+        <NextUIProvider>
+          <QueryClientProvider client={queryClient}>
+            <App />
+          </QueryClientProvider>
+        </NextUIProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );

@@ -1,10 +1,9 @@
-import { Button } from "@nextui-org/react";
-import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useRoutes } from "react-router-dom";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import MainContainer from "./components/layout/MainContainer";
+import { useAuth } from "./context/AuthProvider";
 import Browser from "./pages/Browser";
 import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
@@ -14,35 +13,9 @@ import PageNotFound from "./pages/PageNotFound";
 import Playground from "./pages/Playground";
 import SignUp from "./pages/SignUp";
 import "./styles/App.css";
-import { API_URL } from "./utils/constants";
 
 const App = () => {
-  const [user, setUser] = useState([]);
-
-  useEffect(() => {
-    const getUser = async () => {
-      const response = await fetch(`${API_URL}/auth/login/success`, {
-        credentials: "include",
-      });
-      const json = await response.json();
-      setUser(json.user);
-    };
-
-    getUser();
-  }, []);
-
-  const logout = () => {
-    (async () => {
-      const response = await fetch(`${API_URL}/auth/logout`, {
-        credentials: "include",
-      });
-
-      await response.json();
-
-      window.location.href = "/";
-    })();
-  };
-
+  const { isLoggedIn, user, logout } = useAuth();
   const element = useRoutes([
     {
       path: "/",
@@ -62,15 +35,15 @@ const App = () => {
     },
     {
       path: "/browser",
-      element: user?.id ? <Browser /> : <Login />,
+      element: isLoggedIn ? <Browser /> : <Login />,
     },
     {
       path: "/inventory",
-      element: user?.id ? <Inventory /> : <Login />,
+      element: isLoggedIn ? <Inventory /> : <Login />,
     },
     {
       path: "/playground",
-      element: user?.id ? <Playground /> : <Login />,
+      element: isLoggedIn ? <Playground /> : <Login />,
     },
     {
       path: "/*",
@@ -82,12 +55,7 @@ const App = () => {
     <>
       <NavBar />
 
-      <MainContainer>
-        {element}
-        <Button onPress={logout}>Logout</Button>
-        {user && <p>{user.username}</p>}
-        {user && <img src={user.avatarurl} alt="profile" />}
-      </MainContainer>
+      <MainContainer>{element}</MainContainer>
 
       <Toaster position="top-right" />
       <Footer />
