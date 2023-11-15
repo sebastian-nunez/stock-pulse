@@ -1,9 +1,5 @@
 import { fromZodError } from "zod-validation-error";
-import {
-  categorySchema,
-  productSchema,
-  tagSchema,
-} from "../../../server/utils/schemas.js";
+import { categorySchema, productSchema, tagSchema } from "./schemas.js";
 
 export const validateProductDetails = (productDetails) => {
   try {
