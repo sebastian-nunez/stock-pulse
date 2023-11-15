@@ -272,7 +272,7 @@ export const productData = [
     description: "Nike Air Max Pulse Roam Men's Shoes",
     image:
       "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/4f685abe-510a-4599-bb28-69859836bf88/air-max-pulse-roam-mens-shoes-X285L2.png",
-    quantity: 17,
+    quantity: 32,
     price: 170,
     is_available: true,
     weight: 2.5,
@@ -286,7 +286,7 @@ export const productData = [
     description: "Ultraboost Light Running Shoes",
     image:
       "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/dc11ff18edbc4c0898a93fbe445e85d9_9366/ultraboost-light-running-shoes.jpg",
-    quantity: 17,
+    quantity: 47,
     price: 170,
     is_available: true,
     weight: 2.5,
@@ -314,7 +314,7 @@ export const productData = [
     description: "Ultraboost 1.0 Shoes",
     image:
       "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d44fa06fc83f4644b7e8acbc01160e1b_9366/NMD_R1_Shoes_Black_GZ9258_01_standard.jpg",
-    quantity: 17,
+    quantity: 30,
     price: 152,
     is_available: true,
     weight: 2.5,
@@ -328,7 +328,7 @@ export const productData = [
     description: "NMD_R1 Shoes",
     image:
       "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/49e3b5e0369142ee840c3b726c96c8a4_9366/nmd_r1-shoes.jpg",
-    quantity: 17,
+    quantity: 12,
     price: 75,
     is_available: true,
     weight: 2.5,
@@ -342,7 +342,7 @@ export const productData = [
     description: "NMD_R3 V3 Shoes",
     image:
       "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/caecb76d53cc4b1a9787f2e96dd44c04_9366/NMD_W1_Shoes_Brown_IE0251_06_standard.jpg",
-    quantity: 17,
+    quantity: 20,
     price: 75,
     is_available: true,
     weight: 2.5,
@@ -370,7 +370,7 @@ export const productData = [
     description: "Retrophy 5 Shoes",
     image:
       "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/3275949756d447fe870cd106d1a58b8b_9366/Retropy_E5_Shoes_Beige_IE7728_06_standard.jpg",
-    quantity: 17,
+    quantity: 33,
     price: 75,
     is_available: true,
     weight: 2.5,
@@ -384,7 +384,7 @@ export const productData = [
     description: "NMD_R3 V1 Shoes",
     image:
       "https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/bd12e628eb824cbe93f8079879050da6_9366/retropy-e5-shoes.jpg",
-    quantity: 17,
+    quantity: 100,
     price: 75,
     is_available: true,
     weight: 2.5,
@@ -398,7 +398,7 @@ export const productData = [
     description: "The latest Pureboost 23 Shoes by Adidas",
     image:
       "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/6d679fb7b15647ee97a687959adebad7_9366/Pureboost_23_Running_Shoes_Black_IF2375_06_standard.jpg",
-    quantity: 17,
+    quantity: 21,
     price: 75,
     is_available: true,
     weight: 2.5,
@@ -412,12 +412,320 @@ export const productData = [
     description: "The latest Terex Free 23 Shoes by Adidas",
     image:
       "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/edf66dc6445448c08380cbd82d70ea1f_9366/Terrex_Free_Hiker_2.0_Low_GORE-TEX_Hiking_Shoes_Beige_IG5459_01_standard.jpg",
-    quantity: 17,
+    quantity: 14,
     price: 75,
     is_available: true,
     weight: 2.5,
     dimensions: "12 x 6 x 4",
     warranty_info: "Four-year limited warranty",
+    category_id: 3
+  },
+  {
+    name: "Air Max Pulse",
+    brand: "Nike",
+    description: "The latest Air Max Pulse Shoes by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/61051bd6-196b-4afb-9946-cdd2c30bf658/air-max-pulse-mens-shoes-DWTVpN.png",
+    quantity: 22,
+    price: 150,
+    is_available: false,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 3
+  },
+  {
+    name: "Full Force Low",
+    brand: "Nike",
+    description: "The latest Full Force Low Shoes by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/d1acc841-5bd4-4a06-811a-95711e9c7a73/full-force-low-mens-shoes-7NgJLT.png",
+    quantity: 30,
+    price: 95,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 2
+  },
+  {
+    name: "Killshot 2",
+    brand: "Nike",
+    description: "The latest Killshot 2 Shoes by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/d1acc841-5bd4-4a06-811a-95711e9c7a73/full-force-low-mens-shoes-7NgJLT.png",
+    quantity: 30,
+    price: 95,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 2
+  },
+  {
+    name: "Woodside 2",
+    brand: "Nike",
+    description: "The latest Woodside 2 Shoes by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/5112a862-f38b-4a22-bc31-5bf1217c309e/woodside-2-mens-boots-Tc46Gf.png",
+    quantity: 30,
+    price: 125,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 4
+  },
+  {
+    name: "Woodside 2",
+    brand: "Nike",
+    description: "The latest Woodside 2 Shoes by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/5112a862-f38b-4a22-bc31-5bf1217c309e/woodside-2-mens-boots-Tc46Gf.png",
+    quantity: 30,
+    price: 125,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 2
+  },
+  {
+    name: "Jordan 5 NV",
+    brand: "Nike",
+    description: "The latest Jordan 5 NV Shoes by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/05b0d7e9-9688-49db-8266-8ee16fa33307/air-jordan-5-navy-mens-shoes-Qw4dtb.png",
+    quantity: 30,
+    price: 210,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 1
+  },
+  {
+    name: "Air Jordan GR",
+    brand: "Nike",
+    description: "The latest Jordan 1 Green Shoes by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/28812013-b5f3-4148-a1b4-170227e0e0fe/air-jordan-1-low-mens-shoes-0LXhbn.png",
+    quantity: 38,
+    price: 88,
+    is_available: false,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 2
+  },
+  {
+    name: "Renew Ride",
+    brand: "Nike",
+    description: "The latest Renew Shoes by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/f1ff4189-cccf-446c-b795-8472edc1fa67/renew-ride-3-mens-road-running-shoes-7hTSLw.png",
+    quantity: 30,
+    price: 60,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 3
+  },
+  {
+    name: "Jordan SE Craft",
+    brand: "Nike",
+    description: "The latest Jordan SE Craft by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/baccff07-c847-43d5-bdb3-a78b7fd3846e/air-jordan-1-mid-se-craft-mens-shoes-5VjD18.png",
+    quantity: 40,
+    price: 100,
+    is_available: false,
+    weight: 2.5,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 1
+  },
+  {
+    name: "AirMax 2017",
+    brand: "Nike",
+    description: "The latest Jordan 6 Aqua Craft by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/dhrfmqbj8o9jthjragzi/air-max-2017-mens-shoes-BVqnkV.png",
+    quantity: 40,
+    price: 150,
+    is_available: true,
+    weight: 3,
+    dimensions: "12 x 6 x 4",
+    warranty_info: "Four-year limited warranty",
+    category_id: 3
+  },
+  {
+    name: "AirMax 90",
+    brand: "Nike",
+    description: "The latest AirMax 90 Craft by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e9e94e99-b4d1-4e0a-a1a3-419776037b49/air-max-90-mens-shoes-DLDWPT.png",
+    quantity: 40,
+    price: 86,
+    is_available: false,
+    weight: 4,
+    dimensions: "12 x 6 x 3",
+    warranty_info: "2-year limited warranty",
+    category_id: 3
+  },
+  {
+    name: "Impact 4",
+    brand: "Nike",
+    description: "The latest Impact 4 by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/5eb3d983-e731-4a7a-8990-446d231c2229/impact-4-basketball-shoes-nmn08j.png",
+    quantity: 40,
+    price: 67,
+    is_available: true,
+    weight: 4.5,
+    dimensions: "12 x 6 x 3",
+    warranty_info: "2-year limited warranty",
+    category_id: 1
+  },
+  {
+    name: "Exceed 2s",
+    brand: "Nike",
+    description: "The latest Exceed 2s by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/a77e2c37-8bd5-4030-83ec-6c005cba7b69/air-max-excee-mens-shoes-vl97pm.png",
+    quantity: 40,
+    price: 95,
+    is_available: true,
+    weight: 4.5,
+    dimensions: "12 x 6 x 3",
+    warranty_info: "2-year limited warranty",
+    category_id: 4
+  },
+  {
+    name: "Roshe One",
+    brand: "Nike",
+    description: "The latest Roshe One by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/io8yssdrwwi3ahjkndsp/roshe-one-mens-shoe-MkTmzjJv.png",
+    quantity: 10,
+    price: 40,
+    is_available: false,
+    weight: 4.5,
+    dimensions: "12 x 6 x 3",
+    warranty_info: "2-year limited warranty",
+    category_id: 4
+  },
+  {
+    name: "Zoom CMTF",
+    brand: "Nike",
+    description: "The latest Zooms One by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/dfa81860-eaa1-4104-985c-0058b1e86761/air-jordan-1-zoom-cmft-2-mens-shoes-Tw02qw.png",
+    quantity: 120,
+    price: 150,
+    is_available: false,
+    weight: 4,
+    dimensions: "12 x 6 x 3",
+    warranty_info: "2-year limited warranty",
+    category_id: 4
+  },
+  {
+    name: "Blazer Mid",
+    brand: "Nike",
+    description: "The latest Blazer One by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/389b709e-5102-4e55-aa5d-07099b500831/blazer-mid-77-vintage-mens-shoes-nw30B2.png",
+    quantity: 4,
+    price: 105,
+    is_available: true,
+    weight: 4,
+    dimensions: "12 x 6 x 3",
+    warranty_info: "2-year limited warranty",
+    category_id: 1
+  },
+  {
+    name: "React 1",
+    brand: "Nike",
+    description: "The latest Court Legacy One by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/4a6c49a8-b485-4b1a-b9b3-f3088daace6c/air-force-1-react-mens-shoe-WSjfs8.png",
+    quantity: 15,
+    price: 110,
+    is_available: true,
+    weight: 2,
+    dimensions: "12 x 6 x 3",
+    warranty_info: "2-year limited warranty",
+    category_id: 1
+  },
+  {
+    name: "Legacy 312",
+    brand: "Nike",
+    description: "The latest Legacy 312 by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/hk7hv22ezuxx0qvadlt9/air-jordan-legacy-312-low-mens-shoes-B931hr.png",
+    quantity: 15,
+    price: 110,
+    is_available: true,
+    weight: 2,
+    dimensions: "12 x 6 x 3",
+    warranty_info: "2-year limited warranty",
+    category_id: 4
+  },
+  {
+    name: "Flex Control",
+    brand: "Nike",
+    description: "The latest Flex Control 312 by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e91623bb-e3c9-4452-883d-9d12d5544752/flex-control-4-mens-workout-shoes-14Z62l.png",
+    quantity: 15,
+    price: 125,
+    is_available: true,
+    weight: 2,
+    dimensions: "12 x 6 x 3",
+    warranty_info: "2-year limited warranty",
+    category_id: 3
+  },
+  {
+    name: "True Flight 3s",
+    brand: "Nike",
+    description: "The latest TrueFlight Control 312 by Nike",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/b43240c0-7912-4bdc-be11-d701f89c29a2/jordan-true-flight-mens-shoes-ODLzlq.png",
+    quantity: 15,
+    price: 110,
+    is_available: true,
+    weight: 2,
+    dimensions: "12 x 6 x 3",
+    warranty_info: "2-year limited warranty",
+    category_id: 2
+  },
+  {
+    name: "AirMax Terrascape",
+    brand: "Nike",
+    description: "The latest Terrascape Control 312 by Nike. Sustainable!",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e527a8aa-768f-4f1b-ba8e-9f2fd8dc290b/air-max-terrascape-plus-mens-shoes-2bxm1R.png",
+    quantity: 15,
+    price: 120,
+    is_available: true,
+    weight: 2,
+    dimensions: "12 x 6 x 3",
+    warranty_info: "2-year limited warranty",
+    category_id: 4
+  },
+  {
+    name: "Infinity RN",
+    brand: "Nike",
+    description: "The latest Infinity Control by Nike. Sustainable!",
+    image:
+      "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/124ef1bd-d20a-423d-9588-e8277775b699/infinityrn-4-mens-road-running-shoes-4hKwJW.png",
+    quantity: 15,
+    price: 160,
+    is_available: true,
+    weight: 2.5,
+    dimensions: "12 x 6 x 3",
+    warranty_info: "3-year limited warranty",
     category_id: 3
   }
 ];

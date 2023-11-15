@@ -1,86 +1,57 @@
 export const productTagData = [
-  {
-    product_id: 1,
-    tag_id: 1
-  },
-  {
-    product_id: 1,
-    tag_id: 2
-  },
-  {
-    product_id: 2,
-    tag_id: 1
-  },
-  {
-    product_id: 3,
-    tag_id: 1
-  },
-  {
-    product_id: 3,
-    tag_id: 2
-  },
-  {
-    product_id: 4,
-    tag_id: 1
-  },
-  {
-    product_id: 5,
-    tag_id: 2
-  },
-  {
-    product_id: 21,
-    tag_id: 1
-  },
-  {
-    product_id: 21,
-    tag_id: 2
-  },
-  {
-    product_id: 22,
-    tag_id: 2
-  },
-  {
-    product_id: 23,
-    tag_id: 3
-  },
-  {
-    product_id: 24,
-    tag_id: 1
-  },
-  {
-    product_id: 25,
-    tag_id: 3
-  },
-  {
-    product_id: 26,
-    tag_id: 1
-  },
-  {
-    product_id: 26,
-    tag_id: 4
-  },
-  {
-    product_id: 27,
-    tag_id: 2
-  },
-  {
-    product_id: 27,
-    tag_id: 4
-  },
-  {
-    product_id: 28,
-    tag_id: 1
-  },
-  {
-    product_id: 28,
-    tag_id: 3
-  },
-  {
-    product_id: 29,
-    tag_id: 2
-  },
-  {
-    product_id: 30,
-    tag_id: 4
-  }
+  { product_id: 1, tag_id: 1 },
+  { product_id: 1, tag_id: 2 },
+  { product_id: 2, tag_id: 1 },
+  { product_id: 3, tag_id: 1 },
+  { product_id: 3, tag_id: 2 },
+  { product_id: 4, tag_id: 1 },
+  { product_id: 7, tag_id: 1 },
+  { product_id: 8, tag_id: 1 },
+  { product_id: 9, tag_id: 1 },
+  { product_id: 5, tag_id: 2 },
+  { product_id: 8, tag_id: 2 },
+  { product_id: 9, tag_id: 3 },
+  { product_id: 12, tag_id: 1 },
+  { product_id: 13, tag_id: 4 },
+  { product_id: 3, tag_id: 4 },
+  { product_id: 21, tag_id: 2 },
+  { product_id: 22, tag_id: 2 },
+  { product_id: 23, tag_id: 3 },
+  { product_id: 24, tag_id: 1 },
+  { product_id: 25, tag_id: 3 },
+  { product_id: 26, tag_id: 1 },
+  { product_id: 26, tag_id: 4 },
+  { product_id: 27, tag_id: 2 },
+  { product_id: 27, tag_id: 4 },
+  { product_id: 28, tag_id: 1 },
+  { product_id: 28, tag_id: 3 },
+  { product_id: 29, tag_id: 2 },
+  { product_id: 30, tag_id: 4 },
+  { product_id: 32, tag_id: 1 },
+  { product_id: 32, tag_id: 2 },
+  { product_id: 33, tag_id: 2 },
+  { product_id: 34, tag_id: 3 },
+  { product_id: 35, tag_id: 1 },
+  { product_id: 36, tag_id: 3 },
+  { product_id: 37, tag_id: 1 },
+  { product_id: 37, tag_id: 4 },
+  { product_id: 38, tag_id: 2 },
+  { product_id: 38, tag_id: 4 },
+  { product_id: 39, tag_id: 1 },
+  { product_id: 39, tag_id: 3 },
+  { product_id: 40, tag_id: 2 },
+  { product_id: 41, tag_id: 4 },
+  { product_id: 42, tag_id: 1 },
+  { product_id: 42, tag_id: 3 },
+  { product_id: 43, tag_id: 2 },
+  { product_id: 43, tag_id: 4 },
+  { product_id: 44, tag_id: 1 },
+  { product_id: 44, tag_id: 2 },
+  { product_id: 45, tag_id: 3 },
+  { product_id: 46, tag_id: 1 },
+  { product_id: 46, tag_id: 4 },
+  { product_id: 47, tag_id: 2 },
+  { product_id: 48, tag_id: 3 },
+  { product_id: 49, tag_id: 2 },
+  { product_id: 50, tag_id: 4 }
 ];
