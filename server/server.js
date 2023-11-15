@@ -10,6 +10,7 @@ import ProductTagRoutes from "./routes/productTag.js";
 import ProductRoutes from "./routes/products.js";
 import TagRoutes from "./routes/tags.js";
 import UserRoutes from "./routes/users.js";
+
 dotenv.config();
 
 // constants
@@ -48,6 +49,9 @@ passport.deserializeUser((user, done) => {
 
 // middleware
 app.use(express.json());
+
+// Apply authMiddleware to all API routes
+// app.use("/api", authMiddleware);
 
 // routes
 app.use("/api/users", UserRoutes);
