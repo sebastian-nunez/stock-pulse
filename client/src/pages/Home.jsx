@@ -10,14 +10,14 @@ const Home = () => {
   return (
     <div className="flex min-h-[calc(100vh-6rem)] flex-col justify-between pt-28">
       <div className="flex flex-col gap-6 sm:text-center">
-        <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-7xl">
+        <h1 className="text-5xl font-extrabold tracking-tight lg:text-6xl xl:text-7xl">
           Empower Your Business with <br />
           <span className="inline-flex bg-gradient-to-r from-[#2f68f3] via-purple-600 to-pink-400 bg-clip-text py-1 text-transparent">
             StockPulse Inventory Management
           </span>
         </h1>
 
-        <h2 className="pb-4 pt-1 text-default-500 md:text-2xl lg:px-56">
+        <h2 className="pb-4 pt-1 text-lg text-default-500 md:text-2xl lg:px-56">
           Effortlessly track and manage your inventory with StockPulse. Gain
           insights, streamline operations, and boost productivity.
         </h2>
@@ -35,7 +35,7 @@ const Home = () => {
       </div>
 
       {/* --------------- TRUSTED BY ----------------- */}
-      <div class="mx-auto text-center sm:block lg:px-36">
+      <div class="mx-auto hidden text-center sm:block lg:px-36">
         <span class="text-lg font-semibold uppercase text-gray-400">
           TRUSTED BY
         </span>

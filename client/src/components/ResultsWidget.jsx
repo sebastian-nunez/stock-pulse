@@ -25,7 +25,7 @@ const ResultsWidget = ({
 
       <div className="flex items-center">
         {/* ---------- Rows per page ---------- */}
-        <label>Rows per page:</label>
+        <label>Rows per page: </label>
 
         <select
           aria-label="Select items per page"

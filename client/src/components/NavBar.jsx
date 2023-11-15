@@ -113,10 +113,12 @@ export default function App() {
       className="border-b-1 drop-shadow-sm"
     >
       {/* Hamburger toggle */}
-      <NavbarMenuToggle
-        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        className="sm:hidden"
-      />
+      {isLoggedIn && (
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
+      )}
 
       {/* Desktop Menu (LEFT) */}
       <NavbarContent className="hidden gap-4 sm:flex" justify="start">
