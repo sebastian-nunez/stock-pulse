@@ -4,6 +4,7 @@ import express from "express";
 import session from "express-session";
 import passport from "passport";
 import { GitHub } from "./config/auth.js";
+import authRoutes from "./routes/auth.js";
 import CategoryRoutes from "./routes/categories.js";
 import ProductTagRoutes from "./routes/productTag.js";
 import ProductRoutes from "./routes/products.js";
