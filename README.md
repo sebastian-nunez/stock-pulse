@@ -6,7 +6,9 @@
 
 **Designed and developed by:** Priscilla Colon, Sebastian Nunez
 
-🔗 **Link to deployed app:** <https://stockpulse.up.railway.app/>
+**Link to deployed app:** <https://stockpulse.up.railway.app/>
+
+**Demo Video:** <https://www.youtube.com/watch?v=ZLVxP9Sl_cY>
 
 ![landing page](demos/screenshots/landingpage.png)
 
@@ -107,7 +109,7 @@
 
 ### Video Walkthrough
 
-[Here's a GIF walkthrough of the final project](https://www.dropbox.com/scl/fi/e2hte8dno0llvpnrawel0/stockpulse_video_walkthrough_1.gif?rlkey=xc512ui054e5kgomrj5w2ogtw&dl=0)
+[Here's a GIF walkthrough of the final project](https://www.youtube.com/watch?v=ZLVxP9Sl_cY)
 
 ### Product Details
 

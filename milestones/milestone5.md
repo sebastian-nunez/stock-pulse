@@ -73,7 +73,9 @@ Complete the checklist below detailing each baseline, custom, and stretch featur
 
 ## Final Demo GIF
 
-[Here's a GIF walkthrough of the final project](https://www.dropbox.com/scl/fi/e2hte8dno0llvpnrawel0/stockpulse_video_walkthrough_1.gif?rlkey=xc512ui054e5kgomrj5w2ogtw&dl=0)
+[YouTube Video DEMO](https://www.youtube.com/watch?v=ZLVxP9Sl_cY)
+
+[Here's a GIF walkthrough of the final project (GIF)](https://www.dropbox.com/scl/fi/e2hte8dno0llvpnrawel0/stockpulse_video_walkthrough_1.gif?rlkey=xc512ui054e5kgomrj5w2ogtw&dl=0)
 
 ## Reflection
 
