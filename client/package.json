@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.1",
     "@hookform/resolvers": "^3.3.2",
     "@nextui-org/react": "^2.1.13",
     "@react-stately/data": "^3.11.0",
